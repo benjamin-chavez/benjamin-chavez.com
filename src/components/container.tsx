@@ -7,18 +7,25 @@ type ContainerProps = {
   as?: keyof JSX.IntrinsicElements;
   className?: string;
   children: React.ReactNode;
+  [x: string]: any;
 };
 
 export function Container({
   as: Component = 'div',
   className,
   children,
+  ...props
 }: ContainerProps) {
   return (
     <Component
-      className={cx('mx-auto max-w-7xl bg-orange-500 px-6 lg:px-8', className)}
+      // bg-orange-500/10
+      className={cx('mx-auto max-w-7xl  px-6 lg:px-8', className)}
+      {...props}
     >
-      <div className="mx-auto max-w-2xl bg-blue-500/20 lg:max-w-none">
+      <div
+        // bg-blue-500/20
+        className="mx-auto max-w-2xl  lg:max-w-none"
+      >
         {children}
       </div>
     </Component>

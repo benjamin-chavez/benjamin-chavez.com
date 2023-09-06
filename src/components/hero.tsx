@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section
       // text-transparent
-      className="bg-hero-image relative min-h-screen w-full bg-cover bg-center bg-no-repeat "
+      className="bg-hero-image relative -z-10  -mt-14 min-h-screen w-full bg-cover bg-center bg-no-repeat"
     >
       <Container
         // as="section"

@@ -1,3 +1,4 @@
+import 'server-only';
 import './globals.css';
 // import type { Metadata } from 'next';
 import RootLayout from '@/components/root-layout';
@@ -26,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${open_sans.variable} ${dosis.variable} ${inter.variable} font-dosis h-full bg-[#ECEDFA] text-base antialiased`}
+      className={`${open_sans.variable} ${dosis.variable} ${inter.variable} font-dosis h-full scroll-smooth bg-[#ECEDFA] text-base antialiased`}
     >
       {/* <body className={inter.className}> */}
       <body

@@ -8,7 +8,7 @@ export default function Header() {
       <div className="flex w-full justify-between">
         <div>
           <Link
-            href=""
+            href="/"
             className="text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414]"
           >
             Benjamin Chavez
@@ -18,11 +18,14 @@ export default function Header() {
           // leading-8
           className="font-open-sans flex items-center text-base font-normal leading-6"
         >
-          <Link href="" className="px-2">
+          <Link href="/" className="px-2">
             Home
           </Link>
-          <Link href="" className="px-2">
+          <Link href="/#portfolio" className="px-2">
             Portfolio
+          </Link>
+          <Link href="/blog" className="px-2">
+            Blog
           </Link>
           <Link href="" className="px-2">
             My Story

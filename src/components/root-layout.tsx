@@ -1,11 +1,12 @@
 // src/components/root-layout.tsx
-'use client';
+import 'server-only';
 
 import { usePathname } from 'next/navigation';
 // import { Arimo, Inter, Open_Sans, Dosis } from 'next/font/google';
 import Footer from '@/components/footer';
 import Header from './header';
 import Hero from './hero';
+import Portfolio from './portfolio';
 
 // const inter = Inter({
 //   subsets: ['latin'],
@@ -39,12 +40,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let pathname = usePathname();
+  // let pathname = usePathname();
 
   return (
     <RootLayoutInner>
       <Header />
-      <Hero />
+
       <main className="w-full flex-auto ">{children}</main>
       <Footer />
     </RootLayoutInner>
