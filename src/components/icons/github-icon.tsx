@@ -15,6 +15,7 @@ export function GithubIcon({
       viewBox="0 0 496 512"
       fill="currentColor"
       aria-hidden="true"
+      role="img"
       className={cx('h-4', className)}
       {...props}
     >

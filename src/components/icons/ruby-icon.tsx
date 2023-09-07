@@ -15,9 +15,12 @@ export default function RubyIcon({
       viewBox="0 0 128 128"
       fill="currentColor"
       aria-hidden="true"
+      role="img"
       className={cx('h-4', className)}
       {...props}
     >
+      <title>Ruby Logo</title>
+      <desc>Icon representing the Ruby programming language.</desc>
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"

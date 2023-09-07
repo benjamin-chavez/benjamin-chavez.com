@@ -16,6 +16,7 @@ export default function EnvelopeFilledIcon({
         viewBox="0 0 512 512"
         fill="currentColor"
         aria-hidden="true"
+        role="img"
         className={cx('h-4', className)}
         {...props}
       >

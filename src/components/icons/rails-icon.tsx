@@ -15,6 +15,7 @@ export default function RailsIcon({
       viewBox="0 0 128 128"
       fill="currentColor"
       aria-hidden="true"
+      role="img"
       className={cx('h-4', className)}
       {...props}
     >

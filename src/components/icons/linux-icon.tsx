@@ -15,9 +15,12 @@ export default function LinuxIcon({
       viewBox="0 0 128 128"
       fill="currentColor"
       aria-hidden="true"
+      role="img"
       className={cx('h-4', className)}
       {...props}
     >
+      <title>Linux Logo</title>
+      <desc>Icon representing the Linux operating system.</desc>
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"

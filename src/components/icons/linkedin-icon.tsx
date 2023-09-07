@@ -15,6 +15,7 @@ export function LinkedInIcon({
       viewBox="0 0 448 512"
       fill="currentColor"
       aria-hidden="true"
+      role="img"
       className={cx('h-4', className)}
       {...props}
     >

@@ -17,6 +17,7 @@ export default function TailwindIcon({
       viewBox="0 0 54 33"
       fill="currentColor"
       aria-hidden="true"
+      role="img"
       className={cx('h-3', className)}
       {...props}
     >
