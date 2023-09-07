@@ -33,9 +33,9 @@ const config: Config = {
       },
     },
   },
-  future: {
-    hoverOnlyWhenSupported: true,
-  },
+  // future: {
+  //   hoverOnlyWhenSupported: true,
+  // },
   // plugins: [require('prettier-plugin-tailwindcss')],
   // plugins: ['prettier-plugin-tailwindcss'],
 };

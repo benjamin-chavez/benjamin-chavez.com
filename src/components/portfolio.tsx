@@ -38,7 +38,7 @@ const projects = [
   {
     title: 'The Denizen Designer Project',
     description:
-      'Report for the Equity Health &amp; Innovations Research Lab at DePaul University.',
+      'Report for the Equity Health & Innovations Research Lab at DePaul University.',
     image: DenizenDesignerThumbnail,
     altText:
       'Preview of The Denizen Designer Project, a web development work by Benjamin Chavez',
@@ -177,14 +177,14 @@ function PortfolioCard({ project }: { project: any }) {
         <div className="relative z-10 hidden h-full flex-col justify-center bg-black/70 p-4 text-center text-white group-hover:flex">
           <h3
             // font-medium
-            className="font-dosis text-3xl  tracking-[.18rem]"
+            className="font-dosis text-3xl  tracking-[.18rem] [text-wrap:balance]"
           >
             {project.title}
           </h3>
-          <p className="font-open-sans xs:block hidden text-base text-gray-400">
+          <p className="font-open-sans xs:block mt-2 hidden text-base text-gray-400 [text-wrap:balance]">
             {project.description}
           </p>
-          <div className="flex justify-center gap-2">
+          <div className=" mt-4 flex justify-center gap-4 ">
             {project.links.map((link: any) => (
               <a
                 key="url"

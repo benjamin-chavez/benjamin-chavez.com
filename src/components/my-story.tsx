@@ -47,7 +47,7 @@ const storySection = {
 
 export default function MyStory() {
   return (
-    <section id="my-story">
+    <section id="my-story" className="my-12 pt-4">
       <Container>
         <div className="flex flex-col items-center justify-center">
           <h2 className="font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">

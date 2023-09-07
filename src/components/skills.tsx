@@ -1,6 +1,7 @@
 // src/components/skills.tsx
 
 import { Container } from './container';
+import TypescriptIcon from './icons/typescript-icon';
 
 const technologies = [
   { title: 'TypeScript', icon: '' },
@@ -32,7 +33,7 @@ const technologies = [
 
 export default function Skills() {
   return (
-    <section className="bg-parallax bg-fixed">
+    <section className="bg-parallax mt-12 bg-fixed pt-4">
       <Container className="mt-12 pb-20 pt-4">
         <div className="flex  items-center justify-center">
           <h2 className="font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
@@ -42,8 +43,12 @@ export default function Skills() {
         <div className="font-open-sans mt-4 flex flex-wrap items-center justify-center gap-6">
           {' '}
           {technologies.map((tech) => (
-            <div key={tech.title} className="text-base text-white">
-              {tech.title}
+            <div
+              key={tech.title}
+              className="flex items-center text-base text-white"
+              justify-center
+            >
+              <TypescriptIcon /> {tech.title}
             </div>
           ))}
         </div>

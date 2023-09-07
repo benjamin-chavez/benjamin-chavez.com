@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { cx } from '../../cva.config';
 import BarsIcon from './icons/bars-icon';
 import { XMarkIcon } from './icons/x-mark-icon';
+import { Container } from './container';
 
 export type NavItem = {
   name: string;
@@ -20,9 +21,9 @@ const navItems: Record<string, NavItem> = {
   '/#portfolio': {
     name: 'Portfolio',
   },
-  '/blog': {
-    name: 'Blog',
-  },
+  // '/blog': {
+  //   name: 'Blog',
+  // },
   '/#my-story': {
     name: 'My Story',
   },
@@ -77,7 +78,7 @@ function DesktopNavigation({ pathname }: { pathname: string }) {
         // activeLinkClassName="!text-stone-400 hover:!text-stone-500"
 
         linkClassName="font-open-sans p-2 text-base font-normal leading-6 text-stone-400 hover:text-stone-500"
-        activeLinkClassName="!text-[#1F1F1F]"
+        activeLinkClassName="text-[#1F1F1F]"
       />
     </div>
   );
@@ -109,7 +110,7 @@ function MobileNavigation({
           <div className="flex items-center justify-between ">
             <Link
               href="/"
-              className="flex items-center justify-center text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414]"
+              className="flex items-center justify-center whitespace-nowrap text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414]"
             >
               Benjamin Chavez
             </Link>
@@ -146,30 +147,34 @@ export default function Header() {
   }
 
   return (
-    // <header className="relative sticky z-50 flex h-14 w-full items-center bg-[#F8F9FA] px-12">
-    <header className="sticky top-0 z-50 flex h-14 w-full items-center bg-[#F8F9FA] px-12">
-      <div className="flex w-full justify-between">
-        <Link
-          href="/"
-          className="flex items-center justify-center text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414]"
-        >
-          Benjamin Chavez
-        </Link>
+    <header
+      // px-12
+      className="sticky top-0 z-50 flex h-14 w-full items-center justify-center bg-[#F8F9FA]  "
+    >
+      <div className="w-full px-[15px]">
+        <div className="flex w-full justify-between ">
+          <Link
+            href="/"
+            className="flex items-center justify-center whitespace-nowrap text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414]"
+          >
+            Benjamin Chavez
+          </Link>
 
-        <div className="flex md:hidden">
-          <button type="button" onClick={() => setMobileMenuOpen(true)}>
-            <span className="sr-only">Open main menu</span>
-            <BarsIcon className="h-full w-auto " />
-          </button>
+          <div className="flex md:hidden">
+            <button type="button" onClick={() => setMobileMenuOpen(true)}>
+              <span className="sr-only">Open main menu</span>
+              <BarsIcon className="h-full w-auto " />
+            </button>
+          </div>
+
+          <DesktopNavigation pathname={pathname} />
+          <MobileNavigation
+            pathname={pathname}
+            mobileMenuOpen={mobileMenuOpen}
+            setMobileMenuOpen={setMobileMenuOpen}
+            navItems={navItems}
+          />
         </div>
-
-        <DesktopNavigation pathname={pathname} />
-        <MobileNavigation
-          pathname={pathname}
-          mobileMenuOpen={mobileMenuOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
-          navItems={navItems}
-        />
       </div>
     </header>
   );
