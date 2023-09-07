@@ -9,7 +9,9 @@ import BorderlineBasicThumbnail from '@/../public/img/thumbnails/borderlinebasic
 import EstTaxMailerThumbnail from '@/../public/img/thumbnails/estimated-tax-mailer-thumbnail.png';
 import ChipInThumbnail from '@/../public/img/thumbnails/chip-in-thumbnail.png';
 import AminchavezThumbnail from '@/../public/img/thumbnails/Aminchavez.com-thumbnail.png';
-import { GithubIcon, WebsiteIcon, DownloadIcon } from './icons';
+import { GithubIcon } from './icons/github-icon';
+import { DownloadIcon } from './icons/download-icon';
+import { WebsiteIcon } from './icons/website-icon';
 
 const projects = [
   {

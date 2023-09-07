@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { cx } from '../../cva.config';
 import BarsIcon from './icons/bars-icon';
-import { XMarkIcon } from './icons/x-icon';
+import { XMarkIcon } from './icons/x-mark-icon';
 
 export type NavItem = {
   name: string;
@@ -73,8 +73,11 @@ function DesktopNavigation({ pathname }: { pathname: string }) {
     <div className="hidden items-center md:flex">
       <NavigationLinks
         pathname={pathname}
-        linkClassName="font-open-sans p-2 text-base font-normal leading-6 text-[#1F1F1F]"
-        activeLinkClassName="!text-stone-400 hover:!text-stone-500"
+        // linkClassName="font-open-sans p-2 text-base font-normal leading-6 text-[#1F1F1F]"
+        // activeLinkClassName="!text-stone-400 hover:!text-stone-500"
+
+        linkClassName="font-open-sans p-2 text-base font-normal leading-6 text-stone-400 hover:text-stone-500"
+        activeLinkClassName="!text-[#1F1F1F]"
       />
     </div>
   );
@@ -106,7 +109,7 @@ function MobileNavigation({
           <div className="flex items-center justify-between ">
             <Link
               href="/"
-              className="text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414]"
+              className="flex items-center justify-center text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414]"
             >
               Benjamin Chavez
             </Link>
@@ -143,11 +146,12 @@ export default function Header() {
   }
 
   return (
-    <header className="flex h-14 w-full items-center bg-[#F8F9FA] px-12 ">
+    // <header className="relative sticky z-50 flex h-14 w-full items-center bg-[#F8F9FA] px-12">
+    <header className="sticky top-0 z-50 flex h-14 w-full items-center bg-[#F8F9FA] px-12">
       <div className="flex w-full justify-between">
         <Link
           href="/"
-          className="text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414]"
+          className="flex items-center justify-center text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414]"
         >
           Benjamin Chavez
         </Link>
