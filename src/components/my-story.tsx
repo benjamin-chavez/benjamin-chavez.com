@@ -39,7 +39,7 @@ const storySection = {
 
 export default function MyStory() {
   return (
-    <section>
+    <section id="my-story">
       <Container>
         <div className="flex items-center justify-center">
           <h2 className="font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">

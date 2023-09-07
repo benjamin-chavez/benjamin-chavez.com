@@ -22,7 +22,7 @@ const contactLinks = [
 
 export default function Footer() {
   return (
-    <Container as="footer" className="bg-parallax bg-scroll py-5">
+    <Container as="footer" className="bg-parallax bg-scroll py-5" id="contact">
       <div className="flex items-center justify-center">
         <h2 className="font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
           Contact

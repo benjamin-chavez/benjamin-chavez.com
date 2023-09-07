@@ -164,7 +164,7 @@ function PortfolioCard({ project }: { project: any }) {
     <>
       <div
         // box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        className="shadow-basic relative aspect-video w-full"
+        className="shadow-basic group relative aspect-video w-full"
       >
         <Image
           src={project.image}
@@ -172,7 +172,7 @@ function PortfolioCard({ project }: { project: any }) {
           fill
           alt={''}
         />
-        <div className="relative z-10 flex h-full flex-col justify-center bg-black/70 p-4 text-center text-white">
+        <div className="relative z-10 hidden h-full flex-col justify-center bg-black/70 p-4 text-center text-white group-hover:flex">
           <h3
             // font-medium
             className="font-dosis text-3xl  tracking-[.18rem]"
@@ -206,7 +206,7 @@ export default function Portfolio() {
     <Container
       as="section"
       // max-w-screen-2xl
-      className="mt-12  pt-4"
+      className="mt-12 pt-4"
       id="portfolio"
     >
       {/* // <section className="mt-12 pt-4" id="portfolio"> */}
