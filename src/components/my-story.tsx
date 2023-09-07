@@ -80,9 +80,12 @@ export default function MyStory() {
           <h2 className="font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
             My Story
           </h2>
-          <div className="font-open-sans text-[15px] font-light text-neutral-500">
+          <article className="prose max-w-none columns-3 gap-x-4">
             {storySection.paragraphs.map((paragraph, index) => (
-              <p className="m-2" key={index}>
+              <p
+                className="font-open-sans break-inside-avoid-column text-[15px] font-light text-neutral-500"
+                key={index}
+              >
                 {' '}
                 {paragraph.body}
                 {paragraph.link && (
@@ -99,8 +102,9 @@ export default function MyStory() {
                 {book.author}
               </li>
             ))}
-          </div>
+          </article>
         </div>
+        {/* </div> */}
       </Container>
     </section>
   );

@@ -164,24 +164,25 @@ const projects = [
 function PortfolioCard({ project }: { project: any }) {
   return (
     <>
-      <div
-        // box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        className="shadow-basic group relative aspect-video w-full"
-      >
+      <div className="shadow-basic group relative aspect-video w-full">
         <Image
           src={project.image}
           className="absolute inset-0 "
           fill
           alt={''}
         />
-        <div className="relative z-10 hidden h-full flex-col justify-center bg-black/70 p-4 text-center text-white group-hover:flex">
+        {/* <div className="relative z-10 hidden h-full flex-col justify-center bg-black/70 p-4 text-center text-white transition duration-500  group-hover:flex group-hover:ease-in"> */}
+        <div className="duration-600 relative z-10 flex h-full  flex-col justify-center p-4 text-center transition ease-in-out group-hover:bg-black/80">
           <h3
             // font-medium
-            className="font-dosis text-3xl  tracking-[.18rem] [text-wrap:balance]"
+            className="font-dosis text-3xl tracking-[.18rem] text-transparent [text-wrap:balance] group-hover:text-white"
           >
             {project.title}
           </h3>
-          <p className="font-open-sans xs:block mt-2 hidden text-base text-gray-400 [text-wrap:balance]">
+          <p
+            // [text-wrap:balance]
+            className="font-open-sans xs:block mt-2 hidden text-base text-transparent group-hover:text-gray-400"
+          >
             {project.description}
           </p>
           <div className=" mt-4 flex justify-center gap-4 ">
@@ -189,7 +190,7 @@ function PortfolioCard({ project }: { project: any }) {
               <a
                 key="url"
                 // px-2 py-1
-                className="font-open-sans flex w-14 items-center justify-center rounded border border-white py-2 text-base text-gray-400 hover:text-white"
+                className="font-open-sans flex w-14 items-center justify-center rounded py-2 text-base text-transparent hover:!text-white group-hover:border group-hover:border-white group-hover:text-gray-400"
                 href={link.url}
                 target="_blank"
               >
@@ -222,6 +223,7 @@ export default function Portfolio() {
           Germany.
         </h3>
       </div>
+
       <div className="grid grid-cols-1 gap-x-6 gap-y-7 pt-6 lg:grid-cols-2 xl:grid-cols-3">
         {projects.map(
           (project) =>

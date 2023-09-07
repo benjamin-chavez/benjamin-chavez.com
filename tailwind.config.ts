@@ -31,12 +31,18 @@ const config: Config = {
         xs: '475px',
         ...defaultTheme.screens,
       },
+      transitionDuration: {
+        '600': '600ms',
+      },
     },
   },
   // future: {
   //   hoverOnlyWhenSupported: true,
   // },
-  // plugins: [require('prettier-plugin-tailwindcss')],
+  plugins: [
+    // require('prettier-plugin-tailwindcss')
+    require('@tailwindcss/typography'),
+  ],
   // plugins: ['prettier-plugin-tailwindcss'],
 };
 
