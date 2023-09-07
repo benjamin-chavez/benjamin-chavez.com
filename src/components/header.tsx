@@ -107,7 +107,6 @@ function MobileNavigation({
             <Link
               href="/"
               className="text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414]"
-              onClick={() => setMobileMenuOpen(false)}
             >
               Benjamin Chavez
             </Link>

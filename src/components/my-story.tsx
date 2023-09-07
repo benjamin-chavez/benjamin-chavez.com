@@ -41,10 +41,13 @@ export default function MyStory() {
   return (
     <section id="my-story">
       <Container>
-        <div className="flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
           <h2 className="font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
             My Story
           </h2>
+          {storySection.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
       </Container>
     </section>
