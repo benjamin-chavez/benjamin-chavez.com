@@ -1,34 +1,52 @@
 // src/components/skills.tsx
 
 import { Container } from './container';
+import BootstrapIcon from './icons/bootstrap-icon';
+import CssIcon from './icons/css-icon';
+import DatabaseIcon from './icons/database-icon';
+import ExcelIcon from './icons/excel-icon';
+import FigmaIcon from './icons/figma-icon';
+import GitIcon from './icons/git-icon';
+import HtmlIcon from './icons/html-icon';
+import JavaIcon from './icons/java-icon';
+import JavaScriptIcon from './icons/javascript-icon';
+import LinuxIcon from './icons/linux-icon';
+import MacIcon from './icons/mac-icon';
+import NextjsIcon from './icons/nextjs-icon';
+import NodeIcon from './icons/node-icon';
+import PostgresIcon from './icons/postgres-icon';
+import PythonIcon from './icons/python-icon';
+import RailsIcon from './icons/rails-icon';
+import ReactIcon from './icons/react-icon';
+import ReduxIcon from './icons/redux-icon';
+import RubyIcon from './icons/ruby-icon';
+import TailwindIcon from './icons/tailwind-icon';
 import TypescriptIcon from './icons/typescript-icon';
+import WindowsIcon from './icons/windows-icon';
 
 const technologies = [
-  { title: 'TypeScript', icon: '' },
-  { title: 'JavaScript', icon: '' },
-  { title: 'Ruby', icon: '' },
-  { title: 'Java', icon: '' },
-  { title: 'Python', icon: '' },
-  { title: 'SQL', icon: '' },
-  // { title: 'PSQL', icon: '' },
-  { title: 'HTML', icon: '' },
-  { title: 'CSS', icon: '' },
-
-  { title: 'React', icon: '' },
-  { title: 'Ruby on Rails', icon: '' },
-  { title: 'Next.js', icon: '' },
-  { title: 'Node.js', icon: '' },
-  { title: 'Git', icon: '' },
-  { title: 'PostgreSQL', icon: '' },
-
-  { title: 'Bootstrap', icon: '' },
-  { title: 'Tailwind', icon: '' },
-
-  { title: 'Figma', icon: '' },
-
-  { title: 'Linux', icon: '' },
-  { title: 'Windows', icon: '' },
-  { title: 'Mac OSC', icon: '' },
+  { title: 'TypeScript', IconComponent: TypescriptIcon },
+  { title: 'JavaScript', IconComponent: JavaScriptIcon },
+  { title: 'Ruby', IconComponent: RubyIcon },
+  { title: 'Java', IconComponent: JavaIcon },
+  { title: 'Python', IconComponent: PythonIcon },
+  { title: 'SQL', IconComponent: DatabaseIcon },
+  { title: 'VBA', IconComponent: ExcelIcon },
+  { title: 'HTML', IconComponent: HtmlIcon },
+  { title: 'CSS', IconComponent: CssIcon },
+  { title: 'React', IconComponent: ReactIcon },
+  { title: 'Redux', IconComponent: ReduxIcon },
+  { title: 'Ruby on Rails', IconComponent: RailsIcon },
+  { title: 'Next.js', IconComponent: NextjsIcon },
+  { title: 'Node.js', IconComponent: NodeIcon },
+  { title: 'Git', IconComponent: GitIcon },
+  { title: 'PostgreSQL', IconComponent: PostgresIcon },
+  { title: 'Bootstrap', IconComponent: BootstrapIcon },
+  { title: 'Tailwind', IconComponent: TailwindIcon },
+  { title: 'Figma', IconComponent: FigmaIcon },
+  { title: 'Linux', IconComponent: LinuxIcon },
+  { title: 'Windows', IconComponent: WindowsIcon },
+  { title: 'Mac OSC', IconComponent: MacIcon },
 ];
 
 export default function Skills() {
@@ -42,15 +60,19 @@ export default function Skills() {
         </div>
         <div className="font-open-sans mt-4 flex flex-wrap items-center justify-center gap-6">
           {' '}
-          {technologies.map((tech) => (
-            <div
-              key={tech.title}
-              className="flex items-center text-base text-white"
-              justify-center
-            >
-              <TypescriptIcon /> {tech.title}
-            </div>
-          ))}
+          {technologies.map((tech) => {
+            const { IconComponent } = tech;
+
+            return (
+              <div
+                key={tech.title}
+                className="flex items-center text-base text-white"
+                justify-center
+              >
+                <IconComponent /> {tech.title}
+              </div>
+            );
+          })}
         </div>
       </Container>
     </section>

@@ -15,7 +15,7 @@ export type NavItem = {
 };
 
 const navItems: Record<string, NavItem> = {
-  '/': {
+  '/#home': {
     name: 'Home',
   },
   '/#portfolio': {

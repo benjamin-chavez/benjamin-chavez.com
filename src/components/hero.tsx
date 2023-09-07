@@ -7,7 +7,10 @@ import BannerImage from '@/../public/img/Banner-image-cropped.png';
 
 export default function Hero() {
   return (
-    <section className="bg-hero-image relative -mt-6 h-screen min-h-screen w-full bg-cover bg-fixed bg-center bg-no-repeat">
+    <section
+      className="bg-hero-image relative -mt-6 h-screen min-h-screen w-full bg-cover bg-fixed bg-center bg-no-repeat"
+    id="home"
+    >
       {/* <Image
         src={BannerImage}
         alt={''}
@@ -24,7 +27,7 @@ export default function Hero() {
         // className="absolute top-0 h-full w-full bg-green-500 bg-gradient-to-b from-transparent to-black/70 pb-12"
         className="flex h-full w-full flex-col justify-end"
       >
-        <div className="  text-center">
+        <div className=" text-center">
           <h1 className="text-transparent md:text-white">
             <span className="font-dosis block text-7xl font-light uppercase tracking-[.45rem] ">
               Benjamin Chavez
