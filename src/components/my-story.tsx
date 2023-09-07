@@ -46,7 +46,7 @@ export default function MyStory() {
             My Story
           </h2>
           {storySection.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+            <p key={paragraph[0]}>{paragraph}</p>
           ))}
         </div>
       </Container>
