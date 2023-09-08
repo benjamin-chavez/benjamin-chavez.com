@@ -80,7 +80,7 @@ export default function MyStory() {
           <h2 className="font-dosis  text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
             My Story
           </h2>
-          <article className="prose my-6 max-w-none columns-3 gap-x-4">
+          <article className="prose my-6 max-w-none columns-1 gap-x-4 sm:columns-2 md:columns-3">
             {storySection.paragraphs.map((paragraph, index) => (
               <p
                 className="font-open-sans break-inside-avoid-column text-[15px] font-light text-neutral-500"
