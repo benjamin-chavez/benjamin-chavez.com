@@ -66,7 +66,11 @@ function TextLink({
   children: React.ReactNode;
 }) {
   return (
-    <a target="_blank" href={href} className="underline hover:text-[#008000]">
+    <a
+      target="_blank"
+      href={href}
+      className="font-light text-neutral-900 underline hover:text-[#008000]"
+    >
       {children}
     </a>
   );
@@ -98,12 +102,17 @@ export default function MyStory() {
                 {paragraph.bodyAfterLink && paragraph.bodyAfterLink}
               </p>
             ))}
-            {storySection.books.map((book) => (
-              <li className="m-2" key={book.title}>
-                <TextLink href={book.url}>{book.title}</TextLink> by{' '}
-                {book.author}
-              </li>
-            ))}
+            <ul role="list" className="list-disc pl-5 marker:text-neutral-500">
+              {storySection.books.map((book) => (
+                <li
+                  className="font-open-sans prose my-1 -indent-2 text-[15px] font-light text-neutral-500"
+                  key={book.title}
+                >
+                  <TextLink href={book.url}>{book.title}</TextLink> by{' '}
+                  {book.author}
+                </li>
+              ))}
+            </ul>
           </article>
         </div>
         {/* </div> */}

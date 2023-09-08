@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 // src/app/blog/page.tsx
 
+import { allBlogs } from 'contentlayer/generated';
 import Link from 'next/link';
 
 const posts = [
@@ -109,6 +110,19 @@ const posts = [
 ];
 
 export default function Blog() {
+  const publicPosts = allBlogs
+    // .filter(
+    //   (post) =>
+    //     new Date(post.publishedAt) <= new Date() ||
+    //     process.env.NODE_ENV === 'development',
+    // )
+    .sort((a, b) => {
+      if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
+        return -1;
+      }
+      return 1;
+    });
+
   return (
     <
       // className="flex flex-col items-center justify-center"
@@ -133,14 +147,17 @@ export default function Blog() {
             <div
               // sm:mt-16 sm:pt-16 mt-10
               // border-gray-200
-              className="mt-6 space-y-16 border-t border-gray-300 pt-10 "
+              className="mt-6 w-full space-y-16 border-t border-gray-300  pt-10"
             >
-              {posts.map((post) => (
-                <Link href="/" key={post.id}>
+              {publicPosts.map((post) => (
+                <Link href={`/blog/${post.slug}`} key={post.slug}>
                   <article className="group mb-4 flex max-w-3xl flex-col items-start justify-between rounded p-4 hover:bg-black/10">
                     <div className="flex items-center gap-x-4 text-xs">
-                      <time dateTime={post.datetime} className="text-gray-500">
-                        {post.date}
+                      <time
+                        dateTime={post.publishedAt}
+                        className="text-gray-500"
+                      >
+                        {post.publishedAt}
                       </time>
                     </div>
                     <div
