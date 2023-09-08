@@ -71,13 +71,15 @@ function TextLink({
     </a>
   );
 }
-
+// <section className="py-12">
+//  <Container className="" id="portfolio"> */}
+// <div className="scroll-m-14 px-12" id="portfolio">
 export default function MyStory() {
   return (
     <section className="py-12">
-      <Container id="my-story">
+      <div id="my-story" className="scroll-m-14 px-12">
         <div className="flex flex-col items-center justify-center">
-          <h2 className="font-dosis  text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
+          <h2 className="font-dosis mt-4 text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
             My Story
           </h2>
           <article className="prose my-6 max-w-none columns-1 gap-x-4 sm:columns-2 md:columns-3">
@@ -105,7 +107,7 @@ export default function MyStory() {
           </article>
         </div>
         {/* </div> */}
-      </Container>
+      </div>
     </section>
   );
 }
