@@ -33,6 +33,37 @@ var Blog = defineDocumentType(() => ({
   },
   computedFields
 }));
+var themes = [
+  "css-variables",
+  "dark-plus",
+  "dracula-soft",
+  "dracula",
+  "github-dark-dimmed",
+  "github-dark",
+  "github-light",
+  "hc_light",
+  "light-plus",
+  "material-theme-darker",
+  "material-theme-lighter",
+  "material-theme-ocean",
+  "material-theme-palenight",
+  "material-theme",
+  "min-dark",
+  "min-light",
+  "monokai",
+  "nord",
+  "one-dark-pro",
+  "poimandres",
+  "rose-pine-dawn",
+  "rose-pine-moon",
+  "rose-pine",
+  "slack-dark",
+  "slack-ochin",
+  "solarized-dark",
+  "solarized-light",
+  "vitesse-dark",
+  "vitesse-light"
+];
 var contentlayer_config_default = makeSource({
   contentDirPath: "./src/content",
   documentTypes: [Blog],
@@ -44,7 +75,7 @@ var contentlayer_config_default = makeSource({
         rehypePrettyCode,
         {
           // theme: JSON.parse(readFileSync(themePath, 'utf-8')),
-          theme: "one-dark-pro",
+          theme: themes[27],
           onVisitLine(node) {
             if (node.children.length === 0) {
               node.children = [{ type: "text", value: " " }];
@@ -75,4 +106,4 @@ export {
   Blog,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-VYAO67N4.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-M5XSA24U.mjs.map
