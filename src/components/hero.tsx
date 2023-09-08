@@ -13,9 +13,11 @@ function HeroButton({
   children: React.ReactNode;
 }) {
   return (
+    //  "duration-600 transition ease-in-out group-hover:bg-black/80"
+
     <Link
       href={href}
-      className="font-open-sans flex h-[38px] w-[120px] items-center justify-center whitespace-nowrap rounded border border-white bg-[#00000036] text-center text-base text-white hover:bg-[#a7a7a736]"
+      className="font-open-sans flex h-[38px] w-[120px] items-center justify-center whitespace-nowrap rounded border border-white bg-[#00000036] text-center text-base text-white transition duration-300 ease-in-out hover:bg-[#a7a7a736] "
     >
       {children}
     </Link>
