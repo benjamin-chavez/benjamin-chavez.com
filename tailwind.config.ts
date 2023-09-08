@@ -20,7 +20,7 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       boxShadow: {
-        basic: '0 0 10px rgba(0, 0, 0, 0.3)',
+        basic: '0 0 10px rgba(0, 0, 0, 0.1)',
       },
       fontFamily: {
         'open-sans': ['var(--font-open-sans)'],

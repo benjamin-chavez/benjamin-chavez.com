@@ -53,7 +53,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="relative z-50 w-full bg-[#F8F9FA] py-1">
+    <header className="relative sticky top-0 z-50 w-full bg-[#F8F9FA] py-1">
       <div className="flex w-full items-center justify-between sm:px-4 md:px-4 lg:px-12">
         <nav
           //

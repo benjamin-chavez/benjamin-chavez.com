@@ -207,7 +207,8 @@ function PortfolioCard({ project }: { project: any }) {
 export default function Portfolio() {
   return (
     <section className="py-12">
-      <Container className="" id="portfolio">
+      {/* <Container className="" id="portfolio"> */}
+      <div className="scroll-m-14 px-12" id="portfolio">
         <div className="flex flex-col items-center justify-center ">
           <h2 className="font-dosis mt-4 text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
             Portfolio
@@ -219,7 +220,7 @@ export default function Portfolio() {
           </h3>
         </div>
 
-        <div className="my-6 grid grid-cols-1 gap-x-6 gap-y-7 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="my-6 grid grid-cols-1 gap-x-8 gap-y-7 lg:grid-cols-2 xl:grid-cols-3">
           {projects.map(
             (project) =>
               project.preview && (
@@ -229,7 +230,7 @@ export default function Portfolio() {
               ),
           )}
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
