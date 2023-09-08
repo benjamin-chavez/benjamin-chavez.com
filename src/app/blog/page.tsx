@@ -111,11 +111,11 @@ const posts = [
 
 export default function Blog() {
   const publicPosts = allBlogs
-    // .filter(
-    //   (post) =>
-    //     new Date(post.publishedAt) <= new Date() ||
-    //     process.env.NODE_ENV === 'development',
-    // )
+    .filter(
+      (post) =>
+        new Date(post.publishedAt) <= new Date() ||
+        process.env.NODE_ENV === 'development',
+    )
     .sort((a, b) => {
       if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
         return -1;
