@@ -1,7 +1,7 @@
 // src/app/blog/[slug]/page.tsx
 
 // import 'server-only';
-
+// 'use client'
 import { allBlogs } from 'contentlayer/generated';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,6 +10,7 @@ import { Metadata } from 'next';
 import { Container } from '@/components/container';
 import { Mdx } from '@/components/mdx';
 // import { formatDate } from '@/app/lib/utils';
+// import { Highlight, themes } from 'prism-react-renderer';
 
 function getPost(params: any) {
   return allBlogs.find((post) => post.slug === params.slug);
@@ -50,6 +51,18 @@ function getPost(params: any) {
 //   };
 // }
 
+const codeBlock = `
+const GroceryItem: React.FC<GroceryItemProps> = ({ item }) => {
+  return (
+    <div>
+      <h2>{item.name}</h2>
+      <p>Price: {item.price}</p>
+      <p>Quantity: {item.quantity}</p>
+    </div>
+  );
+}
+`;
+
 interface BlogProps {
   params: {
     slug: string;
@@ -65,6 +78,20 @@ export default async function Blog({ params }: BlogProps) {
 
   return (
     <>
+      {/* <Highlight theme={themes.shadesOfPurple} code={codeBlock} language="tsx">
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre style={style}>
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line })}>
+                <span>{i + 1}</span>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight> */}
       <div className="bg-[#ECEDFA] py-12 sm:py-12">
         <div className="mx-auto flex max-w-7xl   px-6 lg:px-8">
           <div

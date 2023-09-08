@@ -1,11 +1,12 @@
 // contentlayer.config.js
 
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
-// import { readFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrismPlus from 'rehype-prism-plus';
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -72,6 +73,8 @@ const themes = [
   'vitesse-dark',
   'vitesse-light',
 ];
+// const shiki = require('shiki');
+// const mytheme = shiki.getHighlighter({ theme: 'css-variables' });
 
 export default makeSource({
   contentDirPath: './src/content',
@@ -80,11 +83,13 @@ export default makeSource({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
+      // [rehypePrismPlus, { ignoreMissing: true }],
       [
         rehypePrettyCode,
         {
           // theme: JSON.parse(readFileSync(themePath, 'utf-8')),
-          theme: themes[27],
+          theme: themes[0],
+          // theme: mytheme,
           onVisitLine(node) {
             // Prevent lines from collapsing in `display: grid` mode, and allow empty
             // lines to be copy/pasted
