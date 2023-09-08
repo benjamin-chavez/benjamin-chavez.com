@@ -74,13 +74,13 @@ function TextLink({
 
 export default function MyStory() {
   return (
-    <section id="my-story" className="my-12 pt-4">
-      <Container>
+    <section className="py-12">
+      <Container id="my-story">
         <div className="flex flex-col items-center justify-center">
-          <h2 className="font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
+          <h2 className="font-dosis  text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
             My Story
           </h2>
-          <article className="prose max-w-none columns-3 gap-x-4">
+          <article className="prose my-6 max-w-none columns-3 gap-x-4">
             {storySection.paragraphs.map((paragraph, index) => (
               <p
                 className="font-open-sans break-inside-avoid-column text-[15px] font-light text-neutral-500"

@@ -164,15 +164,15 @@ const projects = [
 function PortfolioCard({ project }: { project: any }) {
   return (
     <>
-      <div className="shadow-basic group relative aspect-video w-full">
+      <div className="shadow-basic group relative aspect-video w-full rounded-[3px]">
         <Image
           src={project.image}
-          className="absolute inset-0 "
+          className="absolute inset-0 rounded-[3px]"
           fill
-          alt={''}
+          placeholder="blur"
+          alt={project.altText}
         />
-        {/* <div className="relative z-10 hidden h-full flex-col justify-center bg-black/70 p-4 text-center text-white transition duration-500  group-hover:flex group-hover:ease-in"> */}
-        <div className="duration-600 relative z-10 flex h-full  flex-col justify-center p-4 text-center transition ease-in-out group-hover:bg-black/80">
+        <div className="duration-600 relative z-10 flex h-full  flex-col justify-center rounded-[3px] p-4 text-center transition ease-in-out group-hover:bg-black/80">
           <h3
             // font-medium
             className="font-dosis text-3xl tracking-[.18rem] text-transparent [text-wrap:balance] group-hover:text-white"
@@ -206,34 +206,30 @@ function PortfolioCard({ project }: { project: any }) {
 
 export default function Portfolio() {
   return (
-    <Container
-      as="section"
-      // max-w-screen-2xl
-      className="mt-12 pt-4"
-      id="portfolio"
-    >
-      {/* // <section className="mt-12 pt-4" id="portfolio"> */}
-      <div className="flex flex-col items-center justify-center ">
-        <h2 className="font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
-          Portfolio
-        </h2>
+    <section className="py-12">
+      <Container className="" id="portfolio">
+        <div className="flex flex-col items-center justify-center ">
+          <h2 className="font-dosis mt-4 text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
+            Portfolio
+          </h2>
 
-        <h3 className="pt-2 text-gray-500">
-          A selection of my work as a full stack Developer in The U.S. and
-          Germany.
-        </h3>
-      </div>
+          <h3 className="pt-2 text-gray-500">
+            A selection of my work as a full stack Developer in The U.S. and
+            Germany.
+          </h3>
+        </div>
 
-      <div className="grid grid-cols-1 gap-x-6 gap-y-7 pt-6 lg:grid-cols-2 xl:grid-cols-3">
-        {projects.map(
-          (project) =>
-            project.preview && (
-              <>
-                <PortfolioCard key={project.title} project={project} />
-              </>
-            ),
-        )}
-      </div>
-    </Container>
+        <div className="my-6 grid grid-cols-1 gap-x-6 gap-y-7 lg:grid-cols-2 xl:grid-cols-3">
+          {projects.map(
+            (project) =>
+              project.preview && (
+                <>
+                  <PortfolioCard key={project.title} project={project} />
+                </>
+              ),
+          )}
+        </div>
+      </Container>
+    </section>
   );
 }

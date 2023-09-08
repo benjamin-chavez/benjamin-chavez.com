@@ -1,10 +1,10 @@
 // src/components/header.tsx
 'use client';
 
+import React, { useState, useEffect, useRef } from 'react';
 import { Dialog } from '@headlessui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 import { cx } from '../../cva.config';
 import BarsIcon from './icons/bars-icon';
 import { XMarkIcon } from './icons/x-mark-icon';

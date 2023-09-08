@@ -24,30 +24,6 @@ import TailwindIcon from './icons/tailwind-icon';
 import TypescriptIcon from './icons/typescript-icon';
 import WindowsIcon from './icons/windows-icon';
 
-// const technologies = [
-//   { title: 'TypeScript', IconComponent: TypescriptIcon },
-//   { title: 'JavaScript', IconComponent: JavaScriptIcon },
-//   { title: 'Ruby', IconComponent: RubyIcon },
-//   { title: 'Java', IconComponent: JavaIcon },
-//   { title: 'Python', IconComponent: PythonIcon },
-//   { title: 'SQL', IconComponent: DatabaseIcon },
-//   { title: 'VBA', IconComponent: ExcelIcon },
-//   { title: 'HTML', IconComponent: HtmlIcon },
-//   { title: 'CSS', IconComponent: CssIcon },
-//   { title: 'React', IconComponent: ReactIcon },
-//   { title: 'Redux', IconComponent: ReduxIcon },
-//   { title: 'Ruby on Rails', IconComponent: RailsIcon },
-//   { title: 'Next.js', IconComponent: NextjsIcon },
-//   { title: 'Node.js', IconComponent: NodeIcon },
-//   { title: 'Git', IconComponent: GitIcon },
-//   { title: 'PostgreSQL', IconComponent: PostgresIcon },
-//   { title: 'Bootstrap', IconComponent: BootstrapIcon },
-//   { title: 'Tailwind', IconComponent: TailwindIcon },
-//   { title: 'Figma', IconComponent: FigmaIcon },
-//   { title: 'Linux', IconComponent: LinuxIcon },
-//   { title: 'Windows', IconComponent: WindowsIcon },
-//   { title: 'Mac OSC', IconComponent: MacIcon },
-// ];
 const technologies = {
   'Languages & Technologies': [
     { title: 'TypeScript', IconComponent: TypescriptIcon },
@@ -81,17 +57,20 @@ const technologies = {
 
 export default function Skills() {
   return (
-    <section className="bg-parallax mt-12 bg-fixed pt-4">
-      <Container className="mt-7 pb-20 pt-4">
-        <div className="flex  items-center justify-center">
-          <h2 className="font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
+    <section className="bg-parallax bg-fixed py-12">
+      <Container>
+        <div className="flex flex-col items-center justify-center ">
+          <h2 className="font-dosis mt-4 text-3xl uppercase leading-9 tracking-[.4rem] text-white">
             Technologies
           </h2>
         </div>
-        <div className="font-open-sans mt-8 flex flex-wrap items-center justify-center gap-6">
+        <div className="font-open-sans my-6 flex flex-col  items-center justify-center gap-8 ">
           {Object.entries(technologies).map(([category, techs]) => {
             return (
-              <div key={category} className="flex gap-5">
+              <div
+                key={category}
+                className="flex flex-wrap items-center justify-center gap-5  "
+              >
                 {techs.map((tech) => {
                   const { IconComponent } = tech;
 
@@ -99,6 +78,7 @@ export default function Skills() {
                     <div
                       key={tech.title}
                       className="flex items-center whitespace-nowrap text-base text-white"
+                      // className="flex whitespace-nowrap text-white"
                       justify-center
                     >
                       <IconComponent />
