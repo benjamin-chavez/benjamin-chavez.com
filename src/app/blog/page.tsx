@@ -127,16 +127,17 @@ export default function Blog() {
   return (
     <>
       <Container
-        // bg-[#ECEDFA] bg-red-500
-        className=" py-12 sm:py-12"
+      // bg-[#ECEDFA] bg-red-500
+      // className="py-12 sm:py-12"
       >
         <div>
-          <h1 className="text-center font-dosis text-7xl font-light uppercase tracking-[.45rem] text-[#141414]">
+          <h1 className="mt-4 text-center font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
+            {/* My Story */}
             Blog
           </h1>
-          <p className="mt-2 text-center text-lg leading-8 text-gray-600">
+          {/* <p className="mt-2 text-center text-lg leading-8 text-gray-600">
             Technical articles covering my experiences as a software engineer
-          </p>
+          </p> */}
           <div className="mt-6 space-y-16 border-t border-gray-300 pt-10">
             {publicPosts.map((post) => (
               <Link href={`/blog/${post.slug}`} key={post.slug}>

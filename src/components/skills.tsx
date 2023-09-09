@@ -57,9 +57,7 @@ const technologies = {
 
 export default function Skills() {
   return (
-    <section
-    // className="bg-parallax bg-fixed py-12"
-    >
+    <section className="bg-parallax bg-fixed py-12">
       <Container className="max-w-5xl">
         <div className="flex flex-col items-center justify-center ">
           <h2 className="mt-4 font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
@@ -71,7 +69,7 @@ export default function Skills() {
             return (
               <div
                 key={category}
-                className="flex flex-wrap items-center justify-center gap-5  "
+                className="flex w-full flex-wrap items-center justify-center gap-5  "
               >
                 {techs.map((tech) => {
                   const { IconComponent } = tech;

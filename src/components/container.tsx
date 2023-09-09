@@ -23,15 +23,15 @@ export function Container({
       // sm:px-6 lg:px-8 mx-auto sm:max-w-7xl
       className={cx(
         // 'mx-auto w-screen max-w-3xl px-2',
-        'mx-auto  max-w-3xl px-2',
+        'mx-auto max-w-3xl px-6 md:px-4',
         className,
         //
       )}
       {...props}
     >
       <div
-        // bg-blue-500/20 mx-auto max-w-2xl lg:max-w-none
-        className="bg-red-500/50 sm:bg-yellow-500/50 md:bg-green-500/50 lg:bg-green-500/50 xl:bg-blue-500/50"
+      // bg-blue-500/20 mx-auto max-w-2xl lg:max-w-none
+      // className="bg-red-500/50 sm:bg-yellow-500/50 md:bg-green-500/50 lg:bg-green-500/50 xl:bg-blue-500/50"
       >
         {children}
       </div>

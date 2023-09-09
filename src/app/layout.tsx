@@ -31,7 +31,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     >
       <body
         // debug-screens
-        className="flex min-h-full flex-col"
+        className=" flex min-h-full flex-col"
       >
         <RootLayout>{children}</RootLayout>
       </body>

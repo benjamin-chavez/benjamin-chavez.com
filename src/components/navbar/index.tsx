@@ -26,7 +26,8 @@ const navItems: Record<string, NavItem> = {
   '/#my-story': {
     name: 'My Story',
   },
-  '/#contact': {
+  // '/#contact': {
+  '/blog/building-a-chrome-extension-with-shared-state': {
     name: 'Contact',
   },
 };

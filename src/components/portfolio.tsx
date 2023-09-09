@@ -164,7 +164,7 @@ const projects = [
 function PortfolioCard({ project }: { project: any }) {
   return (
     <>
-      <div className="shadow-basic group relative aspect-video w-full rounded-[3px]">
+      <div className="group relative aspect-video w-full rounded-[3px] shadow-basic">
         <Image
           src={project.image}
           className="absolute inset-0 rounded-[3px]"
@@ -172,7 +172,7 @@ function PortfolioCard({ project }: { project: any }) {
           placeholder="blur"
           alt={project.altText}
         />
-        <div className="duration-600 relative z-10 flex h-full  flex-col justify-center rounded-[3px] p-4 text-center transition ease-in-out group-hover:bg-black/80">
+        <div className="relative z-10 flex h-full flex-col justify-center rounded-[3px] p-4 text-center transition duration-600 ease-in-out group-hover:bg-black/80">
           <h3
             // font-medium
             className="font-dosis text-3xl tracking-[.18rem] text-transparent [text-wrap:balance] group-hover:text-white"
@@ -181,7 +181,7 @@ function PortfolioCard({ project }: { project: any }) {
           </h3>
           <p
             // [text-wrap:balance]
-            className="font-open-sans xs:block mt-2 hidden text-base text-transparent group-hover:text-gray-400"
+            className="mt-2 hidden font-open-sans text-base text-transparent group-hover:text-gray-400 xs:block"
           >
             {project.description}
           </p>
@@ -190,7 +190,7 @@ function PortfolioCard({ project }: { project: any }) {
               <a
                 key="url"
                 // px-2 py-1
-                className="font-open-sans flex w-14 items-center justify-center rounded py-2 text-base text-transparent hover:!text-white group-hover:border group-hover:border-white group-hover:text-gray-400"
+                className="flex w-14 items-center justify-center rounded py-2 font-open-sans text-base text-transparent hover:!text-white group-hover:border group-hover:border-white group-hover:text-gray-400"
                 href={link.url}
                 target="_blank"
               >
@@ -208,13 +208,13 @@ export default function Portfolio() {
   return (
     <section className="py-12">
       {/* <Container className="" id="portfolio"> */}
-      <div className="scroll-m-14 px-12" id="portfolio">
+      <Container className="scroll-m-14 md:max-w-none md:px-12" id="portfolio">
         <div className="flex flex-col items-center justify-center ">
-          <h2 className="font-dosis mt-4 text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
+          <h2 className="mt-4 font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
             Portfolio
           </h2>
 
-          <h3 className="pt-2 text-gray-500">
+          <h3 className="pt-2 text-center font-open-sans text-[0.94rem] font-light text-gray-500">
             A selection of my work as a full stack Developer in The U.S. and
             Germany.
           </h3>
@@ -230,7 +230,7 @@ export default function Portfolio() {
               ),
           )}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

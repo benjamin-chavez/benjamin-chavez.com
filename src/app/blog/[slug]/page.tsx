@@ -63,12 +63,14 @@ export default async function Blog({ params }: BlogProps) {
   }
 
   return (
-    <div className="bg-[#ECEDFA] bg-purple-500">
+    <
+      // className="bg-[#ECEDFA] bg-purple-500"
+    >
       <Container
-        // bg-[#ECEDFA] py-12 sm:py-12
-        className="py-12 sm:py-12"
+      // bg-[#ECEDFA] py-12 sm:py-12
+      // className="py-12 sm:py-12"
       >
-        <div className="mt-18 w-full bg-green-500">
+        {/* <div className="mt-18 w-full bg-green-500">
           <Link href="/blog" className="flex items-center px-2 font-semibold">
             <svg
               width="16"
@@ -82,16 +84,20 @@ export default async function Blog({ params }: BlogProps) {
             </svg>
             <span className="pl-1"> back</span>
           </Link>
-        </div>
+        </div> */}
 
-        <h1 className="text-center font-dosis text-7xl font-light uppercase tracking-[.45rem] text-[#141414] ">
+        <h1 className="mt-4 text-center font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
+          {/* My Story */}
           {post.title}
         </h1>
 
-        <section className="mt-12 flex flex-col bg-red-500">
+        <section
+          // mt-12  bg-red-500
+          className="mt-6 flex flex-col"
+        >
           <Mdx code={post?.body.code} />
         </section>
       </Container>
-    </div>
+    </>
   );
 }
