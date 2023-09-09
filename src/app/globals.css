@@ -300,3 +300,9 @@ code .line::before {
 .code-line:hover {
   @apply -mx-4  bg-gray-700 bg-opacity-50;
 }
+
+.remark-code-container pre {
+  /* margin-top: 0; */
+  /* border-radius: 0px; */
+  @apply border border-t-0 border-white/30;
+}

@@ -104,7 +104,7 @@ publishedAt: '2023-09-8'
 ## Step 5: Add A Route To Return Data
 
   Let's create a new route so that we can serve up some data. Since our data object is made up of different members of The Beatles, we will call our route `/api/beatles`
-  ```ts:sdfsd
+  ```ts:sdfsd showLineNumbers
   app.get('/api/beatles', (req, res) => {
     const data = {
       title: 'The Beatles',
@@ -128,9 +128,7 @@ publishedAt: '2023-09-8'
 
   The fully updated file will look like this:
 
-  ```ts
-  // express-api/app.ts
-
+  ```ts:express-api/app.ts showLineNumbers
   import express from 'express';
 
   const PORT = 5000;
@@ -279,9 +277,7 @@ Step 6: Add hot reloading
   ```
 
   Your updated server code should now look like this:
-  ```ts
-  // express-api/src/app.ts
-
+  ```ts:express-api/src/app.ts{35-39} showLineNumbers
   import express from 'express';
 
   const PORT = 5000;

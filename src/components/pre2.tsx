@@ -2,6 +2,7 @@
 import clsx, { ClassValue } from 'clsx';
 import { cx } from 'cva.config';
 import React from 'react';
+import { SiTypescript } from 'react-icons/si';
 import { twMerge } from 'tailwind-merge';
 // import { clsxm } from "utils";
 
@@ -34,14 +35,19 @@ export default function Pre2({ className, ...props }: IPre) {
       }, 2000);
     }
   };
+  let Icon = SiTypescript;
 
   return (
-    <div ref={textInput} className="">
+    <div ref={textInput} className=" ">
       <pre
-        className="m-0 flex w-full items-center justify-between rounded-b-none  bg-slate-900"
+        className="m-0 flex w-full items-center justify-between rounded-b-none   bg-slate-900"
         {...props}
       >
-        {props.title}
+        <span className="flex items-center gap-2">
+          {' '}
+          <Icon className="flex h-3.5 w-3.5 items-center" />
+          {props.title}
+        </span>
         <button
           aria-label="Copy code"
           type="button"

@@ -2,6 +2,7 @@
 import clsx, { ClassValue } from 'clsx';
 import { cx } from 'cva.config';
 import React, { useEffect } from 'react';
+import { SiTypescript } from 'react-icons/si';
 import { twMerge } from 'tailwind-merge';
 // import { clsxm } from "utils";
 
