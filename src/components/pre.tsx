@@ -38,6 +38,7 @@ export default function Pre({ className, ...props }: IPre) {
         if (parentElement && parentElement.children.length > 1) {
           secondChild = parentElement.children[1];
           // console.log('here!!: ', secondChild.firstChild?.textContent);
+          // @ts-ignore
           navigator.clipboard.writeText(secondChild.firstChild?.textContent);
         }
 
@@ -58,8 +59,8 @@ export default function Pre({ className, ...props }: IPre) {
   useEffect(() => {
     if (textInput.current !== null) {
       let parentElement = textInput.current.parentElement;
-
-      if (parentElement?.firstChild?.lastChild.title) {
+      // @ts-ignore
+      if (parentElement?.firstChild?.lastChild?.title) {
         setHastitle(true);
         // console.log('HERE: ', parentElement?.firstChild?.lastChild.title);
       }
