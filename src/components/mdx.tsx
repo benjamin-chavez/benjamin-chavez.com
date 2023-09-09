@@ -40,8 +40,9 @@ const mdxComponents = {
   p: ({ className, ...props }: MdxComponentProps) => (
     <p
       // className={cx('leading-7 [&:not(:first-child)]:mt-6', className)}
+      // [&:not(:first-child)]:mt-6
       className={cx(
-        'font-open-sans text-[0.94rem] font-light text-[#777777] [&:not(:first-child)]:mt-6',
+        'font-open-sans text-[0.94rem] font-light text-[#777777] ',
         className,
       )}
       {...props}
@@ -51,6 +52,8 @@ const mdxComponents = {
     <code
       className={cx(
         // 'relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm',
+        'text-sm',
+        // 'text-[0.813rem]',
         className,
       )}
       {...props}

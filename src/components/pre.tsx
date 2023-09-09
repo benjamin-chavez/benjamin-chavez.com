@@ -89,7 +89,9 @@ export default function Pre({ className, ...props }: IPre) {
   return (
     <div ref={textInput} className="relative ">
       {!hasTitle ? (
-        <div className=" pb-3">
+        <div
+        // className=" pb-3"
+        >
           <button
             aria-label="Copy code"
             type="button"
@@ -132,7 +134,7 @@ export default function Pre({ className, ...props }: IPre) {
             </svg>
           </button>
           <pre
-            className="py-4 "
+            className="my-0 py-4"
             // className={clsxm(
             //   'pre mb-4 mt-4 overflow-x-auto rounded-lg bg-slate-900 px-3 py-4 font-mono',
             //   className

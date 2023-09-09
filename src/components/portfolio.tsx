@@ -206,7 +206,7 @@ function PortfolioCard({ project }: { project: any }) {
 
 export default function Portfolio() {
   return (
-    <section className="py-12">
+    <section className="bg-[#ECEDFA] py-12">
       {/* <Container className="" id="portfolio"> */}
       <Container className="scroll-m-14 md:max-w-none md:px-12" id="portfolio">
         <div className="flex flex-col items-center justify-center ">

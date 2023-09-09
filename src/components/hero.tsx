@@ -17,7 +17,7 @@ function HeroButton({
 
     <Link
       href={href}
-      className="font-open-sans flex h-[38px] w-[120px] items-center justify-center whitespace-nowrap rounded border border-white bg-[#00000036] text-center text-base text-white transition duration-300 ease-in-out hover:bg-[#a7a7a736] "
+      className="flex h-[38px] w-[120px] items-center justify-center whitespace-nowrap rounded border border-white bg-[#00000036] text-center font-open-sans text-base text-white transition duration-300 ease-in-out hover:bg-[#a7a7a736] "
     >
       {children}
     </Link>
@@ -30,27 +30,28 @@ export default function Hero() {
       // bg-hero-image -mt-6
       // className="relative h-screen min-h-screen w-full bg-cover bg-fixed bg-center bg-no-repeat"
       id="home"
-      className="bg-hero-image relative -mt-14 h-screen min-h-screen w-full bg-cover bg-fixed bg-center bg-no-repeat"
+      // bg-hero-image
+      className=" relative -mt-14 h-screen min-h-screen w-full bg-cover bg-fixed bg-center bg-no-repeat"
       // className="-mt-14 h-screen"
     >
-      {/* <Image
+      <Image
         src={BannerImage}
         alt={''}
-        className="absolute top-0 -z-20 aspect-auto h-full w-full bg-fixed object-cover"
+        className="fixed  top-8 -z-20 aspect-auto h-full w-full object-cover"
         priority
         placeholder="blur"
       />
       <div
         // pb-12
-        className="absolute top-0 -z-10 aspect-auto h-full w-full bg-gradient-to-b from-transparent to-black/70 "
-      /> */}
+        className="fixed top-0 -z-10 aspect-auto h-full w-full bg-gradient-to-b from-transparent to-black/70 "
+      />
 
       <div className="flex h-full items-end justify-center pb-16 text-white">
         <div className="flex flex-col items-center">
           <h1 className="font-dosis text-7xl font-light uppercase tracking-[.45rem] text-transparent md:text-white ">
             Benjamin Chavez
           </h1>
-          <h2 className="font-open-sans mt-3 block text-base">
+          <h2 className="mt-3 block font-open-sans text-base">
             Full Stack Developer
           </h2>
 
