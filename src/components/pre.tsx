@@ -87,16 +87,15 @@ export default function Pre({ className, ...props }: IPre) {
   // };
 
   return (
-    <div ref={textInput} className="relative ">
+    <div ref={textInput} className="group relative bg-red-500">
       {!hasTitle ? (
-        <div
-        // className=" pb-3"
-        >
+        <div className=" ">
           <button
             aria-label="Copy code"
             type="button"
             className={cx(
-              'absolute right-3 top-2.5 z-50 h-9 w-9 rounded border bg-slate-900 p-1 hover:bg-slate-700',
+              'absolute right-3 top-2 z-40 h-9 w-9 rounded border bg-slate-900 p-1 opacity-0 hover:bg-slate-700 group-hover:opacity-100',
+              'ease transition-opacity duration-200',
               copied
                 ? 'border-green-400 focus:border-green-400 focus:outline-none'
                 : 'border-gray-300',
@@ -133,24 +132,10 @@ export default function Pre({ className, ...props }: IPre) {
               )}
             </svg>
           </button>
-          <pre
-            className="my-0 py-4"
-            // className={clsxm(
-            //   'pre mb-4 mt-4 overflow-x-auto rounded-lg bg-slate-900 px-3 py-4 font-mono',
-            //   className
-            // )}
-            {...props}
-          />
+          <pre className="my-0 py-4" {...props} />
         </div>
       ) : (
-        <pre
-          className="mt-0 rounded-t-none "
-          // className={clsxm(
-          //   'pre mb-4 mt-4 overflow-x-auto rounded-lg bg-slate-900 px-3 py-4 font-mono',
-          //   className
-          // )}
-          {...props}
-        />
+        <pre className="mt-0 rounded-t-none " {...props} />
       )}
     </div>
   );
