@@ -306,3 +306,8 @@ code .line::before {
   /* border-radius: 0px; */
   @apply border border-t-0 border-white/30;
 }
+
+.remark-code-container {
+  /* @apply w-screen bg-blue-500; */
+  /* @apply w-full bg-blue-500; */
+}

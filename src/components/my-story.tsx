@@ -75,21 +75,27 @@ function TextLink({
     </a>
   );
 }
-// <section className="py-12">
-//  <Container className="" id="portfolio"> */}
-// <div className="scroll-m-14 px-12" id="portfolio">
+
 export default function MyStory() {
   return (
     <section className="py-12">
-      <div id="my-story" className="scroll-m-14 px-12">
-        <div className="flex flex-col items-center justify-center">
-          <h2 className="font-dosis mt-4 text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
+      <Container
+        id="my-story"
+        // px-12
+        className="max-w-5xl scroll-m-14 "
+      >
+        <div className="flex w-full flex-col items-center justify-center bg-green-500">
+          <h2 className="mt-4 font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
             My Story
           </h2>
-          <article className="prose my-6 max-w-none columns-1 gap-x-4 sm:columns-2 md:columns-3">
+          <article
+            // max-w-none
+            className="prose my-6 max-w-7xl columns-1 gap-x-4 bg-red-500 md:columns-3"
+            // className="prose "
+          >
             {storySection.paragraphs.map((paragraph, index) => (
               <p
-                className="font-open-sans break-inside-avoid-column text-[15px] font-light text-neutral-500"
+                className="break-inside-avoid-column font-open-sans text-[15px] font-light text-neutral-500"
                 key={index}
               >
                 {' '}
@@ -105,7 +111,7 @@ export default function MyStory() {
             <ul role="list" className="list-disc pl-5 marker:text-neutral-500">
               {storySection.books.map((book) => (
                 <li
-                  className="font-open-sans prose my-1 -indent-2 text-[15px] font-light text-neutral-500"
+                  className="prose my-1 -indent-2 font-open-sans text-[15px] font-light text-neutral-500"
                   key={book.title}
                 >
                   <TextLink href={book.url}>{book.title}</TextLink> by{' '}
@@ -116,7 +122,7 @@ export default function MyStory() {
           </article>
         </div>
         {/* </div> */}
-      </div>
+      </Container>
     </section>
   );
 }

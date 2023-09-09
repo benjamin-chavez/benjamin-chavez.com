@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 // src/app/blog/page.tsx
 
+import { Container } from '@/components/container';
 import { allBlogs } from 'contentlayer/generated';
 import Link from 'next/link';
 
@@ -124,69 +125,45 @@ export default function Blog() {
     });
 
   return (
-    <
-      // className="flex flex-col items-center justify-center"
-    >
-      {/*  */}
-
-      <div className="bg-[#ECEDFA] py-12 sm:py-12">
-        <div className="mx-auto flex max-w-7xl   px-6 lg:px-8">
-          <div
-            // max-w-6xl
-            className="mx-auto flex flex-col items-center justify-center "
-          >
-            <h1 className="font-dosis text-7xl font-light uppercase tracking-[.45rem]  text-[#141414]">
-              Blog
-            </h1>
-            <p className="mt-2 text-lg leading-8 text-gray-600">
-              Technical articles covering my experiences as a software engineer
-            </p>
-            {/* <h2 className="font-open-sans mt-3 block text-base">
-              Build in public
-            </h2> */}
-            <div
-              // sm:mt-16 sm:pt-16 mt-10
-              // border-gray-200
-              className="mt-6 w-full space-y-16 border-t border-gray-300  pt-10"
-            >
-              {publicPosts.map((post) => (
-                <Link href={`/blog/${post.slug}`} key={post.slug}>
-                  <article className="group mb-4 flex max-w-3xl flex-col items-start justify-between rounded p-4 hover:bg-black/10">
-                    <div className="flex items-center gap-x-4 text-xs">
-                      <time
-                        dateTime={post.publishedAt}
-                        className="text-gray-500"
-                      >
-                        {post.publishedAt}
-                      </time>
-                    </div>
-                    <div
-                      // group
-                      className="  relative"
+    <>
+      <Container
+        // bg-[#ECEDFA] bg-red-500
+        className=" py-12 sm:py-12"
+      >
+        <div>
+          <h1 className="text-center font-dosis text-7xl font-light uppercase tracking-[.45rem] text-[#141414]">
+            Blog
+          </h1>
+          <p className="mt-2 text-center text-lg leading-8 text-gray-600">
+            Technical articles covering my experiences as a software engineer
+          </p>
+          <div className="mt-6 space-y-16 border-t border-gray-300 pt-10">
+            {publicPosts.map((post) => (
+              <Link href={`/blog/${post.slug}`} key={post.slug}>
+                <article className="group mb-4 flex flex-col items-start justify-between rounded p-4 hover:bg-black/10">
+                  <div className="flex items-center text-xs">
+                    <time dateTime={post.publishedAt} className="text-gray-500">
+                      {post.publishedAt}
+                    </time>
+                  </div>
+                  <div className="relative ">
+                    <h3 className="mt-3 text-lg uppercase leading-6 text-gray-900 group-hover:text-gray-600">
+                      <span className="absolute inset-0" />
+                      {post.title}
+                    </h3>
+                    <p
+                      // className="font-open-sans mt-3 line-clamp-3 text-sm leading-6 text-gray-600 "
+                      className="mt-3 break-inside-avoid-column font-open-sans text-[15px] font-light text-neutral-500"
                     >
-                      <h3
-                        //   font-semibold
-                        className="mt-3 text-lg uppercase leading-6 text-gray-900 group-hover:text-gray-600"
-                      >
-                        <span className="absolute inset-0" />
-                        {post.title}
-                      </h3>
-                      <p
-                        // className="font-open-sans mt-3 line-clamp-3 text-sm leading-6 text-gray-600 "
-                        className="font-open-sans mt-3 break-inside-avoid-column text-[15px] font-light text-neutral-500"
-                      >
-                        {post.description}
-                      </p>
-                    </div>
-                  </article>
-                </Link>
-              ))}
-            </div>
+                      {post.description}
+                    </p>
+                  </div>
+                </article>
+              </Link>
+            ))}
           </div>
         </div>
-      </div>
-
-      {/*  */}
+      </Container>
     </>
   );
 }

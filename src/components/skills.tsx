@@ -57,14 +57,16 @@ const technologies = {
 
 export default function Skills() {
   return (
-    <section className="bg-parallax bg-fixed py-12">
-      <Container>
+    <section
+    // className="bg-parallax bg-fixed py-12"
+    >
+      <Container className="max-w-5xl">
         <div className="flex flex-col items-center justify-center ">
-          <h2 className="font-dosis mt-4 text-3xl uppercase leading-9 tracking-[.4rem] text-white">
+          <h2 className="mt-4 font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
             Technologies
           </h2>
         </div>
-        <div className="font-open-sans my-6 flex flex-col  items-center justify-center gap-8 ">
+        <div className="my-6 flex flex-col items-center  justify-center gap-8 font-open-sans ">
           {Object.entries(technologies).map(([category, techs]) => {
             return (
               <div

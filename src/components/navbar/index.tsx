@@ -55,9 +55,12 @@ export default function Navbar() {
   return (
     <header
       // relative
-      className="sticky top-0 z-50 w-full bg-[#F8F9FA] py-1"
+      className="sticky top-0 z-50 w-full  bg-[#F8F9FA] py-1"
     >
-      <div className="flex w-full items-center justify-between sm:px-4 md:px-4 lg:px-12">
+      <Container
+        // className="flex w-full items-center justify-between sm:px-4 md:px-4 lg:px-12"
+        className="max-w-7xl"
+      >
         <nav
           //
           className="mx-auto flex h-full w-full items-center justify-between p-2"
@@ -75,7 +78,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:block">
-            <div className="font-open-sans text-fs-lg flex flex-row md:gap-x-3">
+            <div className="text-fs-lg flex flex-row font-open-sans md:gap-x-3">
               {Object.entries(navItems).map(([path, { name }]) => {
                 const isActive = path === pathname;
 
@@ -100,7 +103,7 @@ export default function Navbar() {
           setMobileMenuOpen={setMobileMenuOpen}
           navItems={navItems}
         />
-      </div>
+      </Container>
     </header>
   );
 }

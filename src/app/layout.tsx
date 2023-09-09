@@ -27,9 +27,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${open_sans.variable} ${dosis.variable} ${inter.variable} font-dosis h-full scroll-smooth bg-[#ECEDFA] text-base antialiased`}
+      className={`${open_sans.variable} ${dosis.variable} ${inter.variable} h-full scroll-smooth bg-[#ECEDFA] font-dosis text-base antialiased`}
     >
-      {/* <body className={inter.className}> */}
       <body
         // debug-screens
         className="flex min-h-full flex-col"
