@@ -54,6 +54,7 @@ export default makeSource({
         {
           // container: false,
           titleTagName: 'pre2',
+          // titleTagName: 'pre',
           // titleTagName: 'div',
           titleClassName: 'custom-code-title',
           titleProperties: (language, title) => ({
