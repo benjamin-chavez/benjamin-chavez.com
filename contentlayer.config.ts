@@ -1,3 +1,4 @@
+// @ts-nocheck
 // contentlayer.config.js
 
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
