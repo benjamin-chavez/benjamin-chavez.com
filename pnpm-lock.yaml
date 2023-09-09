@@ -65,6 +65,9 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
+  react-icons:
+    specifier: ^4.11.0
+    version: 4.11.0(react@18.2.0)
   rehype-autolink-headings:
     specifier: ^7.0.0
     version: 7.0.0
@@ -77,6 +80,12 @@ dependencies:
   rehype-slug:
     specifier: ^6.0.0
     version: 6.0.0
+  remark-code-title:
+    specifier: ^0.2.5
+    version: 0.2.5
+  remark-flexible-code-titles:
+    specifier: ^1.1.3
+    version: 1.1.3
   remark-gfm:
     specifier: ^3.0.1
     version: 3.0.1
@@ -92,6 +101,9 @@ dependencies:
   typescript:
     specifier: 5.2.2
     version: 5.2.2
+  unist-util-visit:
+    specifier: ^5.0.0
+    version: 5.0.0
 
 devDependencies:
   '@tailwindcss/typography':
@@ -4206,6 +4218,14 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-icons@4.11.0(react@18.2.0):
+    resolution: {integrity: sha512-V+4khzYcE5EBk/BvcuYRq6V/osf11ODUM2J8hg2FDSswRrGvqiYUYPRy4OdrWaQOBj4NcpJfmHZLNaD+VH0TyA==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
@@ -4321,6 +4341,19 @@ packages:
       '@types/hast': 2.3.5
       hast-util-to-html: 8.0.4
       unified: 10.1.2
+    dev: false
+
+  /remark-code-title@0.2.5:
+    resolution: {integrity: sha512-6tIhdZdECMM0EQk3eDFxUQn/97VKKmo7JkCwfg/mkJaZZBwH+cbP0UDRslOqqzLcueakPZ8q7Gtj5KtGB/jufw==}
+    dependencies:
+      unist-util-visit: 4.1.2
+    dev: false
+
+  /remark-flexible-code-titles@1.1.3:
+    resolution: {integrity: sha512-S/2ThjghwdGJshfgBUOBsbTU6fqYdJTANwCrCUCvKYHQ3L/3II1swP7+vPSO/01wJi0ifGUgwOCDw8l0aqUnbQ==}
+    dependencies:
+      '@types/mdast': 3.0.12
+      unist-util-visit: 4.1.2
     dev: false
 
   /remark-frontmatter@4.0.1:

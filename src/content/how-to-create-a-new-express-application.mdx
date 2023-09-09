@@ -33,6 +33,7 @@ publishedAt: '2023-09-8'
 ## Step 2: Add The Project Dependencies
 
   Install the Express Framework
+  <CodeTitle title="express-api/src/app.ts" lang="ts" />
 
   ```bash
   pnpm i express
@@ -68,9 +69,8 @@ publishedAt: '2023-09-8'
   ```
 
   Add your server code:
-  ```ts  title=state.ts {1, 3-4} showLineNumbers
-  // express-api/src/app.ts
 
+  ```ruby:express-api/src/app.ts {1, 3-4} showLineNumbers
   import express from 'express';
 
   const PORT = 5000;
@@ -104,7 +104,7 @@ publishedAt: '2023-09-8'
 ## Step 5: Add A Route To Return Data
 
   Let's create a new route so that we can serve up some data. Since our data object is made up of different members of The Beatles, we will call our route `/api/beatles`
-  ```ts
+  ```ts:sdfsd
   app.get('/api/beatles', (req, res) => {
     const data = {
       title: 'The Beatles',

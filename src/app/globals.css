@@ -95,11 +95,11 @@ code .line::before {
 
 /* Code title styles */
 .remark-code-title {
-  @apply rounded-t bg-gray-700 px-5 py-3 font-mono text-sm font-bold text-gray-200;
+  @apply rounded-t bg-red-700 px-5 py-3 font-mono text-sm font-bold text-gray-200;
 }
 
 .remark-code-title + div > pre {
-  @apply mt-0 rounded-t-none;
+  @apply mt-0 rounded-t-none bg-red-500;
 }
 
 /* Code block styles */
@@ -119,9 +119,9 @@ code .line::before {
   @apply bg-red-500 bg-opacity-20;
 }
 
-/* .highlight-line {
-  @apply border-primary-500 -mx-4 border-l-4 bg-gray-700 bg-opacity-50;
-} */
+.highlight-line {
+  @apply -mx-4 border-l-4 border-red-500 bg-gray-700 bg-opacity-50;
+}
 
 .line-number::before {
   @apply -ml-2 mr-4 inline-block w-4 text-right text-gray-400;
@@ -231,9 +231,9 @@ code .line::before {
   display: inline;
 }
 
-pre {
+/* pre {
   overflow-x: auto;
-}
+} */
 
 /**
  * Inspired by gatsby remark prism - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs/
@@ -262,12 +262,12 @@ pre {
   background-color: rgba(239, 68, 68, 0.2); /* Set deleted line (-) color */
 }
 
-.highlight-line {
+/* .highlight-line {
   margin-left: -16px;
   margin-right: -16px;
-  background-color: rgba(55, 65, 81, 0.5); /* Set highlight bg color */
-  border-left: 4px solid rgb(59, 130, 246); /* Set highlight accent border color */
-}
+  background-color: rgba(55, 65, 81, 0.5);
+  border-left: 4px solid rgb(59, 130, 246);
+} */
 
 .line-number::before {
   display: inline-block;
@@ -277,4 +277,26 @@ pre {
   margin-left: -8px;
   color: rgb(156, 163, 175); /* Line number color */
   content: attr(line);
+}
+
+/* Code title styles */
+/* .remark-code-title {
+  background-color: rgb(0, 0, 0); /* Set highlight bg color */
+/* } */
+
+/* .remark-code-title + div > pre {
+  background-color: rgba(42, 104, 202, 0.5); /* Set highlight bg color */
+/* } */
+/*
+.remark-code-container pre {
+  margin-top: 0;
+  border-radius: 0px;
+} */
+
+.highlight-line {
+  @apply -mx-4 border-l-4 border-red-500 bg-gray-700 bg-opacity-50;
+}
+
+.code-line:hover {
+  @apply -mx-4  bg-gray-700 bg-opacity-50;
 }

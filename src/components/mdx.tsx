@@ -9,9 +9,29 @@ import { useMDXComponent } from 'next-contentlayer/hooks';
 
 import clsx from 'clsx';
 import { Container } from './container';
+import { CopyButton } from './copy-button';
+import Pre from './pre';
+import CodeTitle from './code-title';
+import Pre2 from './pre2';
 
 const mdxComponents = {
+  CodeTitle,
   Image,
+  pre2: Pre2,
+  pre: Pre,
+  // pre: ({ className, ...props }: any) => {
+  //   console.log(props);
+
+  //   return (
+  //     <pre
+  //       className={clsx(
+  //         'mb-4 mt-6 overflow-x-auto rounded-lg border bg-black py-4',
+  //         className,
+  //       )}
+  //       {...props}
+  //     />
+  //   );
+  // },
 };
 
 interface MdxProps {
@@ -28,6 +48,7 @@ export function Mdx({ code }: MdxProps) {
         // className="prose prose-quoteless prose-neutral mx-auto "
         className="prose max-w-none"
       >
+        {/* @ts-ignore */}
         <Component components={{ ...mdxComponents }} />
       </article>
     </Container>
