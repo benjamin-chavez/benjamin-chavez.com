@@ -24,7 +24,6 @@ const navItems: Record<string, NavItem> = {
     name: 'My Story',
   },
   '/#contact': {
-    // '/blog/building-a-chrome-extension-with-shared-state': {
     name: 'Contact',
   },
   '/blog': {
@@ -47,7 +46,6 @@ export function LogoIconLink() {
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
 
   const navItemRefs = useRef({});
 
@@ -57,25 +55,18 @@ export default function Navbar() {
   }
 
   const [activeSection, setActiveSection] = useState(pathname);
-
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]');
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (
-            (entry.target.id === 'contact' &&
-              window.innerHeight + window.scrollY >=
-                document.body.offsetHeight) ||
-            entry.isIntersecting
-          ) {
-            console.log('HEREHERE: ', entry.target.id);
-            if (entry.isIntersecting) {
-              const newActiveLink = navItemRefs.current[`/#${entry.target.id}`];
+          if (entry.isIntersecting) {
+            // @ts-ignore
+            const newActiveLink = navItemRefs.current[`/#${entry.target.id}`];
 
-              if (newActiveLink) {
-                setActiveSection(`/#${entry.target.id}`);
-              }
+            if (newActiveLink) {
+              setActiveSection(`/#${entry.target.id}`);
             }
           }
         });
@@ -94,20 +85,31 @@ export default function Navbar() {
     };
   }, [pathname]);
 
+  useEffect(() => {
+    const setActiveLinkBasedOnSection = (sectionPath: string) => {
+      // @ts-ignore
+      const newActiveLink = navItemRefs.current[sectionPath];
+      newActiveLink?.classList.add('active-heyaaa');
+    };
+
+    setActiveLinkBasedOnSection(pathname);
+  }, []);
+
   const navLinks = useMemo(() => {
     return Object.entries(navItems).map(([path, { name }]) => {
-      // const isActive = path === pathname;
       const isActive = path === activeSection;
 
       return (
         <Link
           key={path}
           href={path}
+          // @ts-ignore
           ref={(el) => (navItemRefs.current[path] = el)}
           className={clsx('mx-1 text-[#141414] transition-all ', {
             '!text-neutral-500 hover:!text-neutral-500/80': !isActive,
           })}
           onClick={() => {
+            console.log(path);
             setActiveSection(path);
           }}
         >
@@ -119,10 +121,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full  bg-[#F8F9FA] py-1">
-      <Container
-        // className="flex w-full items-center justify-between sm:px-4 md:px-4 lg:px-12"
-        className="max-w-7xl"
-      >
+      <Container className="max-w-7xl">
         <nav
           //
           className="mx-auto flex h-full w-full items-center justify-between p-2"
@@ -133,9 +132,7 @@ export default function Navbar() {
           <div className="flex md:hidden">
             <button type="button" onClick={() => setMobileMenuOpen(true)}>
               <span className="sr-only">Open main menu</span>
-              <BarsIcon
-              // className="h-full w-auto "
-              />
+              <BarsIcon />
             </button>
           </div>
 

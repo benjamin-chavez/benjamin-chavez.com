@@ -57,7 +57,7 @@ export default function Hero() {
 
           <div className="mt-4 flex gap-9">
             <HeroButton href={'/#portfolio'}>Portfolio</HeroButton>
-            <HeroButton href={'/blog'}>My Story</HeroButton>
+            <HeroButton href={'/blog'}>Blog</HeroButton>
           </div>
         </div>
       </div>
