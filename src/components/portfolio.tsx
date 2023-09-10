@@ -180,15 +180,15 @@ function PortfolioCard({ project }: { project: any }) {
             {project.title}
           </h3>
           <p
-            // [text-wrap:balance]
-            className="mt-2 hidden font-open-sans text-base text-transparent group-hover:text-gray-400 xs:block"
+            // [text-wrap:balance] hidden xs:block
+            className="mt-2 font-open-sans text-base text-transparent group-hover:text-gray-400 "
           >
             {project.description}
           </p>
           <div className=" mt-4 flex justify-center gap-4 ">
             {project.links.map((link: any) => (
               <a
-                key="url"
+                key={link.url}
                 // px-2 py-1
                 className="flex w-14 items-center justify-center rounded py-2 font-open-sans text-base text-transparent hover:!text-white group-hover:border group-hover:border-white group-hover:text-gray-400"
                 href={link.url}
@@ -206,9 +206,13 @@ function PortfolioCard({ project }: { project: any }) {
 
 export default function Portfolio() {
   return (
-    <section className="bg-[#ECEDFA] py-12">
+    <section className="bg-[#ECEDFA] py-12" id="portfolio">
+      {/* <section className="bg-[#ECEDFA] py-12" id="portfolio"> */}
       {/* <Container className="" id="portfolio"> */}
-      <Container className="scroll-m-14 md:max-w-none md:px-12" id="portfolio">
+      <Container
+        className="scroll-m-14 md:max-w-none md:px-12"
+        // id="portfolio"
+      >
         <div className="flex flex-col items-center justify-center ">
           <h2 className="mt-4 font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
             Portfolio

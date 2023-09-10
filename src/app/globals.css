@@ -361,3 +361,7 @@ p > code {
 .prose *:hover > .anchor {
   @apply visible;
 }
+/*
+.active-heyaaa {
+  @apply bg-red-500;
+} */

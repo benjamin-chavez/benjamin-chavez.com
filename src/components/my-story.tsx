@@ -78,9 +78,9 @@ function TextLink({
 
 export default function MyStory() {
   return (
-    <section className="bg-[#ECEDFA] py-12">
+    <section className="bg-[#ECEDFA] py-12" id="my-story">
       <Container
-        id="my-story"
+        // id="my-story"
         // px-12
         className="max-w-5xl scroll-m-14 "
       >
