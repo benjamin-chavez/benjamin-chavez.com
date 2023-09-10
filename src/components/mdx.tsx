@@ -76,7 +76,7 @@ const mdxComponents = {
     <code
       className={cx(
         // 'relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm',
-        'text-sm',
+        'font-mono text-sm',
         // 'text-[0.813rem]',
         className,
       )}
@@ -98,7 +98,7 @@ export function Mdx({ code, className }: MdxProps) {
       <article
         // className="mdx"
         // className="prose prose-quoteless  mx-auto "
-        className=" prose max-w-none pb-20"
+        className=" prose max-w-none pb-20 prose-code:before:content-none prose-code:after:content-none "
       >
         {/* @ts-ignore */}
         <Component components={{ ...mdxComponents }} />

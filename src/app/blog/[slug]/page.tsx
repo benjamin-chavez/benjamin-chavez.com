@@ -99,10 +99,13 @@ export default async function Blog({ params }: BlogProps) {
       // bg-[#ECEDFA] py-12 sm:py-12
       // className="py-12 sm:py-12"
       // className="mt-10"
-      // className=''
+      // className="bg-[#FFFFFF]"
       >
         <BackButton className={'mt-6'} />
-        <h1 className="mt-6 text-center font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414] ">
+        <h1
+          // text-center
+          className="mt-6  font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414] "
+        >
           {post.title}
         </h1>
 

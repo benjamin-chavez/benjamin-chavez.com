@@ -320,3 +320,18 @@ pre {
   /* @apply w-screen bg-blue-500; */
   /* @apply w-full bg-blue-500; */
 }
+
+/* styles.css */
+/* p.font-open-sans > code { */
+/* p > code {
+  @apply rounded border bg-gray-100 px-1;
+  @apply !text-[13px] !font-normal !text-white;
+  @apply !rounded-md !bg-slate-700 !px-[5px] !py-[3px];
+} */
+
+/* !text-[#1F2328] !bg-[#AFB8C10] */
+p > code {
+  @apply rounded border bg-gray-100 px-1;
+  @apply !text-[13px] !font-normal !text-[#777777];
+  @apply !m-0 !rounded-md !bg-gray-300 !px-[.4em] !py-[.2em];
+}
