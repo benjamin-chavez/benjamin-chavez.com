@@ -47,59 +47,35 @@ export function LogoIconLink() {
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const navItemRefs = useRef({});
-  // const navItemRefs = useRef(
-  //   Object.keys(navItems).reduce(
-  //     (acc, path) => {
-  //       acc[path] = null;
-  //       return acc;
-  //     },
-  //     {} as Record<string, HTMLAnchorElement | null>,
-  //   ),
-  // );
 
   let pathname = usePathname() || '/';
   if (pathname.includes('/blog/')) {
     pathname = '/blog';
   }
 
-  const setActiveLinkBasedOnSection = (sectionPath: string) => {
-    // Remove the active state from all navItems
-    Object.values(navItemRefs.current).forEach((el) => {
-      if (el) el.classList.remove('active-heyaaa');
-    });
-
-    // Set the clicked navItem as active
-    const newActiveLink = navItemRefs.current[sectionPath];
-    if (newActiveLink) {
-      newActiveLink.classList.add('active-heyaaa');
-    }
-  };
-
   const [activeSection, setActiveSection] = useState(pathname);
+
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]');
-    console.log('sections: ', sections);
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log('entry: ', entry.target.id);
-          if (entry.isIntersecting) {
-            const currentActive = document.querySelector('.active-heyaaa');
-            if (currentActive) {
-              currentActive.classList.remove('active-heyaaa');
-            }
+          if (
+            (entry.target.id === 'contact' &&
+              window.innerHeight + window.scrollY >=
+                document.body.offsetHeight) ||
+            entry.isIntersecting
+          ) {
+            console.log('HEREHERE: ', entry.target.id);
+            if (entry.isIntersecting) {
+              const newActiveLink = navItemRefs.current[`/#${entry.target.id}`];
 
-            console.log('navItemRefs: ', navItemRefs);
-
-            const newActiveLink = navItemRefs.current[`/#${entry.target.id}`];
-            console.log(newActiveLink, `[href="#${entry.target.id}"]`);
-            if (newActiveLink) {
-              newActiveLink.classList.add('active-heyaaa');
-              // pathname = `/#${entry.target.id}`;
-              setActiveSection(`/#${entry.target.id}`);
-              console.log('pathname: ', pathname);
+              if (newActiveLink) {
+                setActiveSection(`/#${entry.target.id}`);
+              }
             }
           }
         });
@@ -116,11 +92,7 @@ export default function Navbar() {
         observer.unobserve(section);
       });
     };
-
-    setActiveLinkBasedOnSection(pathname);
   }, [pathname]);
-
-  setActiveLinkBasedOnSection(pathname);
 
   const navLinks = useMemo(() => {
     return Object.entries(navItems).map(([path, { name }]) => {
@@ -136,7 +108,6 @@ export default function Navbar() {
             '!text-neutral-500 hover:!text-neutral-500/80': !isActive,
           })}
           onClick={() => {
-            console.log(path);
             setActiveSection(path);
           }}
         >
@@ -147,10 +118,7 @@ export default function Navbar() {
   }, [activeSection]);
 
   return (
-    <header
-      // relative
-      className="sticky top-0 z-50 w-full  bg-[#F8F9FA] py-1"
-    >
+    <header className="sticky top-0 z-50 w-full  bg-[#F8F9FA] py-1">
       <Container
         // className="flex w-full items-center justify-between sm:px-4 md:px-4 lg:px-12"
         className="max-w-7xl"
@@ -171,27 +139,8 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div
-            // className="hidden md:block"
-            className="block"
-          >
+          <div className="block">
             <div className="text-fs-lg flex flex-row font-open-sans md:gap-x-3">
-              {/* {Object.entries(navItems).map(([path, { name }]) => {
-                const isActive = path === pathname;
-
-                return (
-                  <Link
-                    key={path}
-                    href={path}
-                    ref={(el) => (navItemRefs.current[path] = el)}
-                    className={clsx('mx-1 text-[#141414] transition-all ', {
-                      '!text-neutral-500 hover:!text-neutral-500/80': !isActive,
-                    })}
-                  >
-                    <span className="text-fs-lg">{name}</span>
-                  </Link>
-                );
-              })} */}
               {navLinks}
             </div>
           </div>
