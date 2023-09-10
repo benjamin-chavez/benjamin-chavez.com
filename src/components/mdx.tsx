@@ -31,10 +31,34 @@ const mdxComponents = {
         // text-gray-500
         // 'pt-2 font-open-sans text-[0.94rem] font-light  text-[#777777]',
         // mt-3  block
-        'font-open-sans text-base font-normal',
+        'font-open-sans text-base font-bold',
         className,
       )}
       {...props}
+    />
+  ),
+  h3: ({ className, ...props }: MdxComponentProps) => (
+    <h2
+      className={cx(
+        // 'mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0',
+        // text-gray-500
+        // 'pt-2 font-open-sans text-[0.94rem] font-light  text-[#777777]',
+        // mt-3  block
+        'font-open-sans text-base font-semibold',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  a: ({ className, ...props }: MdxComponentProps) => (
+    <a
+      className={cx(
+        // 'font-medium underline underline-offset-4',
+        'font-light text-neutral-900 underline hover:text-[#008000]',
+        className,
+      )}
+      {...props}
+      target="_blank"
     />
   ),
   p: ({ className, ...props }: MdxComponentProps) => (
@@ -63,17 +87,18 @@ const mdxComponents = {
 
 interface MdxProps {
   code: string;
+  className?: string;
 }
 
-export function Mdx({ code }: MdxProps) {
+export function Mdx({ code, className }: MdxProps) {
   const Component = useMDXComponent(code);
 
   return (
-    <div className="">
+    <div className={cx('', className)}>
       <article
         // className="mdx"
         // className="prose prose-quoteless  mx-auto "
-        className=" prose max-w-none"
+        className=" prose max-w-none pb-20"
       >
         {/* @ts-ignore */}
         <Component components={{ ...mdxComponents }} />

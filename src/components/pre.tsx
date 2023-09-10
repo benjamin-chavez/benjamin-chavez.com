@@ -62,32 +62,12 @@ export default function Pre({ className, ...props }: IPre) {
       // @ts-ignore
       if (parentElement?.firstChild?.lastChild?.title) {
         setHastitle(true);
-        // console.log('HERE: ', parentElement?.firstChild?.lastChild.title);
       }
     }
   }, []);
 
-  // let parentElement = textInput.current.parentElement;
-
-  // const onCopy = () => {
-  //   if (textInput.current !== null) {
-  //     setCopied(true);
-
-  //     // Getting the sibling element's content
-  //     let siblingContent = textInput.current.nextElementSibling.textContent;
-  // console.log('here!!: ', siblingContent);
-
-  //     navigator.clipboard.writeText(
-  //       siblingContent || textInput.current.textContent!,
-  //     );
-  //     setTimeout(() => {
-  //       setCopied(false);
-  //     }, 2000);
-  //   }
-  // };
-
   return (
-    <div ref={textInput} className="group relative bg-red-500">
+    <div ref={textInput} className="group relative ">
       {!hasTitle ? (
         <div className=" ">
           <button

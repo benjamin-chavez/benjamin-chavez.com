@@ -16,7 +16,7 @@ When building a Chrome extension with React, TypeScript, and Tailwind, there are
 
 Let's first look at how to design a shared state in a background script. The idea is to create a "source of truth" in your background script that can be accessed and updated by all the content scripts. Here's a basic example of how you might set this up:
 
-```ts title="background.ts"
+```ts:background.ts
 import { State, updateState } from './state';
 
 export const sharedState: State = {
@@ -39,7 +39,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-```ts title="state.ts"
+
+```ts:state.ts
 export interface State {
   // Define your shared state structure here
 }

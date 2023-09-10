@@ -54,7 +54,8 @@ export default function MobileMenu({
                       key={path}
                       href={path}
                       // font-semibold
-                      className="font-open-sans -mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 text-purple-500 hover:bg-gray-50"
+                      // text-neutral-500
+                      className="-mx-3 block rounded-lg px-3 py-2 font-open-sans text-base font-normal leading-7 text-[#777777] hover:bg-gray-50"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {name}
