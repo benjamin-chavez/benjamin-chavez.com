@@ -3,7 +3,7 @@
 
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container } from '../container';
 import Link from 'next/link';
 import BarsIcon from '../icons/bars-icon';
@@ -26,8 +26,8 @@ const navItems: Record<string, NavItem> = {
   '/#my-story': {
     name: 'My Story',
   },
-  // '/#contact': {
-  '/blog/building-a-chrome-extension-with-shared-state': {
+  '/#contact': {
+    // '/blog/building-a-chrome-extension-with-shared-state': {
     name: 'Contact',
   },
 };
@@ -52,6 +52,39 @@ export default function Navbar() {
   if (pathname.includes('/blog/')) {
     pathname = '/blog';
   }
+
+  useEffect(() => {
+    // const sections = document.querySelectorAll('section[id]');
+    const sections = document.querySelectorAll('div[id]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const currentActive = document.querySelector('.active');
+            if (currentActive) {
+              currentActive.classList.remove('active');
+            }
+
+            const newActiveLink = document.querySelector(
+              `[href="#${entry.target.id}"]`,
+            );
+            newActiveLink?.classList.add('active');
+          }
+        });
+      },
+      { threshold: 0.6 },
+    );
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        observer.unobserve(section);
+      });
+    };
+  }, []);
 
   return (
     <header

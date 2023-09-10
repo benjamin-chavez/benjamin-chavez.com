@@ -30,7 +30,10 @@ export default function Footer() {
         <h2 className="text-center  font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
           Contact
         </h2>
-        <div gap-7 className="mt-6 flex items-center justify-center  ">
+        <div
+          // gap-7
+          className="mt-6 flex items-center justify-center  "
+        >
           {contactLinks.map((contact) => {
             const { IconComponent } = contact;
 
