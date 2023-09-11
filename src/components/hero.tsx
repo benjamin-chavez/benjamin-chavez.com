@@ -27,24 +27,17 @@ function HeroButton({
 export default function Hero() {
   return (
     <section
-      // bg-hero-image -mt-6
-      // className="relative h-screen min-h-screen w-full bg-cover bg-fixed bg-center bg-no-repeat"
       id="home"
-      // bg-hero-image
       className=" relative -mt-14 h-screen min-h-screen w-full bg-cover bg-fixed bg-center bg-no-repeat"
-      // className="-mt-14 h-screen"
     >
       <Image
         src={BannerImage}
         alt={''}
-        className="absolute top-8 -z-20 aspect-auto h-full w-full object-cover md:fixed"
+        className="absolute top-0 -z-20 aspect-auto h-full w-full object-cover md:fixed"
         priority
         placeholder="blur"
       />
-      <div
-        // pb-12
-        className="absolute top-0 -z-10 aspect-auto h-full w-full bg-gradient-to-b from-transparent to-black/70 md:fixed "
-      />
+      <div className="absolute top-0 -z-10 aspect-auto h-full w-full bg-gradient-to-b from-transparent to-black/70 md:fixed " />
 
       <div className="flex h-full items-end justify-center pb-16 text-white">
         <div className="flex flex-col items-center">
@@ -57,7 +50,7 @@ export default function Hero() {
 
           <div className="mt-4 flex gap-9">
             <HeroButton href={'/#portfolio'}>Portfolio</HeroButton>
-            <HeroButton href={'/blog'}>Blog</HeroButton>
+            <HeroButton href={'/#contact'}>Contact</HeroButton>
           </div>
         </div>
       </div>
