@@ -24,16 +24,22 @@ const contactLinks = [
 ];
 
 export default function Footer() {
-  // <span className="tracking-[.4rem]">Contac</span>t
   return (
     <section className="bg-parallax py-7 md:bg-fixed" id="contact">
       <Container className="max-w-5xl py-9">
         <div className="flex flex-col items-center justify-center ">
           <h2 className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
-            Contact
+            {/* Contact */}
+            <span
+              // tracking-[.4rem]
+              className=""
+            >
+              Contac
+            </span>
+            t
           </h2>
         </div>
-        <div className="my-6 flex items-center  justify-center gap-8 font-open-sans ">
+        <div className="my-6 flex items-center justify-center gap-8 font-open-sans ">
           {contactLinks.map((contact) => {
             const { IconComponent } = contact;
             return (
