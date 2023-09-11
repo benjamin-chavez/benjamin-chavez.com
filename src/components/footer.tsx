@@ -28,9 +28,9 @@ export default function Footer() {
     <section className="bg-parallax py-7 md:bg-fixed" id="contact">
       <Container className="max-w-5xl py-9">
         <div className="flex flex-col items-center justify-center ">
-          <h2 className=" bg-red-500 font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
+          <h2 className=" bg-red-500 font-dosis text-3xl uppercase leading-9  text-white">
             {/* Contact */}
-            <span className="">Contac</span>t
+            <span className="tracking-[.4rem]">Contac</span>t
           </h2>
         </div>
         <div className="my-6 flex items-center justify-center gap-8 font-open-sans ">
