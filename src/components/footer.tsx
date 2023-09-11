@@ -31,8 +31,8 @@ export default function Footer() {
         className=" py-9"
         // flex items-center justify-center
       >
-        <div className="flex flex-col items-center justify-center">
-          <div className="w-fit">
+        <div className="flex flex-col items-center justify-center bg-red-500">
+          <div className="w-fit bg-green-500">
             <h2 className=" w-fit font-dosis text-3xl uppercase leading-9 text-white ">
               <span className="tracking-[.4rem]">Contac</span>t
             </h2>
