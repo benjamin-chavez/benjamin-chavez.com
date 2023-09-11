@@ -25,7 +25,7 @@ const contactLinks = [
 
 export default function Footer() {
   return (
-    <section className="scroll-m-7 bg-parallax bg-fixed py-7" id="contact">
+    <section className="scroll-m-7 bg-parallax py-7 md:bg-fixed" id="contact">
       <Container as="footer" className="flex items-center justify-center py-9">
         <div className="w-fit">
           <h2 className=" w-fit font-dosis text-3xl uppercase leading-9 text-white ">

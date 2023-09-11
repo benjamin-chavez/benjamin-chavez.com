@@ -4,6 +4,7 @@
 
 import { Container } from '@/components/container';
 import { Mdx } from '@/components/mdx';
+import { formatDate } from '@/lib/utils';
 import { allBlogs } from 'contentlayer/generated';
 import { cx } from 'cva.config';
 import Link from 'next/link';
@@ -96,9 +97,53 @@ export default async function Blog({ params }: BlogProps) {
     <>
       <Container className="relative py-9">
         <BackButton className={'pb-9'} />
-        <h1 className=" text-center font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414] ">
+
+        {/* <div className=" flex items-center gap-4 text-xs">
+          <div className="rounded  px-2 py-1">
+            Published on:{' '}
+            <time
+              dateTime={post.publishedAt}
+              className="font-open-sans text-gray-500"
+            >
+              {formatDate(post.publishedAt)}
+            </time>
+          </div>
+          <div className="rounded bg-green-500/20 px-2 py-1">
+            Updated on:{' '}
+            <time
+              dateTime={post.publishedAt}
+              className="font-open-sans text-gray-500"
+            >
+              {formatDate(post.publishedAt)}
+            </time>
+          </div>
+        </div>
+        <div className="mt-2" /> */}
+        <h1 className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414] ">
           {post.title}
         </h1>
+
+        <div className="mt-2" />
+        <div className="flex items-center gap-4 text-xs">
+          <div className="">
+            Published on:{' '}
+            <time
+              dateTime={post.publishedAt}
+              className="font-open-sans text-gray-500"
+            >
+              {formatDate(post.publishedAt)}
+            </time>
+          </div>
+          <div className="rounded bg-green-500/20 px-2 py-1">
+            Updated on:{' '}
+            <time
+              dateTime={post.publishedAt}
+              className="font-open-sans text-gray-500"
+            >
+              {formatDate(post.publishedAt)}
+            </time>
+          </div>
+        </div>
 
         <section className="my-6 flex flex-col">
           <Mdx code={post?.body.code} />

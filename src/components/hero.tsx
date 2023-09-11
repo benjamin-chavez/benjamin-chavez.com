@@ -37,13 +37,13 @@ export default function Hero() {
       <Image
         src={BannerImage}
         alt={''}
-        className="fixed  top-8 -z-20 aspect-auto h-full w-full object-cover"
+        className="absolute top-8 -z-20 aspect-auto h-full w-full object-cover md:fixed"
         priority
         placeholder="blur"
       />
       <div
         // pb-12
-        className="fixed top-0 -z-10 aspect-auto h-full w-full bg-gradient-to-b from-transparent to-black/70 "
+        className="absolute top-0 -z-10 aspect-auto h-full w-full bg-gradient-to-b from-transparent to-black/70 md:fixed "
       />
 
       <div className="flex h-full items-end justify-center pb-16 text-white">
