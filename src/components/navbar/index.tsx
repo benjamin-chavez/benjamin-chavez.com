@@ -31,9 +31,9 @@ const navItems: Record<string, NavItem> = {
   '/blog': {
     name: 'Blog',
   },
-  '/blog/how-to-create-a-new-express-application': {
-    name: 'Post',
-  },
+  // '/blog/how-to-create-a-new-express-application': {
+  //   name: 'Post',
+  // },
 };
 
 export function LogoIconLink() {
@@ -111,10 +111,11 @@ export default function Navbar() {
   }, [activeSection]);
 
   return (
-    <header className="sticky top-0 z-50 w-full  bg-[#F8F9FA] py-1">
-      <Container className="max-w-7xl">
+    <header className="sticky top-0 z-50 w-full bg-[#F8F9FA] py-1">
+      <Container className="max-w-7xl md:max-w-none md:px-12">
         <nav
-          className="mx-auto flex h-full w-full items-center justify-between p-2"
+          //
+          className=" mx-auto flex h-full w-full items-center justify-between py-2"
           aria-label="Global"
         >
           <LogoIconLink />
