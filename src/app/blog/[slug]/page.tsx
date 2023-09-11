@@ -105,7 +105,7 @@ export default async function Blog({ params }: BlogProps) {
         <BackButton
           // mt-6 mt-3
           // className={'absolute top-4'}
-          className={'pb-3'}
+          className={'pb-9'}
         />
         <h1
           // text-center
