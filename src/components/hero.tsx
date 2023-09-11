@@ -37,7 +37,7 @@ export default function Hero() {
         priority
         placeholder="blur"
       />
-      <div className="absolute top-0 -z-10 aspect-auto h-full w-full bg-gradient-to-b from-transparent to-black/70 md:fixed " />
+      <div className="absolute top-0 -z-10 aspect-auto h-full w-full bg-gradient-to-b from-transparent to-black/70 md:fixed" />
 
       <div className="flex h-full items-end justify-center pb-16 text-white">
         <div className="flex flex-col items-center">

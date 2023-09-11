@@ -4,6 +4,7 @@ author: 'Ben Chavez'
 description: 'this is the description'
 summary: An article about middleware.
 publishedAt: '2026-09-19'
+updatedAt: '2026-09-19'
 # image: '/images/backend/og.png'
 # ## Motivation
 ---
@@ -147,7 +148,7 @@ export function updateState(state: State, newState: Partial<State>): void {
 }
 ```
 
-In this version, the shared state is a `Map` where each key is a window ID and each value is the shared state for that window. The background script loads and saves the shared state for each window separately, using the window ID as part of the key in `chrome.storage.local`. The **`UPDATE_STATE`** message now includes the window ID, so the background script knows which window's state to update.
+In this version, the shared state is a `Map` where each key is a window ID and each value is the shared state for that window. The background script loads and saves the shared state for each window separately, using the window ID as part of the key in `chrome.storage.local`. The `UPDATE_STATE` message now includes the window ID, so the background script knows which window's state to update.
 
 ## Pros and Cons of Maintaining Shared State in Memory
 
@@ -169,7 +170,7 @@ Maintaining the shared state in memory (in the background script) instead of rea
 
 When deciding where to store your shared state, you have several options: `chrome.storage`, `sessionStorage`, and `localStorage`. The best choice depends on your specific needs:
 
-**`chrome.storage`**: This is asynchronous, so it doesn't block the main thread. It also has larger storage limits and can be accessed from any script in your extension, including background, content, and popup scripts.
+**chrome.storage**: This is asynchronous, so it doesn't block the main thread. It also has larger storage limits and can be accessed from any script in your extension, including background, content, and popup scripts.
 
 **sessionStorage**: This stores data only for one session. The data is deleted when the user closes the specific browser tab. Like `localStorage`, `sessionStorage` is synchronous, can block the main thread, and has smaller storage limits.
 

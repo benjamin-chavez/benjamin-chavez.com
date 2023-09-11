@@ -67,7 +67,7 @@ export default function Pre({ className, ...props }: IPre) {
   }, []);
 
   return (
-    <div ref={textInput} className="group relative ">
+    <div ref={textInput} className="group relative">
       {!hasTitle ? (
         <div className=" ">
           <button
@@ -112,10 +112,10 @@ export default function Pre({ className, ...props }: IPre) {
               )}
             </svg>
           </button>
-          <pre className="my-0 py-4" {...props} />
+          <pre className="mb-8 mt-3 py-4" {...props} />
         </div>
       ) : (
-        <pre className="mt-0 rounded-t-none " {...props} />
+        <pre className="mb-8 mt-0  rounded-t-none " {...props} />
       )}
     </div>
   );

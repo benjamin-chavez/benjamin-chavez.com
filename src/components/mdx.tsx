@@ -22,21 +22,25 @@ const mdxComponents = {
         // 'mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0',
         // text-gray-500
         // 'pt-2 font-open-sans text-[0.94rem] font-light  text-[#777777]',
-        // mt-3  block
-        'font-open-sans text-base font-bold',
+        // mt-3  block font-bold font-open-sans
+        // mt-16
+        'mb-6  font-normal uppercase',
+        'text-xl tracking-[.1rem] text-[#141414]',
+        ' [&:not(:first-child)]:mt-16',
         className,
       )}
       {...props}
     />
   ),
   h3: ({ className, ...props }: MdxComponentProps) => (
-    <h2
+    <h3
       className={cx(
         // 'mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0',
         // text-gray-500
         // 'pt-2 font-open-sans text-[0.94rem] font-light  text-[#777777]',
-        // mt-3  block
-        'font-open-sans text-base font-semibold',
+        // mt-3  block  font-semibold
+        ' font-dosis font-normal',
+        'text-lg uppercase text-[#141414]',
         className,
       )}
       {...props}
@@ -52,6 +56,16 @@ const mdxComponents = {
       {...props}
       target="_blank"
       rel="noopener noreferrer"
+    />
+  ),
+  strong: ({ className, ...props }: MdxComponentProps) => (
+    <strong
+      // text-[#777777]
+      className={cx(
+        'font-open-sans text-[0.94rem] font-normal text-neutral-600',
+        className,
+      )}
+      {...props}
     />
   ),
   p: ({ className, ...props }: MdxComponentProps) => (
@@ -91,7 +105,7 @@ export function Mdx({ code, className }: MdxProps) {
       <article
         // className="mdx"
         // className="prose prose-quoteless  mx-auto "
-        className=" prose max-w-none pb-20 prose-code:before:content-none prose-code:after:content-none "
+        className=" prose max-w-none  pb-20 prose-code:before:content-none prose-code:after:content-none"
       >
         {/* @ts-ignore */}
         <Component components={{ ...mdxComponents }} />

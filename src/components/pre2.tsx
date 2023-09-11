@@ -38,7 +38,7 @@ export default function Pre2({ className, ...props }: IPre) {
   let Icon = SiTypescript;
 
   return (
-    <div ref={textInput} className="relative w-full">
+    <div ref={textInput} className="relative w-full ">
       <button
         aria-label="Copy code"
         type="button"
@@ -83,7 +83,7 @@ export default function Pre2({ className, ...props }: IPre) {
       </button>
       <pre
         // flex
-        className="m-0 items-center  rounded-b-none bg-slate-900  "
+        className="mb-0 mt-8 items-center rounded-b-none bg-slate-900"
         {...props}
         // mt-
       >

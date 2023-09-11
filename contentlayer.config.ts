@@ -9,10 +9,11 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrismPlus from 'rehype-prism-plus';
 import remarkCodeTitles from 'remark-flexible-code-titles';
-import visit from 'unist-util-visit';
+import readingTime from "reading-time";
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields: any = {
+  readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
   slug: {
     type: 'string',
     // resolve: (doc) => `/${doc._raw.flattenedPath}`,
@@ -40,6 +41,7 @@ export const Blog = defineDocumentType(() => ({
       required: true,
     },
     publishedAt: { type: 'string', required: true },
+    updatedAt: { type: 'string', required: true },
   },
   computedFields,
 }));

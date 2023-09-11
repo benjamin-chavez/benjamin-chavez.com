@@ -70,10 +70,10 @@ function BackButton({ className }: { className?: string }) {
           <path d="M12.9999 6.83211L6.05548 6.83211L7.59049 5.2971C7.98101 4.90657 7.98101 4.27341 7.59049 3.88288L7.35157 3.64397C6.96105 3.25344 6.32788 3.25344 5.93736 3.64397L2.55473 7.0266C2.5455 7.03516 2.53639 7.04394 2.52742 7.05291L2.2885 7.29183C1.89797 7.68235 1.89797 8.31552 2.2885 8.70604L5.93965 12.3572C6.33017 12.7477 6.96334 12.7477 7.35386 12.3572L7.59278 12.1183C7.9833 11.7278 7.9833 11.0946 7.59278 10.7041L6.0587 9.16998L12.9999 9.16998C13.5522 9.16998 13.9999 8.72227 13.9999 8.16998V7.83211C13.9999 7.27982 13.5522 6.83211 12.9999 6.83211Z" />
         </svg>
         <span
-          // font-open-sans
-          className=" pl-1"
+          //
+          className=" pl-1 font-open-sans text-[15px]"
         >
-          back
+          Back
         </span>
       </Link>
     </div>
@@ -98,54 +98,34 @@ export default async function Blog({ params }: BlogProps) {
       <Container className="relative py-9">
         <BackButton className={'pb-9'} />
 
-        {/* <div className=" flex items-center gap-4 text-xs">
-          <div className="rounded  px-2 py-1">
-            Published on:{' '}
-            <time
-              dateTime={post.publishedAt}
-              className="font-open-sans text-gray-500"
-            >
-              {formatDate(post.publishedAt)}
-            </time>
-          </div>
-          <div className="rounded bg-green-500/20 px-2 py-1">
-            Updated on:{' '}
-            <time
-              dateTime={post.publishedAt}
-              className="font-open-sans text-gray-500"
-            >
-              {formatDate(post.publishedAt)}
-            </time>
-          </div>
-        </div>
-        <div className="mt-2" /> */}
         <h1 className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414] ">
           {post.title}
         </h1>
 
         <div className="mt-2" />
-        <div className="flex items-center gap-4 text-xs">
-          <div className="">
-            Published on:{' '}
+
+        <div className="flex flex-col justify-start gap-x-3 gap-y-2 font-open-sans text-[15px] text-xs sm:flex-row sm:items-center">
+          <div className=" ">
             <time
               dateTime={post.publishedAt}
               className="font-open-sans text-gray-500"
             >
-              {formatDate(post.publishedAt)}
+              {formatDate(post.publishedAt)} / {post.readingTime.text}
             </time>
           </div>
-          <div className="rounded bg-green-500/20 px-2 py-1">
-            Updated on:{' '}
+          <div className="-ml-1 w-fit rounded bg-[#008000]/20 px-1 py-1 font-open-sans text-[#008000] md:ml-0">
+            Last Updated:{' '}
             <time
               dateTime={post.publishedAt}
-              className="font-open-sans text-gray-500"
+              // text-gray-500
+              className="font-open-sans text-[#008000]"
             >
-              {formatDate(post.publishedAt)}
+              {formatDate(post.updatedAt)}
             </time>
           </div>
         </div>
 
-        <section className="my-6 flex flex-col">
+        <section className="my-16 flex flex-col">
           <Mdx code={post?.body.code} />
         </section>
       </Container>
