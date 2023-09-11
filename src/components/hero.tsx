@@ -33,7 +33,7 @@ export default function Hero() {
       <Image
         src={BannerImage}
         alt={''}
-        className="absolute top-0 -z-20 aspect-auto h-full w-full object-cover md:fixed"
+        className="absolute top-0 -z-20 aspect-auto h-full w-full object-cover md:fixed  lg:top-0 xl:top-4 2xl:top-9"
         priority
         placeholder="blur"
       />
