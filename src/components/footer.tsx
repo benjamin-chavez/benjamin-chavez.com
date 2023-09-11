@@ -38,10 +38,13 @@ export default function Footer() {
             return (
               <div
                 key={contact.title}
-                // gap-5
-                className="flex w-full flex-wrap items-center justify-center  "
+                // gap-5 w-full flex-wrap flex  items-center justify-center
+                className=""
               >
-                <IconComponent className="h-[30px] w-full text-neutral-500 hover:text-white" />
+                <IconComponent
+                  // w-full
+                  className="h-[30px]  text-neutral-500 hover:text-white"
+                />
               </div>
             );
           })}
