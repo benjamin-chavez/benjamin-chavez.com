@@ -36,16 +36,12 @@ export default function Footer() {
           {contactLinks.map((contact) => {
             const { IconComponent } = contact;
             return (
-              <div
-                key={contact.title}
-                // gap-5 w-full flex-wrap flex  items-center justify-center
-                className=""
-              >
+              <a key={contact.title} href={contact.url} target="_blank">
                 <IconComponent
                   // w-full
-                  className="h-[30px]  text-neutral-500 hover:text-white"
+                  className="h-[30px] text-neutral-500 hover:text-white"
                 />
-              </div>
+              </a>
             );
           })}
         </div>
@@ -62,8 +58,8 @@ export default function Footer() {
 //        <a
 //          key={contact.title}
 //          className="text-gray-300"
-//          href={contact.url}
-//          target="_blank"
+//  href={contact.url}
+//  target="_blank"
 //        >
 //          <IconComponent className=" h-[30px] w-full text-neutral-500 hover:text-white" />
 //        </a>
