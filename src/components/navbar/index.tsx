@@ -3,13 +3,13 @@
 // src/components/navbar/index.tsx
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { useRef, useState, useEffect, useMemo } from 'react';
-import { Container } from '../container';
+import { cx } from 'cva.config';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Container } from '../container';
 import BarsIcon from '../icons/bars-icon';
 import MobileMenu from './mobile-menu';
-import { cx } from 'cva.config';
 
 export type NavItem = {
   name: string;

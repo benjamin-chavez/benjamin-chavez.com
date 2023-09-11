@@ -28,14 +28,7 @@ export default function Footer() {
     <section className="scroll-m-7 bg-parallax bg-fixed py-7" id="contact">
       <Container as="footer" className="flex items-center justify-center py-9">
         <div className="w-fit">
-          <h2
-            // text-center
-            // tracking-[.4rem] text-center
-            className=" w-fit font-dosis text-3xl uppercase leading-9 text-white "
-
-            //   className={cx('leading-7 [&:not(:first-child)]:mt-6', className)}
-            // [&:not(:first-child)]:mt-6
-          >
+          <h2 className=" w-fit font-dosis text-3xl uppercase leading-9 text-white ">
             <span className="tracking-[.4rem]">Contac</span>t
           </h2>
           <div className="my-6 flex items-center justify-between  ">
@@ -49,14 +42,10 @@ export default function Footer() {
                   href={contact.url}
                   target="_blank"
                 >
-                  <IconComponent
-                    // px-4
-                    className=" h-[30px] w-full text-neutral-500 hover:text-white"
-                  />
+                  <IconComponent className=" h-[30px] w-full text-neutral-500 hover:text-white" />
                 </a>
               );
             })}
-            {/* </div> */}
           </div>
         </div>
       </Container>

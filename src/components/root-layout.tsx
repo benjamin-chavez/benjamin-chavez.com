@@ -2,7 +2,6 @@
 import 'server-only';
 
 import Footer from '@/components/footer';
-import Header from './header';
 import Navbar from './navbar';
 
 function RootLayoutInner({ children }: { children: React.ReactNode }) {
@@ -20,7 +19,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // let pathname = usePathname();
-
   return <RootLayoutInner>{children}</RootLayoutInner>;
 }

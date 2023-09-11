@@ -173,23 +173,16 @@ function PortfolioCard({ project }: { project: any }) {
           alt={project.altText}
         />
         <div className="relative z-10 flex h-full flex-col justify-center rounded-[3px] p-4 text-center transition duration-600 ease-in-out group-hover:bg-black/80">
-          <h3
-            // font-medium
-            className="font-dosis text-3xl tracking-[.18rem] text-transparent [text-wrap:balance] group-hover:text-white"
-          >
+          <h3 className="font-dosis text-3xl tracking-[.18rem] text-transparent [text-wrap:balance] group-hover:text-white">
             {project.title}
           </h3>
-          <p
-            // [text-wrap:balance] hidden xs:block
-            className="mt-2 font-open-sans text-base text-transparent group-hover:text-gray-400 "
-          >
+          <p className="mt-2 font-open-sans text-base text-transparent group-hover:text-gray-400 ">
             {project.description}
           </p>
           <div className=" mt-4 flex justify-center gap-4 ">
             {project.links.map((link: any) => (
               <a
                 key={link.url}
-                // px-2 py-1
                 className="flex w-14 items-center justify-center rounded py-2 font-open-sans text-base text-transparent hover:!text-white group-hover:border group-hover:border-white group-hover:text-gray-400"
                 href={link.url}
                 target="_blank"
@@ -209,10 +202,7 @@ export default function Portfolio() {
     <section className="scroll-m-7 bg-[#ECEDFA] py-7" id="portfolio">
       <Container className="py-9 md:max-w-none md:px-12">
         <div className="flex flex-col items-center justify-center ">
-          <h2
-            // mt-4
-            className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]"
-          >
+          <h2 className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
             Portfolio
           </h2>
 

@@ -25,7 +25,6 @@ export default function Pre2({ className, ...props }: IPre) {
       let secondChild;
       if (parentElement && parentElement.children.length > 1) {
         secondChild = parentElement.children[1];
-        // console.log('here!!: ', secondChild.firstChild?.textContent);
         // @ts-ignore
         navigator.clipboard.writeText(secondChild?.firstChild?.textContent);
       }

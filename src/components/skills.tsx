@@ -78,8 +78,6 @@ export default function Skills() {
                     <div
                       key={tech.title}
                       className="flex items-center whitespace-nowrap text-base text-white"
-                      // className="flex whitespace-nowrap text-white"
-                      // justify-center
                     >
                       <IconComponent />
                       <span className="ml-1">{tech.title}</span>

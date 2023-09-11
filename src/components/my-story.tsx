@@ -79,11 +79,7 @@ function TextLink({
 export default function MyStory() {
   return (
     <section className="scroll-m-7 bg-[#ECEDFA] py-7" id="my-story">
-      <Container
-        // id="my-story"
-        // px-12
-        className="max-w-5xl py-9"
-      >
+      <Container className="max-w-5xl py-9">
         <div className="flex w-full flex-col items-center justify-center">
           <h2
             // mt-4
@@ -98,11 +94,7 @@ export default function MyStory() {
             A selection of my work as a full stack Developer in The U.S. and
             Germany.
           </h3> */}
-          <article
-            // max-w-none
-            className="prose my-6 max-w-7xl columns-1 gap-x-4  md:columns-3"
-            // className="prose "
-          >
+          <article className="prose my-6 max-w-7xl columns-1 gap-x-4  md:columns-3">
             {storySection.paragraphs.map((paragraph, index) => (
               <p
                 className=" break-inside-avoid-column font-open-sans text-[15px] font-light text-neutral-500"
@@ -131,7 +123,6 @@ export default function MyStory() {
             </ul>
           </article>
         </div>
-        {/* </div> */}
       </Container>
     </section>
   );

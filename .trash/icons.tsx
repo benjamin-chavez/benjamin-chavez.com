@@ -1,3 +1,4 @@
+// @ts-nocheck
 // src/components/icons.tsx
 
 // app/components/icons/github-icon.tsx

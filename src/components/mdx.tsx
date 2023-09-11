@@ -2,25 +2,18 @@
 
 'use client';
 
-import * as React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
 import { useMDXComponent } from 'next-contentlayer/hooks';
-
-import clsx from 'clsx';
-import { Container } from './container';
-import { CopyButton } from './copy-button';
+import Image from 'next/image';
 import Pre from './pre';
-import CodeTitle from './code-title';
-import Pre2 from './pre2';
+
 import { cx } from 'cva.config';
+import Pre2 from './pre2';
 
 type MdxComponentProps = {
   className: string;
 };
 
 const mdxComponents = {
-  CodeTitle,
   Image,
   pre2: Pre2,
   pre: Pre,

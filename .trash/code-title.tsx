@@ -16,7 +16,7 @@ import {
   SiTypescript,
   SiVercel,
 } from 'react-icons/si';
-import Pre from './pre';
+import Pre from '../src/components/pre';
 
 type ICodeTitle = {
   title?: string;
