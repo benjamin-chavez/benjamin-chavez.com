@@ -31,16 +31,13 @@ const navItems: Record<string, NavItem> = {
   '/blog': {
     name: 'Blog',
   },
-  // '/blog/how-to-create-a-new-express-application': {
-  //   name: 'Post',
-  // },
 };
 
 export function LogoIconLink() {
   return (
     <Link
       href="/"
-      className="whitespace-nowrap text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414]"
+      className=" whitespace-nowrap border-transparent text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414] focus:border-transparent focus:ring-0"
     >
       <span className="sr-only">Ctrl-F Plus</span>
       {/* <LogoIcon /> */}

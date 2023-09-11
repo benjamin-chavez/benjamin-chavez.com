@@ -1,16 +1,16 @@
 // src/components/portfolio.tsx
 import 'server-only';
 
-import Image from 'next/image';
-import { Container } from './container';
+import AminchavezThumbnail from '@/../public/img/thumbnails/Aminchavez.com-thumbnail.png';
+import BorderlineBasicThumbnail from '@/../public/img/thumbnails/borderlinebasicb-thumbnail.png';
+import ChipInThumbnail from '@/../public/img/thumbnails/chip-in-thumbnail.png';
 import CtrlFPlusThumbnail from '@/../public/img/thumbnails/ctrl-f-plus-thumbnail.png';
 import DenizenDesignerThumbnail from '@/../public/img/thumbnails/denizen-designer-thumbnail.png';
-import BorderlineBasicThumbnail from '@/../public/img/thumbnails/borderlinebasicb-thumbnail.png';
 import EstTaxMailerThumbnail from '@/../public/img/thumbnails/estimated-tax-mailer-thumbnail.png';
-import ChipInThumbnail from '@/../public/img/thumbnails/chip-in-thumbnail.png';
-import AminchavezThumbnail from '@/../public/img/thumbnails/Aminchavez.com-thumbnail.png';
-import { GithubIcon } from './icons/github-icon';
+import Image from 'next/image';
+import { Container } from './container';
 import { DownloadIcon } from './icons/download-icon';
+import { GithubIcon } from './icons/github-icon';
 import { WebsiteIcon } from './icons/website-icon';
 
 const projects = [

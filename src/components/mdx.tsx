@@ -19,11 +19,6 @@ const mdxComponents = {
   h2: ({ className, ...props }: MdxComponentProps) => (
     <h2
       className={cx(
-        // 'mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0',
-        // text-gray-500
-        // 'pt-2 font-open-sans text-[0.94rem] font-light  text-[#777777]',
-        // mt-3  block font-bold font-open-sans
-        // mt-16
         'mb-6  font-normal uppercase',
         'text-xl tracking-[.1rem] text-[#141414]',
         ' [&:not(:first-child)]:mt-16',
@@ -35,10 +30,6 @@ const mdxComponents = {
   h3: ({ className, ...props }: MdxComponentProps) => (
     <h3
       className={cx(
-        // 'mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0',
-        // text-gray-500
-        // 'pt-2 font-open-sans text-[0.94rem] font-light  text-[#777777]',
-        // mt-3  block  font-semibold
         ' font-dosis font-normal',
         'text-lg uppercase text-[#141414]',
         className,
@@ -49,7 +40,6 @@ const mdxComponents = {
   a: ({ className, ...props }: MdxComponentProps) => (
     <a
       className={cx(
-        // 'font-medium underline underline-offset-4',
         'font-light text-neutral-900 underline transition-all hover:text-[#008000]',
         className,
       )}
@@ -60,7 +50,6 @@ const mdxComponents = {
   ),
   strong: ({ className, ...props }: MdxComponentProps) => (
     <strong
-      // text-[#777777]
       className={cx(
         'font-open-sans text-[0.94rem] font-normal text-neutral-600',
         className,
@@ -70,8 +59,6 @@ const mdxComponents = {
   ),
   p: ({ className, ...props }: MdxComponentProps) => (
     <p
-      // className={cx('leading-7 [&:not(:first-child)]:mt-6', className)}
-      // [&:not(:first-child)]:mt-6
       className={cx(
         'font-open-sans text-[0.94rem] font-light text-[#777777] ',
         className,
@@ -80,15 +67,7 @@ const mdxComponents = {
     />
   ),
   code: ({ className, ...props }: MdxComponentProps) => (
-    <code
-      className={cx(
-        // 'relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm',
-        'font-mono text-sm',
-        // 'text-[0.813rem]',
-        className,
-      )}
-      {...props}
-    />
+    <code className={cx('font-mono text-sm', className)} {...props} />
   ),
 };
 
@@ -102,11 +81,7 @@ export function Mdx({ code, className }: MdxProps) {
 
   return (
     <div className={cx('', className)}>
-      <article
-        // className="mdx"
-        // className="prose prose-quoteless  mx-auto "
-        className=" prose max-w-none  pb-20 prose-code:before:content-none prose-code:after:content-none"
-      >
+      <article className=" prose max-w-none  pb-20 prose-code:before:content-none prose-code:after:content-none">
         {/* @ts-ignore */}
         <Component components={{ ...mdxComponents }} />
       </article>

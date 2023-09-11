@@ -1,5 +1,6 @@
 // src/components/my-story.tsx
 import 'server-only';
+
 import { Container } from './container';
 
 const storySection = {
@@ -82,19 +83,10 @@ export default function MyStory() {
     <section className="scroll-m-7 bg-[#ECEDFA] py-7" id="my-story">
       <Container className="max-w-5xl py-9">
         <div className="flex w-full flex-col items-center justify-center">
-          <h2
-            // mt-4
-            className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]"
-          >
+          <h2 className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
             My Story
           </h2>
-          {/* <h3
-            // text-gray-500
-            className="pt-2 font-open-sans text-[0.94rem] font-light  text-[#777777]"
-          >
-            A selection of my work as a full stack Developer in The U.S. and
-            Germany.
-          </h3> */}
+
           <article className="prose my-6 max-w-7xl columns-1 gap-x-4  md:columns-3">
             {storySection.paragraphs.map((paragraph, index) => (
               <p

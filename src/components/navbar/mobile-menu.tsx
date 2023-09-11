@@ -27,26 +27,13 @@ export default function MobileMenu({
       >
         <div className="fixed inset-0 z-50" />
 
-        <Dialog.Panel
-          // pl-12 pr-8
-          className="x-5 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white py-3  pr-2 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
-        >
+        <Dialog.Panel className="x-5 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white py-3  pr-2 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <Container className="mx-auto max-w-7xl  md:max-w-none md:px-12">
             <div className="flex items-center justify-between ">
-              {/* <Link
-              href="/"
-              // -m-1.5 p-1.5
-              className=""
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <span className="sr-only">Ctrl-F Plus</span>
-              Benjamin Chavez
-            </Link> */}
-              <LogoIconLink />
+              <LogoIconLink  />
 
               <button type="button" onClick={() => setMobileMenuOpen(false)}>
                 <span className="sr-only">Close menu</span>
-                {/* <XMarkIcon aria-hidden="true" /> */}
                 <XMarkIcon className="h-8 w-auto" />
               </button>
             </div>
@@ -59,8 +46,6 @@ export default function MobileMenu({
                       <Link
                         key={path}
                         href={path}
-                        // font-semibold
-                        // text-neutral-500
                         className="-mx-3 block rounded-lg px-3 py-2 font-open-sans text-base font-normal leading-7 text-[#777777] hover:bg-gray-50"
                         onClick={() => setMobileMenuOpen(false)}
                       >
