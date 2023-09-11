@@ -51,6 +51,7 @@ const mdxComponents = {
       )}
       {...props}
       target="_blank"
+      rel="noopener noreferrer"
     />
   ),
   p: ({ className, ...props }: MdxComponentProps) => (

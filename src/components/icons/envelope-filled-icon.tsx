@@ -17,6 +17,7 @@ export default function EnvelopeFilledIcon({
         fill="currentColor"
         aria-hidden="true"
         role="img"
+        title="Email Envelope Icon"
         className={cx('h-4', className)}
         {...props}
       >

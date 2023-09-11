@@ -67,9 +67,10 @@ function TextLink({
 }) {
   return (
     <a
-      target="_blank"
-      href={href}
       className="font-light text-neutral-900 underline hover:text-[#008000]"
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
     >
       {children}
     </a>

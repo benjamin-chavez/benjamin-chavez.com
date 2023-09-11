@@ -183,11 +183,14 @@ function PortfolioCard({ project }: { project: any }) {
             {project.links.map((link: any) => (
               <a
                 key={link.url}
-                className="flex w-14 items-center justify-center rounded py-2 font-open-sans text-base text-transparent hover:!text-white group-hover:border group-hover:border-white group-hover:text-gray-400"
                 href={link.url}
+                className="flex w-14 items-center justify-center rounded py-2 font-open-sans text-base text-transparent hover:!text-white group-hover:border group-hover:border-white group-hover:text-gray-400"
                 target="_blank"
+                rel="noopener noreferrer"
+                title={link.type}
               >
                 {link.icon && link.icon}
+                <span className="sr-only">{link.type}</span>
               </a>
             ))}
           </div>

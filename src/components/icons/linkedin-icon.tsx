@@ -16,6 +16,7 @@ export function LinkedInIcon({
       fill="currentColor"
       aria-hidden="true"
       role="img"
+      title="LinkedIn Icon"
       className={cx('h-4', className)}
       {...props}
     >

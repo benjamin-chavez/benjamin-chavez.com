@@ -17,6 +17,7 @@ export function GithubIcon({
       aria-hidden="true"
       role="img"
       className={cx('h-4', className)}
+      title="GitHub Icon"
       {...props}
     >
       {/* Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. */}

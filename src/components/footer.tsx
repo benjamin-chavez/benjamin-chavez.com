@@ -1,6 +1,7 @@
 // src/components/footer.tsx
-import { Container } from '@/components/container';
 import 'server-only';
+
+import { Container } from '@/components/container';
 import EnvelopeFilledIcon from './icons/envelope-filled-icon';
 import { GithubIcon } from './icons/github-icon';
 import { LinkedInIcon } from './icons/linkedin-icon';
@@ -36,11 +37,15 @@ export default function Footer() {
           {contactLinks.map((contact) => {
             const { IconComponent } = contact;
             return (
-              <a key={contact.title} href={contact.url} target="_blank">
-                <IconComponent
-                  // w-full
-                  className="h-[30px] text-neutral-500 hover:text-white"
-                />
+              <a
+                key={contact.title}
+                href={contact.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={contact.title}
+              >
+                <IconComponent className="h-[30px] text-neutral-500 hover:text-white" />
+                <span className="sr-only">{contact.title}</span>
               </a>
             );
           })}
@@ -49,20 +54,3 @@ export default function Footer() {
     </section>
   );
 }
-
-//  <div className="my-6 flex items-center justify-between  ">
-//    {contactLinks.map((contact) => {
-//      const { IconComponent } = contact;
-
-//      return (
-//        <a
-//          key={contact.title}
-//          className="text-gray-300"
-//  href={contact.url}
-//  target="_blank"
-//        >
-//          <IconComponent className=" h-[30px] w-full text-neutral-500 hover:text-white" />
-//        </a>
-//      );
-//    })}
-//  </div>;
