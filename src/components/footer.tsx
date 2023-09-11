@@ -1,5 +1,5 @@
 // src/components/footer.tsx
-
+import 'server-only';
 import { Container } from '@/components/container';
 import { LinkedInIcon } from './icons/linkedin-icon';
 import { GithubIcon } from './icons/github-icon';

@@ -1,4 +1,4 @@
-// temp.tsx
+// src/components/navbar/index.tsx
 
 // src/components/navbar/index.tsx
 'use client';

@@ -1,5 +1,5 @@
 // src/components/my-story.tsx
-
+import 'server-only';
 import { Container } from './container';
 
 const storySection = {

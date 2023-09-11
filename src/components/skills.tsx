@@ -1,5 +1,5 @@
 // src/components/skills.tsx
-
+import 'server-only';
 import { Container } from './container';
 import BootstrapIcon from './icons/bootstrap-icon';
 import CssIcon from './icons/css-icon';

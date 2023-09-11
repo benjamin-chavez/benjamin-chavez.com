@@ -1,6 +1,5 @@
 // src/components/mdx.tsx
-
-'use client';
+import 'server-only';
 
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import Image from 'next/image';

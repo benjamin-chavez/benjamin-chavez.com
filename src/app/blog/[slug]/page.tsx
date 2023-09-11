@@ -1,6 +1,6 @@
 // src/app/blog/[slug]/page.tsx
 
-// import 'server-only';
+import 'server-only';
 
 import { Container } from '@/components/container';
 import { Mdx } from '@/components/mdx';

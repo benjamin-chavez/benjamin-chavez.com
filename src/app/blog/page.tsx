@@ -1,4 +1,5 @@
 // src/app/blog/page.tsx
+import 'server-only';
 
 import { Container } from '@/components/container';
 import { formatDate } from '@/lib/utils';
