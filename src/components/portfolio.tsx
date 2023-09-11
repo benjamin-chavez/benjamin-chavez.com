@@ -206,19 +206,17 @@ function PortfolioCard({ project }: { project: any }) {
 
 export default function Portfolio() {
   return (
-    <section className="bg-[#ECEDFA] py-12" id="portfolio">
-      {/* <section className="bg-[#ECEDFA] py-12" id="portfolio"> */}
-      {/* <Container className="" id="portfolio"> */}
-      <Container
-        className="scroll-m-14 md:max-w-none md:px-12"
-        // id="portfolio"
-      >
+    <section className="scroll-m-7 bg-[#ECEDFA] py-7" id="portfolio">
+      <Container className="py-9 md:max-w-none md:px-12">
         <div className="flex flex-col items-center justify-center ">
-          <h2 className="mt-4 font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
+          <h2
+            // mt-4
+            className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]"
+          >
             Portfolio
           </h2>
 
-          <h3 className="pt-2 text-center font-open-sans text-[0.94rem] font-light text-gray-500">
+          <h3 className="mt-2 text-center font-open-sans text-[0.94rem] font-light text-gray-500">
             A selection of my work as a full stack Developer in The U.S. and
             Germany.
           </h3>

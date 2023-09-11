@@ -57,10 +57,10 @@ const technologies = {
 
 export default function Skills() {
   return (
-    <section className="bg-parallax bg-fixed py-12">
-      <Container className="max-w-5xl">
+    <section className="bg-parallax bg-fixed py-7">
+      <Container className="max-w-5xl py-9">
         <div className="flex flex-col items-center justify-center ">
-          <h2 className="mt-4 font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
+          <h2 className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
             Technologies
           </h2>
         </div>

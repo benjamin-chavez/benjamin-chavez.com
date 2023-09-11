@@ -96,17 +96,23 @@ export default async function Blog({ params }: BlogProps) {
   return (
     <>
       <Container
-      // bg-[#ECEDFA] py-12 sm:py-12
-      // className="py-12 sm:py-12"
-      // className="mt-10"
-      // className="bg-[#FFFFFF]"
+        // bg-[#ECEDFA] py-12 sm:py-12
+        // className="py-12 sm:py-12"
+        // className="mt-10"
+        // className="bg-[#FFFFFF]"
+        className="relative py-9"
       >
-        <BackButton className={'mt-6'} />
+        <BackButton
+          // mt-6 mt-3
+          className={'absolute top-4'}
+        />
         <h1
           // text-center
-          className="mt-6  font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414] "
+          // mt-6
+          className=" text-center font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414] "
         >
-          {post.title}
+          {/* {post.title} */}
+          Blog
         </h1>
 
         <section

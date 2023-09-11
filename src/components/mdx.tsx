@@ -54,7 +54,7 @@ const mdxComponents = {
     <a
       className={cx(
         // 'font-medium underline underline-offset-4',
-        'font-light text-neutral-900 underline hover:text-[#008000]',
+        'font-light text-neutral-900 underline transition-all hover:text-[#008000]',
         className,
       )}
       {...props}

@@ -31,6 +31,9 @@ const navItems: Record<string, NavItem> = {
   '/blog': {
     name: 'Blog',
   },
+  '/blog/how-to-create-a-new-express-application': {
+    name: 'Post',
+  },
 };
 
 export function LogoIconLink() {
@@ -49,14 +52,14 @@ export function LogoIconLink() {
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navItemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
-
   let pathname = usePathname() || '/';
   if (pathname.includes('/blog/')) {
     pathname = '/blog';
   }
 
   const [activeSection, setActiveSection] = useState(pathname);
+
+  const navItemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
 
   useEffect(() => {
     if (pathname.includes('/blog')) {
@@ -126,7 +129,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="block">
+          <div className="hidden md:block">
             <div className="text-fs-lg flex flex-row font-open-sans md:gap-x-3">
               {navLinks}
             </div>

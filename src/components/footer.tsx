@@ -25,14 +25,15 @@ const contactLinks = [
 
 export default function Footer() {
   return (
-    <section className="bg-parallax bg-fixed py-20" id="contact">
-      <Container as="footer">
-        <h2 className="text-center  font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
+    <section className="scroll-m-7 bg-parallax bg-fixed py-7" id="contact">
+      <Container as="footer" className="py-9">
+        {/* <div className="py-5"> */}
+        <h2 className="text-center font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
           Contact
         </h2>
         <div
           // gap-7
-          className="mt-6 flex items-center justify-center  "
+          className="my-6 flex items-center justify-center  "
         >
           {contactLinks.map((contact) => {
             const { IconComponent } = contact;
@@ -48,6 +49,7 @@ export default function Footer() {
               </a>
             );
           })}
+          {/* </div> */}
         </div>
       </Container>
     </section>

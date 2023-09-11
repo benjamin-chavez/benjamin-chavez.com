@@ -349,9 +349,9 @@ p > code {
   @apply visible;
 }
 
-.prose a {
+/* .prose a {
   @apply decoration-neutral-400 decoration-[0.1em] underline-offset-2 transition-all;
-}
+} */
 
 .prose .anchor:after {
   @apply text-neutral-300;

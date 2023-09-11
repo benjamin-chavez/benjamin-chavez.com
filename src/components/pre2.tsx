@@ -86,7 +86,7 @@ export default function Pre2({ className, ...props }: IPre) {
         // flex
         className="m-0 items-center  rounded-b-none bg-slate-900  "
         {...props}
-        mt-
+        // mt-
       >
         <div className=" flex items-center gap-2 overflow-hidden truncate">
           {' '}
