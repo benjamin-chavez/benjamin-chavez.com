@@ -115,7 +115,7 @@ export default function Navbar() {
       <Container className="max-w-7xl md:max-w-none md:px-12">
         <nav
           //
-          className=" mx-auto flex h-full w-full items-center justify-between py-2"
+          className="mx-auto flex h-full w-full items-center justify-between py-2"
           aria-label="Global"
         >
           <LogoIconLink />
