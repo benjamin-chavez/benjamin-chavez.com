@@ -5,18 +5,6 @@ import EnvelopeFilledIcon from './icons/envelope-filled-icon';
 import { GithubIcon } from './icons/github-icon';
 import { LinkedInIcon } from './icons/linkedin-icon';
 
-import JavaScriptIcon from './icons/javascript-icon';
-import RubyIcon from './icons/ruby-icon';
-import TypescriptIcon from './icons/typescript-icon';
-
-const technologies = {
-  'Languages & Technologies': [
-    { title: 'TypeScript', IconComponent: TypescriptIcon },
-    { title: 'JavaScript', IconComponent: JavaScriptIcon },
-    { title: 'Ruby', IconComponent: RubyIcon },
-  ],
-};
-
 const contactLinks = [
   {
     title: 'LinkedIn',
@@ -38,11 +26,11 @@ const contactLinks = [
 export default function Footer() {
   // <span className="tracking-[.4rem]">Contac</span>t
   return (
-    <section className="bg-parallax py-7 md:bg-fixed">
+    <section className="bg-parallax py-7 md:bg-fixed" id="contact">
       <Container className="max-w-5xl py-9">
         <div className="flex flex-col items-center justify-center ">
           <h2 className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">
-            Technologies
+            Contact
           </h2>
         </div>
         <div className="my-6 flex items-center  justify-center gap-8 font-open-sans ">
