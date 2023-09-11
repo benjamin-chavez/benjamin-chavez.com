@@ -42,13 +42,16 @@ export default function Blog() {
             Blog
             {/* HOW TO CREATE A NEW EXPRESS APPLICATION */}
           </h1>
-          <p className="mt-2 text-center text-lg leading-8 text-gray-600">
+
+          {/* <h3 className="mt-2 text-center font-open-sans text-[0.94rem] font-light text-gray-500">
             Technical articles covering my experiences as a software engineer
-          </p>
+            A selection of my work as a full stack Developer in The U.S. and
+            Germany.
+          </h3> */}
           <div
             // border-t border-gray-300
             // pt-10
-            className="mt-6 space-y-16 "
+            className="my-6 space-y-16 "
           >
             {publicPosts.map((post) => (
               <Link href={`/blog/${post.slug}`} key={post.slug}>

@@ -89,8 +89,7 @@ export default function MyStory() {
             // mt-4
             className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]"
           >
-            {/* My Story */}
-            Blog
+            My Story
           </h2>
           {/* <h3
             // text-gray-500
