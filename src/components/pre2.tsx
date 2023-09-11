@@ -16,7 +16,8 @@ export default function Pre2({ className, ...props }: IPre) {
     <div ref={textInput} className="relative w-full ">
       <CopyButton textInput={textInput} />
       <pre
-        className="mb-0 mt-8 items-center rounded-b-none bg-slate-900"
+        // bg-[#030314]
+        className="mb-0 mt-8 items-center rounded-b-none !bg-black"
         {...props}
       >
         <div className=" flex items-center gap-2 overflow-hidden truncate">

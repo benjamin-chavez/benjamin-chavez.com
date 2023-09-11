@@ -9,11 +9,21 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrismPlus from 'rehype-prism-plus';
 import remarkCodeTitles from 'remark-flexible-code-titles';
-import readingTime from "reading-time";
+import readingTime from 'reading-time';
+
+import Prism from 'prismjs';
+
+// Extend the grammar
+Prism.languages.insertBefore('html', 'tag', {
+  'span-tag': {
+    pattern: /<span[\s\S]*?>|<\/span>/i,
+    inside: Prism.languages.html.tag.inside,
+  },
+});
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields: any = {
-  readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
+  readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
   slug: {
     type: 'string',
     // resolve: (doc) => `/${doc._raw.flattenedPath}`,

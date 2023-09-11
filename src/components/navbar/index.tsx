@@ -40,7 +40,6 @@ export function LogoIconLink() {
       className="whitespace-nowrap  text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414] !outline-none"
     >
       <span className="sr-only">Ctrl-F Plus</span>
-      {/* <LogoIcon /> */}
       Benjamin Chavez
     </Link>
   );

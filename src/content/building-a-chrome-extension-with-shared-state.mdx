@@ -8,7 +8,49 @@ updatedAt: '2026-09-19'
 # image: '/images/backend/og.png'
 # ## Motivation
 ---
+```ts
+import { promises as fs } from 'fs';
 
+export class Store {
+    constructor() {
+    }
+
+    async foo() {
+        const buffer = await fs.readFile('test.yaml', 'utf-8');
+        return buffer.substr(0, buffer.length);
+    }
+}
+```
+
+
+```html
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Hello</title>
+    <link
+      href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css"
+      rel="stylesheet"
+    />
+
+    <style type="text/css">
+      body {
+      	color: purple;
+      	background-color: #d8da3d;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      window.alert("Hello World");
+    </script>
+    <div class="flash-banner hidden">
+      <span class="codicon"></span>
+    </div>
+  </body>
+</html>
+
+```
 
 When building a Chrome extension with React, TypeScript, and Tailwind, there are many architectural decisions to make. One crucial decision is how to manage shared state across different parts of your extension, like content scripts that run in separate tabs. This article explores how to efficiently implement a global shared state in your background script, acting as a "controller".
 

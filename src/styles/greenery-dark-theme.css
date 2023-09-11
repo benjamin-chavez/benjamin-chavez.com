@@ -1,0 +1,159 @@
+code[class*='language-'],
+pre[class*='language-'] {
+  color: #d4d4d4;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection,
+code[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection {
+  text-shadow: none;
+  background: #83a06c33;
+}
+
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection,
+code[class*='language-']::selection,
+code[class*='language-'] ::selection {
+  text-shadow: none;
+  background: #83a06c33;
+}
+
+@media print {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    text-shadow: none;
+  }
+}
+
+/* Code blocks */
+pre[class*='language-'] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  color: white;
+  background: #1f1f1f;
+}
+
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+.token.string {
+  color: #e1f3e7;
+}
+
+.token.variable {
+  color: #e1f3e7;
+}
+
+.token.number {
+  color: #83a06c;
+}
+
+.token.char {
+  color: #83a06c;
+}
+
+.token.constant {
+  color: #83a06c;
+}
+
+.token.hexcode {
+  color: #83a06c;
+}
+
+.token.keyword {
+  color: #83a06c;
+}
+
+.token.tag {
+  color: #83a06c;
+}
+
+.token.builtin {
+  color: #c78547;
+}
+
+.token.changed {
+  color: #c78547;
+}
+
+.token.boolean {
+  color: #c78547;
+}
+
+.token.property {
+  color: #83a06c;
+}
+
+.token.attr-name {
+  color: #ebc17a;
+}
+
+.token.selector {
+  color: #769baa;
+}
+
+.token.class-name {
+  color: #c78547b06698;
+}
+
+.token.regex {
+  color: #9ac2be;
+}
+
+.token.punctuation {
+  color: #667c55;
+}
+
+.token.function {
+  color: #adc586;
+}
+
+.token.symbol {
+  color: #adc586;
+}
+
+.token.inserted {
+  color: #adc586;
+}
+
+.token.comment {
+  color: #4e5350;
+  font-style: italic;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+.prose pre {
+  @apply !bg-[#1F1F1F];
+}

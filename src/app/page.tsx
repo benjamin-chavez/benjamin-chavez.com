@@ -1,4 +1,5 @@
 import 'server-only';
+
 import Hero from '@/components/hero';
 import MyStory from '@/components/my-story';
 import Portfolio from '@/components/portfolio';

@@ -111,10 +111,10 @@ export default function Pre({ className, ...props }: IPre) {
               )}
             </svg>
           </button>
-          <pre className="mb-8 mt-3 py-4" {...props} />
+          <pre className="mb-8 mt-3  py-4" {...props} />
         </div>
       ) : (
-        <pre className="mb-8 mt-0  rounded-t-none " {...props} />
+        <pre className="mb-8 mt-0 rounded-t-none " {...props} />
       )}
     </div>
   );

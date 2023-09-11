@@ -1,5 +1,14 @@
 import 'server-only';
-import './globals.css';
+
+import '../styles/globals.css';
+import '../styles/mdx.css';
+// import '../styles/gruvbox-dark.css';
+// import '../styles/duotone-forest.css';
+// import '../styles/forest-night-italic-serenade.css';
+// import '../styles/greenery-dark-theme.css';
+// import '../styles/v-theme.css';
+import '../styles/forest-focus-theme.css';
+// import '../styles/xonokai.css';
 // import type { Metadata } from 'next';
 import RootLayout from '@/components/root-layout';
 import { Dosis, Inter, Open_Sans } from 'next/font/google';
@@ -29,12 +38,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       lang="en"
       className={`${open_sans.variable} ${dosis.variable} ${inter.variable} h-full scroll-smooth bg-[#ECEDFA] font-dosis text-base antialiased`}
     >
-      <body
-        // debug-screens
-        className=" flex min-h-full flex-col"
-      >
+      <body className=" flex min-h-full flex-col">
         <RootLayout>{children}</RootLayout>
       </body>
     </html>
   );
 }
+
+// #1F2937
