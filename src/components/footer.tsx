@@ -26,22 +26,22 @@ const contactLinks = [
 export default function Footer() {
   return (
     <section className="bg-parallax py-7 md:bg-fixed" id="contact">
-      <Container className="max-w-5xl py-9">
-        <div className="flex flex-col items-center justify-center ">
-          <h2 className=" bg-red-500 font-dosis text-3xl uppercase leading-9  text-white">
-            {/* Contact */}
+      <Container className="flex w-fit max-w-5xl flex-col items-center py-9">
+        <div className="flex flex-col items-center justify-center bg-orange-500">
+          <h2 className=" bg-red-500 font-dosis text-3xl uppercase leading-9 text-white">
             <span className="tracking-[.4rem]">Contac</span>t
           </h2>
         </div>
-        <div className="my-6 flex items-center justify-center gap-8 font-open-sans ">
+        <div className="my-6 flex w-full items-center justify-between bg-green-500 font-open-sans">
           {contactLinks.map((contact) => {
             const { IconComponent } = contact;
             return (
               <div
                 key={contact.title}
-                className="flex w-full flex-wrap items-center justify-center gap-5  "
+                // gap-5
+                className="flex w-full flex-wrap items-center justify-center  "
               >
-                <IconComponent className=" h-[30px] w-full text-neutral-500 hover:text-white" />
+                <IconComponent className="h-[30px] w-full text-neutral-500 hover:text-white" />
               </div>
             );
           })}
