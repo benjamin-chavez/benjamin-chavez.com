@@ -37,7 +37,7 @@ export function LogoIconLink() {
   return (
     <Link
       href="/"
-      className="whitespace-nowrap border-transparent text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414] focus:border-transparent focus:ring-0 active:border-transparent active:ring-0"
+      className="whitespace-nowrap  text-xl font-normal uppercase leading-8 tracking-[0.2em] text-[#141414] !outline-none"
     >
       <span className="sr-only">Ctrl-F Plus</span>
       {/* <LogoIcon /> */}
