@@ -1,3 +1,5 @@
+// temp.tsx
+
 // src/components/navbar/index.tsx
 'use client';
 
@@ -56,35 +58,31 @@ export default function Navbar() {
 
   const [activeSection, setActiveSection] = useState(pathname);
 
-  let activeFound = false;
-
   useEffect(() => {
-    const sections = document.querySelectorAll('section[id]');
+    if (pathname.includes('/blog')) {
+      return;
+    }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !pathname.includes('/blog')) {
-            const newActiveLink = navItemRefs.current[`/#${entry.target.id}`];
-
-            if (newActiveLink) {
-              setActiveSection(`/#${entry.target.id}`);
-            }
+    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const newActiveLink = navItemRefs.current[`/#${entry.target.id}`];
+          if (newActiveLink) {
+            setActiveSection(`/#${entry.target.id}`);
           }
-        });
-      },
-      { threshold: 0.9 },
-    );
-
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
-
-    return () => {
-      sections.forEach((section) => {
-        observer.unobserve(section);
+        }
       });
     };
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      threshold: 0.9,
+    });
+
+    const sections = document.querySelectorAll('section[id]');
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
   }, [pathname]);
 
   const navLinks = useMemo(() => {
