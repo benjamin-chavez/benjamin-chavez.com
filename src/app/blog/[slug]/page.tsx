@@ -15,40 +15,50 @@ function getPost(params: any) {
   return allBlogs.find((post) => post.slug === params.slug);
 }
 
-// export async function generateMetadata({
-//   params,
-// }: any): Promise<Metadata | undefined> {
-//   const post = getPost(params);
+export async function generateMetadata({
+  // @ts-ignore
+  params,
+  // @ts-ignore
+}): Promise<Metadata | undefined> {
+  const post = allBlogs.find((post) => post.slug === params.slug);
+  if (!post) {
+    return;
+  }
 
-//   if (!post) {
-//     return;
-//   }
+  const {
+    title,
+    publishedAt: publishedTime,
+    summary: description,
+    // image,
+    slug,
+  } = post;
+  // const ogImage = image
+  //   ? `https://benjamin-chavez.com${image}`
+  //   : `https://benjamin-chavez.com/og?title=${title}`;
 
-//   // TODO: double check the `publishedAt` meta data
-//   const {
-//     title,
-//     publishedAt: publishedTime,
-//     summary: description,
-//     slug,
-//   } = post;
-
-//   return {
-//     title,
-//     description,
-//     openGraph: {
-//       title,
-//       description,
-//       type: 'article',
-//       publishedTime,
-//       url: `https://ctrl-f.plus/blog/${slug}`,
-//     },
-//     twitter: {
-//       card: 'summary_large_image',
-//       title,
-//       description,
-//     },
-//   };
-// }
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      publishedTime,
+      url: `https://benjamin-chavez.com/blog/${slug}`,
+      // images: [
+      //   {
+      //     url: ogImage,
+      //   },
+      // ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      // images: [ogImage],
+    },
+  };
+}
 
 function BackButton({ className }: { className?: string }) {
   return (

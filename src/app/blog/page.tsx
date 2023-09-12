@@ -5,6 +5,13 @@ import { Container } from '@/components/container';
 import { formatDate } from '@/lib/utils';
 import { allBlogs } from 'contentlayer/generated';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description:
+    'Read about the things I have learned in my journey as a Software Engineer.',
+};
 
 export default function Blog() {
   const publicPosts = allBlogs
