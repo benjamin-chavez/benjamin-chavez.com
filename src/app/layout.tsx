@@ -4,7 +4,6 @@ import RootLayout from '@/components/root-layout';
 import { Metadata } from 'next';
 import { Dosis, Inter, Open_Sans } from 'next/font/google';
 import '../styles/globals.css';
-// import '../styles/markdown-styles.css';
 import '../styles/mdx.css';
 
 const inter = Inter({
@@ -24,13 +23,15 @@ const open_sans = Open_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL('https://benjamin-chavez.com'),
   title: {
-    default: 'Ben Chavez',
-    template: '%s | Ben Chavez',
+    default: 'Benjamin Chavez | Full Stack Developer',
+    template: '%s | Benjamin Chavez',
   },
-  description: 'Full Stack Developer.',
+  description:
+    'Ben Chavez is a Full Stack Developer with expertise in Javascript, Typescript, Node, React, Ruby on Rails, and PostgreSQL. Explore his portfolio to see his innovative solutions and proven track record in software development..',
   openGraph: {
     title: 'Benjamin Chavez',
-    description: 'Full Stack Developer',
+    description:
+      'Explore the portfolio of Benjamin Chavez, a Chicago-based Full Stack Developer with a strong background in Javascript, Typescript, Node, React, Ruby on Rails, and PostgreSQL. Discover his work and contributions to software development.',
     url: 'https://benjamin-chavez.com',
     siteName: 'Benjamin Chavez',
     locale: 'en_US',

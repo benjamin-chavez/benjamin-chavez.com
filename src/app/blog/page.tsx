@@ -34,11 +34,6 @@ export default function Blog() {
           Blog
         </h1>
 
-        {/* <h3 className="mt-2 text-center font-open-sans text-[0.94rem] font-light text-gray-500">
-            Technical articles covering my experiences as a software engineer
-            A selection of my work as a full stack Developer in The U.S. and
-            Germany.
-          </h3> */}
         <div className="my-6 space-y-16 ">
           {publicPosts.map((post) => (
             <Link href={`/blog/${post.slug}`} key={post.slug}>
