@@ -53,8 +53,8 @@ updatedAt: '2026-09-19'
 
   Inside of the newly creates `tsconfig.json` file, declare your `outDir`.
   ```diff showLineNumbers
-  -  // "outDir": "./",                                   /* Specify an output folder
-  +  "outDir": "./dist",                                  /* Specify an output folder
+  -  // "outDir": "./",       /* Specify an output folder
+  +  "outDir": "./dist",      /* Specify an output folder
   ```
 
 ## Step 3: Write your Express Server:
@@ -92,7 +92,7 @@ updatedAt: '2026-09-19'
 
 ## Step 4: Run Your New Express Server
 
-  Compile your `typscript` code. The compiled code will be saved in the `./dist` directory from [step2]() above.
+  Compile your `typscript` code. The compiled code will be saved in the `./dist` directory from [step 2](#) above.
   ```bash
   pnpm tsc
   ```
@@ -105,7 +105,7 @@ updatedAt: '2026-09-19'
 ## Step 5: Add A Route To Return Data
 
   Let's create a new route so that we can serve up some data. Since our data object is made up of different members of The Beatles, we will call our route `/api/beatles`
-  ```ts:sdfsd showLineNumbers
+  ```ts showLineNumbers
   app.get('/api/beatles', (req, res) => {
     const data = {
       title: 'The Beatles',
@@ -266,7 +266,7 @@ Step 6: Add hot reloading
   To make sure that our server code is actually hot-reloading, let's add one more Beatle to our data object.
 
   Go ahead and add
-  ```json
+  ```json:
   {
     'first name': 'Stag',
     'last name': 'Beetle',

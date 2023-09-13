@@ -4,7 +4,14 @@ import { allBlogs } from 'contentlayer/generated';
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const blogs = allBlogs.map((post) => ({
+  const today = new Date();
+
+  const filteredBlogs = allBlogs.filter((post) => {
+    const publishDate = new Date(post.publishedAt);
+    return publishDate <= today;
+  });
+
+  const blogs = filteredBlogs.map((post) => ({
     url: `https://benjamin-chavez.com/${post.slug}`,
     lastModified: post.updatedAt,
   }));
