@@ -16,8 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: post.updatedAt,
   }));
 
-  const routes = ['', 'blog'].map((route) => ({
-    url: `https://benjamin-chavez.com/${route}`,
+  const routes = ['', '/blog'].map((route) => ({
+    url: `https://benjamin-chavez.com${route}`,
     lastModified: new Date().toISOString().split('T')[0],
   }));
 
