@@ -3,10 +3,10 @@ import 'server-only';
 
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import Image from 'next/image';
-import Pre from './pre';
 
 import { cx } from 'cva.config';
-import Pre2 from './pre2';
+import CodeCopyButton from './code-copy-button';
+import CodeBlockTitle from './code-block-title';
 
 type MdxComponentProps = {
   className: string;
@@ -14,8 +14,6 @@ type MdxComponentProps = {
 
 const mdxComponents = {
   Image,
-  pre2: Pre2,
-  pre: Pre,
   h2: ({ className, ...props }: MdxComponentProps) => (
     <h2
       className={cx(
@@ -66,9 +64,32 @@ const mdxComponents = {
       {...props}
     />
   ),
-  code: ({ className, ...props }: MdxComponentProps) => (
-    <code className={cx('font-mono text-sm', className)} {...props} />
+  pre: ({ className, ...props }: any) => (
+    <pre
+      // !bg-transparent
+      className={cx(
+        'group relative m-0 overflow-x-auto rounded-md  py-4',
+        className,
+      )}
+      {...props}
+    >
+      <CodeCopyButton text={props.__rawstring__} />
+      {props.children}
+    </pre>
   ),
+  // code: ({ className, ...props }: MdxComponentProps) => (
+  //   <code className={cx('font-mono text-sm ', className)} {...props} />
+  // ),
+  code: ({ className, ...props }: any) => (
+    <code
+      className={cx(
+        'relative rounded  px-[0.3rem] py-[0.2rem] font-mono text-sm',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  CodeBlockTitle,
 };
 
 interface MdxProps {

@@ -1,38 +1,32 @@
-// @ts-nocheck
 // contentlayer.config.js
 
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import { readFileSync } from 'fs';
 import remarkGfm from 'remark-gfm';
-// import rehypePrettyCode from 'rehype-pretty-code';
+import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrismPlus from 'rehype-prism-plus';
 import remarkCodeTitles from 'remark-flexible-code-titles';
 import readingTime from 'reading-time';
+import attachRawStringToCodeContainers from './src/lib/mdxPlugins/attachRawStringToCodeContainers.ts';
+import attachMetadataProperties from './src/lib/mdxPlugins/attachMetadataProperties.ts';
 
-import Prism from 'prismjs';
-
-// Extend the grammar
-Prism.languages.insertBefore('html', 'tag', {
-  'span-tag': {
-    pattern: /<span[\s\S]*?>|<\/span>/i,
-    inside: Prism.languages.html.tag.inside,
-  },
-});
+// const THEME_PATH = './src/styles/forest-focus-theme.json';
+const THEME_PATH = './src/styles/greenery-theme.json';
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
-const computedFields: any = {
-  readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
+const computedFields = {
+  readingTime: {
+    type: 'json',
+    resolve: (doc) => readingTime(doc.body.raw),
+  },
   slug: {
     type: 'string',
-    // resolve: (doc) => `/${doc._raw.flattenedPath}`,
-    resolve: (doc: any) => doc._raw.flattenedPath,
-    // resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
+    resolve: (doc) => doc._raw.flattenedPath,
   },
   slugAsParams: {
     type: 'string',
-    resolve: (doc: any) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
+    resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
   },
 };
 
@@ -58,6 +52,7 @@ export const Blog = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: './src/content',
+  contentDirExclude: ['drafts'],
   documentTypes: [Blog],
   mdx: {
     remarkPlugins: [
@@ -65,10 +60,7 @@ export default makeSource({
       [
         remarkCodeTitles,
         {
-          // container: false,
-          titleTagName: 'pre2',
-          // titleTagName: 'pre',
-          // titleTagName: 'div',
+          titleTagName: 'CodeBlockTitle',
           titleClassName: 'custom-code-title',
           titleProperties: (language, title) => ({
             ['data-language']: language,
@@ -78,14 +70,35 @@ export default makeSource({
       ],
     ],
     rehypePlugins: [
+      attachRawStringToCodeContainers,
       rehypeSlug,
-      [rehypePrismPlus, { ignoreMissing: true }],
+      // [rehypePrismPlus, { ignoreMissing: true }],
+      [
+        rehypePrettyCode,
+        {
+          theme: JSON.parse(readFileSync(THEME_PATH, 'utf-8')),
+          // theme: 'github-light',
+          onVisitLine(node) {
+            // Prevent lines from collapsing in `display: grid` mode, and allow empty
+            // lines to be copy/pasted
+            if (node.children.length === 0) {
+              node.children = [{ type: 'text', value: ' ' }];
+            }
+          },
+          onVisitHighlightedLine(node) {
+            node?.properties?.className?.push('line--highlighted');
+          },
+          onVisitHighlightedWord(node) {
+            node.properties.className = ['word--highlighted'];
+          },
+        },
+      ],
+      attachMetadataProperties,
       [
         rehypeAutolinkHeadings,
         {
           properties: {
-            // className: ['anchor'],
-            className: ['subheading-anchor'],
+            className: ['anchor'],
             ariaLabel: 'Link to section',
           },
         },

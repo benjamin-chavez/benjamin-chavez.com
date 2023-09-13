@@ -126,7 +126,7 @@ function MobileNavigation({
               <div className="space-y-2 py-6">
                 <NavigationLinks
                   pathname={pathname}
-                  linkClassName="text-shark -mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 hover:bg-gray-50 font-open-sans"
+                  linkClassName="text-red -mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 hover:bg-gray-50 font-open-sans"
                   onClick={() => setMobileMenuOpen(false)}
                 />
               </div>

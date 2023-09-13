@@ -8,49 +8,8 @@ updatedAt: '2026-09-19'
 # image: '/images/backend/og.png'
 # ## Motivation
 ---
-```ts
-import { promises as fs } from 'fs';
 
-export class Store {
-    constructor() {
-    }
-
-    async foo() {
-        const buffer = await fs.readFile('test.yaml', 'utf-8');
-        return buffer.substr(0, buffer.length);
-    }
-}
-```
-
-
-```html
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Hello</title>
-    <link
-      href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css"
-      rel="stylesheet"
-    />
-
-    <style type="text/css">
-      body {
-      	color: purple;
-      	background-color: #d8da3d;
-      }
-    </style>
-  </head>
-  <body>
-    <script>
-      window.alert("Hello World");
-    </script>
-    <div class="flash-banner hidden">
-      <span class="codicon"></span>
-    </div>
-  </body>
-</html>
-
-```
+## Motivation
 
 When building a Chrome extension with React, TypeScript, and Tailwind, there are many architectural decisions to make. One crucial decision is how to manage shared state across different parts of your extension, like content scripts that run in separate tabs. This article explores how to efficiently implement a global shared state in your background script, acting as a "controller".
 
@@ -58,7 +17,8 @@ When building a Chrome extension with React, TypeScript, and Tailwind, there are
 
 Let's first look at how to design a shared state in a background script. The idea is to create a "source of truth" in your background script that can be accessed and updated by all the content scripts. Here's a basic example of how you might set this up:
 
-```ts:background.ts
+
+```ts:background.ts {9, 13-16} showLineNumbers
 import { State, updateState } from './state';
 
 export const sharedState: State = {
@@ -81,8 +41,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-
-```ts:state.ts
+```ts:state.ts showLineNumbers
 export interface State {
   // Define your shared state structure here
 }
@@ -100,7 +59,8 @@ The updateState function is a simple helper that uses Object.assign to merge the
 
 The shared state object in the background script is not persisted across browser sessions. To handle this, you can use `chrome.storage.local` to store the shared state and load it when the extension starts up:
 
-```ts title="background.ts"
+{/* title="background.ts" */}
+```ts
 import { State, updateState } from './state';
 
 export const sharedState: State = {
@@ -190,7 +150,7 @@ export function updateState(state: State, newState: Partial<State>): void {
 }
 ```
 
-In this version, the shared state is a `Map` where each key is a window ID and each value is the shared state for that window. The background script loads and saves the shared state for each window separately, using the window ID as part of the key in `chrome.storage.local`. The `UPDATE_STATE` message now includes the window ID, so the background script knows which window's state to update.
+In this version, the shared state is a `Map` where each key is a window ID and each value is the shared state for that window. The background script loads and saves the shared state for each window separately, using the window ID as part of the key in `chrome.storage.local`. The **`UPDATE_STATE`** message now includes the window ID, so the background script knows which window's state to update.
 
 ## Pros and Cons of Maintaining Shared State in Memory
 
@@ -212,7 +172,7 @@ Maintaining the shared state in memory (in the background script) instead of rea
 
 When deciding where to store your shared state, you have several options: `chrome.storage`, `sessionStorage`, and `localStorage`. The best choice depends on your specific needs:
 
-**chrome.storage**: This is asynchronous, so it doesn't block the main thread. It also has larger storage limits and can be accessed from any script in your extension, including background, content, and popup scripts.
+**`chrome.storage`**: This is asynchronous, so it doesn't block the main thread. It also has larger storage limits and can be accessed from any script in your extension, including background, content, and popup scripts.
 
 **sessionStorage**: This stores data only for one session. The data is deleted when the user closes the specific browser tab. Like `localStorage`, `sessionStorage` is synchronous, can block the main thread, and has smaller storage limits.
 

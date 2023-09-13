@@ -1,18 +1,11 @@
 import 'server-only';
 
-import '../styles/globals.css';
-import '../styles/mdx.css';
-// import '../styles/gruvbox-dark.css';
-// import '../styles/duotone-forest.css';
-// import '../styles/forest-night-italic-serenade.css';
-// import '../styles/greenery-dark-theme.css';
-// import '../styles/v-theme.css';
-import '../styles/forest-focus-theme.css';
-// import '../styles/xonokai.css';
-// import type { Metadata } from 'next';
 import RootLayout from '@/components/root-layout';
-import { Dosis, Inter, Open_Sans } from 'next/font/google';
 import { Metadata } from 'next';
+import { Dosis, Inter, Open_Sans } from 'next/font/google';
+import '../styles/globals.css';
+// import '../styles/mdx.css';
+import '../styles/markdown-styles.css';
 
 const inter = Inter({
   subsets: ['latin'],

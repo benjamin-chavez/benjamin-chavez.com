@@ -1,0 +1,546 @@
+{
+  "name": "greenery",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#1f1f1f",
+    "editor.foreground": "#d4d4d4",
+    "titleBar.activeBackground": "#1f1f1f",
+
+    "activityBar.background": "#1f1f1f",
+    "activityBar.foreground": "#fdfdfd",
+    "activityBarBadge.background": "#667c55",
+    "activityBar.border": "#1c1d1c",
+
+    "sideBar.background": "#1f1f1f",
+    "sideBarTitle.foreground": "#667c55",
+    "sideBarSectionHeader.background": "#1f1f1f",
+
+    "editorGroupHeader.tabsBackground": "#1c1d1c",
+    "tab.activeBackground": "#1f1f1f",
+    "tab.inactiveBackground": "#1c1d1c",
+    "tab.border": "#1f1f1f",
+    "tab.activeBorder": "#667c55",
+    "tab.hoverBackground": "#667c55",
+
+    "statusBar.background": "#4c5c3f",
+    "statusBar.noFolderBackground": "#4c5c3f",
+    "statusBar.debuggingBackground": "#ebc17a",
+    "statusBar.debuggingForeground": "#1f1f1f",
+
+    "editorLineNumber.foreground": "#41463d",
+
+    "gitDecoration.modifiedResourceForeground": "#ebc17a",
+    "gitDecoration.untrackedResourceForeground": "#769baa",
+    "gitDecoration.conflictingResourceForeground": "#f07178",
+    "gitDecoration.deletedResourceForeground": "#bb90d8",
+    "gitDecoration.ignoredResourceForeground": "#4e5350",
+
+    "editor.wordHighlightBackground": "#83a06c33",
+    "editor.selectionBackground": "#83a06c33",
+    "editor.findMatchBackground": "#ebc17a33",
+    "editor.findMatchHighlightBackground": "#afdf6333"
+  },
+  "tokenColors": [
+    {
+      "scope": [],
+      "settings": {
+        "foreground": "#eeffffff"
+      }
+    },
+    {
+      "name": "Black",
+      "scope": [],
+      "settings": {
+        "foreground": "#1f1f1f"
+      }
+    },
+    {
+      "name": "Red",
+      "scope": [
+        "meta.block variable.other",
+        "support.other.variable",
+        "string.other.link",
+        "entity.name.module.js",
+        "variable.import.parameter.js"
+      ],
+      "settings": {
+        "foreground": "#f07178"
+      }
+    },
+    {
+      "name": "Yellow",
+      "scope": [
+        "constant.numeric",
+        "support.constant",
+        "constant.character",
+        "constant.escape",
+        "keyword.other.unit",
+        "keyword.other",
+        "source.css support.type.property-name",
+        "source.sass support.type.property-name",
+        "source.scss support.type.property-name",
+        "source.less support.type.property-name",
+        "source.stylus support.type.property-name",
+        "source.postcss support.type.property-name",
+        "entity.name.tag.reference.scss",
+        "support.constant.property-value.css",
+        "constant.numeric.css",
+        "source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json",
+        "string.other.link.title.markdown",
+        "string.other.link.description.markdown"
+      ],
+      "settings": {
+        "foreground": "#ebc17a"
+      }
+    },
+    {
+      "name": "Green",
+      "scope": [
+        "keyword",
+        "storage.type",
+        "storage.modifier",
+        "keyword.control.flow.python",
+        "keyword.control.flow.js",
+        "keyword.control.loop.js",
+        "source.json meta.structure.dictionary.json support.type.property-name.json",
+        "support.type.property-name.json",
+        "source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json",
+        "entity.name.tag.block.any.html",
+        "entity.name.tag.structure.any.html",
+        "entity.name.tag.open.jsx",
+        "entity.name.tag.close.jsx",
+        "meta.property-name.css",
+        "entity.name.tag.inline.any.html",
+        "entity.name.tag.html",
+        "entity.name.section.markdown"
+      ],
+      "settings": {
+        "foreground": "#83a06c"
+      }
+    },
+    {
+      "name": "Blue",
+      "scope": [
+        "meta.class-method.js entity.name.function.js",
+        "variable.function.constructor",
+        "entity.name.tag.css",
+        "entity.other.attribute-name.pseudo-class.css",
+        "variable.language.this.js",
+        "variable.language.self.js",
+        "meta.function.parameters.js",
+        "variable.parameter",
+        "markup.fenced_code.block.markdown",
+        "variable.other.readwrite.global.special.perl"
+      ],
+      "settings": {
+        "foreground": "#769baa"
+      }
+    },
+    {
+      "name": "Magenta",
+      "scope": [
+        "entity.other.attribute-name.class.css",
+        "entity.other.attribute-name",
+        "variable.other.class.js",
+        "entity.name.class",
+        "support.class.component",
+        "entity.name.type.class.python",
+        "meta.class.python",
+        "entity.name.type.js",
+        "string.other.link.description.title.markdown",
+        "variable.other.readwrite.global.perl"
+      ],
+      "settings": {
+        "foreground": "#b06698"
+      }
+    },
+    {
+      "name": "Cyan",
+      "scope": [
+        "support.type",
+        "source.sass keyword.control",
+        "string.regexp",
+        "constant.character.escape",
+        "support.class.builtin.js",
+        "support.class.builtin",
+        "markup.italic.markdown",
+        "markup.bold.markdown",
+        "fenced_code.block.language"
+      ],
+      "settings": {
+        "foreground": "#9ac2be"
+      }
+    },
+    {
+      "name": "White",
+      "scope": [
+        "variable",
+        "string constant.other.placeholder",
+        "meta.function-call.arguments.python",
+        "variable.other.readwrite",
+        "variable.other.object",
+        "expression.embedded.vue",
+        "string.unquoted",
+        "JSXNested"
+      ],
+      "settings": {
+        "foreground": "#e1f3e7"
+      }
+    },
+    {
+      "name": "Orange",
+      "scope": [
+        "entity.name",
+        "support.type",
+        "support.class",
+        "support.orther.namespace.use.php",
+        "meta.use.php",
+        "support.other.namespace.php",
+        "markup.changed.git_gutter",
+        "support.type.sys-types",
+        "constant.language.boolean",
+        "constant.language.undefined",
+        "constant.language.null"
+      ],
+      "settings": {
+        "foreground": "#c78547"
+      }
+    },
+    {
+      "name": "Purple",
+      "scope": [],
+      "settings": {
+        "foreground": "#bb90d8"
+      }
+    },
+    {
+      "name": "Green Dark",
+      "scope": [
+        "entity.other.attribute-name.class",
+        "punctuation.definition.tag.jsx",
+        "storage.type.function",
+        "entity.name.tag.script.html",
+        "entity.name.tag.template.html",
+        "entity.name.tag.style.html",
+        "markup.underline.link.markdown",
+        "markup.underline.link.image.markdown"
+      ],
+      "settings": {
+        "foreground": "#667c55"
+      }
+    },
+    {
+      "name": "Green Light",
+      "scope": [
+        "entity.name.function.js",
+        "constant.other.color",
+        "constant.other.color.rgb-value.hex.css",
+        "keyword.control",
+        "constant.other.color",
+        "punctuation",
+        "meta.tag",
+        "punctuation.definition.tag",
+        "punctuation.separator.inheritance.php",
+        "punctuation.definition.tag.html",
+        "punctuation.definition.tag.begin.html",
+        "punctuation.definition.tag.end.html",
+        "punctuation.section.embedded",
+        "keyword.other.template",
+        "keyword.other.substitution",
+        "string",
+        "constant.other.symbol",
+        "constant.other.key",
+        "entity.other.inherited-class",
+        "markup.heading",
+        "markup.inserted.git_gutter",
+        "meta.group.braces.curly constant.other.object.key.js string.unquoted.label.js",
+        "support.type.property-name.css",
+        "punctuation.definition.variable.perl"
+      ],
+      "settings": {
+        "foreground": "#adc586"
+      }
+    },
+    {
+      "name": "Green Very Light",
+      "scope": [
+        "string.quoted.double",
+        "string.quoted.single",
+        "string.quoted.double.json",
+        "string.quoted.module.js"
+      ],
+      "settings": {
+        "foreground": "#afcaaf"
+      }
+    },
+    {
+      "name": "Comment",
+      "scope": [
+        "comment",
+        "punctuation.definition.comment",
+        "punctuation.definition.heading.markdown",
+        "punctuation.definition.markdown",
+        "punctuation.definition.bold.markdown",
+        "punctuation.definition.italic.markdown",
+        "meta.separator.markdown"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#4e5350"
+      }
+    },
+
+    {
+      "name": "Black Bold",
+      "scope": [],
+      "settings": {
+        "foreground": "#1f1f1f",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Red Bold",
+      "scope": [],
+      "settings": {
+        "foreground": "#f07178",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Yellow Bold",
+      "scope": [],
+      "settings": {
+        "foreground": "#ebc17a",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Green Bold",
+      "scope": ["variable.language.special.self.python"],
+      "settings": {
+        "foreground": "#83a06c",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Blue Bold",
+      "scope": ["entity.name.method.js"],
+      "settings": {
+        "foreground": "#769baa",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Magenta Bold",
+      "scope": [],
+      "settings": {
+        "foreground": "#b06698",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Cyan Bold",
+      "scope": [],
+      "settings": {
+        "foreground": "#9ac2be",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "White Bold",
+      "scope": [],
+      "settings": {
+        "foreground": "#e1f3e7",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Orange Bold",
+      "scope": [],
+      "settings": {
+        "foreground": "#c78547",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Purple Bold",
+      "scope": [],
+      "settings": {
+        "foreground": "#c792ea",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Green Dark Bold",
+      "scope": [],
+      "settings": {
+        "foreground": "#5b6e4b",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Green Light Bold",
+      "scope": [],
+      "settings": {
+        "foreground": "#8eac74",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Green Very Light Bold",
+      "scope": [],
+      "settings": {
+        "foreground": "#9ab49a",
+        "fontStyle": "bold"
+      }
+    },
+
+    {
+      "name": "Black Italic",
+      "scope": [],
+      "settings": {
+        "foreground": "#1f1f1f",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Red Italic",
+      "scope": [
+        "variable.language",
+        "source.js constant.other.object.key.js string.unquoted.label.js"
+      ],
+      "settings": {
+        "foreground": "#f07178",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Yellow Italic",
+      "scope": [
+        "entity.name.function",
+        "meta.function-call",
+        "variable.function",
+        "support.function",
+        "keyword.other.special-method",
+
+        "text.html.basic entity.other.attribute-name.html",
+        "text.html.basic entity.other.attribute-name",
+        "entity.other.attribute-name.html",
+        "entity.other.attribute-name.jsx",
+        "variable.other.property.js"
+      ],
+      "settings": {
+        "foreground": "#ebc17a",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Green Italic",
+      "scope": [],
+      "settings": {
+        "foreground": "#83a06c",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Blue Italic",
+      "scope": [
+        "entity.name.method.js",
+        "tag.decorator.js entity.name.tag.js",
+        "tag.decorator.js punctuation.definition.tag.js",
+        "keyword.other.unit.em.css",
+        "keyword.other.unit.px.css",
+        "keyword.other.unit.s.css",
+        "keyword.other.unit.rem.css",
+        "keyword.other.unit.percentage.css",
+        "variable.language.prototype.js"
+      ],
+      "settings": {
+        "foreground": "#769baa",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Magenta Italic",
+      "scope": ["variable.other.object.property"],
+      "settings": {
+        "foreground": "#b06698",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Cyan Italic",
+      "scope": ["support.function.builtin"],
+      "settings": {
+        "foreground": "#9ac2be",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "White Italic",
+      "scope": [],
+      "settings": {
+        "foreground": "#e1f3e7",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Orange Italic",
+      "scope": [],
+      "settings": {
+        "foreground": "#c78547",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Purple Italic",
+      "scope": [],
+      "settings": {
+        "foreground": "#c792ea",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Green Dark Italic",
+      "scope": [],
+      "settings": {
+        "foreground": "#5b6e4b",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Green Light Italic",
+      "scope": [
+        "entity.name.function.python",
+        "entity.name.function.method.js"
+      ],
+      "settings": {
+        "foreground": "#8eac74",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Green Very Light Italic",
+      "scope": ["variable.scss"],
+      "settings": {
+        "foreground": "#9ab49a",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Red Error",
+      "scope": ["invalid", "invalid.illegal"],
+      "settings": {
+        "foreground": "#f7442d",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "URL",
+      "scope": ["*url*", "*link*", "*uri*"],
+      "settings": {
+        "fontStyle": "underline"
+      }
+    }
+  ]
+}

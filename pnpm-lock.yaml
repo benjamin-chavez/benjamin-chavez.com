@@ -83,9 +83,6 @@ dependencies:
   rehype-slug:
     specifier: ^6.0.0
     version: 6.0.0
-  remark-code-title:
-    specifier: ^0.2.5
-    version: 0.2.5
   remark-flexible-code-titles:
     specifier: ^1.1.3
     version: 1.1.3
@@ -4518,12 +4515,6 @@ packages:
       '@types/hast': 2.3.5
       hast-util-to-html: 8.0.4
       unified: 10.1.2
-    dev: false
-
-  /remark-code-title@0.2.5:
-    resolution: {integrity: sha512-6tIhdZdECMM0EQk3eDFxUQn/97VKKmo7JkCwfg/mkJaZZBwH+cbP0UDRslOqqzLcueakPZ8q7Gtj5KtGB/jufw==}
-    dependencies:
-      unist-util-visit: 4.1.2
     dev: false
 
   /remark-flexible-code-titles@1.1.3:
