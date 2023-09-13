@@ -9,7 +9,6 @@ import { allBlogs } from 'contentlayer/generated';
 import { cx } from 'cva.config';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-// import { formatDate } from '@/app/lib/utils';
 
 function getPost(params: any) {
   return allBlogs.find((post) => post.slug === params.slug);
@@ -120,10 +119,14 @@ export default async function Blog({ params }: BlogProps) {
               dateTime={post.publishedAt}
               className="font-open-sans text-gray-500"
             >
-              {/* {formatDate(post.publishedAt)} / {post.readingTime.text} */}
+              {formatDate(post.publishedAt)} / {post.readingTime.text}
             </time>
           </div>
-          <div className="-ml-1 w-fit rounded bg-[#008000]/20 px-1 py-1 font-open-sans text-[#008000] md:ml-0">
+
+          <div
+            // text-gray-800
+            className=" -ml-1 w-fit rounded-md  !bg-[#83a06c] !bg-opacity-80 px-1 py-1 font-open-sans !text-[#008000] md:ml-0"
+          >
             Last Updated:{' '}
             <time
               dateTime={post.publishedAt}

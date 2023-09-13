@@ -4,7 +4,8 @@ import RootLayout from '@/components/root-layout';
 import { Metadata } from 'next';
 import { Dosis, Inter, Open_Sans } from 'next/font/google';
 import '../styles/globals.css';
-import '../styles/markdown-styles.css';
+// import '../styles/markdown-styles.css';
+import '../styles/mdx.css';
 
 const inter = Inter({
   subsets: ['latin'],

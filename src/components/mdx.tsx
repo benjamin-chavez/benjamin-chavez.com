@@ -8,6 +8,7 @@ import Image from 'next/image';
 import CodeCopyButton from './code-copy-button';
 import CodeBlockTitle from './code-block-title';
 import clsx from 'clsx';
+import { cx } from 'cva.config';
 
 type MdxComponentProps = {
   className: string;
@@ -18,7 +19,7 @@ const mdxComponents = {
   h2: ({ className, ...props }: MdxComponentProps) => (
     <h2
       className={clsx(
-        'mb-6  font-normal uppercase',
+        'mb-6 scroll-m-16 font-normal uppercase',
         'text-xl tracking-[.1rem] text-[#141414]',
         ' [&:not(:first-child)]:mt-16',
         className,
@@ -29,24 +30,30 @@ const mdxComponents = {
   h3: ({ className, ...props }: MdxComponentProps) => (
     <h3
       className={clsx(
-        ' font-dosis font-normal',
+        'scroll-m-16 font-dosis font-normal',
         'text-lg uppercase text-[#141414]',
         className,
       )}
       {...props}
     />
   ),
-  a: ({ className, ...props }: MdxComponentProps) => (
-    <a
-      className={clsx(
-        'font-light text-neutral-900 underline transition-all hover:text-[#008000]',
-        className,
-      )}
-      {...props}
-      target="_blank"
-      rel="noopener noreferrer"
-    />
-  ),
+  // a: ({ className, ...props }: MdxComponentProps) => (
+  a: ({ className, href, ...props }: MdxComponentProps & { href?: string }) => {
+    const isExternalLink = href?.startsWith('http');
+    return (
+      <a
+        href={href}
+        className={cx(
+          ' font-light text-neutral-900 underline transition-all hover:text-[#008000]',
+          // 'decoration-neutral-400 decoration-[0.1em] underline-offset-2 transition-all'
+          className,
+        )}
+        {...props}
+        // target={isExternalLink ? '_blank' : '_self'}
+        // rel={isExternalLink ? 'noopener noreferrer' : undefined}
+      />
+    );
+  },
   strong: ({ className, ...props }: MdxComponentProps) => (
     <strong
       className={clsx(
@@ -69,7 +76,9 @@ const mdxComponents = {
     <pre
       // !bg-transparent
       className={clsx(
-        'group relative m-0 overflow-x-auto rounded-md  py-4',
+        'px-0',
+        'group relative m-0 overflow-x-auto rounded-md py-4',
+        '!bg-transparent',
         className,
       )}
       {...props}
@@ -78,13 +87,12 @@ const mdxComponents = {
       {props.children}
     </pre>
   ),
-  // code: ({ className, ...props }: MdxComponentProps) => (
-  //   <code className={clsx('font-mono text-sm ', className)} {...props} />
-  // ),
+
   code: ({ className, ...props }: any) => (
     <code
-      className={clsx(
-        'relative rounded  px-[0.3rem] py-[0.2rem] font-mono text-sm',
+      className={cx(
+        // 'relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm',
+        'font-mono text-sm',
         className,
       )}
       {...props}

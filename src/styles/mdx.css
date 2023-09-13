@@ -1,0 +1,96 @@
+::selection {
+  /* @apply bg-red-500 text-white; */
+  @apply !m-0 !rounded-md  !bg-[#83a06c] !bg-opacity-80 !px-[.4em] !py-[.2em] !text-gray-800;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.prose .anchor {
+  @apply invisible absolute no-underline;
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.anchor:hover {
+  @apply visible;
+}
+/*
+.prose a {
+  @apply decoration-neutral-400 decoration-[0.1em] underline-offset-2 transition-all;
+} */
+
+.prose .anchor:after {
+  @apply text-neutral-300;
+  content: '#';
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
+}
+
+/* Code highlight within text (ex: `snippit`) */
+.prose code {
+  @apply border-none bg-gray-200 px-0;
+}
+
+[data-rehype-pretty-code-fragment] code {
+  @apply grid min-w-full break-words rounded-none border-0 bg-transparent p-0 text-sm text-black;
+  counter-reset: line;
+  box-decoration-break: clone;
+}
+
+[data-rehype-pretty-code-fragment] .line {
+  @apply relative rounded px-4 py-[0.2rem] font-mono text-sm;
+}
+
+[data-rehype-pretty-code-fragment] [data-line-numbers] > .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1rem;
+  margin-right: 1.25rem;
+  text-align: right;
+  color: gray;
+}
+
+[data-rehype-pretty-code-fragment] .line:hover {
+  @apply w-full cursor-default rounded-none bg-slate-500 bg-opacity-10;
+}
+
+[data-rehype-pretty-code-fragment] .line--highlighted {
+  @apply rounded-none bg-slate-500 bg-opacity-10;
+  box-shadow: inset 4px 0 0 0 #83a06c;
+  /* box-shadow: inset 4px 0 0 0 #008000; */
+}
+
+[data-rehype-pretty-code-fragment] .line-highlighted span {
+  @apply relative;
+}
+
+[data-rehype-pretty-code-fragment] .word--highlighted {
+  @apply rounded-md bg-slate-500 bg-opacity-10 p-1;
+}
+
+.remark-code-container .flex + [data-rehype-pretty-code-fragment] > pre {
+  @apply rounded-t-none;
+}
+
+.remark-code-container {
+  @apply mt-6 rounded-md border border-gray-700 !bg-[#1F1F1F] bg-opacity-90;
+}
+
+p > code {
+  @apply rounded border bg-gray-100 px-1;
+  @apply !text-[13px] !font-normal !text-[#777777];
+  @apply !m-0 !rounded-md  !bg-[#83a06c] !bg-opacity-50 !px-[.4em] !py-[.2em] !text-gray-500;
+}
