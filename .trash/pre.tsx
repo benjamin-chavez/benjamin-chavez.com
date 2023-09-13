@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import clsx, { ClassValue } from 'clsx';
 import { cx } from 'cva.config';

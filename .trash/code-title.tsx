@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { RiCodeLine, RiFileTextLine, RiFolderOpenLine } from 'react-icons/ri';
 import {
