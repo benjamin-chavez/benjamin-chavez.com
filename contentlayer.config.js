@@ -8,13 +8,13 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkCodeTitles from 'remark-flexible-code-titles';
 import readingTime from 'reading-time';
-// import attachRawStringToCodeContainers from './src/lib/mdxPlugins/attachRawStringToCodeContainers.ts';
-// import attachMetadataProperties from './src/lib/mdxPlugins/attachMetadataProperties.ts';
+import attachRawStringToCodeContainers from './src/lib/mdxPlugins/attachRawStringToCodeContainers.ts';
+import attachMetadataProperties from './src/lib/mdxPlugins/attachMetadataProperties.ts';
 import { REMARK_CODE_TITLE_TAG_NAME } from './constants.ts';
-import {
-  attachRawStringToCodeContainers,
-  attachMetadataProperties,
-} from 'rehype-code-copy';
+// import {
+//   attachRawStringToCodeContainers,
+//   attachMetadataProperties,
+// } from 'rehype-code-copy';
 
 // const THEME_PATH = './src/styles/forest-focus-theme.json';
 const THEME_PATH = './src/styles/greenery-theme.json';
