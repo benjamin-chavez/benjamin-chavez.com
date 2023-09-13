@@ -125,7 +125,7 @@ export default async function Blog({ params }: BlogProps) {
 
           <div
             // text-gray-800
-            className=" -ml-1 w-fit rounded-md  !bg-[#83a06c] !bg-opacity-80 px-1 py-1 font-open-sans !text-[#008000] md:ml-0"
+            className=" -ml-1 w-fit rounded-md !bg-[#83a06c] !bg-opacity-50 px-1.5 py-1 font-open-sans !text-[#008000] md:ml-0"
           >
             Last Updated:{' '}
             <time

@@ -78,7 +78,7 @@ const mdxComponents = {
       className={clsx(
         'px-0',
         'group relative m-0 overflow-x-auto rounded-md py-4',
-        '!bg-transparent',
+        // '!bg-transparent',
         className,
       )}
       {...props}
