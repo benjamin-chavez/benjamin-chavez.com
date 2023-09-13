@@ -1,9 +1,5 @@
 /* src/styles/markdown-styles.css */
 
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
 ::selection {
   @apply bg-yellow-500 text-white;
 }
@@ -17,14 +13,56 @@ pre {
   scrollbar-width: none; /* Firefox */
 }
 
-.prose .anchor {
+/**
+ * CSS Styles for code highlighting.
+ * Feel free to customize token styles
+ * by copying from a prismjs compatible theme:
+ * https://github.com/PrismJS/prism-themes
+ */
+
+/* Code title styles */
+.remark-code-title {
+  @apply rounded-t bg-red-700 px-5 py-3 font-mono text-sm font-bold text-gray-200;
+}
+
+.remark-code-title + div > pre {
+  @apply mt-0 rounded-t-none bg-red-500;
+}
+
+/* Code block styles */
+/* .code-highlight {
+  @apply float-left min-w-full;
+} */
+
+/* .code-line {
+  @apply -mx-4 block border-l-4 border-transparent pl-4 pr-4;
+} */
+
+.code-line.inserted {
+  @apply bg-green-500 bg-opacity-20;
+}
+
+.code-line.deleted {
+  @apply bg-red-500 bg-opacity-20;
+}
+
+/* .highlight-line {
+  @apply -mx-4 border-l-4 border-red-500 bg-gray-700 bg-opacity-50;
+} */
+
+/* .line-number::before {
+  @apply -ml-2 mr-4 inline-block w-4 text-right text-gray-400;
+  content: attr(line);
+} */
+
+/* .prose .anchor {
   @apply invisible absolute no-underline;
   margin-left: -1em;
   padding-right: 0.5em;
   width: 80%;
   max-width: 700px;
   cursor: pointer;
-}
+} */
 
 .anchor:hover {
   @apply visible;
@@ -43,47 +81,35 @@ pre {
   @apply visible;
 }
 
-.prose pre {
-  /* shadow-sm shadow-gray-300 */
-  @apply bg-red-500;
-}
+/* .prose pre { */
+/* shadow-sm shadow-gray-300 */
+/* @apply bg-red-500; */
+/* } */
 
 /* Code highlight within text (ex: `snippit`) */
-.prose code {
+/* .prose code {
   @apply border-none bg-gray-200 px-0;
-}
+} */
 
-.prose pre code {
-  /* dark:text-neutral-200 */
+/* .prose pre code {
   @apply p-0 text-neutral-800;
   border: initial;
-}
+} */
 
 .prose img {
   /* Don't apply styles to next/image */
   @apply m-0;
 }
 
-.prose > :first-child {
-  /* // Override removing top margin, causing layout shift */
+/* .prose > :first-child {
+  // Override removing top margin, causing layout shift
   margin-top: 1.25em !important;
   margin-bottom: 1.25em !important;
-}
+} */
 
 code[class*='language-'],
 pre[class*='language-'] {
   @apply text-neutral-50;
-}
-
-table {
-  display: block;
-  max-width: fit-content;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.prose .callout > p {
-  margin: 0 !important;
 }
 
 [data-rehype-pretty-code-fragment] code {
@@ -125,5 +151,120 @@ table {
 }
 
 .remark-code-container {
-  @apply mt-6 rounded-md border border-gray-700 bg-red-500;
+  /* bg-red-500 */
+  @apply mt-6 rounded-md border border-gray-700;
+}
+
+/**
+ * Inspired by gatsby remark prism - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs/
+ * 1. Make the element just wide enough to fit its content.
+ * 2. Always fill the visible space in .code-highlight.
+ */
+.code-highlight {
+  float: left; /* 1 */
+  min-width: 100%; /* 2 */
+}
+
+.code-line {
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: -16px;
+  margin-right: -16px;
+  border-left: 4px solid rgba(0, 0, 0, 0); /* Set placeholder for highlight accent border color to transparent */
+}
+
+.code-line.inserted {
+  background-color: rgba(16, 185, 129, 0.2); /* Set inserted line (+) color */
+}
+
+.code-line.deleted {
+  background-color: rgba(239, 68, 68, 0.2); /* Set deleted line (-) color */
+}
+
+/* .highlight-line {
+  margin-left: -16px;
+  margin-right: -16px;
+  background-color: rgba(55, 65, 81, 0.5);
+  border-left: 4px solid rgb(59, 130, 246);
+} */
+
+.line-number::before {
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  margin-right: 16px;
+  margin-left: -8px;
+  color: rgb(156, 163, 175); /* Line number color */
+  content: attr(line);
+}
+
+/* Code title styles */
+/* .remark-code-title {
+  background-color: rgb(0, 0, 0); /* Set highlight bg color */
+/* } */
+
+/* .remark-code-title + div > pre {
+  background-color: rgba(42, 104, 202, 0.5); /* Set highlight bg color */
+/* } */
+/*
+.remark-code-container pre {
+  margin-top: 0;
+  border-radius: 0px;
+} */
+
+.highlight-line {
+  @apply -mx-4 border-l-4 border-red-500 bg-gray-700 bg-opacity-50;
+}
+
+.code-line:hover {
+  @apply -mx-4  bg-gray-700 bg-opacity-50;
+}
+
+.remark-code-container pre {
+  /* margin-top: 0; */
+  /* border-radius: 0px; */
+  @apply border border-t-0 border-white/30;
+}
+
+/* .remark-code-container { */
+/* @apply w-screen bg-blue-500; */
+/* @apply w-full bg-blue-500; */
+/* } */
+
+/* styles.css */
+/* p.font-open-sans > code { */
+/* p > code {
+  @apply rounded border bg-gray-100 px-1;
+  @apply !text-[13px] !font-normal !text-white;
+  @apply !rounded-md !bg-slate-700 !px-[5px] !py-[3px];
+} */
+
+/* !text-[#1F2328] !bg-[#AFB8C10] */
+p > code {
+  @apply rounded border bg-gray-100 px-1;
+  @apply !text-[13px] !font-normal !text-[#777777];
+  @apply !m-0 !rounded-md !bg-gray-300 !px-[.4em] !py-[.2em];
+}
+
+.prose .anchor {
+  @apply invisible absolute no-underline;
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.anchor:hover {
+  @apply visible;
+}
+
+.prose .anchor:after {
+  @apply text-neutral-400;
+  content: '#';
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
 }

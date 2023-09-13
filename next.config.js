@@ -2,10 +2,9 @@ const { withContentlayer } = require('next-contentlayer');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  // experimental: {
-  //   serverActions: true,
-  // },
+  experimental: {},
+  reactStrictMode: false,
+  poweredByHeader: false,
 };
 
 // const withBundleAnalyzer = require('@next/bundle-analyzer')({

@@ -180,9 +180,7 @@ updatedAt: '2026-09-19'
 
   Next, let's see what happens if we add one more Beatle to our data object. Without stopping the server let's go ahead and make the following update:
 
-  ```ts
-  // express-api/app.ts
-
+  ```ts:express-api/app.ts showLineNumbers
   import express from 'express';
 
   const PORT = 5000;
@@ -237,8 +235,7 @@ Step 6: Add hot reloading
 
   Next, open up you package.json and add the following `start` script. We are going to just delete the `test` script, but you can leave it if you prefer:
 
-  ```json
-  // express-api/package.json
+  ```json:express-api/package.json
   "scripts": {
     "start": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/app.ts'"
   },

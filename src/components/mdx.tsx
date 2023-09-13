@@ -1,12 +1,13 @@
 // src/components/mdx.tsx
-import 'server-only';
+// import 'server-only';
 
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import Image from 'next/image';
+// import { cx } from 'cva.config';
 
-import { cx } from 'cva.config';
 import CodeCopyButton from './code-copy-button';
 import CodeBlockTitle from './code-block-title';
+import clsx from 'clsx';
 
 type MdxComponentProps = {
   className: string;
@@ -16,7 +17,7 @@ const mdxComponents = {
   Image,
   h2: ({ className, ...props }: MdxComponentProps) => (
     <h2
-      className={cx(
+      className={clsx(
         'mb-6  font-normal uppercase',
         'text-xl tracking-[.1rem] text-[#141414]',
         ' [&:not(:first-child)]:mt-16',
@@ -27,7 +28,7 @@ const mdxComponents = {
   ),
   h3: ({ className, ...props }: MdxComponentProps) => (
     <h3
-      className={cx(
+      className={clsx(
         ' font-dosis font-normal',
         'text-lg uppercase text-[#141414]',
         className,
@@ -37,7 +38,7 @@ const mdxComponents = {
   ),
   a: ({ className, ...props }: MdxComponentProps) => (
     <a
-      className={cx(
+      className={clsx(
         'font-light text-neutral-900 underline transition-all hover:text-[#008000]',
         className,
       )}
@@ -48,7 +49,7 @@ const mdxComponents = {
   ),
   strong: ({ className, ...props }: MdxComponentProps) => (
     <strong
-      className={cx(
+      className={clsx(
         'font-open-sans text-[0.94rem] font-normal text-neutral-600',
         className,
       )}
@@ -57,7 +58,7 @@ const mdxComponents = {
   ),
   p: ({ className, ...props }: MdxComponentProps) => (
     <p
-      className={cx(
+      className={clsx(
         'font-open-sans text-[0.94rem] font-light text-[#777777] ',
         className,
       )}
@@ -67,7 +68,7 @@ const mdxComponents = {
   pre: ({ className, ...props }: any) => (
     <pre
       // !bg-transparent
-      className={cx(
+      className={clsx(
         'group relative m-0 overflow-x-auto rounded-md  py-4',
         className,
       )}
@@ -78,11 +79,11 @@ const mdxComponents = {
     </pre>
   ),
   // code: ({ className, ...props }: MdxComponentProps) => (
-  //   <code className={cx('font-mono text-sm ', className)} {...props} />
+  //   <code className={clsx('font-mono text-sm ', className)} {...props} />
   // ),
   code: ({ className, ...props }: any) => (
     <code
-      className={cx(
+      className={clsx(
         'relative rounded  px-[0.3rem] py-[0.2rem] font-mono text-sm',
         className,
       )}
@@ -101,9 +102,11 @@ export function Mdx({ code, className }: MdxProps) {
   const Component = useMDXComponent(code);
 
   return (
-    <div className={cx('', className)}>
-      <article className=" prose max-w-none  pb-20 prose-code:before:content-none prose-code:after:content-none">
+    <div className={clsx('', className)}>
+      <article className=" prose max-w-none pb-20 prose-code:before:content-none prose-code:after:content-none">
+        {/* <article className="prose max-w-none"> */}
         {/* @ts-ignore */}
+
         <Component components={{ ...mdxComponents }} />
       </article>
     </div>

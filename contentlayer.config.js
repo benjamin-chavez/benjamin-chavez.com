@@ -10,6 +10,7 @@ import remarkCodeTitles from 'remark-flexible-code-titles';
 import readingTime from 'reading-time';
 import attachRawStringToCodeContainers from './src/lib/mdxPlugins/attachRawStringToCodeContainers.ts';
 import attachMetadataProperties from './src/lib/mdxPlugins/attachMetadataProperties.ts';
+import { REMARK_CODE_TITLE_TAG_NAME } from './constants.ts';
 
 // const THEME_PATH = './src/styles/forest-focus-theme.json';
 const THEME_PATH = './src/styles/greenery-theme.json';
@@ -60,7 +61,7 @@ export default makeSource({
       [
         remarkCodeTitles,
         {
-          titleTagName: 'CodeBlockTitle',
+          titleTagName: REMARK_CODE_TITLE_TAG_NAME,
           titleClassName: 'custom-code-title',
           titleProperties: (language, title) => ({
             ['data-language']: language,

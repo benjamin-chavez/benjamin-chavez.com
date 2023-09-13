@@ -120,7 +120,7 @@ export default async function Blog({ params }: BlogProps) {
               dateTime={post.publishedAt}
               className="font-open-sans text-gray-500"
             >
-              {formatDate(post.publishedAt)} / {post.readingTime.text}
+              {/* {formatDate(post.publishedAt)} / {post.readingTime.text} */}
             </time>
           </div>
           <div className="-ml-1 w-fit rounded bg-[#008000]/20 px-1 py-1 font-open-sans text-[#008000] md:ml-0">

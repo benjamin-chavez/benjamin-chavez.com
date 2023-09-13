@@ -1,11 +1,16 @@
 // plugins/attachMetadataProperties.ts
 
+import { REMARK_CODE_TITLE_TAG_NAME } from '../../../constants';
 import { visit } from 'unist-util-visit';
 
 export default function attachMetadataProperties() {
   return (tree: any) => {
     visit(tree, (node) => {
-      if (node?.type === 'element' && node?.tagName === 'CodeBlockTitle') {
+      // if (node?.type === 'element' && node?.tagName === 'CodeBlockTitle') {
+      if (
+        node?.type === 'element' &&
+        node?.tagName === REMARK_CODE_TITLE_TAG_NAME
+      ) {
         node.properties['__withmeta__'] = (
           node.children.at(0).tagName === 'div'
         ).toString();
