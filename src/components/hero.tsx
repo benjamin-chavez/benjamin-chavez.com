@@ -1,7 +1,8 @@
 // src/components/hero.tsx
 
 import 'server-only';
-import BannerImage from '@/../public/img/Banner-image-cropped.png';
+// import BannerImage from '@/../public/img/Banner-image-cropped.png';
+import BannerImage from '@/../public/img/Banner-image-cropped.webp';
 import Image from 'next/image';
 import Link from 'next/link';
 

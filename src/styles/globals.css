@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::selection {
+  /* @apply bg-red-500 text-white; */
+  @apply !m-0 !rounded-md  !bg-[#83a06c] !bg-opacity-80 !px-[.4em] !py-[.2em] !text-gray-800;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
