@@ -27,14 +27,18 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className=" relative -mt-14 h-screen min-h-screen w-full bg-cover bg-fixed bg-center bg-no-repeat"
+      className=" relative -mt-14 h-screen min-h-screen w-full bg-hero-image bg-cover bg-fixed bg-center bg-no-repeat"
     >
-      <Image
-        src={BannerImage}
-        alt={''}
+      <img
+        // src={BannerImage}
+        src="../../public/img/Banner-image-cropped.png"
+        alt="Benjamin Chavez"
         className="absolute top-0 -z-20 aspect-auto h-full w-full object-cover md:fixed  lg:top-0 xl:top-4 2xl:top-9"
-        priority
-        placeholder="blur"
+        // priority
+        // quality={100}
+        // fill
+        // sizes="100vw"
+        // placeholder="blur"
       />
       <div className="absolute top-0 -z-10 aspect-auto h-full w-full bg-gradient-to-b from-transparent to-black/70 md:fixed" />
 
