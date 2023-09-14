@@ -3,10 +3,8 @@
 import 'server-only';
 // 'use client';
 // import BannerImage from '@/../public/img/Banner-image-cropped.png';
-import BannerImage from './banner-image';
-import Image from 'next/image';
 import Link from 'next/link';
-import { CldImage } from 'next-cloudinary';
+import BannerImage from './banner-image';
 
 function HeroButton({
   href,
