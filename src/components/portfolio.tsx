@@ -171,6 +171,7 @@ function PortfolioCard({ project }: { project: any }) {
           fill
           placeholder="blur"
           alt={project.altText}
+          loading="lazy"
         />
         <div className="relative z-10 flex h-full flex-col justify-center rounded-[3px] p-4 text-center transition duration-600 ease-in-out group-hover:bg-black/80">
           <h3 className="font-dosis text-3xl tracking-[.18rem] text-transparent [text-wrap:balance] group-hover:text-white">
