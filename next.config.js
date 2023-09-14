@@ -3,28 +3,31 @@ const { withContentlayer } = require('next-contentlayer');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {},
-  reactStrictMode: false,
-  poweredByHeader: false,
+  // reactStrictMode: false,
+  // poweredByHeader: false,
   trailingSlash: true,
-  headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: securityHeaders,
-      },
-    ];
+  // headers() {
+  //   return [
+  //     {
+  //       source: '/(.*)',
+  //       headers: securityHeaders,
+  //     },
+  //   ];
+  // },
+  images: {
+    domains: ['res.cloudinary.com', 'asset.cloudinary.com/'],
   },
 };
 
 const ContentSecurityPolicy = `
-  default-src 'self'  vercel.live;
-  script-src 'self' https://localhost:12719 'unsafe-eval' 'unsafe-inline' va.vercel-scripts.com cdn.vercel-insights.com vercel.live https://www.youtube.com https://imgur.com/;
-  frame-src youtube.com www.youtube.com https://imgur.com/;
-  style-src 'self' 'unsafe-inline';
-  img-src * blob: data:;
-  media-src 'none';
-  connect-src *;
-  font-src 'self';
+//   default-src 'self'  vercel.live;
+//   script-src 'self' https://localhost:12719 'unsafe-eval' 'unsafe-inline' va.vercel-scripts.com cdn.vercel-insights.com vercel.live https://www.youtube.com https://imgur.com/;
+//   frame-src youtube.com www.youtube.com https://imgur.com/;
+//   style-src 'self' 'unsafe-inline';
+//   img-src * blob: data:;
+//   media-src 'none';
+//   connect-src *;
+//   font-src 'self';
 `;
 
 const securityHeaders = [
