@@ -9,6 +9,7 @@ import { allBlogs } from 'contentlayer/generated';
 import { cx } from 'cva.config';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import '../../../styles/mdx.css';
 
 function getPost(params: any) {
   return allBlogs.find((post) => post.slug === params.slug);

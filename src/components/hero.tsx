@@ -1,8 +1,9 @@
 // src/components/hero.tsx
+
+import 'server-only';
 import BannerImage from '@/../public/img/Banner-image-cropped.png';
 import Image from 'next/image';
 import Link from 'next/link';
-import 'server-only';
 
 function HeroButton({
   href,

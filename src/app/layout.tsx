@@ -1,11 +1,10 @@
 import 'server-only';
 
-import { Analytics } from '@vercel/analytics/react';
 import RootLayout from '@/components/root-layout';
+import { Analytics } from '@vercel/analytics/react';
 import { Metadata } from 'next';
 import { Dosis, Inter, Open_Sans } from 'next/font/google';
 import '../styles/globals.css';
-import '../styles/mdx.css';
 
 const inter = Inter({
   subsets: ['latin'],
