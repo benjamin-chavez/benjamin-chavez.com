@@ -1,18 +1,16 @@
 ---
 # src/content/how-to-create-new-express-application.md
  # # How To Create A Basic Express Typescript Web Application
-title: 'How to Create a New Express Application'
+title: 'Step-by-Step Guide: Setting Up an Express.js TypeScript Web App"'
 author: 'Ben Chavez'
-description: 'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.'
-summary: 'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.'
+description: 'Step-by-step guide on setting up a new Express web application with TypeScript. Learn the essentials from initializing the project to configuring the server.'
+summary: 'Ben Chavez presents a comprehensive tutorial on creating a new Express web application using TypeScript. Dive into the initial setup, directory structures, and essential configurations to get your web application up and running.'
 publishedAt: '2023-09-13'
 updatedAt: '2026-09-13'
 ---
 
 
-{/* # How to Create a New Express Application */}
-
-## Step 1: Create A New Project
+## 1: Create A New Directory for your application
 
   Create a new directory for our Express server.
   ```bash
@@ -30,7 +28,7 @@ updatedAt: '2026-09-13'
   ```
 
 
-## Step 2: Add The Project Dependencies
+## 2: Add The Project Dependencies
 
   Install the Express Framework
 
@@ -56,7 +54,7 @@ updatedAt: '2026-09-13'
   +  "outDir": "./dist",      /* Specify an output folder
   ```
 
-## Step 3: Write your Express Server:
+## 3: Write your Express Server:
 
   Create a new `src` folder.
   ```bash
@@ -89,7 +87,7 @@ updatedAt: '2026-09-13'
   ```
 
 
-## Step 4: Run Your New Express Server
+## 4: Run Your New Express Server
 
   Compile your `typscript` code. The compiled code will be saved in the `./dist` directory from [step 2](#) above.
   ```bash
@@ -101,7 +99,7 @@ updatedAt: '2026-09-13'
   node ./dist/app.js
   ```
 
-## Step 5: Add A Route To Return Data
+## 5: Add Endpoint to Some Return Data
 
   Let's create a new route so that we can serve up some data. Since our data object is made up of different members of The Beatles, we will call our route `/api/beatles`
   ```ts showLineNumbers

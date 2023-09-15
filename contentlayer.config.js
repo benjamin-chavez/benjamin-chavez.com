@@ -8,15 +8,12 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkCodeTitles from 'remark-flexible-code-titles';
 import readingTime from 'reading-time';
-import attachRawStringToCodeContainers from './src/lib/mdxPlugins/attachRawStringToCodeContainers.ts';
-import attachMetadataProperties from './src/lib/mdxPlugins/attachMetadataProperties.ts';
 import { REMARK_CODE_TITLE_TAG_NAME } from './constants.ts';
-// import {
-//   attachRawStringToCodeContainers,
-//   attachMetadataProperties,
-// } from 'rehype-code-copy';
+import {
+  rehypeAttachRawStringsToCodeContainer,
+  rehypeEnrichCodeContainerMetadata,
+} from 'rehype-clipboard-prep-code';
 
-// const THEME_PATH = './src/styles/forest-focus-theme.json';
 const THEME_PATH = './src/styles/greenery-theme.json';
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
@@ -75,14 +72,12 @@ export default makeSource({
       ],
     ],
     rehypePlugins: [
-      attachRawStringToCodeContainers,
+      rehypeAttachRawStringsToCodeContainer,
       rehypeSlug,
-      // [rehypePrismPlus, { ignoreMissing: true }],
       [
         rehypePrettyCode,
         {
           theme: JSON.parse(readFileSync(THEME_PATH, 'utf-8')),
-          // theme: 'github-light',
           onVisitLine(node) {
             // Prevent lines from collapsing in `display: grid` mode, and allow empty
             // lines to be copy/pasted
@@ -98,7 +93,7 @@ export default makeSource({
           },
         },
       ],
-      attachMetadataProperties,
+      rehypeEnrichCodeContainerMetadata,
       [
         rehypeAutolinkHeadings,
         {
