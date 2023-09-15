@@ -43,5 +43,6 @@ Finally, open [http://localhost:3000](http://localhost:3000) in your browser to 
 
 - `pnpm run start`
   - Runs a local copy of the production build on [http://localhost:3000](http://localhost:3000)
+
 - `pnpm run lint`
   - Checks styling throughout codebase
