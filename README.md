@@ -21,4 +21,4 @@
 
 ## License
 
-[MIT]([https://github.com/benjamin-chavez/rehype-clipboard-prep-code/blob/master/LICENSE](https://github.com/benjamin-chavez/benjamin-chavez.com/blob/master/LICENSE)https://github.com/benjamin-chavez/benjamin-chavez.com/blob/master/LICENSE)
+[MIT](https://github.com/benjamin-chavez/benjamin-chavez.com/blob/master/LICENSE)
