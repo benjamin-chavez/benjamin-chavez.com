@@ -1,12 +1,13 @@
 # benjamin-chavez.com
 
-## Getting Started
-
-First, run the development server:
+## Running Locally
 
 ```bash
+git clone git@github.com:benjamin-chavez/benjamin-chavez.com.git
+cd benjamin-chavez.com
+pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the locally running site.
 
