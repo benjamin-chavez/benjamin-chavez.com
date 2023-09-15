@@ -12,6 +12,7 @@ First, clone the repo:
 git clone git@github.com:benjamin-chavez/benjamin-chavez.com.git
 cd benjamin-chavez.com
 ```
+
 Next, install the npm dependencies:
 ```bash
 pnpm install
@@ -23,7 +24,6 @@ cp .env.example .env.local
 ```
 
 Next, run the development server:
-
 ```bash
 pnpm dev
 ```
