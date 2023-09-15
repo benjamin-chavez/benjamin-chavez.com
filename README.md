@@ -17,3 +17,8 @@
     ```
 
  2. Open [http://localhost:3000](http://localhost:3000) with your browser to see the locally running site.
+
+
+## License
+
+[MIT]([https://github.com/benjamin-chavez/rehype-clipboard-prep-code/blob/master/LICENSE](https://github.com/benjamin-chavez/benjamin-chavez.com/blob/master/LICENSE)https://github.com/benjamin-chavez/benjamin-chavez.com/blob/master/LICENSE)
