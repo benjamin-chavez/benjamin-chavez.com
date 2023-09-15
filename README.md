@@ -7,11 +7,13 @@
 
 ## Running Locally
 
-```bash
-git clone git@github.com:benjamin-chavez/benjamin-chavez.com.git
-cd benjamin-chavez.com
-pnpm install
-pnpm dev
-```
+ 1. Clone the repo and install the dependencies
+   
+    ```bash
+    git clone git@github.com:benjamin-chavez/benjamin-chavez.com.git
+    cd benjamin-chavez.com
+    pnpm install
+    pnpm dev
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the locally running site.
+ 2. Open [http://localhost:3000](http://localhost:3000) with your browser to see the locally running site.
