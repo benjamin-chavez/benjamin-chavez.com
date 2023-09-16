@@ -16,15 +16,6 @@ export default function BannerImage() {
         quality={100}
         placeholder="blur"
       /> */}
-      {/* <CldImage
-        deliveryType="fetch"
-        width="3000"
-        height="657"
-        className="absolute top-0 -z-20 aspect-auto h-full w-full object-cover md:fixed  lg:top-0 xl:top-4 2xl:top-9"
-        src="Banner-image-cropped_fiuipi"
-        // sizes="100vw"
-        alt="Description of my image"
-      /> */}
       <CldImage
         width="3000"
         height="657"
@@ -32,6 +23,7 @@ export default function BannerImage() {
         src="Banner-image-cropped_fiuipi"
         alt={'Benjamin Chavez Full Stack Developer'}
         sizes="100vw"
+        format="avif"
         // loading="lazy"
         // sizes="(min-width: 3000px ) 50vw,
         //        (min-width: 3000px) 33vw,
