@@ -76,7 +76,8 @@
   @apply mt-6 rounded-md border border-gray-700 bg-[#1F2937] bg-opacity-90 p-0;
 }
 
-p > code {
+p > code,
+li > code {
   @apply rounded border bg-gray-100 px-1;
   @apply !text-[13px] !font-normal !text-[#777777];
   @apply !m-0 whitespace-nowrap  !rounded-md !bg-[#83a06c] !bg-opacity-50 !px-[.4em] !py-[.2em] !text-gray-600;

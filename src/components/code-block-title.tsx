@@ -1,6 +1,6 @@
 // src/components/code-block-title.tsx
 
-import 'server-only';
+// import 'server-only';
 import CodeCopyButton from './code-copy-button';
 
 const CodeBlockTitle = ({ ...props }) => {

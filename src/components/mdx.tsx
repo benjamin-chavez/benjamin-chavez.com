@@ -1,21 +1,19 @@
 // src/components/mdx.tsx
 // import 'server-only';
+'use client';
 
-import { useMDXComponent } from 'next-contentlayer/hooks';
-import Image from 'next/image';
-// import { cx } from 'cva.config';
-
-import CodeCopyButton from './code-copy-button';
-import CodeBlockTitle from './code-block-title';
 import clsx from 'clsx';
 import { cx } from 'cva.config';
+import { useMDXComponent } from 'next-contentlayer/hooks';
+import Image from 'next/image';
+import CodeBlockTitle from './code-block-title';
+import CodeCopyButton from './code-copy-button';
 
 type MdxComponentProps = {
   className: string;
 };
 
 const mdxComponents = {
-  Image,
   h2: ({ className, ...props }: MdxComponentProps) => (
     <h2
       className={clsx(
@@ -72,7 +70,34 @@ const mdxComponents = {
       {...props}
     />
   ),
-  pre: ({ className, ...props }: any) => (
+  ul: ({ className, ...props }: MdxComponentProps) => (
+    <ul
+      className={cx(
+        'list-disc font-open-sans text-[0.94rem] text-[#777777]',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  ol: ({ className, ...props }: MdxComponentProps) => (
+    <ol
+      className={cx(
+        'list-decimal font-open-sans text-[0.94rem]  text-[#777777]',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  li: ({ className, ...props }: MdxComponentProps) => (
+    <li
+      className={cx(
+        'mt-2 font-open-sans text-[0.94rem]  text-[#777777]',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  pre: ({ className, ...props }: MdxComponentProps) => (
     <pre
       // !bg-transparent
       className={clsx(
@@ -87,7 +112,6 @@ const mdxComponents = {
       {props.children}
     </pre>
   ),
-
   code: ({ className, ...props }: any) => (
     <code
       className={cx(
@@ -98,6 +122,7 @@ const mdxComponents = {
       {...props}
     />
   ),
+  Image,
   CodeBlockTitle,
 };
 

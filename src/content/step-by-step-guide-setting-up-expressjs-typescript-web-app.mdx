@@ -1,335 +1,344 @@
 ---
 # src/content/how-to-create-new-express-application.md
- # # How To Create A Basic Express Typescript Web Application
-title: 'Step-by-Step Guide: Setting Up an Express.js TypeScript Web App"'
+# # How To Create A Basic Express Typescript Web Application
+title: 'Step-by-Step Guide: Setting Up an Express.js TypeScript Web App'
 author: 'Ben Chavez'
 description: 'Step-by-step guide on setting up a new Express web application with TypeScript. Learn the essentials from initializing the project to configuring the server.'
 summary: 'Ben Chavez presents a comprehensive tutorial on creating a new Express web application using TypeScript. Dive into the initial setup, directory structures, and essential configurations to get your web application up and running.'
 publishedAt: '2023-09-13'
-updatedAt: '2026-09-13'
+updatedAt: '2023-10-10'
 ---
-
 
 ## 1: Create A New Directory for your application
 
-  Create a new directory for our Express server.
-  ```bash
-  mkdir express-api
-  ```
+Create a new directory for our Express server.
 
-  Change your directory so that you are inside of the newly created folder
-  ```bash
-  cd express-api
-  ```
+```bash
+mkdir express-api
+```
 
-  Initialize your `package.json` file.
-  ```bash
-  pnpm init
-  ```
+Change your directory so that you are inside of the newly created folder
 
+```bash
+cd express-api
+```
+
+Initialize your `package.json` file.
+
+```bash
+pnpm init
+```
 
 ## 2: Add The Project Dependencies
 
-  Install the Express Framework
+Install the Express Framework
 
+```bash
+pnpm i express
+```
 
-  ```bash
-  pnpm i express
-  ```
+Install Typescript
 
-  Install Typescript
+```bash
+pnpm i -D typescript @types/express @types/node
+```
 
-  ```bash
-  pnpm i -D typescript @types/express @types/node
-  ```
+Initialize your `tsconfig.json` file.
 
-  Initialize your `tsconfig.json` file.
-  ```bash
-  pnpm tsc --init
-  ```
+```bash
+pnpm tsc --init
+```
 
-  Inside of the newly creates `tsconfig.json` file, declare your `outDir`.
-  ```diff showLineNumbers
-  -  // "outDir": "./",       /* Specify an output folder
-  +  "outDir": "./dist",      /* Specify an output folder
-  ```
+Inside of the newly creates `tsconfig.json` file, declare your `outDir`.
+
+```diff showLineNumbers
+-  // "outDir": "./",       /* Specify an output folder
++  "outDir": "./dist",      /* Specify an output folder
+```
 
 ## 3: Write your Express Server:
 
-  Create a new `src` folder.
-  ```bash
-  mkdir src
-  ```
+Create a new `src` folder.
 
-  Create your `app.ts` file. This is where your server code will live.
-  ```bash showLineNumbers
-  touch src/app.ts
-  ```
+```bash
+mkdir src
+```
 
-  Add your server code:
+Create your `app.ts` file. This is where your server code will live.
 
-  ```ruby:express-api/src/app.ts {1, 3-4} showLineNumbers
-  import express from 'express';
+```bash showLineNumbers
+touch src/app.ts
+```
 
-  const PORT = 5000;
+Add your server code:
 
-  const app = express();
+```ruby:express-api/src/app.ts {1, 3-4} showLineNumbers
+import express from 'express';
 
-  app.get('/api', (req, res) => {
-    res.send('Server Running...');
-  });
+const PORT = 5000;
 
-  app.listen(PORT, () => {
-    console.log(`Server listening at http://localhost:${PORT}/api...`);
-  });
+const app = express();
 
-  export default app;
-  ```
+app.get('/api', (req, res) => {
+  res.send('Server Running...');
+});
 
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}/api...`);
+});
+
+export default app;
+```
 
 ## 4: Run Your New Express Server
 
-  Compile your `typscript` code. The compiled code will be saved in the `./dist` directory from [step 2](#) above.
-  ```bash
-  pnpm tsc
-  ```
+Compile your `typscript` code. The compiled code will be saved in the `./dist` directory from [step 2](#) above.
 
-  Run the compiled server code
-  ```bash
-  node ./dist/app.js
-  ```
+```bash
+pnpm tsc
+```
+
+Run the compiled server code
+
+```bash
+node ./dist/app.js
+```
 
 ## 5: Add Endpoint to Some Return Data
 
-  Let's create a new route so that we can serve up some data. Since our data object is made up of different members of The Beatles, we will call our route `/api/beatles`
-  ```ts showLineNumbers
-  app.get('/api/beatles', (req, res) => {
-    const data = {
-      title: 'The Beatles',
-      beatles: [
-        {
-          'first name': 'John',
-          'last name': 'Lennon',
-          instrument: 'Guitar',
-        },
-        {
-          'first name': 'Paul',
-          'last name': 'McCartney',
-          instrument: 'Bass Guitar',
-        },
-      ],
-    };
+Let's create a new route so that we can serve up some data. Since our data object is made up of different members of The Beatles, we will call our route `/api/beatles`
 
-    res.json(data);
-  });
-  ```
+```ts showLineNumbers
+app.get('/api/beatles', (req, res) => {
+  const data = {
+    title: 'The Beatles',
+    beatles: [
+      {
+        'first name': 'John',
+        'last name': 'Lennon',
+        instrument: 'Guitar',
+      },
+      {
+        'first name': 'Paul',
+        'last name': 'McCartney',
+        instrument: 'Bass Guitar',
+      },
+    ],
+  };
 
-  The fully updated file will look like this:
+  res.json(data);
+});
+```
 
-  ```ts:express-api/app.ts showLineNumbers
-  import express from 'express';
+The fully updated file will look like this:
 
-  const PORT = 5000;
+```ts:express-api/app.ts showLineNumbers
+import express from 'express';
 
-  const app = express();
+const PORT = 5000;
 
-
-  app.get('/api', (req, res) => {
-    res.send('Server Running...');
-  });
-
-  app.get('/api/beatles', (req, res) => {
-    const data = {
-      title: 'The Beatles',
-      beatles: [
-        {
-          'first name': 'John',
-          'last name': 'Lennon',
-          instrument: 'Guitar',
-        },
-        {
-          'first name': 'Paul',
-          'last name': 'McCartney',
-          instrument: 'Bass Guitar',
-        }
-      ],
-    };
-
-    res.json(data);
-  });
-
-  app.listen(PORT, () => {
-    console.log(`Server listening at http://localhost:${PORT}/api...`);
-  });
-
-  export default app;
-
-  ```
-
-  Let's repeat [step 4]() above by running:
-  ```bash
-  pnpm tsc
-  node ./dist/app.js
-  ```
-
-  Now, if you go to [http://localhost:5000/api/beatles](http://localhost:5000/api/beatles), you will see that our Beatles data is being served for us!
+const app = express();
 
 
-  Next, let's see what happens if we add one more Beatle to our data object. Without stopping the server let's go ahead and make the following update:
+app.get('/api', (req, res) => {
+  res.send('Server Running...');
+});
 
-  ```ts:express-api/app.ts showLineNumbers
-  import express from 'express';
+app.get('/api/beatles', (req, res) => {
+  const data = {
+    title: 'The Beatles',
+    beatles: [
+      {
+        'first name': 'John',
+        'last name': 'Lennon',
+        instrument: 'Guitar',
+      },
+      {
+        'first name': 'Paul',
+        'last name': 'McCartney',
+        instrument: 'Bass Guitar',
+      }
+    ],
+  };
 
-  const PORT = 5000;
+  res.json(data);
+});
 
-  const app = express();
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}/api...`);
+});
 
-  app.get('/api', (req, res) => {
-    res.send('Server Running...');
-  });
+export default app;
 
-  app.get('/api/beatles', (req, res) => {
-    const data = {
-      title: 'The Beatles',
-      beatles: [
-        {
-          'first name': 'John',
-          'last name': 'Lennon',
-          instrument: 'Guitar',
-        },
-        {
-          'first name': 'Paul',
-          'last name': 'McCartney',
-          instrument: 'Bass Guitar',
-        }
-      ],
-    };
+```
 
-    res.json(data);
-  });
+Let's repeat [step 4]() above by running:
 
-  app.listen(PORT, () => {
-    console.log(`Server listening at http://localhost:${PORT}/api...`);
-  });
+```bash
+pnpm tsc
+node ./dist/app.js
+```
 
-  export default app;
-  ```
+Now, if you go to [http://localhost:5000/api/beatles](http://localhost:5000/api/beatles), you will see that our Beatles data is being served for us!
 
-  But wait... If you look back to [http://localhost:5000/api/beatles](http://localhost:5000/api/beatles), our beatles data didn't change, we don't have our third Beatle!
+Next, let's see what happens if we add one more Beatle to our data object. Without stopping the server let's go ahead and make the following update:
 
+```ts:express-api/app.ts showLineNumbers
+import express from 'express';
+
+const PORT = 5000;
+
+const app = express();
+
+app.get('/api', (req, res) => {
+  res.send('Server Running...');
+});
+
+app.get('/api/beatles', (req, res) => {
+  const data = {
+    title: 'The Beatles',
+    beatles: [
+      {
+        'first name': 'John',
+        'last name': 'Lennon',
+        instrument: 'Guitar',
+      },
+      {
+        'first name': 'Paul',
+        'last name': 'McCartney',
+        instrument: 'Bass Guitar',
+      }
+    ],
+  };
+
+  res.json(data);
+});
+
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}/api...`);
+});
+
+export default app;
+```
+
+But wait... If you look back to [http://localhost:5000/api/beatles](http://localhost:5000/api/beatles), our beatles data didn't change, we don't have our third Beatle!
 
 Step 6: Add hot reloading
 
-  We can fix this by adding some additional npm packages to help us watch our code for changes.
+We can fix this by adding some additional npm packages to help us watch our code for changes.
 
-  Go ahead and stop your server by hitting `ctrl-c` or `ctrl-d` on your keyboard.
+Go ahead and stop your server by hitting `ctrl-c` or `ctrl-d` on your keyboard.
 
-  Add `nodemon` and `ts-node`
+Add `nodemon` and `ts-node`
 
-  ```bash
-  pnpm i -D nodemon ts-node
-  ```
+```bash
+pnpm i -D nodemon ts-node
+```
 
-  Next, open up you package.json and add the following `start` script. We are going to just delete the `test` script, but you can leave it if you prefer:
+Next, open up you package.json and add the following `start` script. We are going to just delete the `test` script, but you can leave it if you prefer:
 
-  ```json:express-api/package.json
-  "scripts": {
-    "start": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/app.ts'"
-  },
-  ```
+```json:express-api/package.json
+"scripts": {
+  "start": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/app.ts'"
+},
+```
 
-  Let's go ahead and run our server once more.
-  ```bash
-  pnpm start
-  ```
+Let's go ahead and run our server once more.
 
-  You will see the following in your terminal:
-  ```bash
-  ➜  express-api pnpm start
+```bash
+pnpm start
+```
 
-  > express-api@1.0.0 start /home/benchavez/Code (Ubuntu VM)/Projects/delete-me/express-api
-  > nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/app.ts'
+You will see the following in your terminal:
 
-  [nodemon] 3.0.1
-  [nodemon] to restart at any time, enter `rs`
-  [nodemon] watching path(s): src/**
-  [nodemon] watching extensions: ts,json
-  [nodemon] starting `ts-node src/app.ts`
-  Server listening at http://localhost:5000/api...
-  ```
+```bash
+➜  express-api pnpm start
 
-  Now, if you go back to  [http://localhost:5000/api/beatles](http://localhost:5000/api/beatles), you will see all three of our Beatles.
+> express-api@1.0.0 start /home/benchavez/Code (Ubuntu VM)/Projects/delete-me/express-api
+> nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/app.ts'
 
-  To make sure that our server code is actually hot-reloading, let's add one more Beatle to our data object.
+[nodemon] 3.0.1
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): src/**
+[nodemon] watching extensions: ts,json
+[nodemon] starting `ts-node src/app.ts`
+Server listening at http://localhost:5000/api...
+```
 
-  Go ahead and add
-  ```json:
-  {
-    'first name': 'Stag',
-    'last name': 'Beetle',
-    instrument: 'Mandible Harp',
-  }
-  ```
+Now, if you go back to [http://localhost:5000/api/beatles](http://localhost:5000/api/beatles), you will see all three of our Beatles.
 
-  Your updated server code should now look like this:
-  ```ts:express-api/src/app.ts{35-39} showLineNumbers
-  import express from 'express';
+To make sure that our server code is actually hot-reloading, let's add one more Beatle to our data object.
 
-  const PORT = 5000;
+Go ahead and add
 
-  const app = express();
+```json:
+{
+  'first name': 'Stag',
+  'last name': 'Beetle',
+  instrument: 'Mandible Harp',
+}
+```
 
-  app.get('/api', (req, res) => {
-    res.send('Server Running...');
-  });
+Your updated server code should now look like this:
 
-  app.get('/api/beatles', (req, res) => {
-    const data = {
-      title: 'The Beatles',
-      beatles: [
-        {
-          'first name': 'John',
-          'last name': 'Lennon',
-          instrument: 'Guitar',
-        },
-        {
-          'first name': 'Paul',
-          'last name': 'McCartney',
-          instrument: 'Bass Guitar',
-        },
-        {
-          'first name': 'George',
-          'last name': 'Harrison',
-          instrument: 'Lead Guitar',
-        },
-        {
-          'first name': 'Ringo',
-          'last name': 'Starr',
-          instrument: 'Drums',
-        },
-        {
-          'first name': 'Stag',
-          'last name': 'Beetle',
-          instrument: 'Mandible Harp',
-        },
-      ],
-    };
-    res.json(data);
-  });
+```ts:express-api/src/app.ts{35-39} showLineNumbers
+import express from 'express';
 
-  app.listen(PORT, () => {
-    console.log(`Server listening at http://localhost:${PORT}/api.`);
-  });
+const PORT = 5000;
 
-  export default app;
-  ```
+const app = express();
 
-  If you go back to [http://localhost:5000/api/beatles](http://localhost:5000/api/beatles) one last time, then you will see that unlike the last time we added a Beatle, our new beatle has been added to our api route without having to stop our server!
+app.get('/api', (req, res) => {
+  res.send('Server Running...');
+});
+
+app.get('/api/beatles', (req, res) => {
+  const data = {
+    title: 'The Beatles',
+    beatles: [
+      {
+        'first name': 'John',
+        'last name': 'Lennon',
+        instrument: 'Guitar',
+      },
+      {
+        'first name': 'Paul',
+        'last name': 'McCartney',
+        instrument: 'Bass Guitar',
+      },
+      {
+        'first name': 'George',
+        'last name': 'Harrison',
+        instrument: 'Lead Guitar',
+      },
+      {
+        'first name': 'Ringo',
+        'last name': 'Starr',
+        instrument: 'Drums',
+      },
+      {
+        'first name': 'Stag',
+        'last name': 'Beetle',
+        instrument: 'Mandible Harp',
+      },
+    ],
+  };
+  res.json(data);
+});
+
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}/api.`);
+});
+
+export default app;
+```
+
+If you go back to [http://localhost:5000/api/beatles](http://localhost:5000/api/beatles) one last time, then you will see that unlike the last time we added a Beatle, our new beatle has been added to our api route without having to stop our server!
 
 ## Conclusion
 
-  Note, in a typical express server, you wouldn't have your data sitting dirrectly in your route like we did here.
+Note, in a typical express server, you wouldn't have your data sitting dirrectly in your route like we did here.
 
-  The full code repository can be found at [github.com/benjamin-chavez/node-pg-knex-passport-template](https://github.com/benjamin-chavez/node-pg-knex-passport-template).
+The full code repository can be found at [github.com/benjamin-chavez/node-pg-knex-passport-template](https://github.com/benjamin-chavez/node-pg-knex-passport-template).
 
-  If you found this post useful, then stay tuned for more posts as I document my journey building a multi-vendor marketplace for music producers.
+If you found this post useful, then stay tuned for more posts as I document my journey building a multi-vendor marketplace for music producers.
