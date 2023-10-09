@@ -122,7 +122,11 @@ const mdxComponents = {
       {...props}
     />
   ),
-  Image,
+  Image: ({ className, ...props }: any) => (
+    <div className="flex w-full justify-center">
+      <Image alt={props.alt} className="rounded-md" {...props} />
+    </div>
+  ),
   CodeBlockTitle,
 };
 
@@ -136,10 +140,8 @@ export function Mdx({ code, className }: MdxProps) {
 
   return (
     <div className={clsx('', className)}>
-      <article className=" prose max-w-none pb-20 prose-code:before:content-none prose-code:after:content-none">
-        {/* <article className="prose max-w-none"> */}
+      <article className=" prose mx-auto max-w-none pb-20 prose-code:before:content-none prose-code:after:content-none ">
         {/* @ts-ignore */}
-
         <Component components={{ ...mdxComponents }} />
       </article>
     </div>

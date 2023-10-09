@@ -3,8 +3,8 @@ title: 'Auth0 Express Next.js'
 author: 'Ben Chavez'
 description: 'this is the description'
 summary: An article about middleware.
-publishedAt: '2023-10-10'
-updatedAt: '2023-10-10'
+publishedAt: '2023-10-11'
+updatedAt: '2023-10-11'
 # image: '/images/backend/og.png'
 # ## Motivation
 ---
@@ -55,7 +55,12 @@ pnpm start
 
 Now, if you open your browser to [http://localhost:3000](http://localhost:3000) and [http://localhost:5000/api](http://localhost:5000/api), you will see the following:
 
-TODO: Insert Picture:
+<Image
+  src="/img/blog/auth0-nextjs-express/ss1.png"
+  width="718"
+  height="404"
+  alt="Screenshot"
+/>
 
 ## Declare Rewrites
 
@@ -87,7 +92,12 @@ Start up your frontend server again and go back to go to [http://localhost:3000/
 
 The `404` should be gone, and you should now see `Server Running...`:
 
-TODO: SS3
+<Image
+  src="/img/blog/auth0-nextjs-express/ss3.png"
+  width="718"
+  height="404"
+  alt="Screenshot"
+/>
 
 This message is coming directly from your backend because the `rewrite` has redirected our request from `http://localhost:3000/api` go `http://localhost:5000/api`.
 
@@ -113,7 +123,12 @@ export const config = {
 
 If you open your browser back to [http://localhost:3000](http://localhost:3000), you will be automatically redirected to the auth0 login screen.
 
-{/* TODO: Screenshot ss2 */}
+<Image
+  src="/img/blog/auth0-nextjs-express/ss2.png"
+  width="718"
+  height="404"
+  alt="Screenshot"
+/>
 
 This is because we have effectively protected all routes. The `withMiddlewareAuthRequired()` tells Next.js and Auth0 to require authentication and the `matcher: '/:path*',` tells Next.js which routes need to pass through the middleware, in our case all of them.
 
@@ -156,8 +171,6 @@ To remedy this, we need to add Authentication to the route directly in our Backe
 pnpm i express-jwt jwks-rsa
 ```
 
-{/* TODO: Fix formatting */}
-
 2. Create this middleware file `server/src/middleware/authMiddleware.ts` in your backend.
 
 ```ts:server/src/middleware/authMiddleware.ts showLineNumbers
@@ -190,13 +203,17 @@ import { checkJwt } from './middleware/authMiddleware';
 ...
 
 app.use('/api', checkJwt, routes);
-
 ...
 ```
 
 If we open back up to [http://localhost:5000/api](http://localhost:5000/api), we will see that our backend api routes are now protected as well.
 
-{/* TODO: SS4 */}
+<Image
+  src="/img/blog/auth0-nextjs-express/ss4.png"
+  width="718"
+  height="404"
+  alt="Screenshot"
+/>
 
 ## Securely passing Auth Tokens
 
@@ -382,7 +399,12 @@ export default function PrivatePage() {
 }
 ```
 
-{/* TODO: SS5 */}
+<Image
+  src="/img/blog/auth0-nextjs-express/ss5.png"
+  width="718"
+  height="404"
+  alt="Screenshot"
+/>
 
 ### Set Authentication Headers
 
@@ -471,8 +493,6 @@ export const config = {
 ```
 
 Now, if we go to our private page and click our `Call API` button, we will see the response data object being displayed on our `Private` page:
-
-{/* TODO: SS6 */}
 
 <Image
   src="/img/blog/auth0-nextjs-express/ss6.png"
