@@ -108,7 +108,9 @@ const mdxComponents = {
       )}
       {...props}
     >
+      {/* @ts-ignore */}
       <CodeCopyButton text={props.__rawstring__} />
+      {/* @ts-ignore */}
       {props.children}
     </pre>
   ),
