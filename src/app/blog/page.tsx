@@ -52,7 +52,7 @@ export default function Blog() {
                     {post.title}
                   </h3>
                   <p className="mt-3 break-inside-avoid-column font-open-sans text-[15px] font-light text-neutral-500">
-                    {post.description}
+                    {post.summary}
                   </p>
                 </div>
               </article>
