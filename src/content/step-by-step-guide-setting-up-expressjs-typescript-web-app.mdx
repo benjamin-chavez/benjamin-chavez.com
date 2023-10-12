@@ -3,8 +3,8 @@
 # # How To Create A Basic Express Typescript Web Application
 title: 'Step-by-Step Guide: Setting Up an Express.js TypeScript Web App'
 author: 'Ben Chavez'
-description: 'Step-by-step guide on setting up a new Express web application with TypeScript. Learn the essentials from initializing the project to configuring the server.'
-summary: 'Ben Chavez presents a comprehensive tutorial on creating a new Express web application using TypeScript. Dive into the initial setup, directory structures, and essential configurations to get your web application up and running.'
+description: 'Want to learn how to create a basic server using Express and Typescript? Look no further than this comprehensive guide. Follow along to create your own server and endpoints, and learn how to use hot reloading to watch for changes in code. Whether you're a beginner or just looking to expand your knowledge, this guide is a valuable resource for anyone interested in creating a basic Express Typescript web application.'
+summary: 'In this step-by-step guide, you will learn how to create a basic Express Typescript web application, from creating a new directory for the application to running the server. You will also learn how to add endpoints to return data and how to add hot reloading to watch for changes in code'
 publishedAt: '2023-09-13'
 updatedAt: '2023-10-10'
 ---
@@ -17,7 +17,7 @@ Create a new directory for our Express server.
 mkdir express-api
 ```
 
-Change your directory so that you are inside of the newly created folder
+Change your directory so that you are inside the newly created folder
 
 ```bash
 cd express-api
@@ -235,7 +235,7 @@ Add `nodemon` and `ts-node`
 pnpm i -D nodemon ts-node
 ```
 
-Next, open up you package.json and add the following `start` script. We are going to just delete the `test` script, but you can leave it if you prefer:
+Next, open up your package.json and add the following `start` script. We are going to just delete the `test` script, but you can leave it if you prefer:
 
 ```json:express-api/package.json
 "scripts": {
@@ -254,7 +254,7 @@ You will see the following in your terminal:
 ```bash
 ➜  express-api pnpm start
 
-> express-api@1.0.0 start /home/benchavez/Code (Ubuntu VM)/Projects/delete-me/express-api
+> express-api@1.0.0 start  /your/directory/path/your-project-name
 > nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/app.ts'
 
 [nodemon] 3.0.1
@@ -333,11 +333,11 @@ app.listen(PORT, () => {
 export default app;
 ```
 
-If you go back to [http://localhost:5000/api/beatles](http://localhost:5000/api/beatles) one last time, then you will see that unlike the last time we added a Beatle, our new beatle has been added to our api route without having to stop our server!
+If you go back to [http://localhost:5000/api/beatles](http://localhost:5000/api/beatles) one last time, then you will see that unlike the last time we added a Beatle, our new beatle has been added to our API route without having to stop our server!
 
 ## Conclusion
 
-Note, in a typical express server, you wouldn't have your data sitting dirrectly in your route like we did here.
+Note, in a typical express server, you wouldn't have your data sitting directly in your route like we did here.
 
 The full code repository can be found at [github.com/benjamin-chavez/node-pg-knex-passport-template](https://github.com/benjamin-chavez/node-pg-knex-passport-template).
 

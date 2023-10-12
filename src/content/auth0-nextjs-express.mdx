@@ -1,15 +1,16 @@
 ---
-title: 'Auth0 Express Next.js'
+title: 'Integrating Next.js with Express.js using Auth0 for Authentication'
 author: 'Ben Chavez'
-description: 'this is the description'
-summary: An article about middleware.
+description: 'Learn how to integrate a Next.js 13 frontend with a custom backend Express.js server API using Auth0 for authentication. This tutorial assumes some basic knowledge of Next.js and Express.js and that you have an Auth0 account set up.'
+summary: 'This article provides a step-by-step guide to integrating a Next.js 13 frontend with a custom backend Express.js server API using Auth0 for authentication. The article assumes some basic knowledge of Next.js and Express.js and that the reader has an Auth0 account set up. The tutorial covers topics such as rewrites, middleware, and more.'
+keywords: Next.js, Express.js, Auth0, Authentication, Integration, Rewrite, Middleware.
 publishedAt: '2024-10-10'
 updatedAt: '2024-10-10'
 ---
 
-In this post I am going to walk you through the process of integrating a Next.js 13 (Next.js App directory) frontend with a custom backend Express.js server API. In this code I will be using Auth0 for authentication, but the process will be similar for other auth providers.
+In this post, I am going to walk you through the process of integrating a Next.js 13 (Next.js App directory) frontend with a custom backend Express.js server API. In this code, I will be using Auth0 for authentication, but the process will be similar for other auth providers.
 
-Between Vercel's push towards serverless functions (No worries, I'm still vercel fanboy...), and the seemingly widespread adoption of tRPC by much of the Typescript community, I have found that the documentation on how to integrate your own backend API with the new Next.js app directory to be a bit sparse.
+Between Vercel's push towards serverless functions (No worries, I'm still a Vercel fanboy...), and the seemingly widespread adoption of tRPC by much of the Typescript community, I have found that the documentation on how to integrate your own backend API with the new Next.js app directory to be a bit sparse.
 
 Now in many cases, if you are using Next.js with Typescript, it probably makes sense to use serverless functions and if you want full type-safety, then it would make sense to use tRPC too.
 
@@ -19,9 +20,9 @@ However, in my case, there were a few reasons why I didn't want to use serverles
 2. I have yet to determine if this is unfounded, but I didn't really feel like working around cold starts as I expect my user base to start small and grow over time.
 3. If my application does gain traction, I didn't want to lock myself into using Typescript+node.js just because I implemented the MVP using tRPC.
 
-With that said, I do intend on learning those technologies in the future and advise you also have some good reasons if you are going to build your application with your own API server.
+With that said, I do intend on learning those technologies in the future and advise that you also have some good reasons if you are going to build your application with your own API server.
 
-I am going to assume that you have some basic knowledge of Next.js, Express.js, and that you have an Auth0 account set up. If not, here are some helpful resources to get you to that point:
+I am going to assume that you have some basic knowledge of Next.js and Express.js and that you have an Auth0 account set up. If not, here are some helpful resources to get you to that point:
 
 - Express.js:
   - [Step-by-step Guide: Setting Up An Express.js Typescript Web App](https://benjamin-chavez.com/blog/step-by-step-guide-setting-up-expressjs-typescript-web-app/)
@@ -31,20 +32,20 @@ I am going to assume that you have some basic knowledge of Next.js, Express.js, 
 
 Now, if you want to code along, you can find the starter code here: [GITHUBLINK](TODO:).
 
-In this example, I will have the express server stored in a `server` folder and the Next.js app in a `client` folder. I will be running them indivdually in their own terminals, but in a real project you will likely want to use something like [concurrently](https://www.npmjs.com/package/concurrently) or [TurboRepo](https://turbo.build/repo) so that you can run the two applications in parallel from the same terminal.
+In this example, I will have the express server stored in a `server` folder and the Next.js app in a `client` folder. I will be running them individually in their own terminals, but in a real project, you will likely want to use something like [concurrently](https://www.npmjs.com/package/concurrently) or [TurboRepo](https://turbo.build/repo) so that you can run the two applications in parallel from the same terminal.
 
 ## Start Application
 
-Open two separate terminals and start the frontend in one and the backend in the other:
+Open two separate terminals: start the frontend in one and the backend in the other.
 
-Start Next.js frontend App
+Start the Next.js frontend app
 
 ```bash
 cd client
 pnpm dev
 ```
 
-Start Express.js backend Server
+Start the Express.js backend server
 
 ```bash
 cd server
@@ -62,9 +63,9 @@ Now, if you open your browser to [http://localhost:3000](http://localhost:3000) 
 
 ## Declare Rewrites
 
-In Next.js a Rewrite allows us to redirect any incoming navigation or client requests.
+In Next.js a [rewrite](https://nextjs.org/docs/app/api-reference/next-config-js/rewrites) allows us to map any incoming navigation or client requests.
 
-We are going to use [Next.js rewrites](https://nextjs.org/docs/app/api-reference/next-config-js/rewrites) to map all incoming api requests over to our express server.
+We are going to use rewrites to map all incoming API requests over to our express server.
 
 Now, with both your frontend and backend running, go to [http://localhost:3000/api](http://localhost:3000/api) in your browser. You will see a `404 page not found` error.
 
@@ -86,7 +87,7 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-Start up your frontend server again and go back to go to [http://localhost:3000/api](http://localhost:3000/api) in your browser.
+Start up your frontend server again and <strong>go back to</strong> [http://localhost:3000/api](http://localhost:3000/api) in your browser.
 
 The `404` should be gone, and you should now see `Server Running...`:
 
@@ -97,16 +98,18 @@ The `404` should be gone, and you should now see `Server Running...`:
   alt="Screenshot"
 />
 
-This message is coming directly from your express server because our request to `http://localhost:3000/api` has been mapped over to `http://localhost:5000/api`.
+This message is coming directly from your **Express.js** server because our request to `http://localhost:3000/api` has been mapped over to `http://localhost:5000/api`.
 
-## Add Next.js Middlware
+## Add Next.js Middleware
 
 Rather than requiring authentication in each of our private pages or components, we will be implementing [Next.js Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware), which will allow us to specify the specific routes that we want to make private.
 
 {/* TODO: Cleanup */}
-There are several benefits to this approach. The first is that it will allow us to keep authentication and authorization handled client-side. This is as opposed to handling auth server-side in our express server. If we were to have the auth happen in our server, then we would be sending requests each time a user navigated to a new page and then we would have to wait for our server response before allowing the user to continue. You can imagine how this might become problematic.
+There are several benefits to this approach. The primary benefit is that it enables client-side handling of authentication and authorization, as opposed to server-side handling in our **Express.js** server. If we were to have the auth happen in our server, then we would be sending requests each time a user navigated to a new page and then we would have to wait for our server response before allowing the user to continue. You can imagine how this might become problematic.
 
-This approach allows us to keep our auth logic separate from our other applcation logic. This separation of concerns is a good design choice in that the modulatity reduces cognitive load and if later we decide to change auth managers, we only have to update one file as opposed to having to update every private page/component.
+This approach allows us to keep our auth logic separate from our other **application** logic. This separation of concerns is a good design choice as the **modularity** reduces cognitive load and if later we decide to change auth managers, we only have to update one file as opposed to having to update every private page/component.
+
+..."
 
 1. Create a new `client/src/middleware.ts` file and add the following contents:
 
@@ -120,7 +123,7 @@ export const config = {
 };
 ```
 
-If you open your browser back to [http://localhost:3000](http://localhost:3000), you will be automatically redirected to the auth0 login screen.
+If you open your browser back to [http://localhost:3000](http://localhost:3000), you will be automatically redirected to the **Auth0** login screen.
 
 <Image
   src="/img/blog/auth0-nextjs-express/ss2.png"
@@ -129,9 +132,9 @@ If you open your browser back to [http://localhost:3000](http://localhost:3000),
   alt="Screenshot"
 />
 
-This is because we have effectively protected all routes. The `withMiddlewareAuthRequired()` tells Next.js and Auth0 to require authentication for all requests passing through the middleware and the `matcher: '/:path*',` tells Next.js which route requests need to pass through the middleware, in our case all of them.
+This is because we have effectively protected all routes. The function `withMiddlewareAuthRequired()` informs Next.js and Auth0 that authentication is required for all requests processed by the middleware. Meanwhile, the pattern `matcher: '/:path*',` specifies which route requests should be processed by the middleware. In our case, it's all routes.
 
-If you login, you will again have access to all of the pages of our application.
+If you log in, you will again have access to all of the pages of our application.
 
 2. Define protected routes
 
@@ -149,21 +152,21 @@ export const config = {
 
 If you log out and go back to [http://localhost:3000](http://localhost:3000), you should once again be able to access both our `Home` and `Public` pages. Additionally, if you navigate to [http://localhost:3000/private](http://localhost:3000/private), you will be redirected to our login screen.
 
-**NOTE**: TODO: Next.js middlware only runs on navigated routes and API requests from client components. You cannot access the Next.js middleware from server components.
+**NOTE**: TODO: Next.js **middleware** only runs on navigated routes and API requests from client components. You cannot access the Next.js middleware from server components.
 
 ## Protecting Our API Routes
 
-If you navigate back to [http://localhost:3000/api](http://localhost:3000/api), you will notice that you need to be logged in to see our `Server Running...` response. This is because we passed our API routes to our middleware matcher with `'/api/:path*'`.
+If you return to [http://localhost:3000/api](http://localhost:3000/api), you will notice that you need to be logged in to see our `Server Running...` response. This is because we passed our API routes to our middleware matcher with `'/api/:path*'`.
 
-This is important because it stops unauthorized users from bypassing our security simply by hitting our api routes instead of our frontend UI.
+This is important as it prevents unauthorized users from bypassing our security simply by hitting our API routes instead of our frontend UI.
 
 However, there is still a massive security flaw in our design. If you navigate to [http://localhost:5000/api](http://localhost:5000/api), you will see that our route isn't actually protected.
 
-We know this because we are able to see the `Server Running...` response.
+We know this because we can see the `Server Running...` response.
 
 To remedy this, we need to add Authentication to the route directly in our Backend express API.
 
-1. In you Express.js server directory install the following npm packages:
+1. In your Express.js server directory, install the following npm packages:
 
 ```bash
 #  ENSURE YOU ARE IN YOUR SERVER DIRECTORY
@@ -194,9 +197,9 @@ export const checkJwt = jwt({
 });
 ```
 
-We will use this auth middleware in our backend to decrypt `JWT Authentication Tokens` that our express server recieves from our Next.js frontend.
+We will use this auth middleware in our backend to decrypt `JWT Authentication Tokens` that our Express.js server receives from our Next.js frontend.
 
-3. In your `server/src/app.ts` file import the auth middleware and add it your api route:
+3. In your `server/src/app.ts` file import the auth middleware and add it to your API route:
 
 ```ts:src/app.ts {1, 4} showLineNumbers
 import { checkJwt } from './middleware/authMiddleware';
@@ -206,7 +209,7 @@ app.use('/api', checkJwt, routes);
 ...
 ```
 
-If we open back up to [http://localhost:5000/api](http://localhost:5000/api), we will see that our backend api routes are now protected as well.
+If we open back up to [http://localhost:5000/api](http://localhost:5000/api), we will see that our backend API routes are now protected as well.
 
 <Image
   src="/img/blog/auth0-nextjs-express/ss4.png"
@@ -239,11 +242,11 @@ export async function getMyProducts() {
 }
 ```
 
-The issue is that client components cannot use `getAccessToken()`. We could, get the access token in a server component and pass it as props to our client component. That would work, but it isn't the most secure solution as we would be sending the auth token to the client.
+The issue is that client components cannot use `getAccessToken()`. We could get the access token in a server component and pass it as props to our client component. That would work, but it isn't the most secure solution as we would be sending the auth token to the client.
 
-The solution is to add the authToken to our API Request's headers in our frontend middleware before `rewriting` our requests to our backend API.
+A more secure solution is to add the authToken to our API Request's headers in our frontend middleware before `rewriting` our requests to our backend API.
 
-To set this up we will need to create a request that we can attach our authentication token to, because up to now we have been making requests manually in our browser.
+To set this up we will need to create a request that we can attach our authentication token to because up to now we have been making requests manually in our browser.
 
 1. Convert out `Private` page to a client component by adding the `'use client';` directive to the top of the file.
 
@@ -406,11 +409,11 @@ export default function PrivatePage() {
   alt="Screenshot"
 />
 
-### Set Authentication Headers
+## Set Authentication Headers
 
 Next, we will want to add our authentication token to the headers of our private request as it passes through our middleware.
 
-1. Create a middlware function that takes in a `NextRequest` object, copies the existing headers over to a new `NextResponse` object, and returns that `NextResponse` object:
+1. Create a middleware function that takes in a `NextRequest` object, copies the existing headers over to a new `NextResponse` object, and returns that `NextResponse` object:
 
 ```ts:client/src/middleware.ts {1-11} showLineNumbers
 export default withMiddlewareAuthRequired(function middleware(
@@ -501,8 +504,10 @@ Now, if we go to our private page and click our `Call API` button, we will see t
   alt="Screenshot"
 />
 
+In this article, we learned how to integrate a Next.js 13 frontend with a custom backend Express.js server API using Auth0 for authentication. We covered topics such as setting up a custom backend server, configuring Auth0 for authentication, and integrating the backend with the frontend using rewrites and middleware. By following the steps outlined in this tutorial, you should now have a solid understanding of how to integrate Next.js with Express.js using Auth0 for authentication.
+
 The final code for this post is saved in this GitHub repo. If you found this helpful, give the repo a star! ⭐
 
 The content in this post was something that I learned and implemented as part of the development of my startup `Audio Archive`, which is a multi-vendor marketplace, built with node.js, for music producers to buy and sell Digital Audio Workstation (DAW) files.
 
-If you enjoyed this post, stay tuned as I will continue documenting what I learn in the development of `Audio Archive`. Laslty, if you would like to see the WIP of that project you can find the code here: [github.com/benjamin-chavez/AudioArchive](https://github.com/benjamin-chavez/AudioArchive).
+If you enjoyed this post, stay tuned as I will continue documenting what I learn in the development of `Audio Archive`. Lastly, if you would like to see the WIP of that project you can find the code here: [github.com/benjamin-chavez/AudioArchive](https://github.com/benjamin-chavez/AudioArchive).
