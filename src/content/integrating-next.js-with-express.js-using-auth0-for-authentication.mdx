@@ -152,7 +152,13 @@ export const config = {
 
 If you log out and go back to [http://localhost:3000](http://localhost:3000), you should once again be able to access both our `Home` and `Public` pages. Additionally, if you navigate to [http://localhost:3000/private](http://localhost:3000/private), you will be redirected to our login screen.
 
-**NOTE**: TODO: Next.js **middleware** only runs on navigated routes and API requests from client components. You cannot access the Next.js middleware from server components.
+<Callout emoji="📝">
+
+You cannot access the Next.js middleware from server components.
+
+Next.js **middleware** only runs on _navigated routes_ and _API requests from client components_.
+
+</Callout>
 
 ## Protecting Our API Routes
 

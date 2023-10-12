@@ -97,6 +97,20 @@ const mdxComponents = {
       {...props}
     />
   ),
+  Callout: ({ className, ...props }: any) => (
+    // <code
+    //   className={cx(
+    // 'relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm',
+    //     'font-mono text-sm',
+    //     className,
+    //   )}
+    //   {...props}
+    // />
+    <div className="my-8 flex items-center rounded border border-gray-200 bg-[#F8F9FA] px-4 py-2 text-sm  text-[#777777]">
+      <div className="mr-4 flex w-4 items-center">{props.emoji}</div>
+      <div className=" w-full ">{props.children}</div>
+    </div>
+  ),
   pre: ({ className, ...props }: MdxComponentProps) => (
     <pre
       // !bg-transparent
