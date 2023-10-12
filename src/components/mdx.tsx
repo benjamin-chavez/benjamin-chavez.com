@@ -47,7 +47,7 @@ const mdxComponents = {
           className,
         )}
         {...props}
-        // target={isExternalLink ? '_blank' : '_self'}
+        target={isExternalLink ? '_blank' : '_self'}
         // rel={isExternalLink ? 'noopener noreferrer' : undefined}
       />
     );
