@@ -10,7 +10,7 @@ updatedAt: '2024-10-10'
 
 In this post, I am going to walk you through the process of integrating a Next.js 13 (Next.js App directory) frontend with a custom backend Express.js server API. I will be using Auth0 for authentication in this example, but the process would be similar for other auth providers.
 
-Between Vercel's push towards serverless functions (No worries, I'm still a Vercel fanboy...), and the seemingly widespread adoption of tRPC by much of the Typescript community, I have found that the documentation on how to integrate your own backend API with the new Next.js app directory to be a bit sparse.
+Between Vercel's push towards serverless functions (No worries, I'm still a Vercel fanboy. For now...), and the seemingly widespread adoption of tRPC by much of the Typescript community, I have found the documentation on how to integrate your own backend API with the new Next.js app directory to be a bit sparse.
 
 Now in many cases, if you are using Next.js with Typescript, it probably makes sense to use serverless functions and if you want full type-safety, then it would make sense to use tRPC too.
 
@@ -20,9 +20,9 @@ However, in my case, there were a few reasons why I didn't want to use serverles
 2. I have yet to determine if this is unfounded, but I didn't really feel like working around cold starts as I expect my user base to start small and grow over time.
 3. If my application does gain traction, I didn't want to lock myself into using Typescript+node.js just because I implemented the MVP using tRPC.
 
-With that said, I do intend on learning those technologies in the future and advise that you also have some good reasons if you are going to build your application with your own API server.
+With that said, I do intend on learning those technologies in the future and advise that you also have some good reasons if you are going to build your application with a traditional API server.
 
-I am going to assume that you have some basic knowledge of Next.js and Express.js and that you have an Auth0 account set up. If not, here are some helpful resources to get you to that point:
+I am going to assume that you have some basic knowledge of Next.js and Express.js and that you have an Auth0 account set up with a Next.js application. If not, here are some helpful resources to get you to that point:
 
 - Express.js:
   - [Creating A Typescript Express.Js Web Application With ES6 - Step-By-Step Guide](https://benjamin-chavez.com/blog/creating-a-typescript-express.js-web-application-with-es6-step-by-step-guide/)
@@ -30,27 +30,62 @@ I am going to assume that you have some basic knowledge of Next.js and Express.j
   - [A Comprehensive Guide to Next.js Authentication with Auth0](https://javascript.plainenglish.io/a-comprehensive-guide-to-next-js-authentication-with-auth0-c5af1e472fdb)
   - [Add Login to your Next.js application](https://auth0.com/docs/quickstart/webapp/nextjs/interactive)
 
-Now, if you want to code along, you can find the branch with the starter code [here on GitHub](https://github.com/benjamin-chavez/nextjs-express-auth0-template/branches).
+Now, if you want to code along, you can find the branch with the starter code on my GitHub [here ](https://github.com/benjamin-chavez/nextjs-express-auth0-template/tree/blog-post-starter-code).
 
-In this example, I will have the express server stored in a `server` folder and the Next.js app in a `client` folder. I will be running them individually in their own terminals, but in a real project, you will likely want to use something like [concurrently](https://www.npmjs.com/package/concurrently) or [TurboRepo](https://turbo.build/repo) so that you can run the two applications in parallel from the same terminal.
+In this example, I will have the express server stored in a `server` folder and the Next.js app in a `client` folder. You can run them individually in their own terminals, or in a single terminal using [concurrently](https://www.npmjs.com/package/concurrently) in the root directory.
 
 ## Start Application
 
-Open two separate terminals: start the frontend in one and the backend in the other.
+We will start by getting the base project running locally.
 
-Start the Next.js frontend app
-
-```bash
-cd client
-pnpm dev
-```
-
-Start the Express.js backend server
+1. Clone the starter code:
 
 ```bash
-cd server
-pnpm start
+git clone git@github.com:benjamin-chavez/nextjs-express-auth0-template.git
+cd nextjs-express-auth0-template
 ```
+
+2. Set up the Environment Variables:
+
+```bash
+cp ./client/.env.local.example ./client/.env.local
+cp ./server/.env.example ./server/.env
+```
+
+Be sure to update your Next.js environment variables with your Auth0 application. The update file should look something like this:
+
+```bash
+# client/.env.local
+
+AUTH0_SECRET='e2ebaf05e08f75b2eb3605ce28e6bf3ef0e68c54d9672ec87b4e69fae2f38460'
+AUTH0_BASE_URL='http://localhost:3000'
+AUTH0_ISSUER_BASE_URL='https://dev-mqyygar8pnsvarul.us.auth0.com'
+AUTH0_CLIENT_ID='oMv0Lmf1v2uTITiqQ67hhRJBL4XKdhO4'
+AUTH0_CLIENT_SECRET='I_CFaneP_CyYQ-WBvXzwVlZKjsv4qL9YzY-hE8FE9HrsDNNtCJJnyp5s0vtt_yg1'
+```
+
+3. Install the project dependencies:
+
+```bash
+# From the root directory
+pnpm i
+```
+
+4. Open two separate terminals: start the frontend in one and the backend in the other.
+
+   - Start the Next.js frontend app
+
+   ```bash
+    cd client
+    pnpm dev
+   ```
+
+   - Start the Express.js backend server
+
+   ```bash
+   cd server
+   pnpm start
+   ```
 
 Now, if you open your browser to [http://localhost:3000](http://localhost:3000) and [http://localhost:5000/api](http://localhost:5000/api), you will see the following:
 
@@ -100,6 +135,28 @@ The `404` should be gone, and you should now see `Server Running...`:
 
 This message is coming directly from your **Express.js** server because our request has been mapped from the source path of `http://localhost:3000/api` to the destination path of `http://localhost:5000/api`.
 
+Before we continue, we need to add one more rewrite rule so that our requests to the Auth0 API are excluded from being rewritten:
+
+```js:client/next.config.js {5-8} showLineNumbers
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/auth/:path',
+        destination: '/api/auth/:path*',
+      },
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:5000/api/:path*',
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;
+```
+
 ## Add Next.js Middleware
 
 Rather than requiring authentication in each of our private pages or components, we will be implementing [Next.js Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware). This will allow us to specify the specific routes that we want to make private.
@@ -111,18 +168,12 @@ This approach allows us to keep our auth logic separate from our other **applica
 
 1. Create a new `client/src/middleware.ts` file and add the following contents:
 
-```bash
-touch client/src/middleware.ts
-```
-
 ```ts:client/src/middleware.ts {} showLineNumbers
 import { withMiddlewareAuthRequired } from '@auth0/nextjs-auth0/edge';
 
 export default withMiddlewareAuthRequired();
 
-export const config = {
-  matcher: '/:path*',
-};
+export const config = {};
 ```
 
 If you open your browser back to [http://localhost:3000](http://localhost:3000), you will be automatically redirected to the **Auth0** login screen.
@@ -152,7 +203,7 @@ export const config = {
 };
 ```
 
-If you log out and go back to [http://localhost:3000](http://localhost:3000), you should once again have access to both our `Home` and `Public` pages. Additionally, if you navigate to [http://localhost:3000/private](http://localhost:3000/private), you will be redirected to our login screen.
+Ensure you are logged out and go back to [http://localhost:3000](http://localhost:3000), you should have access to both our `Home` and `Public` pages. Additionally, if you navigate to [http://localhost:3000/private](http://localhost:3000/private), you will once again be redirected to our login screen.
 
 <Callout emoji="📝">
 
@@ -162,18 +213,17 @@ Next.js **middleware** only runs on _navigated routes_ and _API requests from **
 
 </Callout>
 
-## Connecting our Express Server to Auth0
+## Protecting Our API Routes
 
-If you return to [http://localhost:3000/api](http://localhost:3000/api), you will see the following `Not Found` error:
+If you return to [http://localhost:3000/api](http://localhost:3000/api), you will notice that you need to be logged in to see our `Server Running...` response. This is because we passed our API routes to our middleware matcher with `'/api/:path*'`.
 
-<Image
-  src="/img/blog/auth0-nextjs-express/ss7.png"
-  width="718"
-  height="404"
-  alt="Screenshot"
-/>
+This is important as it prevents unauthorized users from bypassing our security simply by hitting our API routes instead of our frontend UI.
 
-This is because Auth0 doesn't know about our Express.js Server yet. Let's add our server to Auth0 and connect it to our Next.js app inside of Auth0.
+However, there is still a massive security flaw in our design. If you navigate to [http://localhost:5000/api](http://localhost:5000/api), you will see that our route isn't actually protected.
+
+We know this because we are able to see the `Server Running...` response.
+
+To remedy this, we need to add our API to Auth0 and add authentication to the route in our Express server code.
 
 1. In your Auth0 dashboard go to `Applications>APIs`.
 
@@ -184,7 +234,7 @@ This is because Auth0 doesn't know about our Express.js Server yet. Let's add ou
   alt="Screenshot"
 />
 
-2. Click the `+ Create API button` and update the form's Name and Identifier fields and click create:
+2. Click the `+ Create API button` and update the form's Name and Identifier fields before clicking create:
 
    - **Name:** Express.js Server
    - **Identifier:** http://localhost:5000/api
@@ -197,39 +247,40 @@ This is because Auth0 doesn't know about our Express.js Server yet. Let's add ou
   alt="Screenshot"
 />
 
-3. Update the Environment Variables
+3. Update your Environment Variables
+
+   - Copy the `AUTH0_ISSUER_BASE_URL` environment variable from the `client/.env.local` file and add it to `server/.env`
 
    - Create a new `AUTH0_AUDIENCE` env variable and set it equal to the identifer from the previous step:
 
-   - Copy the `AUTH0_ISSUER_BASE_URL` environment variable from `client/.env.local` and add it to `server/.env`
-
-```bash:server/.env
+```bash:server/.env {3,4} showLineNumbers
 PORT=5000
 
-AUTH0_ISSUER_BASE_URL='https://dev-q514l5sgo7t68du7.us.auth0.com'
+AUTH0_ISSUER_BASE_URL='https://dev-mqyygar8pnsvarul.us.auth0.com'
 AUTH0_AUDIENCE=http://localhost:5000/api
 ```
 
-```bash:client/.env.local
-AUTH0_SECRET=replace-with-your-own-secret-generated-by-running-openssl
-AUTH0_BASE_URL=http://localhost:3000
-AUTH0_ISSUER_BASE_URL='https://dev-q514l5sgo7t68du7.us.auth0.com'
-AUTH0_CLIENT_ID='25Y6cTzFPUAAoweiKcbc7Kd9Mc1OYnt5'
-AUTH0_CLIENT_SECRET='W1XJQNmn7AmU46v_GXsQ7WxntFnA59zof5Cx4fg-VRqruQPPBe-Hbtxk9UZHucjB'
+```bash:client/.env.local {16-17} showLineNumbers
+# Secret key for Auth0 - To generate, run `openssl rand -hex 32` in the command line
+AUTH0_SECRET='e2ebaf05e08f75b2eb3605ce28e6bf3ef0e68c54d9672ec87b4e69fae2f38460'
+
+# The base URL for your application
+AUTH0_BASE_URL='http://localhost:3000'
+
+# Your Auth0 tenant domain
+AUTH0_ISSUER_BASE_URL='https://dev-mqyygar8pnsvarul.us.auth0.com'
+
+# Your Auth0 client ID
+AUTH0_CLIENT_ID='Hdyjm0UaxA4siHztbgIdU5POnJlgfeLm'
+
+# Your Auth0 client secret
+AUTH0_CLIENT_SECRET='vZ1tRndqiVqLUD7UYFH2d4XWGQOw4jNjuj7Abd45BmMNlmCyaVNapERUE3r9KpsQ'
+
+# The audience that the Auth0 ID token is intended for
 AUTH0_AUDIENCE=http://localhost:5000/api
 ```
 
-## Protecting Our API Routes
-
-If you return to [http://localhost:3000/api](http://localhost:3000/api), you will notice that you need to be logged in to see our `Server Running...` response. This is because we passed our API routes to our middleware matcher with `'/api/:path*'`.
-
-This is important as it prevents unauthorized users from bypassing our security simply by hitting our API routes instead of our frontend UI.
-
-However, there is still a massive security flaw in our design. If you navigate to [http://localhost:5000/api](http://localhost:5000/api), you will see that our route isn't actually protected.
-
-We know this because we are able to see the `Server Running...` response.
-
-To remedy this, we need to add Authentication to the route directly in our Backend Express API.
+Now that we've added our API to Auth0 we can add authentication directly to our server routes.
 
 1. In your Express.js server directory, install the following npm packages:
 
@@ -272,7 +323,7 @@ import { checkJwt } from './middleware/authMiddleware';
 
 // Be sure to add the `checkJwt` middleware here:
 app.use('/api', checkJwt, routes);
-app.get('/api/routes', checkJwt, (req, res) => {
+app.get('/api/private-route', checkJwt, (req, res) => {
   res.status(200).send(listEndpoints(app));
 });
 ...
@@ -291,11 +342,11 @@ If we open back up to [http://localhost:5000/api](http://localhost:5000/api), we
 
 For this specifici example, adding CORS is not required because our API requests have been rewritten. TODO: essentially sidestepping TODO: a browser-enforced security measure and doesn't apply to server-to-server communication.
 
-Howerver, it is good practice to add CORS anyway so that we save our future selves from creating unnecesary bugs.
+However, it is good practice to add CORS so that we save our future selves from creating unnecesary bugs.
 
-1. Copy over the `AUTH0_BASE_URL` Environment variable from your next.js app's `.env.local` file into your Express Server's `.env` file:
+1. Copy over the `AUTH0_BASE_URL` Environment variable from your next.js app's `.env.local` file and paste it into your Express Server's `.env` file:
 
-```bash:server/.env showLineNumbers
+```bash:server/.env {5} showLineNumbers
 PORT=5000
 
 AUTH0_ISSUER_BASE_URL='https://dev-q514l5sgo7t68du7.us.auth0.com'
@@ -338,7 +389,7 @@ app.use(cookieParser());
 app.use(flash());
 
 app.use('/api', checkJwt, routes);
-app.get('/api/routes', checkJwt, (req, res) => {
+app.get('/api/private-route', checkJwt, (req, res) => {
   res.status(200).send(listEndpoints(app));
 });
 
@@ -377,7 +428,7 @@ The issue is that client components cannot use `getAccessToken()`. We _could_ ge
 
 A more secure solution is to add the authToken to our API Request's headers in our frontend middleware before `rewriting` our requests to our backend API.
 
-To set this up we will need to create a request that we can attach our authentication token to because up to now we have been making requests manually in our browser.
+Up to now, we have bean manually creating our requests in our browser. So to set this up we will need to create a request that we can attach our authentication token to.
 
 1. Convert the `Private` page to a client component by adding the `'use client';` directive to the top of the file.
 
@@ -403,7 +454,7 @@ export default function PrivatePage() {
     setState((previous) => ({ ...previous, isLoading: true }));
 
     try {
-      const response = await fetch('/api/routes');
+      const response = await fetch('/api/private-route');
       const data = await response.json();
 
       setState((previous) => ({
@@ -533,10 +584,7 @@ export default function PrivatePage() {
 }
 ```
 
-Now, back in your browser
-TODO:
-TODO:
-TODO:
+Now back in your browser, if you login and go to `http://localhost:3000/private`, you should see the updated Private page with the new `Call API` button.
 
 <Image
   src="/img/blog/auth0-nextjs-express/ss5.png"
@@ -649,18 +697,3 @@ The final code for this post is saved in this GitHub repo. If you found this hel
 The content in this post was something that I learned and implemented as part of the development of my startup `Audio Archive`, which is a multi-vendor marketplace, built with node.js, for music producers to buy and sell Digital Audio Workstation (DAW) files.
 
 If you enjoyed this post, stay tuned as I will continue documenting what I learn in the development of `Audio Archive`. Lastly, if you would like to see the WIP of that project you can find the code here: [github.com/benjamin-chavez/AudioArchive](https://github.com/benjamin-chavez/AudioArchive).
-
-{/_ TODO:
-async rewrites() {
-return [
-{
-source: '/api/auth/:path_',
-destination: '/api/auth/:path*',
-},
-{
-source: '/api/:path*',
-destination: 'http://localhost:5000/api/:path*',
-},
-];
-},
-*/}
