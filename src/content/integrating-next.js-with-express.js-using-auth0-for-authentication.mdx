@@ -30,7 +30,7 @@ I am going to assume that you have some basic knowledge of Next.js and Express.j
   - [A Comprehensive Guide to Next.js Authentication with Auth0](https://javascript.plainenglish.io/a-comprehensive-guide-to-next-js-authentication-with-auth0-c5af1e472fdb)
   - [Add Login to your Next.js application](https://auth0.com/docs/quickstart/webapp/nextjs/interactive)
 
-Now, if you want to code along, you can find the branch with the starter code on my GitHub [here ](https://github.com/benjamin-chavez/nextjs-express-auth0-template/tree/blog-post-starter-code).
+Now, if you want to code along, you can find the branch with the starter code on my GitHub [here](https://github.com/benjamin-chavez/nextjs-express-auth0-template/tree/blog-post-starter-code).
 
 In this example, I will have the express server stored in a `server` folder and the Next.js app in a `client` folder. You can run them individually in their own terminals, or in a single terminal using [concurrently](https://www.npmjs.com/package/concurrently) in the root directory.
 
@@ -41,7 +41,7 @@ We will start by getting the base project running locally.
 1. Clone the starter code:
 
 ```bash
-git clone git@github.com:benjamin-chavez/nextjs-express-auth0-template.git
+git clone -b blog-post-starter-code git@github.com:benjamin-chavez/nextjs-express-auth0-template.git
 cd nextjs-express-auth0-template
 ```
 
@@ -104,7 +104,7 @@ We are going to use rewrites to map all incoming API requests over to our expres
 
 Now, with both your frontend and backend running, go to [http://localhost:3000/api](http://localhost:3000/api) in your browser. You will see a `404 page not found` error.
 
-Stop your Next.js client server and add the following code to your `client/next.config.js` file.
+Stop your Next.js client-server and add the following code to your `client/next.config.js` file.
 
 ```js:client/next.config.js {3-10} showLineNumbers
 /** @type {import('next').NextConfig} */
@@ -692,7 +692,7 @@ Now, if we go to our private page and click our `Call API` button, we will see t
 
 In this article, we learned how to integrate a Next.js 13 frontend with a custom backend Express.js server API using Auth0 for authentication. We covered topics such as setting up a custom backend server, configuring Auth0 for authentication, and integrating the backend with the frontend using rewrites and middleware. By following the steps outlined in this tutorial, you should now have a solid understanding of how to integrate Next.js with Express.js using Auth0 for authentication.
 
-The final code for this post is saved in this GitHub repo. If you found this helpful, give the repo a star! ⭐
+The final code for this post is saved in this [GitHub repo](). If you found this helpful, give the repo a star! ⭐
 
 The content in this post was something that I learned and implemented as part of the development of my startup `Audio Archive`, which is a multi-vendor marketplace, built with node.js, for music producers to buy and sell Digital Audio Workstation (DAW) files.
 
