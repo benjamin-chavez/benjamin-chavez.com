@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
           backgroundImage: 'url(https://benjamin-chavez.com/img/og-bg.png)',
         }}
       >
@@ -30,6 +30,8 @@ export async function GET(req: NextRequest) {
           style={{
             marginLeft: 190,
             marginRight: 190,
+            marginTop: 150,
+
             display: 'flex',
             fontSize: 130,
             fontFamily: 'Dosis',
@@ -38,9 +40,61 @@ export async function GET(req: NextRequest) {
             color: 'white',
             lineHeight: '120px',
             whiteSpace: 'pre-wrap',
+            textTransform: 'uppercase',
           }}
         >
           {postTitle}
+          {/* integrating next.js with express.js using auth0 for authentication */}
+        </div>
+        <div
+          style={{
+            marginLeft: 190,
+            marginRight: 190,
+            marginTop: 150,
+            display: 'flex',
+            backgroundColor: 'red',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start',
+            marginBottom: 150,
+          }}
+        >
+          <img
+            src="https://picsum.photos/200/300"
+            width={150}
+            height={150}
+            style={{ borderRadius: '50%' }}
+          />
+          ,
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              justifyContent: 'center',
+              backgroundColor: 'green',
+              height: '100%',
+              color: 'white',
+              paddingLeft: 10,
+            }}
+          >
+            <p
+              style={{
+                textTransform: 'uppercase',
+                fontSize: '2rem',
+                lineHeight: '2.0rem',
+                letterSpacing: '0.1rem',
+              }}
+            >
+              Benjamin Chavez
+            </p>
+            <p
+              style={{
+                fontSize: 24,
+              }}
+            >
+              Full Stack Developer
+            </p>
+          </div>
         </div>
       </div>
     ),
