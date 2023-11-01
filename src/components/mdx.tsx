@@ -82,7 +82,7 @@ const mdxComponents = {
   ol: ({ className, ...props }: MdxComponentProps) => (
     <ol
       className={cx(
-        'list-decimal font-open-sans text-[0.94rem]  text-[#777777]',
+        ' list-decimal   font-open-sans text-[0.94rem] text-[#777777] ',
         className,
       )}
       {...props}
@@ -91,7 +91,7 @@ const mdxComponents = {
   li: ({ className, ...props }: MdxComponentProps) => (
     <li
       className={cx(
-        'mt-2 font-open-sans text-[0.94rem]  text-[#777777]',
+        'mt-2 font-open-sans text-[0.94rem] font-light  text-[#777777]',
         className,
       )}
       {...props}
