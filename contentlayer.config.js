@@ -30,6 +30,25 @@ const computedFields = {
     type: 'string',
     resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
   },
+  structuredData: {
+    type: 'object',
+    resolve: (doc) => ({
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: doc.title,
+      datePublished: doc.publishedAt,
+      dateModified: doc.publishedAt,
+      description: doc.summary,
+      image: doc.image
+        ? `https://benjamin-chavez.com${doc.image}`
+        : `https://benjamin-chavez.com/og?title=${doc.title}`,
+      url: `https://benjamin-chavez.com/blog/${doc._raw.flattenedPath}`,
+      author: {
+        '@type': 'Person',
+        name: 'Benjamin Chavez',
+      },
+    }),
+  },
 };
 
 export const Blog = defineDocumentType(() => ({
