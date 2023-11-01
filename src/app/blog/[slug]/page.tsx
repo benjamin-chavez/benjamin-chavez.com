@@ -29,12 +29,12 @@ export async function generateMetadata({
     title,
     publishedAt: publishedTime,
     summary: description,
-    // image,
+    image,
     slug,
   } = post;
-  // const ogImage = image
-  //   ? `https://benjamin-chavez.com${image}`
-  //   : `https://benjamin-chavez.com/og?title=${title}`;
+  const ogImage = image
+    ? `https://benjamin-chavez.com${image}`
+    : `https://benjamin-chavez.com/og?title=${title}`;
 
   return {
     title,
@@ -45,17 +45,17 @@ export async function generateMetadata({
       type: 'article',
       publishedTime,
       url: `https://benjamin-chavez.com/blog/${slug}`,
-      // images: [
-      //   {
-      //     url: ogImage,
-      //   },
-      // ],
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      // images: [ogImage],
+      images: [ogImage],
     },
   };
 }
