@@ -99,7 +99,9 @@ const mdxComponents = {
   ),
   Callout: ({ className, ...props }: any) => (
     <div className="my-8 flex items-center rounded border border-gray-200 bg-[#F8F9FA] px-4 py-2 text-sm  text-[#777777]">
-      <div className="mr-4 flex w-4 items-center">{props.emoji}</div>
+      {props.emoji && (
+        <div className="mr-4 flex w-4 items-center">{props.emoji}</div>
+      )}
       <div className=" w-full ">{props.children}</div>
     </div>
   ),

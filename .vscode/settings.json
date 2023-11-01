@@ -3,5 +3,5 @@
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
-  "workbench.colorTheme": "Halloween"
+  "workbench.colorTheme": "Gruvbox Light Soft"
 }

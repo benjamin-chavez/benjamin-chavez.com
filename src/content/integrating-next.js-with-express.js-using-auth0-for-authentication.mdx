@@ -4,11 +4,11 @@ author: 'Ben Chavez'
 description: 'Learn how to integrate a Next.js 13 frontend with a custom backend Express.js server API using Auth0 for authentication. This tutorial assumes some basic knowledge of Next.js and Express.js and that you have an Auth0 account set up.'
 summary: 'This article provides a step-by-step guide to integrating a Next.js 13 frontend with a custom backend Express.js server API using Auth0 for authentication. The article assumes some basic knowledge of Next.js and Express.js and that the reader has an Auth0 account set up. The tutorial covers topics such as rewrites, middleware, and more.'
 keywords: Next.js, Express.js, Auth0, Authentication, Integration, Rewrite, Middleware.
-publishedAt: '2024-10-10'
-updatedAt: '2024-10-10'
+publishedAt: '2024-11-1'
+updatedAt: '2024-11-1'
 ---
 
-In this post, I am going to walk you through the process of integrating a Next.js 13 (Next.js App Router) frontend with a custom backend Express.js server API. I use Auth0 for authentication in this example, but the process would be similar for other auth providers.
+In this post, I am going to walk you through the process of integrating a Next.js 13 (Next.js App Router) frontend with a custom backend Express.js server API. We will use Auth0 for authentication in this example, but the process would be similar for other auth providers.
 
 Between Vercel's push towards serverless functions (No worries, I'm still a fanboy. For now...), and the seemingly widespread adoption of tRPC by much of the Typescript community, I have found the documentation on how to integrate your own backend API with the new Next.js app directory to be a bit sparse.
 
@@ -17,12 +17,12 @@ Now in many cases, if you are using Next.js with Typescript, it probably makes s
 However, for my current project, there were a few reasons why I didn't want to use serverless or tRPC:
 
 1. I honestly just wanted more practice with writing REST APIs.
-2. I have yet to determine if this is unfounded, but I didn't really feel like working around cold starts as I expect my user base to start small and grow over time.
-3. If my application does gain traction, I didn't want to lock myself into using Typescript+node.js just because I implemented the MVP using tRPC.
+2. I have yet to determine if this is unfounded, but I didn't really feel like working around cold starts as I expect my app's user base to start small and grow over time.
+3. If my application does gain traction, I didn't want to lock myself into using Typescript+Node.js just because I implemented the MVP using tRPC.
 
 With that said, I do intend on learning those technologies in the future and advise that you also have some good reasons if you are going to build your Next.js application with a traditional API server.
 
-I am going to assume that you have some basic knowledge of Next.js and Express.js and that you have an Auth0 account set up with a Next.js application. If not, here are some helpful resources to get you to that point:
+For this post, I am going to assume that you have some basic knowledge of Next.js and Express.js and that you have an Auth0 account set up with a Next.js application. If not, here are some helpful resources to get you to that point:
 
 - Express.js:
   - [Creating A Typescript Express.Js Web Application With ES6 - Step-By-Step Guide](https://benjamin-chavez.com/blog/creating-a-typescript-express.js-web-application-with-es6-step-by-step-guide/)
@@ -32,7 +32,7 @@ I am going to assume that you have some basic knowledge of Next.js and Express.j
 
 Now, if you want to code along, I have put the starter code on my GitHub. You can download it [here](https://github.com/benjamin-chavez/nextjs-express-auth0-template/tree/blog-post-starter-code).
 
-In this example, I will have the express server stored in a `server` folder and the Next.js app in a `client` folder. I will run the apps in their own terminals, but the starter code is set up with [concurrently](https://www.npmjs.com/package/concurrently) if you prefer to run the apps from a single terminal.
+In this example, I will have the Express server stored in a `server` folder and the Next.js app in a `client` folder. I will run the apps in their own terminals, but the starter code is set up with [concurrently](https://www.npmjs.com/package/concurrently) if you prefer to run the apps from a single terminal.
 
 ## Start Application
 
@@ -41,7 +41,7 @@ We will start by getting the base project running locally.
 1. Clone the starter code:
 
 ```bash
-git clone https://github.com/benjamin-chavez/nextjs-express-auth0-template
+git clone https://github.com/benjamin-chavez/nextjs-express-auth0-template.git
 cd nextjs-express-auth0-template
 git checkout blog-post-starter-code
 ```
@@ -53,35 +53,43 @@ cp ./client/.env.local.example ./client/.env.local
 cp ./server/.env.example ./server/.env
 ```
 
-Be sure to update your Next.js environment variables with the values provided in your Auth0 application dashboard. The update file should look something like this:
+Be sure to update your Next.js environment variables with the values provided in your Auth0 application dashboard. Your updated file should look something like this:
 
 ```bash:client/.env.local showLineNumbers
+# Secret key for Auth0 - To generate, run `openssl rand -hex 32` in the command line
 AUTH0_SECRET='e2ebaf05e08f75b2eb3605ce28e6bf3ef0e68c54d9672ec87b4e69fae2f38460'
+
+# The base URL for your application
 AUTH0_BASE_URL='http://localhost:3000'
+
+# Your Auth0 tenant domain
 AUTH0_ISSUER_BASE_URL='https://dev-mqyygar8pnsvarul.us.auth0.com'
+
+# Your Auth0 client ID
 AUTH0_CLIENT_ID='oMv0Lmf1v2uTITiqQ67hhRJBL4XKdhO4'
+
+# Your Auth0 client secret
 AUTH0_CLIENT_SECRET='I_CFaneP_CyYQ-WBvXzwVlZKjsv4qL9YzY-hE8FE9HrsDNNtCJJnyp5s0vtt_yg1'
 ```
 
-3. Install the project dependencies:
+3. From the root directory, install the project dependencies:
 
 ```bash
-# From the root directory
 pnpm i
 ```
 
-4. Start the Next.js frontend app in the first terminal
+4. Start the Next.js frontend application
 
 ```bash
 cd client
 pnpm dev
 ```
 
-5. Open a second terminal and start the Express.js backend server
+5. Open a second terminal and start the Express.js backend-server
 
 ```bash
 cd server
-pnpm start
+pnpm dev
 ```
 
 Now, if you open your browser to [http://localhost:3000](http://localhost:3000) and [http://localhost:5000/api](http://localhost:5000/api), you will see the following:
@@ -95,13 +103,13 @@ Now, if you open your browser to [http://localhost:3000](http://localhost:3000) 
 
 ## Declare Rewrites
 
-In Next.js a [rewrite](https://nextjs.org/docs/app/api-reference/next-config-js/rewrites) allows us to map any incoming navigation or client request paths to a different destination path.
+In Next.js a [rewrite](https://nextjs.org/docs/app/api-reference/next-config-js/rewrites) allows us to map any incoming navigation and/or client request paths to a specified destination path.
 
-We are going to use rewrites to map all incoming API requests over to our express server path.
+We are going to use rewrites to map all incoming API requests over to our Express server path.
 
 Now, with both your frontend and backend running, go to [http://localhost:3000/api](http://localhost:3000/api) in your browser. You will see a `404 page not found` error.
 
-Stop your Next.js client-server and add the following code to your `client/next.config.js` file.
+1. Stop your Next.js client-server and add the following code to your `client/next.config.js` file.
 
 ```js:client/next.config.js {3-10} showLineNumbers
 /** @type {import('next').NextConfig} */
@@ -119,9 +127,9 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-Start up your Next.js client-server again and <strong>go back to</strong> [http://localhost:3000/api](http://localhost:3000/api) in your browser.
+Start up your Next.js client-server again and go back to [http://localhost:3000/api](http://localhost:3000/api) in your browser.
 
-The `404` should be gone, and you should now see `Server Running...`:
+The `404` should be gone, and you should now see `Server Running...` :
 
 <Image
   src="/img/blog/auth0-nextjs-express/ss3.png"
@@ -130,11 +138,11 @@ The `404` should be gone, and you should now see `Server Running...`:
   alt="Screenshot"
 />
 
-This "Server Running..." message is coming directly from your **Express.js** server because our request has been mapped from the source path of `http://localhost:3000/api` to the destination path of `http://localhost:5000/api`.
+This "Server Running..." message is coming directly from your **Express.js** server because out request was mapped from the source path of `http://localhost:3000/api` over to the destination path of `http://localhost:5000/api`.
 
-Before we continue, we need to add one more rewrite rule so that our requests to the Auth0 API are excluded from being rewritten. This is because Auth0 requires us to use the API Router when implementing frontend auth with Next.js.
+Before we continue, we need to add one more rewrite rule so that our client-side requests to the Auth0 API do not get rewritten. We need to do this because Auth0 requires us to use Next.js's API Router when implementing frontend auth inside of a Next.js application.
 
-The new rewrite simply catches requests to the Auth0 API before they can be rewritten and instead sends them to their original source path.
+The new rewrite simply catches requests to the Auth0 API before they are rewritten to our server API and instead sends them to the requested source path unchanged.
 
 ```js:client/next.config.js {5-8} showLineNumbers
 /** @type {import('next').NextConfig} */
@@ -156,14 +164,18 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
+Be sure to restart your client-side server after making any updates to the `client/next.config.js` file.
+
 ## Add Next.js Middleware
 
-Rather than requiring authentication in each of our private pages or components, we will implement [Next.js Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware), which will allow us to specify the routes that we want to make private.
+Rather than requiring authentication in each of our private pages or components, we will implement our auth with [Next.js Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware), which will allow us to specify which routes we want to make private.
 
 {/* TODO: Cleanup */}
-There are several benefits to this approach. The primary benefit is that it enables client-side handling of authentication and authorization in our **Next.js** application, as opposed to server-side handling in our **Express.js** server. In contrast, if our authentication was handled on the server, we would need to send a requests each time a user navigated to a new page. We would also need to wait for our server to responds to each of those requests before we could allow a user to actually view any content. You can imagine how this might become problematic.
+There are several benefits to this approach. The primary benefit is that it enables client-side handling of authentication and authorization in our **Next.js** application, as opposed to server-side handling in our **Express.js** server.
 
-This approach allows us to keep our auth logic separate from our other **application** logic. This separation of concerns is a good design choice as the **modularity** reduces cognitive load, and if, later, we decide to change auth managers, we only have to update one file as opposed to having to update every private page/component in our application.
+If we were to handle authentication on the server, we would need to send a request each time a user navigated to a new page. Consequently, our client-side application would also need to wait for our server to responds to each of those requests before allowing a user to actually view any content. You can imagine how this might become an unesary drag on performance.
+
+Furthermore, the use of middleware allows us to keep our auth logic separate from our other **application** logic. This separation of concerns is a good design choice as the **modularity** reduces cognitive load, and if, later, we decide to change auth managers, we only have to update one file as opposed to having to update every private page/component in our application.
 
 1. Create a new `client/src/middleware.ts` file and add the following:
 
@@ -184,13 +196,37 @@ If you open your browser back to [http://localhost:3000](http://localhost:3000),
   alt="Screenshot"
 />
 
-This redirection occurs because we have effectively made all of our routes private. The function `withMiddlewareAuthRequired()` informs Next.js and Auth0 that authentication is required for all requests processed by said middleware. Meanwhile, the pattern `matcher: '/:path*',` specifies which route requests should be processed by the middleware. In this case, all of our routes.
+This redirection occurs because we have effectively made all of our routes private. The function `withMiddlewareAuthRequired()` informs Next.js and Auth0 that authentication is required for all requests processed by said middleware.
+
+<Callout emoji="">
+WARNING: If you see the following error instead of a login screen, it means we need to update your Next.js application URI settings in AUTH0.
+
+<Image
+  src="/img/blog/auth0-nextjs-express/ss11.png"
+  width="718"
+  height="404"
+  alt="Screenshot"
+/>
+
+The updated URI settings should be:
+
+- Allowed Callback URLs: http://localhost:3000/api/auth/callback
+- Allowed Lgout URLs: http://localhost:3000
+- ALlowed Web Origins: http://localhost:3000
+
+<Image
+  src="/img/blog/auth0-nextjs-express/ss12.png"
+  width="718"
+  height="404"
+  alt="Screenshot"
+/>
+</Callout>
 
 Note that if you log in or sign up, you will again have access to all of the pages of our application.
 
-2. Define protected routes
+2. Define which routes to protect
 
-Now, we don't actually want to make the whole app private, so let's update our `matcher` pattern as follows:
+Now, we don't actually want to make the whole app private, so let's tell our middleware to only run on our `/private` and `/api` routes with the following change:
 
 ```ts:client/src/middleware.ts {6} showLineNumbers
 import { withMiddlewareAuthRequired } from '@auth0/nextjs-auth0/edge';
@@ -198,29 +234,27 @@ import { withMiddlewareAuthRequired } from '@auth0/nextjs-auth0/edge';
 export default withMiddlewareAuthRequired();
 
 export const config = {
-  matcher: ['/private/:path*'],
+   matcher: ['/private/:path*', '/api/:path*'],
 };
 ```
 
-Ensure you are logged out and go back to [http://localhost:3000](http://localhost:3000), you should have access to both our `Home` and `Public` pages. Additionally, if you navigate to [http://localhost:3000/private](http://localhost:3000/private), you will once again be redirected to our login screen.
+Ensure you are logged out and navigate back to [http://localhost:3000](http://localhost:3000). You should now have access to both our `Home` and `Public` pages. Additionally, if you navigate to [http://localhost:3000/private](http://localhost:3000/private), you will once again be redirected to our login screen.
 
 <Callout emoji="📝">
 
-You cannot access the Next.js middleware from server components as Next.js **middleware** only runs on _navigated routes_ and _API requests from **client components**_.
+You cannot access the Next.js middleware from server components as Next.js **middleware** only runs on _navigated routes_ and/or _API requests that come from **client components**_.
 
 </Callout>
 
 ## Protecting Our API Routes
 
-If you return to [http://localhost:3000/api](http://localhost:3000/api), you will notice that you need to be logged in to see the `Server Running...` from earlier. This is because we passed our API routes to our middleware matcher with `'/api/:path*'`.
+If you return to [http://localhost:3000/api](http://localhost:3000/api), you will notice that now you need to be logged in to see our `Server Running...` message. This is because we passed our API routes to our middleware matcher with `'/api/:path*'`.
 
-This is important as it prevents unauthorized users from bypassing our security simply by hitting our API routes instead of our frontend UI.
+However, there is still a massive security flaw in our design. If you navigate to [http://localhost:5000/api](http://localhost:5000/api), you will see our `Server Running...` message, which means that our route isn't actually protected.
 
-However, there is still a massive security flaw in our design. If you navigate to [http://localhost:5000/api](http://localhost:5000/api), you will see that our route isn't actually protected.
+This is because nothing is preventing unauthorized users from bypassing our security simply by hitting our backend API routes instead of our frontend UI.
 
-We know our route isn't protected because we are able to see the `Server Running...` response.
-
-To remedy this, we need to add our API to Auth0 and add authentication to the API route in our Express server code.
+To remedy this, we need to add our Express API to Auth0 and add authentication to the API route in our Express server code.
 
 1. In your Auth0 dashboard go to `Applications>APIs`.
 
@@ -246,15 +280,15 @@ To remedy this, we need to add our API to Auth0 and add authentication to the AP
 
 3. Update your Environment Variables
 
-   - Copy the `AUTH0_ISSUER_BASE_URL` environment variable from the `client/.env.local` file and add it to the `server/.env` file.
-
    - Create a new `AUTH0_AUDIENCE` env variable and set its value equal to the identifer from the previous step. Add this variable in both your `client/.env.local` and `server/.env` files:
+
+   - Copy the `AUTH0_ISSUER_BASE_URL` environment variable from the `client/.env.local` file and add it to the `server/.env` file.
 
 ```bash:server/.env {3,4} showLineNumbers
 PORT=5000
 
-AUTH0_ISSUER_BASE_URL='https://dev-mqyygar8pnsvarul.us.auth0.com'
 AUTH0_AUDIENCE=http://localhost:5000/api
+AUTH0_ISSUER_BASE_URL='https://dev-mqyygar8pnsvarul.us.auth0.com'
 ```
 
 ```bash:client/.env.local {16-17} showLineNumbers
@@ -283,7 +317,6 @@ Now that we've added our API to to our Auth0 dashboard, we can add authenticatio
 
 ```bash
 #  ENSURE YOU ARE IN YOUR SERVER DIRECTORY
-cd server
 pnpm i express-jwt jwks-rsa
 ```
 
@@ -310,21 +343,69 @@ export const checkJwt = jwt({
 });
 ```
 
-Our Express.js server will use this auth middleware to decrypt `JWT Authentication Tokens` that it receives from our Next.js frontend.
+Our Express.js server will use this auth middleware to decrypt any `JWT Authentication Tokens` that it receives from our Next.js frontend.
 
-3. In your `server/src/app.ts` file, import the auth middleware and add it to your API routes:
+3. In your `server/src/routes/index.ts` file, import the auth middleware and add it to your individual API routes:
 
-```ts:src/app.ts {1, 5} showLineNumbers
+```ts:server/src/app.ts {10, 20} showLineNumbers
+import cookieParser from 'cookie-parser';
+import express from 'express';
+import flash from 'express-flash';
+import morgan from 'morgan';
+import {
+  generalErrorHandler,
+  notFoundHandler,
+} from './middleware/errorMiddleware';
+import routes from './routes/index';
 import { checkJwt } from './middleware/authMiddleware';
-...
 
-// Be sure to add the `checkJwt` middleware here:
+const app = express();
+
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(flash());
+
 app.use('/api', checkJwt, routes);
-app.get('/api/private-route', checkJwt, (req, res) => {
-  res.status(200).send(listEndpoints(app));
-});
-...
+
+app.use(notFoundHandler);
+app.use(generalErrorHandler);
+
+export default app;
 ```
+
+<Callout emoji="">
+
+You could apply the auth middleware to individual routes instead with something like this:
+
+```ts:server/src/routes/index.ts {3, 9, 17} showLineNumbers
+import { Router } from 'express';
+import asyncHandler from 'express-async-handler';
+import { checkJwt } from '../middleware/authMiddleware';
+
+const router = Router();
+
+router.get(
+  '/',
+  checkJwt,
+  asyncHandler(async (req, res, next) => {
+    res.status(200).send('Server Running...');
+  })
+);
+
+router.get(
+  '/private-route',
+  checkJwt,
+  asyncHandler(async (req, res, next) => {
+    res.status(200).send({ message: 'This is a private route' });
+  })
+);
+
+export default router;
+```
+
+</Callout>
 
 If we open back up to [http://localhost:5000/api](http://localhost:5000/api), we will see that we have succesfully protected our backend API routes as well:
 
@@ -343,12 +424,12 @@ However, it is good practice to add CORS so that we can avoid any cross-origin e
 
 1. Copy over the `AUTH0_BASE_URL` Environment variable from your next.js app's `.env.local` file and paste it into your Express Server's `server/.env` file:
 
-```bash:server/.env {5} showLineNumbers
+```bash:server/.env {3} showLineNumbers
 PORT=5000
 
-AUTH0_ISSUER_BASE_URL='https://dev-q514l5sgo7t68du7.us.auth0.com'
-AUTH0_AUDIENCE=http://localhost:5000/api
 AUTH0_BASE_URL=http://localhost:3000
+AUTH0_AUDIENCE=http://localhost:5000/api
+AUTH0_ISSUER_BASE_URL='https://dev-q514l5sgo7t68du7.us.auth0.com'
 ```
 
 2. Install the CORS npm package on your server:
@@ -359,9 +440,8 @@ pnpm i cors
 
 3. Update the imports and add `cors` as middleware in your server's `app.ts` file:
 
-```ts:server/src/app.ts {1, 3, 17, 20} showLineNumbers
+```ts:server/src/app.ts {1, 2, 15, 18} showLineNumbers
 import 'dotenv/config';
-
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import express from 'express';
@@ -371,7 +451,6 @@ import {
   generalErrorHandler,
   notFoundHandler,
 } from './middleware/errorMiddleware';
-import listEndpoints from 'express-list-endpoints';
 import routes from './routes/index';
 import { checkJwt } from './middleware/authMiddleware';
 
@@ -386,15 +465,11 @@ app.use(cookieParser());
 app.use(flash());
 
 app.use('/api', checkJwt, routes);
-app.get('/api/private-route', checkJwt, (req, res) => {
-  res.status(200).send(listEndpoints(app));
-});
 
 app.use(notFoundHandler);
 app.use(generalErrorHandler);
 
 export default app;
-
 ```
 
 ## Securely passing Auth Tokens
@@ -431,15 +506,15 @@ Up to now, we have manually created each of our requests by entering the url in 
 
 1. Convert the `Private` page to a client component by adding the `'use client'` directive to the top of the file.
 
-```tsx:client/src/app/private/page.tsx {1} showLineNumbers
+{/* ```tsx:client/src/app/private/page.tsx {1} showLineNumbers */}
+
+```tsx
 'use client';
 ```
 
 2. Import React's `useState` hook and write a `callApi()` function that fetches data from our Express server.
 
-```tsx:client/src/app/private/page.tsx {3-35} showLineNumbers
-'use client';
-
+```tsx:client/src/app/private/page.tsx {1, 3-33} showLineNumbers
 import { useState } from 'react';
 
 export default function PrivatePage() {
@@ -479,46 +554,28 @@ export default function PrivatePage() {
 
 3. Add a button that we can use to initiate API requests
 
-```tsx:client/src/app/private/page.tsx {1, 8-12} showLineNumbers
-    return (
-      <>
-        <h1 className="mt-10 text-4xl font-bold tracking-tight text-white sm:text-6xl">
-          Private Page
-        </h1>
-
-        <button
-          onClick={callApi}
-          className="block rounded hover:opacity-70 text-white bg-pink-800/50 px-2 py-1 mt-10"
-        >
-          Call API
-        </button>
-      </>
-    );
+```tsx
+<button
+  onClick={callApi}
+  className="mt-10 block rounded bg-pink-800/50 px-2 py-1 text-white hover:opacity-70"
+>
+  Call API
+</button>
 ```
 
 4. If we are not in a `loading state`, display the server response
 
-```tsx:client/src/app/private/page.tsx {1, 15-17} showLineNumbers
-  if (!isLoading) {
-    return (
-      <>
-        <h1 className="mt-10 text-4xl font-bold tracking-tight text-white sm:text-6xl">
-          Private Page
-        </h1>
-
-        <button
-          onClick={callApi}
-          className="block rounded hover:opacity-70 text-white bg-pink-800/50 px-2 py-1 mt-10"
-        >
-          Call API
-        </button>
-
-        <div className="mt-20">
-          {response && <div>{JSON.stringify(response)}</div>}
-        </div>
-      </>
-    );
-  }
+```tsx
+if (!isLoading) {
+  return (
+    <>
+      ...
+      <div className="mt-20">
+        {response && <div>{JSON.stringify(response)}</div>}
+      </div>
+    </>
+  );
+}
 ```
 
 Your fully updated `Private` page should look like this:
@@ -539,7 +596,7 @@ export default function PrivatePage() {
     setState((previous) => ({ ...previous, isLoading: true }));
 
     try {
-      const response = await fetch('/api/routes');
+      const response = await fetch('/api/private-route');
       const data = await response.json();
 
       setState((previous) => ({
@@ -583,7 +640,7 @@ export default function PrivatePage() {
 }
 ```
 
-Now back in your browser, if you log into the app and navigate to `http://localhost:3000/private`, you should see the updated Private page with our new `Call API` button.
+Now back in your browser, if you log into the app and navigate to [http://localhost:3000/private](http://localhost:3000/private), you should see the updated Private page with our new `Call API` button.
 
 <Image
   src="/img/blog/auth0-nextjs-express/ss5.png"
@@ -600,7 +657,9 @@ Finally, we want to add our authentication token to the headers of the private r
 
    The new custom middleware function should take in a `NextRequest` object, copy any existing headers over to a new `NextResponse` object, and return that `NextResponse` object.
 
-```ts:client/src/middleware.ts {1-11} showLineNumbers
+```ts:client/src/middleware.ts {1, 3-13} showLineNumbers
+import { NextRequest, NextResponse } from 'next/server';
+
 export default withMiddlewareAuthRequired(function middleware(
   req: NextRequest,
 ) {
@@ -612,6 +671,7 @@ export default withMiddlewareAuthRequired(function middleware(
 
   return response;
 });
+...
 ```
 
 2. Import `getSession` from Auth0 so that we can access our our user session and auth token:
@@ -641,7 +701,7 @@ export default withMiddlewareAuthRequired(async function middleware(
 
 3. Set the Authorization header in our newly created `NextResponse` object:
 
-```ts {3} showLineNumbers
+```ts:client/src/middleware.ts {3} showLineNumbers
 const token = user?.accessToken;
 
 response.headers.set('Authorization', `Bearer ${token}`);
@@ -680,7 +740,7 @@ export const config = {
 };
 ```
 
-Now, if we go to our private page and click our `Call API` button, we will see the response data object proudly displayed on our `Private` page, which means we can securely access our protected Server API:
+Now, if we navigate back to [http://localhost:3000/private](http://localhost:3000/private) and click our `Call API` button, we will see the response data object proudly displayed on our `Private` page, which means we can securely access our protected Server API:
 
 <Image
   src="/img/blog/auth0-nextjs-express/ss6.png"
@@ -691,7 +751,7 @@ Now, if we go to our private page and click our `Call API` button, we will see t
 
 In this article, we learned how to integrate a Next.js frontend with a custom backend Express.js server API using Auth0 for authentication. We covered topics such as setting up a custom backend server, configuring Auth0 for authentication, and integrating the backend with the frontend using rewrites and middleware. By following the steps outlined in this tutorial, you should now have a solid understanding of how to integrate Next.js with Express.js using Auth0 for authentication.
 
-The final code for this post is saved as a project template in this [GitHub repo](). If you found this code helpful, give the repo a star! ⭐
+The final code for this post is saved as a project template in this [GitHub repo](https://github.com/benjamin-chavez/nextjs-express-auth0-template). If you found this code helpful, give the repo a star! ⭐
 
 The authentication methods discussed in this post are techniques I learned and applied in the development of my startup, tentatively named `Audio Archive`. Audio Archive is a multi-seller marketplace built with node.js, where music producers can buy and sell Digital Audio Workstation (DAW) files."
 
