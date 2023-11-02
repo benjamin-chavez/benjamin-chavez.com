@@ -23,8 +23,7 @@ export async function GET(req: NextRequest) {
           flexDirection: 'column',
           alignItems: 'flex-start',
           justifyContent: 'space-between',
-          backgroundImage:
-            'url(https://benjamin-chavez.com/img/og-thumbnail.png)',
+          backgroundImage: 'url(https://benjamin-chavez.com/img/og-bg.png)',
         }}
       >
         <div
@@ -60,7 +59,7 @@ export async function GET(req: NextRequest) {
           }}
         >
           <img
-            src="https://benjamin-chavez.com/img/avatar"
+            src="https://picsum.photos/200/300"
             width={150}
             height={150}
             style={{ borderRadius: '50%' }}
