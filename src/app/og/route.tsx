@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 // src/app/og/route.tsx
 
 import { ImageResponse } from 'next/server';
@@ -23,7 +25,7 @@ export async function GET(req: NextRequest) {
           flexDirection: 'column',
           alignItems: 'flex-start',
           justifyContent: 'space-between',
-          backgroundImage: 'url(https://benjamin-chavez.com/img/og-bg.png)',
+          backgroundImage: 'url(/img/og-thumbnail.png)',
         }}
       >
         <div
@@ -59,7 +61,7 @@ export async function GET(req: NextRequest) {
           }}
         >
           <img
-            src="https://picsum.photos/200/300"
+            src="/img/avatar.png"
             width={150}
             height={150}
             style={{ borderRadius: '50%' }}

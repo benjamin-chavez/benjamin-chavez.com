@@ -3,6 +3,7 @@ import 'server-only';
 import RootLayout from '@/components/root-layout';
 import { Analytics } from '@vercel/analytics/react';
 import { Metadata } from 'next';
+// @ts-ignore
 import { Dosis, Inter, Open_Sans } from 'next/font/google';
 import '../styles/globals.css';
 

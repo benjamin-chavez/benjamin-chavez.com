@@ -8,6 +8,7 @@ import { formatDate } from '@/lib/utils';
 import { allBlogs } from 'contentlayer/generated';
 import { cx } from 'cva.config';
 import Link from 'next/link';
+// @ts-ignore
 import { notFound } from 'next/navigation';
 import '../../../styles/mdx.css';
 
@@ -101,48 +102,48 @@ export default async function Blog({ params }: BlogProps) {
 
   if (!post) {
     notFound();
+  } else {
+    return (
+      <>
+        <Container className="relative py-9">
+          <BackButton className={'pb-9'} />
+
+          <h1 className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414] ">
+            {post.title}
+          </h1>
+
+          <div className="mt-2" />
+
+          <div className="flex flex-col justify-start gap-x-3 gap-y-2 font-open-sans text-[15px] text-xs sm:flex-row sm:items-center">
+            <div className=" ">
+              <time
+                dateTime={post.publishedAt}
+                className="font-open-sans text-gray-500"
+              >
+                {formatDate(post.publishedAt)} / {post.readingTime.text}
+              </time>
+            </div>
+
+            <div
+              // text-gray-800
+              className=" -ml-1 w-fit rounded-md !bg-[#83a06c] !bg-opacity-50 px-1.5 py-1 font-open-sans !text-[#008000] md:ml-0"
+            >
+              Last Updated:{' '}
+              <time
+                dateTime={post.publishedAt}
+                // text-gray-500
+                className="font-open-sans text-[#008000]"
+              >
+                {formatDate(post.updatedAt)}
+              </time>
+            </div>
+          </div>
+
+          <section className="my-16 flex flex-col">
+            <Mdx code={post?.body.code} />
+          </section>
+        </Container>
+      </>
+    );
   }
-
-  return (
-    <>
-      <Container className="relative py-9">
-        <BackButton className={'pb-9'} />
-
-        <h1 className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414] ">
-          {post.title}
-        </h1>
-
-        <div className="mt-2" />
-
-        <div className="flex flex-col justify-start gap-x-3 gap-y-2 font-open-sans text-[15px] text-xs sm:flex-row sm:items-center">
-          <div className=" ">
-            <time
-              dateTime={post.publishedAt}
-              className="font-open-sans text-gray-500"
-            >
-              {formatDate(post.publishedAt)} / {post.readingTime.text}
-            </time>
-          </div>
-
-          <div
-            // text-gray-800
-            className=" -ml-1 w-fit rounded-md !bg-[#83a06c] !bg-opacity-50 px-1.5 py-1 font-open-sans !text-[#008000] md:ml-0"
-          >
-            Last Updated:{' '}
-            <time
-              dateTime={post.publishedAt}
-              // text-gray-500
-              className="font-open-sans text-[#008000]"
-            >
-              {formatDate(post.updatedAt)}
-            </time>
-          </div>
-        </div>
-
-        <section className="my-16 flex flex-col">
-          <Mdx code={post?.body.code} />
-        </section>
-      </Container>
-    </>
-  );
 }

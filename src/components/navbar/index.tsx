@@ -1,10 +1,10 @@
 // src/components/navbar/index.tsx
 
-// src/components/navbar/index.tsx
 'use client';
 
 import { cx } from 'cva.config';
 import Link from 'next/link';
+// @ts-ignore
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Container } from '../container';
