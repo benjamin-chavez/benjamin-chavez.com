@@ -24,9 +24,14 @@ const nextConfig = {
           '/blog/step-by-step-guide-setting-up-expressjs-typescript-web-app',
         destination:
           '/blog/creating-a-typescript-express.js-web-application-with-es6-step-by-step-guide',
-        permanent: true, // or false if the redirect is temporary
+        permanent: true,
       },
-      // ... other redirects if any
+      {
+        source: 'https://benjamin-chavez.com/downloads/epay-mailer',
+        destination:
+          'https://benjamin-chavez.com/downloads/Estimated%20Tax%20Payment%20Mailer.zip',
+        permanent: true,
+      },
     ];
   },
 };
