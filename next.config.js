@@ -27,9 +27,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: 'https://benjamin-chavez.com/downloads/epay-mailer',
-        destination:
-          'https://benjamin-chavez.com/downloads/Estimated%20Tax%20Payment%20Mailer.zip',
+        source: '/downloads/epay-mailer',
+        destination: '/downloads/Estimated%20Tax%20Payment%20Mailer.zip',
         permanent: true,
       },
     ];
