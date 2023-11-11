@@ -51,7 +51,7 @@ const projects = [
       },
       {
         type: 'github',
-        url: 'https://github.com/benjamin-chavez/EHI-Lab-DeniGithubIconn-Designer-Website',
+        url: 'https://github.com/benjamin-chavez/EHI-Lab-Denizen-Designer-Website',
         icon: <GithubIcon />,
       },
     ],
@@ -92,7 +92,7 @@ const projects = [
       },
       {
         type: 'github',
-        url: 'https://github.com/benjamin-chavez/estimated-taGithubIconpayment-mailer',
+        url: 'https://github.com/benjamin-chavez/estimated-tax-payment-mailer',
         icon: <GithubIcon />,
       },
     ],
