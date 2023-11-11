@@ -87,7 +87,7 @@ const projects = [
     links: [
       {
         type: 'download',
-        url: './Downloadable/Estimated Tax Payment Mailer.zip',
+        url: '/downloads/Estimated Tax Payment Mailer.zip',
         icon: <DownloadIcon />,
       },
       {
