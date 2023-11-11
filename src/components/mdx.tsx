@@ -39,6 +39,7 @@ const mdxComponents = {
   a: ({ className, href, ...props }: MdxComponentProps & { href?: string }) => {
     const isExternalLink = href?.startsWith('http');
     const isNoFollowLink = href?.startsWith('http://localhost:');
+
     return (
       <a
         href={href}
@@ -49,8 +50,13 @@ const mdxComponents = {
         )}
         {...props}
         target={isExternalLink ? '_blank' : '_self'}
-        rel={isNoFollowLink ? 'nofollow' : undefined}
-        // 'noopener noreferrer'
+        rel={
+          isNoFollowLink
+            ? 'nofollow'
+            : isExternalLink
+            ? 'noopener noreferrer'
+            : undefined
+        }
       />
     );
   },
