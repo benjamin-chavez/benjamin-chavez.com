@@ -12,12 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   const blogs = filteredBlogs.map((post) => ({
-    url: `https://benjamin-chavez.com/blog/${post.slug}/`,
+    url: `https://benjamin-chavez.com/blog/${post.slug}`,
     lastModified: post.updatedAt,
   }));
 
   const routes = ['', '/blog'].map((route) => ({
-    url: `https://benjamin-chavez.com${route}/`,
+    url: `https://benjamin-chavez.com${route}`,
     lastModified: new Date().toISOString().split('T')[0],
   }));
 

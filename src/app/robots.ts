@@ -7,7 +7,7 @@ export default function robots() {
         userAgent: '*',
       },
     ],
-    sitemap: 'https://benjamin-chavez.com//sitemap.xml',
-    host: 'https://benjamin-chavez.com/',
+    sitemap: 'https://benjamin-chavez.com/sitemap.xml',
+    host: 'https://benjamin-chavez.com',
   };
 }
