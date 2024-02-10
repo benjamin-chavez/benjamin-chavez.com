@@ -686,6 +686,10 @@ import { getSession, withMiddlewareAuthRequired } from '@auth0/nextjs-auth0/edge
 export default withMiddlewareAuthRequired(async function middleware(
   req: NextRequest
 ) {
+  if (req.nextUrl.pathname.startsWith('/api/auth')) {
+    return;
+  }
+
   const response = NextResponse.next({
     request: {
       headers: new Headers(req.headers),
