@@ -2,6 +2,7 @@ import 'server-only';
 
 import RootLayout from '@/components/root-layout';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
 // @ts-ignore
 import { Dosis, Inter, Open_Sans } from 'next/font/google';
@@ -67,6 +68,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body className=" flex min-h-full flex-col">
         <RootLayout>{children}</RootLayout>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
