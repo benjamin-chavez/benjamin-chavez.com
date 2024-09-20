@@ -6,7 +6,7 @@ summary: 'This article provides a step-by-step guide to integrating a Next.js 13
 keywords: Next.js, Express.js, Auth0, Authentication, Integration, Rewrite, Middleware.
 image: '/img/blog/auth0-nextjs-express/nextjs-express-auth0.png'
 publishedAt: '2023-11-08'
-updatedAt: '2024-02-09'
+updatedAt: '2024-09-19'
 ---
 
 In this post, I am going to walk you through the process of integrating a Next.js 13 (Next.js App Router) frontend with a custom backend Express.js server API. We will use Auth0 for authentication in this example, but the process would be similar for other auth providers.
@@ -656,7 +656,7 @@ Finally, we want to add our authentication token to the headers of the private r
 
 1. Create a custom middleware function and pass it as an argument to the existing `withMiddlewareAuthRequired()` function.
 
-   The new custom middleware function should take in a `NextRequest` object, copy any existing headers over to a new `NextResponse` object, and return that `NextResponse` object.
+   The new custom middleware function should take in a `NextRequest` object, copy any existing headers over to a new `NextResponse` object.
 
 ```ts:client/src/middleware.ts {1, 3-13} showLineNumbers
 import { NextRequest, NextResponse } from 'next/server';
@@ -668,18 +668,21 @@ export default withMiddlewareAuthRequired(function middleware(
     return;
   }
 
-  const response = NextResponse.next({
-    request: {
-      headers: new Headers(req.headers),
-    },
-  });
-
-  return response;
+  const requestHeaders = new Headers(req.headers);
+  const user = await getSession(
+    req,
+    NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    }),
+  );
+  requestHeaders.set('Authorization', `Bearer ${user?.idToken}`);
 });
 ...
 ```
 
-2. Import `getSession` from Auth0 so that we can access our our user session and auth token:
+2. Note that we need to import `getSession` from Auth0 so that we can access our our user session and auth token:
 
 ```ts:client/src/middleware.ts {1, 6, 15-16} showLineNumbers
 import { getSession, withMiddlewareAuthRequired } from '@auth0/nextjs-auth0/edge';
@@ -694,26 +697,30 @@ export default withMiddlewareAuthRequired(async function middleware(
     return;
   }
 
-  const response = NextResponse.next({
-    request: {
-      headers: new Headers(req.headers),
-    },
-  });
-
-  const user = await getSession(req, response);
-  const token = user?.accessToken;
-
-  return response;
+  const requestHeaders = new Headers(req.headers);
+  const user = await getSession(
+    req,
+    NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    }),
+  );
+  requestHeaders.set('Authorization', `Bearer ${user?.idToken}`);
 });
 ...
 ```
 
-3. Set the Authorization header in our newly created `NextResponse` object:
+3. Remove the Authorization header from our newly created `NextResponse` object so that it is not exposed:
 
 ```ts:client/src/middleware.ts {3} showLineNumbers
 const token = user?.accessToken;
 
-response.headers.set('Authorization', `Bearer ${token}`);
+const response = NextResponse.next({
+  request: {
+    headers: requestHeaders,
+  },
+});
 
 return response;
 ```
@@ -734,17 +741,22 @@ export default withMiddlewareAuthRequired(async function middleware(
     return;
   }
 
+  const requestHeaders = new Headers(req.headers);
+  const user = await getSession(
+    req,
+    NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    }),
+  );
+  requestHeaders.set('Authorization', `Bearer ${user?.idToken}`);
+
   const response = NextResponse.next({
     request: {
-      headers: new Headers(req.headers),
+      headers: requestHeaders,
     },
   });
-
-  const user = await getSession(req, response);
-  const token = user?.accessToken;
-
-  response.headers.set('Authorization', `Bearer ${token}`);
-
   return response;
 });
 
