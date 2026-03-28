@@ -24,7 +24,7 @@ export default function Blog() {
 
       <div className="my-6 space-y-16 ">
         {publicPosts.map((post: Post) => (
-          <Link href={`/blog/${post.slug}`} key={post.slug}>
+          <Link href={`/blog/${post.slug}`} key={post.slug} className="block">
             <article className="ease  group mb-4 flex flex-col items-start justify-between rounded px-2 py-4 transition duration-200 hover:bg-black/10">
               <div className="flex items-center text-xs">
                 <time

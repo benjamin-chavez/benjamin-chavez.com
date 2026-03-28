@@ -3,6 +3,11 @@
 import { cx } from 'cva.config';
 import { useEffect, useRef } from 'react';
 
+type LegacyMediaQueryList = MediaQueryList & {
+  addListener?: (listener: (event: MediaQueryListEvent) => void) => void;
+  removeListener?: (listener: (event: MediaQueryListEvent) => void) => void;
+};
+
 type ParallaxBackgroundProps = Readonly<{
   src: string;
   className?: string;
@@ -36,6 +41,7 @@ export default function ParallaxBackground({
     const reducedMotionQuery = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     );
+    const legacyReducedMotionQuery = reducedMotionQuery as LegacyMediaQueryList;
 
     const updatePosition = () => {
       frameRef.current = null;
@@ -73,7 +79,7 @@ export default function ParallaxBackground({
     if ('addEventListener' in reducedMotionQuery) {
       reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
     } else {
-      reducedMotionQuery.addListener(handleReducedMotionChange);
+      legacyReducedMotionQuery.addListener?.(handleReducedMotionChange);
     }
 
     return () => {
@@ -90,7 +96,7 @@ export default function ParallaxBackground({
           handleReducedMotionChange,
         );
       } else {
-        reducedMotionQuery.removeListener(handleReducedMotionChange);
+        legacyReducedMotionQuery.removeListener?.(handleReducedMotionChange);
       }
     };
   }, [speed]);

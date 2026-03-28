@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prettier.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/prettier.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/container.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/container.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/env.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/parallax-background.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/parallax-background.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +53,9 @@
     &quot;accountId&quot;: &quot;b4450e84-4e74-4e45-b2af-32265ed0ed88&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1,
   &quot;fromUser&quot;: false
@@ -129,7 +127,7 @@
       <option name="presentableId" value="Default" />
       <updated>1774710325871</updated>
       <workItem from="1774710327000" duration="4478000" />
-      <workItem from="1774715041557" duration="5848000" />
+      <workItem from="1774715041557" duration="8371000" />
     </task>
     <servers />
   </component>
