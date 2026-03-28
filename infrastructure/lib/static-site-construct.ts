@@ -1,6 +1,6 @@
 // infrastructure/lib/static-site-construct.ts
 
-import * as path from 'path';
+import * as path from 'node:path';
 import * as cdk from 'aws-cdk-lib';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
@@ -22,16 +22,12 @@ export class StaticSiteConstruct extends Construct {
   constructor(scope: Construct, id: string, props: StaticSiteProps) {
     super(scope, id);
 
+    const cloudfrontAssetsPath = path.join(process.cwd(), 'cloudfront');
     const viewerRequestFunctionPath = path.join(
-      process.cwd(),
-      'cloudfront',
+      cloudfrontAssetsPath,
       'viewer-request.js',
     );
-    const redirectsPath = path.join(
-      process.cwd(),
-      'cloudfront',
-      'redirects.json',
-    );
+    const redirectsPath = path.join(cloudfrontAssetsPath, 'redirects.json');
 
     this.bucket = new s3.Bucket(this, 'SiteBucket', {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
@@ -61,6 +57,7 @@ export class StaticSiteConstruct extends Construct {
         code: cloudfront.FunctionCode.fromFile({
           filePath: viewerRequestFunctionPath,
         }),
+        // CloudFront KeyValueStore requires the JS_2_0 runtime.
         runtime: cloudfront.FunctionRuntime.JS_2_0,
         keyValueStore: redirectStore,
       },

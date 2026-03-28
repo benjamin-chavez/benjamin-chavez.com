@@ -47,23 +47,24 @@ We're also going to improve the handler while we're here. Instead of embedding r
 
 ### Instructions
 
-1. Create a dedicated directory for CloudFront assets inside the infrastructure package.
+1. Create a dedicated directory for compiled CloudFront assets and a separate directory for the TypeScript source.
 
 ```bash
-mkdir -p infrastructure/cloudfront
+mkdir -p infrastructure/cloudfront infrastructure/edge
 ```
 
 | Part | What it does |
 |------|-------------|
 | `mkdir` | Creates directories on disk |
 | `-p` | Creates parent directories as needed and does not fail if they already exist |
-| `infrastructure/cloudfront` | The folder where you'll keep the CloudFront function and redirect data files |
+| `infrastructure/cloudfront` | The folder where the compiled CloudFront function and redirect data files will live |
+| `infrastructure/edge` | The folder where you'll author the CloudFront function in TypeScript |
 
 2. Add a new handler file.
 
-**File: `infrastructure/cloudfront/viewer-request.js`**
+**File: `infrastructure/edge/viewer-request.ts`**
 
-```javascript
+```typescript
 import cf from 'cloudfront';
 
 const kvs = cf.kvs();
@@ -106,7 +107,7 @@ function buildRedirectLocation(destination, querystring) {
   return `${destination}${separator}${serializedQuery}`;
 }
 
-export async function handler(event) {
+async function handler(event: ViewerRequestEvent) {
   const request = event.request;
   const uri = request.uri;
 
@@ -143,18 +144,19 @@ export async function handler(event) {
 You already created the directory with:
 
 ```bash
-mkdir -p infrastructure/cloudfront
+mkdir -p infrastructure/cloudfront infrastructure/edge
 ```
 
 | Part | What it does |
 |------|-------------|
 | `mkdir` | Creates directories |
 | `-p` | Creates missing parents and makes the command safe to rerun |
-| `infrastructure/cloudfront` | The destination folder for the new handler file |
+| `infrastructure/cloudfront` | The destination folder for compiled CloudFront assets |
+| `infrastructure/edge` | The destination folder for the TypeScript source file |
 
 ### Checkpoint
 
-At the end of this step, you should have a new file at `infrastructure/cloudfront/viewer-request.js`. The file should:
+At the end of this step, you should have a new file at `infrastructure/edge/viewer-request.ts`. The file should:
 
 - import `cloudfront`
 - call `cf.kvs()`
@@ -260,14 +262,13 @@ export class StaticSiteConstruct extends Construct {
   constructor(scope: Construct, id: string, props: StaticSiteProps) {
     super(scope, id);
 
+    const cloudfrontAssetsPath = path.join(process.cwd(), 'cloudfront');
     const viewerRequestFunctionPath = path.join(
-      process.cwd(),
-      'cloudfront',
+      cloudfrontAssetsPath,
       'viewer-request.js',
     );
     const redirectsPath = path.join(
-      process.cwd(),
-      'cloudfront',
+      cloudfrontAssetsPath,
       'redirects.json',
     );
 
@@ -299,6 +300,7 @@ export class StaticSiteConstruct extends Construct {
         code: cloudfront.FunctionCode.fromFile({
           filePath: viewerRequestFunctionPath,
         }),
+        // CloudFront KeyValueStore requires the JS_2_0 runtime.
         runtime: cloudfront.FunctionRuntime.JS_2_0,
         keyValueStore: redirectStore,
       },
@@ -441,9 +443,72 @@ export class StaticSiteConstruct extends Construct {
 
 3. Delete the old `buildCloudFrontFunction()` method completely. Once the function code lives in its own file, you no longer need any TypeScript that generates JavaScript strings.
 
-> **Common mistake:** Don't forget `runtime: cloudfront.FunctionRuntime.JS_2_0`. CloudFront KeyValueStore helper methods require JavaScript runtime 2.0.
+4. Add a dedicated edge build config so the viewer-request function is authored in TypeScript but compiled to the JavaScript file CloudFront expects.
 
-> **Common mistake:** Your current `infrastructure/cdk.json` excludes `**/*.js` from watch mode. If you use `cdk watch`, changes to `cloudfront/viewer-request.js` will not trigger a resynth until you adjust that exclude list or rerun your commands manually.
+**File: `infrastructure/tsconfig.edge.json`**
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "node",
+    "lib": ["ES2022"],
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "declaration": false,
+    "sourceMap": false,
+    "rootDir": "./edge",
+    "outDir": "./cloudfront"
+  },
+  "include": ["edge/**/*.ts", "edge/**/*.d.ts"]
+}
+```
+
+5. Update your infrastructure package scripts so synth, diff, and deploy always rebuild the edge function first.
+
+**File: `infrastructure/package.json`**
+
+```json
+{
+  "scripts": {
+    "build": "pnpm run build:edge && tsc",
+    "build:edge": "tsc -p tsconfig.edge.json",
+    "build:local": "pnpm run build:edge && tsc",
+    "cdk": "cdk",
+    "synth": "pnpm run build:edge && cdk synth",
+    "deploy": "pnpm run build:edge && cdk deploy",
+    "diff": "pnpm run build:edge && cdk diff"
+  }
+}
+```
+
+6. If you use `cdk watch`, add a watch build hook so TypeScript source changes rebuild the generated edge asset before synthesis.
+
+**File: `infrastructure/cdk.json`**
+
+```json
+{
+  "watch": {
+    "build": "pnpm run build:edge",
+    "include": ["**"],
+    "exclude": [
+      "README.md",
+      "cdk*.json",
+      "**/*.d.ts",
+      "**/*.js",
+      "tsconfig.json",
+      "package*.json",
+      "node_modules",
+      "dist"
+    ]
+  }
+}
+```
 
 ### Command breakdown
 
@@ -453,6 +518,7 @@ There isn't a required terminal command in this step if you're editing the const
 - the construct creates a `KeyValueStore`
 - the function uses `FunctionCode.fromFile(...)`
 - the function is associated with the `KeyValueStore`
+- the edge TypeScript source compiles to `cloudfront/viewer-request.js`
 - `www` `A` and `AAAA` records are created
 
 ### Checkpoint
@@ -460,7 +526,7 @@ There isn't a required terminal command in this step if you're editing the const
 At the end of this step:
 
 - `static-site-construct.ts` should no longer contain `buildCloudFrontFunction`
-- the construct should read `viewer-request.js` from disk
+- the construct should read the compiled `viewer-request.js` from disk
 - redirects should come from `redirects.json`
 - the stack should create four alias records total: apex `A`, apex `AAAA`, `www` `A`, and `www` `AAAA`
 
@@ -526,58 +592,54 @@ That sequence catches most mistakes before they hit AWS.
 1. Type-check the infrastructure package.
 
 ```bash
-pnpm --dir infrastructure exec tsc --noEmit
+pnpm --dir infrastructure run build
 ```
 
 | Part | What it does |
 |------|-------------|
 | `pnpm` | Runs a package-manager command using your workspace's configured package manager |
 | `--dir infrastructure` | Runs the command from the `infrastructure` package directory |
-| `exec` | Executes a binary from that package's dependency graph |
-| `tsc` | Runs the TypeScript compiler |
-| `--noEmit` | Type-checks without writing compiled output files |
+| `run` | Executes a package script |
+| `build` | Compiles the edge function TypeScript first, then type-checks and builds the infrastructure package |
 
 2. Synthesize the stack.
 
 ```bash
-pnpm --dir infrastructure exec cdk synth
+pnpm --dir infrastructure run synth
 ```
 
 | Part | What it does |
 |------|-------------|
 | `pnpm` | Invokes the package manager |
 | `--dir infrastructure` | Runs inside the infrastructure package |
-| `exec` | Executes a package-local binary |
-| `cdk` | Runs the AWS CDK CLI |
-| `synth` | Builds the CloudFormation template locally without deploying |
+| `run` | Executes a package script |
+| `synth` | Rebuilds the edge function and then builds the CloudFormation template locally without deploying |
 
 3. Review the infrastructure diff.
 
 ```bash
-pnpm --dir infrastructure exec cdk diff
+pnpm --dir infrastructure run diff
 ```
 
 | Part | What it does |
 |------|-------------|
 | `pnpm` | Invokes the package manager |
 | `--dir infrastructure` | Runs from the infrastructure package |
-| `exec` | Executes the CDK CLI from local dependencies |
-| `cdk` | Runs the AWS CDK CLI |
-| `diff` | Shows the changes between the deployed stack and your local stack definition |
+| `run` | Executes a package script |
+| `diff` | Rebuilds the edge function and then shows the changes between the deployed stack and your local stack definition |
 
 4. If the synth and diff look right, deploy the stack.
 
 ```bash
-pnpm --dir infrastructure exec cdk deploy
+pnpm --dir infrastructure run deploy
 ```
 
 | Part | What it does |
 |------|-------------|
 | `pnpm` | Invokes the package manager |
 | `--dir infrastructure` | Runs inside the infrastructure package |
-| `exec` | Executes the package-local CDK CLI |
-| `cdk` | Runs the AWS CDK CLI |
-| `deploy` | Applies the synthesized CloudFormation changes to your AWS account |
+| `run` | Executes a package script |
+| `deploy` | Rebuilds the edge function and then applies the synthesized CloudFormation changes to your AWS account |
 
 5. Smoke test the deployed behavior:
 
@@ -594,9 +656,9 @@ This step already includes a breakdown table for every terminal command.
 
 You should be ready to deploy only after all of the following are true:
 
-- `tsc --noEmit` passes
-- `cdk synth` succeeds
-- `cdk diff` shows the new KeyValueStore, the updated CloudFront Function, and the additional `www` alias records
+- `pnpm --dir infrastructure run build` passes
+- `pnpm --dir infrastructure run synth` succeeds
+- `pnpm --dir infrastructure run diff` shows the new KeyValueStore, the updated CloudFront Function, and the additional `www` alias records
 
 ---
 

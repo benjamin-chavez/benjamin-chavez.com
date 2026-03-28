@@ -1,5 +1,5 @@
 name: Deploy
-run-name: ""
+run-name: "🚀 Deploy #${{ github.run_number }} | ${{ github.sha }}"
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
-        contents: read
+        contents: write  # Read for checkout, write for deployment tags
         id-token: write  # Needed for AWS OIDC
     steps:
       - name: Check out repository code
@@ -57,3 +57,21 @@ jobs:
         env:
           DIST_ID: ${{ steps.stack.outputs.dist_id }}
         run: aws cloudfront create-invalidation --distribution-id "$DIST_ID" --paths "/*"
+
+      - name: Tag deployment
+        run: |
+          # Find latest v* tag, default to v0.0.0 if none exists
+          LATEST=$(git tag -l 'v*' --sort=-v:refname | head -1)
+          if [ -z "$LATEST" ]; then
+            LATEST="v0.0.0"
+          fi
+
+          # Extract major.minor.patch and bump patch
+          MAJOR=$(echo "$LATEST" | sed 's/^v//' | cut -d. -f1)
+          MINOR=$(echo "$LATEST" | sed 's/^v//' | cut -d. -f2)
+          PATCH=$(echo "$LATEST" | sed 's/^v//' | cut -d. -f3)
+          NEW_TAG="v${MAJOR}.${MINOR}.$((PATCH + 1))"
+
+          git tag "$NEW_TAG"
+          git push origin "$NEW_TAG"
+          echo "Tagged deployment as $NEW_TAG"
