@@ -18,6 +18,9 @@ async function main() {
   );
   const fontData = fs.readFileSync(fontPath);
 
+  const avatarPath = path.join(process.cwd(), 'public/img/avatar.png');
+  const avatarBase64 = `data:image/png;base64,${fs.readFileSync(avatarPath).toString('base64')}`;
+
   const posts = getAllPosts();
 
   for (const post of posts) {
@@ -53,6 +56,15 @@ async function main() {
             gap: '16px',
           }}
         >
+          <img
+            src={avatarBase64}
+            width={70}
+            height={70}
+            style={{
+              borderRadius: '50%',
+              objectFit: 'cover',
+            }}
+          />
           <div
             style={{
               display: 'flex',
