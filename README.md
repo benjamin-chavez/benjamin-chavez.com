@@ -5,6 +5,11 @@
 </p>
 
 
+## CI/CD
+
+See [`.github/CI-CD.md`](.github/CI-CD.md) for deployment workflow, versioning, and automation details.
+
+
 ## Running Locally
 
 First, clone the repo:

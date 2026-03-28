@@ -19,9 +19,8 @@ export function CloudWatchRUM() {
           identityPoolId,
           telemetries: ['performance', 'errors', 'http'],
         });
-      } catch {
-        // Silently fail — RUM is non-critical
-        // TODO: Should probably log a warning though
+      } catch (err) {
+        console.warn('[CloudWatch RUM] Failed to initialize:', err);
       }
     });
   }, []);

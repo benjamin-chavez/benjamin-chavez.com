@@ -1,20 +1,24 @@
-// infrastructure/lib/static-site-construct.ts
-
-import * as path from 'node:path';
 import * as cdk from 'aws-cdk-lib';
-import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
-import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as targets from 'aws-cdk-lib/aws-route53-targets';
+import * as s3 from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
+import type {
+  SiteEnvironmentConfig,
+  SiteEnvironmentName,
+} from '../config/types';
+import { CloudFrontRouting } from './cloudfront-routing';
 
 export interface StaticSiteProps {
-  domainName: string;
+  readonly appName: string;
+  readonly environment: SiteEnvironmentName;
+  readonly envConfig: SiteEnvironmentConfig;
 }
 
-export class StaticSiteConstruct extends Construct {
+export class StaticSite extends Construct {
   public readonly bucket: s3.Bucket;
   public readonly distribution: cloudfront.Distribution;
   public readonly hostedZone: route53.PublicHostedZone;
@@ -22,12 +26,13 @@ export class StaticSiteConstruct extends Construct {
   constructor(scope: Construct, id: string, props: StaticSiteProps) {
     super(scope, id);
 
-    const cloudfrontAssetsPath = path.join(process.cwd(), 'cloudfront');
-    const viewerRequestFunctionPath = path.join(
-      cloudfrontAssetsPath,
-      'viewer-request.js',
-    );
-    const redirectsPath = path.join(cloudfrontAssetsPath, 'redirects.json');
+    const { appName, environment, envConfig } = props;
+    const {
+      alternateDomainNames,
+      compiledEdgeAssetPath,
+      domainName,
+      redirectsAssetPath,
+    } = envConfig;
 
     this.bucket = new s3.Bucket(this, 'SiteBucket', {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
@@ -36,32 +41,22 @@ export class StaticSiteConstruct extends Construct {
     });
 
     this.hostedZone = new route53.PublicHostedZone(this, 'HostedZone', {
-      zoneName: props.domainName,
+      zoneName: domainName,
     });
 
     const certificate = new acm.Certificate(this, 'Certificate', {
-      domainName: props.domainName,
-      subjectAlternativeNames: [`www.${props.domainName}`],
+      domainName,
+      subjectAlternativeNames: alternateDomainNames,
       validation: acm.CertificateValidation.fromDns(this.hostedZone),
     });
 
-    const redirectStore = new cloudfront.KeyValueStore(this, 'RedirectStore', {
-      comment: `Redirects for ${props.domainName}`,
-      source: cloudfront.ImportSource.fromAsset(redirectsPath),
+    const routing = new CloudFrontRouting(this, 'CloudFrontRouting', {
+      appName,
+      environment,
+      domainName,
+      compiledEdgeAssetPath,
+      redirectsAssetPath,
     });
-
-    const viewerRequestFunction = new cloudfront.Function(
-      this,
-      'ViewerRequestFunction',
-      {
-        code: cloudfront.FunctionCode.fromFile({
-          filePath: viewerRequestFunctionPath,
-        }),
-        // CloudFront KeyValueStore requires the JS_2_0 runtime.
-        runtime: cloudfront.FunctionRuntime.JS_2_0,
-        keyValueStore: redirectStore,
-      },
-    );
 
     const responseHeadersPolicy = new cloudfront.ResponseHeadersPolicy(
       this,
@@ -126,13 +121,13 @@ export class StaticSiteConstruct extends Construct {
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         functionAssociations: [
           {
-            function: viewerRequestFunction,
+            function: routing.viewerRequestFunction,
             eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
           },
         ],
         responseHeadersPolicy,
       },
-      domainNames: [props.domainName, `www.${props.domainName}`],
+      domainNames: [domainName, ...alternateDomainNames],
       certificate,
       defaultRootObject: 'index.html',
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
@@ -168,29 +163,35 @@ export class StaticSiteConstruct extends Construct {
       target: distributionTarget,
     });
 
-    new route53.ARecord(this, 'WwwARecord', {
-      zone: this.hostedZone,
-      recordName: 'www',
-      target: distributionTarget,
-    });
+    for (const [index, alternateDomainName] of alternateDomainNames.entries()) {
+      const recordName = this.getRecordName(alternateDomainName, domainName);
 
-    new route53.AaaaRecord(this, 'WwwAAAARecord', {
-      zone: this.hostedZone,
-      recordName: 'www',
-      target: distributionTarget,
-    });
+      new route53.ARecord(this, `AlternateARecord${index}`, {
+        zone: this.hostedZone,
+        recordName,
+        target: distributionTarget,
+      });
 
-    new cdk.CfnOutput(this, 'BucketName', {
-      value: this.bucket.bucketName,
-    });
-    new cdk.CfnOutput(this, 'DistributionId', {
-      value: this.distribution.distributionId,
-    });
-    new cdk.CfnOutput(this, 'DistributionDomainName', {
-      value: this.distribution.distributionDomainName,
-    });
-    new cdk.CfnOutput(this, 'NameServers', {
-      value: cdk.Fn.join(',', this.hostedZone.hostedZoneNameServers!),
-    });
+      new route53.AaaaRecord(this, `AlternateAAAARecord${index}`, {
+        zone: this.hostedZone,
+        recordName,
+        target: distributionTarget,
+      });
+    }
+  }
+
+  private getRecordName(
+    fullDomainName: string,
+    rootDomainName: string,
+  ): string {
+    const suffix = `.${rootDomainName}`;
+
+    if (!fullDomainName.endsWith(suffix)) {
+      throw new Error(
+        `Alternate domain "${fullDomainName}" must end with ".${rootDomainName}"`,
+      );
+    }
+
+    return fullDomainName.slice(0, -suffix.length);
   }
 }

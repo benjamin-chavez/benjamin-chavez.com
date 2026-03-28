@@ -1,47 +1,53 @@
+#.github/workflows/ci.yml
+
 name: CI
+run-name: "CI #${{ github.run_number }} | ${{ github.sha }}"
 
 on:
   push:
     branches: [master]
   pull_request:
     branches: [master]
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-2
+  CDK_STACK_NAME: BenjaminChavezDotCom
+  APP_URL: https://benjamin-chavez.com
+  ARTIFACT_NAME: dist
+  TAG_PREFIX: v
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
-      - name: Build
-        run: pnpm build
-        env:
-          NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}
-          NEXT_PUBLIC_APP_URL: https://benjamin-chavez.com
-      - uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist/
-          retention-days: 1
+    name: Build
+    uses: ./.github/workflows/build-static-site.yml
+    with:
+      app_url: ${{ env.APP_URL }}
+      artifact_name: ${{ env.ARTIFACT_NAME }}
+      aws_region: ${{ env.AWS_REGION }}
+    secrets: inherit
 
   lighthouse:
+    name: Lighthouse
     needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-      - name: Lighthouse CI
-        run: npx @lhci/cli autorun
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: lighthouse-results
-          path: .lighthouseci/
-          retention-days: 30
+    uses: ./.github/workflows/lighthouse-static-site.yml
+    with:
+      artifact_name: ${{ env.ARTIFACT_NAME }}
+
+  deploy:
+    name: Deploy
+    needs: [build, lighthouse]
+    if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    permissions:
+      contents: write
+      id-token: write
+    uses: ./.github/workflows/deploy-static-site.yml
+    with:
+      artifact_name: ${{ env.ARTIFACT_NAME }}
+      aws_region: ${{ env.AWS_REGION }}
+      cdk_stack_name: ${{ env.CDK_STACK_NAME }}
+      tag_prefix: ${{ env.TAG_PREFIX }}
+    secrets: inherit

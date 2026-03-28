@@ -13,7 +13,7 @@
     "declaration": false,
     "sourceMap": false,
     "rootDir": "./edge",
-    "outDir": "./cloudfront"
+    "outDir": "./dist/cloudfront"
   },
   "include": ["edge/**/*.ts", "edge/**/*.d.ts"]
 }

@@ -2,24 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="new infra&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/prettier.xml&#10;#&#9;.idea/vcs.xml">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/actions/tag-deployment/action.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/actions/tag-deployment/tag-deployment.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/lib/config/site-config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/lib/config/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/lib/constructs/cloudfront-routing.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/lib/stacks/static-site-stack.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/actions/setup-node-pnpm/action.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/actions/setup-node-pnpm/action.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tutorials/2026-03-28-cloudfront-redirect-refactor_codex.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/2026-03-28-cloudfront-redirect-refactor_codex.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/cdk.json" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/cdk.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/cloudfront/viewer-request.js" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/cloudfront/viewer-request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/lib/static-site-construct.ts" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/lib/static-site-construct.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientEnv.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientEnv.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/bin/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/bin/app.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/cloudfront/redirects.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/cloudfront/viewer-request.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/lib/static-site-construct.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/tsconfig.edge.json" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/tsconfig.edge.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/buildEnv.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/buildEnv.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/utility/cloudwatch-rum.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/utility/cloudwatch-rum.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/utility/sentry-init.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/utility/sentry-init.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="GitHub Action" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,6 +86,9 @@
   &quot;fromUser&quot;: false
 }</component>
   <component name="ProjectId" id="3BZxJwJN60MjGd9x0elEa4Nd295" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
@@ -104,6 +120,7 @@
   },
   "keyToStringList": {
     "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TypeScript",
       "TEXT"
     ]
   }
@@ -114,6 +131,9 @@
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/.github" />
       <recent name="$PROJECT_DIR$/scripts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.github/actions/tag-deployment" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: server-side">
