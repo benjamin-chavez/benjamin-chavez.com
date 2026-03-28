@@ -1,34 +1,38 @@
 name: Deploy
+run-name: ""
 
 on:
   push:
     branches: [master]
 
 env:
-  AWS_REGION: us-east-1
-  CDK_STACK_NAME: BenjaminChavezSite
+  AWS_REGION: us-east-2
+  CDK_STACK_NAME: BenjaminChavezDotCom
 
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
-      id-token: write
-      contents: read
+        contents: read
+        id-token: write  # Needed for AWS OIDC
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repository code
+        uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
+      - name: Setup Node.js and PNPM
+        id: setup-node-pnpm
+        uses: ./.github/actions/setup-node-pnpm
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: pnpm
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
 
-      - run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm build
 
-      - run: pnpm build
-
-      - uses: aws-actions/configure-aws-credentials@v4
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "tsc",
+    "build:local": "tsc",
     "cdk": "cdk",
     "synth": "cdk synth",
     "deploy": "cdk deploy",

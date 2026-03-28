@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+
+// infrastructure/bin/app.ts
+
 import * as cdk from 'aws-cdk-lib';
 import { StaticSiteConstruct } from '../lib/static-site-construct';
 
@@ -8,12 +11,6 @@ class BenjaminChavezSiteStack extends cdk.Stack {
 
     new StaticSiteConstruct(this, 'Site', {
       domainName: 'benjamin-chavez.com',
-      redirects: {
-        '/blog/step-by-step-guide-setting-up-expressjs-typescript-web-app':
-          '/blog/creating-a-typescript-express.js-web-application-with-es6-step-by-step-guide/',
-        '/downloads/epay-mailer':
-          '/downloads/Estimated%20Tax%20Payment%20Mailer.zip',
-      },
     });
   }
 }

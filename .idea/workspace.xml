@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="new infra&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/prettier.xml&#10;#&#9;.idea/vcs.xml" />
+    <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="new infra&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/prettier.xml&#10;#&#9;.idea/vcs.xml">
+      <change afterPath="$PROJECT_DIR$/.github/actions/setup-node-pnpm/action.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.nvmrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/cloudfront/redirects.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/cloudfront/viewer-request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/lib/static-site-construct.ts" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/lib/static-site-construct.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/package.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,7 +86,7 @@
     "javascript.preferred.runtime.type.id": "node",
     "js.debugger.nextJs.config.created.client": "true",
     "js.debugger.nextJs.config.created.server": "true",
-    "last_opened_file_path": "/Users/benjaminchavez/Code/benjamin-chavez.com/.github",
+    "last_opened_file_path": "/Users/benjaminchavez/Code/benjamin-chavez.com/.github/actions",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "pnpm",
@@ -91,6 +99,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.github/actions" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/.github" />
       <recent name="$PROJECT_DIR$/scripts" />
     </key>

@@ -1,3 +1,6 @@
+// infrastructure/lib/static-site-construct.ts
+
+import * as path from 'path';
 import * as cdk from 'aws-cdk-lib';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
@@ -9,7 +12,6 @@ import { Construct } from 'constructs';
 
 export interface StaticSiteProps {
   domainName: string;
-  redirects?: Record<string, string>;
 }
 
 export class StaticSiteConstruct extends Construct {
@@ -20,38 +22,50 @@ export class StaticSiteConstruct extends Construct {
   constructor(scope: Construct, id: string, props: StaticSiteProps) {
     super(scope, id);
 
-    // S3 bucket — private, CloudFront OAC access only
+    const viewerRequestFunctionPath = path.join(
+      process.cwd(),
+      'cloudfront',
+      'viewer-request.js',
+    );
+    const redirectsPath = path.join(
+      process.cwd(),
+      'cloudfront',
+      'redirects.json',
+    );
+
     this.bucket = new s3.Bucket(this, 'SiteBucket', {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
       encryption: s3.BucketEncryption.S3_MANAGED,
     });
 
-    // Route 53 hosted zone
     this.hostedZone = new route53.PublicHostedZone(this, 'HostedZone', {
       zoneName: props.domainName,
     });
 
-    // ACM certificate (DNS-validated via Route 53)
     const certificate = new acm.Certificate(this, 'Certificate', {
       domainName: props.domainName,
       subjectAlternativeNames: [`www.${props.domainName}`],
       validation: acm.CertificateValidation.fromDns(this.hostedZone),
     });
 
-    // CloudFront Function for clean URLs + redirects
+    const redirectStore = new cloudfront.KeyValueStore(this, 'RedirectStore', {
+      comment: `Redirects for ${props.domainName}`,
+      source: cloudfront.ImportSource.fromAsset(redirectsPath),
+    });
+
     const viewerRequestFunction = new cloudfront.Function(
       this,
       'ViewerRequestFunction',
       {
-        code: cloudfront.FunctionCode.fromInline(
-          this.buildCloudFrontFunction(props.redirects ?? {}),
-        ),
+        code: cloudfront.FunctionCode.fromFile({
+          filePath: viewerRequestFunctionPath,
+        }),
         runtime: cloudfront.FunctionRuntime.JS_2_0,
+        keyValueStore: redirectStore,
       },
     );
 
-    // Response headers policy with security headers
     const responseHeadersPolicy = new cloudfront.ResponseHeadersPolicy(
       this,
       'SecurityHeaders',
@@ -61,9 +75,9 @@ export class StaticSiteConstruct extends Construct {
             contentSecurityPolicy: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://static.cloudflareinsights.com https://www.youtube.com",
-              "frame-src youtube.com www.youtube.com https://imgur.com/",
+              'frame-src youtube.com www.youtube.com https://imgur.com/',
               "style-src 'self' 'unsafe-inline'",
-              "img-src * blob: data:",
+              'img-src * blob: data:',
               "media-src 'none'",
               "connect-src 'self' https://static.cloudflareinsights.com",
               "font-src 'self'",
@@ -109,12 +123,10 @@ export class StaticSiteConstruct extends Construct {
       },
     );
 
-    // CloudFront distribution
     this.distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: origins.S3BucketOrigin.withOriginAccessControl(this.bucket),
-        viewerProtocolPolicy:
-          cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         functionAssociations: [
           {
             function: viewerRequestFunction,
@@ -126,8 +138,7 @@ export class StaticSiteConstruct extends Construct {
       domainNames: [props.domainName, `www.${props.domainName}`],
       certificate,
       defaultRootObject: 'index.html',
-      minimumProtocolVersion:
-        cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
+      minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
       httpVersion: cloudfront.HttpVersion.HTTP2_AND_3,
       priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
       errorResponses: [
@@ -146,22 +157,32 @@ export class StaticSiteConstruct extends Construct {
       ],
     });
 
-    // DNS records
+    const distributionTarget = route53.RecordTarget.fromAlias(
+      new targets.CloudFrontTarget(this.distribution),
+    );
+
     new route53.ARecord(this, 'ARecord', {
       zone: this.hostedZone,
-      target: route53.RecordTarget.fromAlias(
-        new targets.CloudFrontTarget(this.distribution),
-      ),
+      target: distributionTarget,
     });
 
     new route53.AaaaRecord(this, 'AAAARecord', {
       zone: this.hostedZone,
-      target: route53.RecordTarget.fromAlias(
-        new targets.CloudFrontTarget(this.distribution),
-      ),
+      target: distributionTarget,
     });
 
-    // Stack outputs
+    new route53.ARecord(this, 'WwwARecord', {
+      zone: this.hostedZone,
+      recordName: 'www',
+      target: distributionTarget,
+    });
+
+    new route53.AaaaRecord(this, 'WwwAAAARecord', {
+      zone: this.hostedZone,
+      recordName: 'www',
+      target: distributionTarget,
+    });
+
     new cdk.CfnOutput(this, 'BucketName', {
       value: this.bucket.bucketName,
     });
@@ -174,38 +195,5 @@ export class StaticSiteConstruct extends Construct {
     new cdk.CfnOutput(this, 'NameServers', {
       value: cdk.Fn.join(',', this.hostedZone.hostedZoneNameServers!),
     });
-  }
-
-  private buildCloudFrontFunction(
-    redirects: Record<string, string>,
-  ): string {
-    const redirectEntries = Object.entries(redirects)
-      .map(([from, to]) => `    '${from}': '${to}'`)
-      .join(',\n');
-
-    return `
-function handler(event) {
-  var request = event.request;
-  var uri = request.uri;
-
-  var redirects = {
-${redirectEntries}
-  };
-  if (redirects[uri]) {
-    return {
-      statusCode: 301,
-      headers: { location: { value: redirects[uri] } }
-    };
-  }
-
-  if (uri.endsWith('/')) {
-    request.uri += 'index.html';
-  } else if (!uri.includes('.')) {
-    request.uri += '/index.html';
-  }
-
-  return request;
-}
-`;
   }
 }

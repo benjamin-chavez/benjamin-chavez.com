@@ -1,0 +1,12 @@
+name: 'Setup Node.js and PNPM'
+description: 'Sets up Node.js and PNPM based on project configuration files'
+
+runs:
+  using: "composite"
+  steps:
+    - uses: pnpm/action-setup@v4
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version-file: '.nvmrc'
+        cache: 'pnpm'
