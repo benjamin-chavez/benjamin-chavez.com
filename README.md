@@ -39,7 +39,7 @@ Finally, open [http://localhost:3000](http://localhost:3000) in your browser to 
   - Rebuilds the `.next` and `.contentlayer` folders before running the development server. This is required in order to see styling changes when editing the blog markdown file: `ctrl-markdown-theme.json`.
 
 - `pnpm run build`
-  - Creates a production build
+  - Builds the infrastructure package, then creates the production web build
 
 - `pnpm run start`
   - Runs a local copy of the production build on [http://localhost:3000](http://localhost:3000)
