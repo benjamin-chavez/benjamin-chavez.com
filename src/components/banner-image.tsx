@@ -1,5 +1,4 @@
 // src/components/banner-image.tsx
-'use client';
 
 export default function BannerImage() {
   return (

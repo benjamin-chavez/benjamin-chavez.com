@@ -18,14 +18,36 @@ export interface Post {
 
 const CONTENT_DIR = path.join(process.cwd(), 'src/content');
 
+let cachedPosts: Post[] | null = null;
+
 export function getAllPosts(): Post[] {
-  return fs
+  if (cachedPosts) return cachedPosts;
+
+  cachedPosts = fs
     .readdirSync(CONTENT_DIR)
     .filter((f) => f.endsWith('.mdx'))
     .map((filename) => {
       const slug = filename.replace(/\.mdx$/, '');
       const raw = fs.readFileSync(path.join(CONTENT_DIR, filename), 'utf-8');
       const { data, content } = matter(raw);
+
+      // Validate required frontmatter fields
+      const required = [
+        'title',
+        'author',
+        'description',
+        'summary',
+        'publishedAt',
+        'updatedAt',
+      ] as const;
+      for (const field of required) {
+        if (!data[field]) {
+          throw new Error(
+            `Missing required frontmatter field "${field}" in ${filename}`,
+          );
+        }
+      }
+
       const rt = readingTime(content); // body only, not frontmatter
 
       return {
@@ -55,14 +77,17 @@ export function getAllPosts(): Post[] {
       (a, b) =>
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
     );
+
+  return cachedPosts;
 }
 
 export function getPublishedPosts(): Post[] {
-  const now = new Date();
+  // Compare date strings directly — YYYY-MM-DD format is lexicographically
+  // sortable and avoids timezone issues with Date parsing.
+  const today = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD" in UTC
   return getAllPosts().filter(
     (post) =>
-      new Date(post.publishedAt) <= now ||
-      process.env.NODE_ENV === 'development',
+      post.publishedAt <= today || process.env.NODE_ENV === 'development',
   );
 }
 

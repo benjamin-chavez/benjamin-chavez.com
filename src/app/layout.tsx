@@ -57,6 +57,10 @@ export const metadata: Metadata = {
     // yandex: '14d2e73487fa6c71',
   },
 };
+if (!process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN) {
+  console.warn('[layout] NEXT_PUBLIC_CF_ANALYTICS_TOKEN is not set — Cloudflare Web Analytics will be disabled');
+}
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -66,7 +70,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     >
       <body className=" flex min-h-full flex-col">
         <RootLayout>{children}</RootLayout>
-        {/* Cloudflare Web Analytics — token TBD */}
+        {/* Cloudflare Web Analytics — loads only when NEXT_PUBLIC_CF_ANALYTICS_TOKEN is set */}
         {process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN && (
           <Script
             strategy="afterInteractive"

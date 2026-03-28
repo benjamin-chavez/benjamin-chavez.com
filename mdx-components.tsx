@@ -1,6 +1,5 @@
 import type { MDXComponents } from 'mdx/types';
 import Image from 'next/image';
-import clsx from 'clsx';
 import { cx } from 'cva.config';
 import CodeBlockTitle from '@/components/code-block-title';
 import CodeCopyButton from '@/components/code-copy-button';
@@ -9,7 +8,7 @@ export function useMDXComponents(): MDXComponents {
   return {
     h2: ({ className, ...props }: any) => (
       <h2
-        className={clsx(
+        className={cx(
           'mb-6 scroll-m-16 font-normal uppercase',
           'text-xl tracking-[.1rem] text-[#141414]',
           ' [&:not(:first-child)]:mt-16',
@@ -20,7 +19,7 @@ export function useMDXComponents(): MDXComponents {
     ),
     h3: ({ className, ...props }: any) => (
       <h3
-        className={clsx(
+        className={cx(
           'scroll-m-16 font-dosis font-normal',
           'text-lg uppercase text-[#141414]',
           className,
@@ -53,7 +52,7 @@ export function useMDXComponents(): MDXComponents {
     },
     strong: ({ className, ...props }: any) => (
       <strong
-        className={clsx(
+        className={cx(
           'font-open-sans text-[0.94rem] font-normal text-neutral-600',
           className,
         )}
@@ -62,7 +61,7 @@ export function useMDXComponents(): MDXComponents {
     ),
     p: ({ className, ...props }: any) => (
       <p
-        className={clsx(
+        className={cx(
           'font-open-sans text-[0.94rem] font-light text-[#777777] ',
           className,
         )}
@@ -106,7 +105,7 @@ export function useMDXComponents(): MDXComponents {
     ),
     pre: (props: any) => (
       <pre
-        className={clsx(
+        className={cx(
           'px-0',
           'group relative m-0 overflow-x-auto rounded-md py-4',
           props.className,
