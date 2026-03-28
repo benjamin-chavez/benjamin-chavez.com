@@ -53,9 +53,11 @@ require_command pnpm
 require_env AWS_REGION
 require_env CLOUDFRONT_CERTIFICATE_REGION
 
+AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text)"
+
 export AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-$AWS_REGION}"
 export CDK_DEFAULT_REGION="${CDK_DEFAULT_REGION:-$AWS_REGION}"
-export CDK_DEFAULT_ACCOUNT="${CDK_DEFAULT_ACCOUNT:-$(aws sts get-caller-identity --query Account --output text)}"
+export CDK_DEFAULT_ACCOUNT="${CDK_DEFAULT_ACCOUNT:-$AWS_ACCOUNT_ID}"
 
 STACK_NAME="${CDK_STACK_NAME:-$(jq -r '.context.stackName' infrastructure/cdk.json)}"
 if [[ -z "$STACK_NAME" || "$STACK_NAME" == "null" ]]; then
@@ -66,18 +68,23 @@ fi
 require_file .env.local
 require_env_file_value NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME .env.local
 require_env_file_value NEXT_PUBLIC_APP_URL .env.local
-require_env_file_value NEXT_PUBLIC_AWS_REGION .env.local
-require_env_file_value AWS_REGION .env.local
+
+export NEXT_PUBLIC_AWS_REGION="${NEXT_PUBLIC_AWS_REGION:-$AWS_REGION}"
 
 echo "Mode: $MODE"
 echo "AWS_REGION: $AWS_REGION"
+echo "NEXT_PUBLIC_AWS_REGION: $NEXT_PUBLIC_AWS_REGION"
 echo "CLOUDFRONT_CERTIFICATE_REGION: $CLOUDFRONT_CERTIFICATE_REGION"
 echo "CDK_DEFAULT_ACCOUNT: $CDK_DEFAULT_ACCOUNT"
 echo "CDK stack: $STACK_NAME"
 
 echo
-echo "Installing infrastructure dependencies..."
-pnpm --dir infrastructure install --frozen-lockfile
+if [[ ! -x infrastructure/node_modules/.bin/ts-node || ! -x infrastructure/node_modules/.bin/cdk ]]; then
+  echo "Installing infrastructure dependencies..."
+  CI=true pnpm --dir infrastructure install --frozen-lockfile
+else
+  echo "Infrastructure dependencies already installed."
+fi
 
 echo
 echo "Checking infrastructure diff..."

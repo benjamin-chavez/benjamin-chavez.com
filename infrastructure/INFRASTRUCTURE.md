@@ -34,3 +34,14 @@ Run commands from the repo root with `pnpm --dir infrastructure run <script>`, o
 
 - [Root README](../README.md) for app development and root-level commands
 - [`.github/CI-CD.md`](../.github/CI-CD.md) for the GitHub Actions deployment pipeline
+- [`INITIAL_DEPLOYMENT.md`](INITIAL_DEPLOYMENT.md) for the first manual AWS deployment runbook
+- [`../scripts/initial-aws-deploy.sh`](../scripts/initial-aws-deploy.sh) for the user-run helper script
+
+## Region Notes
+
+The deployment uses two AWS regions on purpose:
+
+- `AWS_REGION` is your main stack region and is currently intended to be `us-east-2`
+- `CLOUDFRONT_CERTIFICATE_REGION` must remain `us-east-1` for the ACM certificate attached to CloudFront
+
+CloudFront viewer certificates cannot use an ACM certificate from `us-east-2`.

@@ -35,6 +35,21 @@ export CLOUDFRONT_CERTIFICATE_REGION=us-east-1
 
 `AWS_REGION` is the deployment region for the stack and site assets. `CLOUDFRONT_CERTIFICATE_REGION` is separate because CloudFront viewer certificates must be created in `us-east-1`.
 
+## Why The Regions Do Not Match
+
+This repo intentionally uses two AWS regions during infrastructure deployment:
+
+- `AWS_REGION=us-east-2`
+  - main stack region
+  - S3 bucket
+  - most CDK-managed resources
+- `CLOUDFRONT_CERTIFICATE_REGION=us-east-1`
+  - ACM certificate used by CloudFront for `benjamin-chavez.com` and `www.benjamin-chavez.com`
+
+This split is required by AWS. CloudFront is a global service, but ACM certificates attached to CloudFront distributions must be created in `us-east-1`. That means the site stack can live in `us-east-2` while the CloudFront viewer certificate still has to be provisioned in `us-east-1`.
+
+Do not change `CLOUDFRONT_CERTIFICATE_REGION` to `us-east-2` unless you also change away from using an ACM certificate on CloudFront.
+
 Optional but supported overrides:
 
 ```bash
@@ -78,11 +93,9 @@ Create `.env.local` if it does not exist and set at least:
 ```dotenv
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=<cloudinary-cloud-name>
 NEXT_PUBLIC_APP_URL=https://benjamin-chavez.com
-NEXT_PUBLIC_AWS_REGION=us-east-2
-AWS_REGION=us-east-2
 ```
 
-The helper script validates that `.env.local` exists before it runs.
+The helper script validates that `.env.local` exists before it runs. It derives `NEXT_PUBLIC_AWS_REGION` from your exported `AWS_REGION`, so the region does not need to be hardcoded in `.env.local`.
 
 ## First Deployment Flow
 

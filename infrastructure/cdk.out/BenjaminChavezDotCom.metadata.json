@@ -1,0 +1,146 @@
+{
+  "/BenjaminChavezDotCom/AWSCloudFrontPartitionHostedZoneIdMap": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AWSCloudFrontPartitionHostedZoneIdMap"
+    }
+  ],
+  "/BenjaminChavezDotCom/BucketName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BucketName"
+    }
+  ],
+  "/BenjaminChavezDotCom/DistributionId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DistributionId"
+    }
+  ],
+  "/BenjaminChavezDotCom/DistributionDomainName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DistributionDomainName"
+    }
+  ],
+  "/BenjaminChavezDotCom/NameServers": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NameServers"
+    }
+  ],
+  "/BenjaminChavezDotCom/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/BenjaminChavezDotCom/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/SiteBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteSiteBucket7CA177D5"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/HostedZone/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteHostedZone0E1602DC"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/Certificate/CertificateRequestorFunction": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+      "data": 0
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/SecurityHeaders/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteSecurityHeaders2B88159C"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/Distribution/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteDistribution390DED28"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/ARecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteARecordDC5A9E63"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/AAAARecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteAAAARecordC995A123"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/AlternateARecord0/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteAlternateARecord0238F1B98"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/AlternateAAAARecord0/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteAlternateAAAARecord04196C860"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/SiteBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteSiteBucketPolicy0953BA94"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/Certificate/CertificateRequestorFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteCertificateCertificateRequestorFunctionCD9FC6AA"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/Certificate/CertificateRequestorResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteCertificateCertificateRequestorResource86F17F2A"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/CloudFrontRouting/RedirectStore/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteCloudFrontRoutingRedirectStore703D8D3B"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/CloudFrontRouting/ViewerRequestFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteCloudFrontRoutingViewerRequestFunction731EB125"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/Certificate/CertificateRequestorFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteCertificateCertificateRequestorFunctionServiceRole5666ECA6"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/Distribution/Origin1/S3OriginAccessControl/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteDistributionOrigin1S3OriginAccessControl4F95283E"
+    }
+  ],
+  "/BenjaminChavezDotCom/Site/Certificate/CertificateRequestorFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy71AFF3A0"
+    }
+  ]
+}
