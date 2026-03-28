@@ -1,11 +1,9 @@
 import 'server-only';
 
 import RootLayout from '@/components/root-layout';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
-// @ts-ignore
 import { Dosis, Inter, Open_Sans } from 'next/font/google';
+import Script from 'next/script';
 import '../styles/globals.css';
 
 const inter = Inter({
@@ -63,12 +61,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${open_sans.variable} ${dosis.variable} ${inter.variable} h-full scroll-smooth bg-[#ECEDFA] font-dosis text-base antialiased`}
     >
       <body className=" flex min-h-full flex-col">
         <RootLayout>{children}</RootLayout>
-        <Analytics />
-        <SpeedInsights />
+        {/* Cloudflare Web Analytics — token TBD */}
+        {process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN && (
+          <Script
+            strategy="afterInteractive"
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token":"${process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN}"}`}
+          />
+        )}
       </body>
     </html>
   );

@@ -4,7 +4,6 @@
 
 import { cx } from 'cva.config';
 import Link from 'next/link';
-// @ts-ignore
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Container } from '../container';
@@ -92,7 +91,7 @@ export default function Navbar() {
         <Link
           key={path}
           href={path}
-          ref={(el) => (navItemRefs.current[path] = el)}
+          ref={(el) => { navItemRefs.current[path] = el; }}
           className={cx('mx-1 text-[#141414] transition-all ', {
             '!text-neutral-500 hover:!text-neutral-500/80': !isActive,
           })}

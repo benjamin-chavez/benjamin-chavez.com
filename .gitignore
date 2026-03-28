@@ -37,3 +37,12 @@ next-env.d.ts
 # contentlayer
 .contentlayer
 
+# claude
+.claude/
+
+# conext
+.conext/
+
+# screenshots (before/after verification)
+.conext/screenshots/
+

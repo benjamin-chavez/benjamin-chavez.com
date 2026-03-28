@@ -3,7 +3,7 @@ import 'server-only';
 
 import { Container } from '@/components/container';
 import { formatDate } from '@/lib/utils';
-import { allBlogs } from 'contentlayer/generated';
+import { getPublishedPosts } from '@/lib/posts';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -14,18 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function Blog() {
-  const publicPosts = allBlogs
-    .filter(
-      (post) =>
-        new Date(post.publishedAt) <= new Date() ||
-        process.env.NODE_ENV === 'development',
-    )
-    .sort((a, b) => {
-      if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
-        return -1;
-      }
-      return 1;
-    });
+  const publicPosts = getPublishedPosts();
 
   return (
     <>

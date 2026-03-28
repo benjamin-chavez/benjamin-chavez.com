@@ -1,18 +1,13 @@
 // src/app/sitemap.ts
 
-import { allBlogs } from 'contentlayer/generated';
+export const dynamic = 'force-static';
+
+import { getPublishedPosts } from '@/lib/posts';
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const today = new Date();
-
-  const filteredBlogs = allBlogs.filter((post) => {
-    const publishDate = new Date(post.publishedAt);
-    return publishDate <= today;
-  });
-
-  const blogs = filteredBlogs.map((post) => ({
-    url: `https://benjamin-chavez.com/blog/${post.slug}`,
+  const blogs = getPublishedPosts().map((post) => ({
+    url: `https://benjamin-chavez.com/blog/${post.slug}/`,
     lastModified: post.updatedAt,
   }));
 

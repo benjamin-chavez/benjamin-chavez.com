@@ -3,7 +3,7 @@
 import { cx } from '../../cva.config';
 
 type ContainerProps = {
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
   className?: string;
   children: React.ReactNode;
   [x: string]: any;

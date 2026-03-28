@@ -2,7 +2,7 @@
 
 'use client';
 
-import { Dialog } from '@headlessui/react';
+import { Dialog, DialogPanel } from '@headlessui/react';
 import Link from 'next/link';
 import { LogoIconLink, NavItem } from '.';
 import { XMarkIcon } from '../icons/x-mark-icon';
@@ -27,7 +27,7 @@ export default function MobileMenu({
       >
         <div className="fixed inset-0 z-50" />
 
-        <Dialog.Panel className="x-5 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white py-3  pr-2 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <DialogPanel className="x-5 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white py-3  pr-2 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <Container className="mx-auto max-w-7xl  md:max-w-none md:px-12">
             <div className="flex items-center justify-between ">
               <LogoIconLink  />
@@ -57,7 +57,7 @@ export default function MobileMenu({
               </div>
             </div>
           </Container>
-        </Dialog.Panel>
+        </DialogPanel>
       </Dialog>
     </>
   );
