@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "dev:clear-cache": "rm -rf .next && next dev --webpack",
-    "build": "tsx --env-file=.env --env-file=.env.local scripts/generate-og-images.tsx && next build --webpack",
+    "build": "tsx --env-file=.env --env-file=.env scripts/generate-og-images.tsx && next build --webpack",
     "start": "next start",
     "lint": "next lint"
   },
