@@ -1,6 +1,6 @@
 // src/components/icons/download-icon.tsx
 
-export function DownloadIcon({ className }: { className?: string }) {
+export function DownloadIcon({ className }: Readonly<{ className?: string }>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -3,12 +3,15 @@ import 'server-only';
 
 import Footer from '@/components/footer';
 import Navbar from './navbar';
+import React from 'react';
 
-function RootLayoutInner({ children }: { children: React.ReactNode }) {
+function RootLayoutInner({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
       <Navbar />
-      <main className=" h-full w-full flex-auto">{children}</main>
+      <main className="w-full flex-auto bg-[#ECEDFA]">{children}</main>
       <Footer />
     </>
   );
@@ -16,8 +19,8 @@ function RootLayoutInner({ children }: { children: React.ReactNode }) {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return <RootLayoutInner>{children}</RootLayoutInner>;
 }

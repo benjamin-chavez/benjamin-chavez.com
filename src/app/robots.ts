@@ -1,5 +1,9 @@
 // src/app/robots.ts
 
+export const dynamic = 'force-static';
+
+import { clientEnv } from '@/clientEnv';
+
 export default function robots() {
   return {
     rules: [
@@ -7,7 +11,7 @@ export default function robots() {
         userAgent: '*',
       },
     ],
-    sitemap: 'https://benjamin-chavez.com/sitemap.xml',
-    host: 'https://benjamin-chavez.com',
+    sitemap: `${clientEnv.NEXT_PUBLIC_APP_URL}/sitemap.xml`,
+    host: clientEnv.NEXT_PUBLIC_APP_URL,
   };
 }

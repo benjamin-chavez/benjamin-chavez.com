@@ -161,43 +161,41 @@ const projects = [
   },
 ];
 
-function PortfolioCard({ project }: { project: any }) {
+function PortfolioCard({ project }: Readonly<{ project: any }>) {
   return (
-    <>
-      <div className="group relative aspect-video w-full rounded-[3px] shadow-basic">
-        <Image
-          src={project.image}
-          className="absolute inset-0 rounded-[3px]"
-          fill
-          placeholder="blur"
-          alt={project.altText}
-          loading="lazy"
-        />
-        <div className="relative z-10 flex h-full flex-col justify-center rounded-[3px] p-4 text-center transition duration-600 ease-in-out group-hover:bg-black/80">
-          <h3 className="font-dosis text-3xl tracking-[.18rem] text-transparent [text-wrap:balance] group-hover:text-white">
-            {project.title}
-          </h3>
-          <p className="mt-2 font-open-sans text-base text-transparent group-hover:text-gray-400 ">
-            {project.description}
-          </p>
-          <div className=" mt-4 flex justify-center gap-4 ">
-            {project.links.map((link: any) => (
-              <a
-                key={link.url}
-                href={link.url}
-                className="flex w-14 items-center justify-center rounded py-2 font-open-sans text-base text-transparent hover:!text-white group-hover:border group-hover:border-white group-hover:text-gray-400"
-                target="_blank"
-                rel="noopener noreferrer"
-                title={link.type}
-              >
-                {link.icon && link.icon}
-                <span className="sr-only">{link.type}</span>
-              </a>
-            ))}
-          </div>
+    <div className="group relative aspect-video w-full rounded-[3px] shadow-basic">
+      <Image
+        src={project.image}
+        className="absolute inset-0 rounded-[3px]"
+        fill
+        placeholder="blur"
+        alt={project.altText}
+        loading="lazy"
+      />
+      <div className="relative z-10 flex h-full flex-col justify-center rounded-[3px] p-4 text-center transition duration-600 ease-in-out group-hover:bg-black/80">
+        <h3 className="font-dosis text-3xl tracking-[.18rem] text-transparent [text-wrap:balance] group-hover:text-white">
+          {project.title}
+        </h3>
+        <p className="mt-2 font-open-sans text-base text-transparent group-hover:text-gray-400 ">
+          {project.description}
+        </p>
+        <div className=" mt-4 flex justify-center gap-4 ">
+          {project.links.map((link: any) => (
+            <a
+              key={link.url}
+              href={link.url}
+              className="flex w-14 items-center justify-center rounded py-2 font-open-sans text-base text-transparent hover:!text-white group-hover:border group-hover:border-white group-hover:text-gray-400"
+              target="_blank"
+              rel="noopener noreferrer"
+              title={link.type}
+            >
+              {link.icon && link.icon}
+              <span className="sr-only">{link.type}</span>
+            </a>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -220,9 +218,7 @@ export default function Portfolio() {
           {projects.map(
             (project) =>
               project.preview && (
-                <>
-                  <PortfolioCard key={project.title} project={project} />
-                </>
+                <PortfolioCard key={project.title} project={project} />
               ),
           )}
         </div>

@@ -1,12 +1,12 @@
 import 'server-only';
 
 import RootLayout from '@/components/root-layout';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { clientEnv } from '@/clientEnv';
 import { Metadata } from 'next';
-// @ts-ignore
 import { Dosis, Inter, Open_Sans } from 'next/font/google';
+import Script from 'next/script';
 import '../styles/globals.css';
+import React from 'react';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -23,7 +23,7 @@ const open_sans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://benjamin-chavez.com'),
+  metadataBase: new URL(clientEnv.NEXT_PUBLIC_APP_URL),
   title: {
     default: 'Benjamin Chavez | Full Stack Developer',
     template: '%s | Benjamin Chavez',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: 'Benjamin Chavez',
     description:
       'Explore the portfolio of Benjamin Chavez, a Chicago-based Full Stack Developer with a strong background in Javascript, Typescript, Node, React, Ruby on Rails, and PostgreSQL. Discover his work and contributions to software development.',
-    url: 'https://benjamin-chavez.com',
+    url: clientEnv.NEXT_PUBLIC_APP_URL,
     siteName: 'Benjamin Chavez',
     locale: 'en_US',
     type: 'website',
@@ -59,16 +59,27 @@ export const metadata: Metadata = {
     // yandex: '14d2e73487fa6c71',
   },
 };
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${open_sans.variable} ${dosis.variable} ${inter.variable} h-full scroll-smooth bg-[#ECEDFA] font-dosis text-base antialiased`}
     >
       <body className=" flex min-h-full flex-col">
+        <div className="pointer-events-none fixed inset-0 -z-50 bg-[linear-gradient(to_bottom,#F8F9FA_0%,#F8F9FA_50%,#040804_50%,#040804_100%)]" />
+
         <RootLayout>{children}</RootLayout>
-        <Analytics />
-        <SpeedInsights />
+        {/* Cloudflare Web Analytics — loads only when NEXT_PUBLIC_CF_ANALYTICS_TOKEN is set */}
+        {clientEnv.NEXT_PUBLIC_CF_ANALYTICS_TOKEN && (
+          <Script
+            strategy="afterInteractive"
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token":"${clientEnv.NEXT_PUBLIC_CF_ANALYTICS_TOKEN}"}`}
+          />
+        )}
       </body>
     </html>
   );

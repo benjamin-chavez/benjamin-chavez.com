@@ -1,12 +1,13 @@
 // src/components/container.tsx
 
 import { cx } from '../../cva.config';
+import React from 'react';
 
 type ContainerProps = {
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
   className?: string;
   children: React.ReactNode;
-  [x: string]: any;
+  [x: string]: unknown;
 };
 
 export function Container({
@@ -14,14 +15,10 @@ export function Container({
   className,
   children,
   ...props
-}: ContainerProps) {
+}: Readonly<ContainerProps>) {
   return (
     <Component
-      className={cx(
-        'mx-auto max-w-3xl px-5 md:px-4',
-        className,
-        //
-      )}
+      className={cx('mx-auto max-w-3xl px-5 md:px-4', className)}
       {...props}
     >
       {children}

@@ -62,10 +62,10 @@ const storySection = {
 function TextLink({
   href,
   children,
-}: {
+}: Readonly<{
   href: string;
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <a
       className="font-light text-neutral-900 underline hover:text-[#008000]"

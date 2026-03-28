@@ -1,7 +1,7 @@
 // src/components/icons/email-icon.tsx
 
 
-export function EmailIcon({ className }: { className?: string }) {
+export function EmailIcon({ className }: Readonly<{ className?: string }>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

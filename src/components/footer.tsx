@@ -26,7 +26,7 @@ const contactLinks = [
 
 export default function Footer() {
   return (
-    <section className="bg-parallax py-7 md:bg-fixed" id="contact">
+    <section className="bg-parallax bg-center py-7" id="contact">
       <Container className="flex w-fit max-w-5xl flex-col items-center py-9">
         <div className="flex flex-col items-center justify-center ">
           <h2 className=" font-dosis text-3xl uppercase leading-9 text-white">
@@ -50,6 +50,9 @@ export default function Footer() {
             );
           })}
         </div>
+        <p className="mt-4 text-sm text-neutral-500">
+          &copy; {new Date().getFullYear()} Benjamin Chavez
+        </p>
       </Container>
     </section>
   );
