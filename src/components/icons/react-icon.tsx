@@ -4,10 +4,10 @@ import { cx } from '../../../cva.config';
 export default function ReactIcon({
   className,
   props,
-}: {
+}: Readonly<{
   className?: string;
   props?: any;
-}) {
+}>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

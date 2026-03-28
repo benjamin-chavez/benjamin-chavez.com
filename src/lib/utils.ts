@@ -1,6 +1,6 @@
 // src/lib/utils.ts
 
-export function formatDate(date: string) {
+export function formatDate(date: string): string {
   const targetDate = new Date(date);
 
   const fullDate = targetDate.toLocaleString('en-us', {

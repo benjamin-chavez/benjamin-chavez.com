@@ -1,6 +1,7 @@
 // src/components/container.tsx
 
 import { cx } from '../../cva.config';
+import React from 'react';
 
 type ContainerProps = {
   as?: keyof React.JSX.IntrinsicElements;
@@ -14,7 +15,7 @@ export function Container({
   className,
   children,
   ...props
-}: ContainerProps) {
+}: Readonly<ContainerProps>) {
   return (
     <Component
       className={cx(

@@ -45,7 +45,7 @@ export async function generateMetadata({
   };
 }
 
-function BackButton({ className }: { className?: string }) {
+function BackButton({ className }: Readonly<{ className?: string }>) {
   return (
     <div className={cx('group w-fit px-0', className)}>
       <Link href="/blog" className="flex items-center justify-center ">
@@ -67,9 +67,9 @@ function BackButton({ className }: { className?: string }) {
 
 export default async function BlogPost({
   params,
-}: {
+}: Readonly<{
   params: Promise<{ slug: string }>;
-}) {
+}>) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
@@ -108,7 +108,7 @@ export default async function BlogPost({
       </div>
 
       <section className="my-16 flex flex-col">
-        <article className=" prose mx-auto max-w-none pb-20 prose-code:before:content-none prose-code:after:content-none ">
+        <article className=" prose mx-auto max-w-none pb-20  prose-code:before:content-none prose-code:after:content-none ">
           <PostContent />
         </article>
       </section>

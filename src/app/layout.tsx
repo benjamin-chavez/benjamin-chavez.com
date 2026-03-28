@@ -58,10 +58,14 @@ export const metadata: Metadata = {
   },
 };
 if (!process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN) {
-  console.warn('[layout] NEXT_PUBLIC_CF_ANALYTICS_TOKEN is not set — Cloudflare Web Analytics will be disabled');
+  console.warn(
+    '[layout] NEXT_PUBLIC_CF_ANALYTICS_TOKEN is not set — Cloudflare Web Analytics will be disabled',
+  );
 }
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"

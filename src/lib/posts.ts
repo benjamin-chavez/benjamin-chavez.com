@@ -23,7 +23,7 @@ let cachedPosts: Post[] | null = null;
 export function getAllPosts(): Post[] {
   if (cachedPosts) return cachedPosts;
 
-  cachedPosts = fs
+  return fs
     .readdirSync(CONTENT_DIR)
     .filter((f) => f.endsWith('.mdx'))
     .map((filename) => {
@@ -77,8 +77,6 @@ export function getAllPosts(): Post[] {
       (a, b) =>
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
     );
-
-  return cachedPosts;
 }
 
 export function getPublishedPosts(): Post[] {

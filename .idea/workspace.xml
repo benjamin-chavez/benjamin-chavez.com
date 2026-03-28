@@ -2,9 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/cleanup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prettier.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/prettier.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/blog/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/blog/[slug]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/global-error.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/global-error.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/not-found.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/not-found.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/code-block-title.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/code-block-title.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/code-copy-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/code-copy-button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/container.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/container.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/hero.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/hero.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/bootstrap-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/bootstrap-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/github-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/github-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/html-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/html-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/javascript-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/javascript-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/linkedin-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/linkedin-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/linux-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/linux-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/mac-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/mac-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/moon-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/moon-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/nextjs-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/nextjs-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/python-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/python-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/react-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/react-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/redux-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/redux-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/typescript-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/typescript-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/website-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/website-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/icons/windows-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/windows-icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/my-story.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-story.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/navbar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/navbar/mobile-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/mobile-menu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/portfolio.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/portfolio.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/root-layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/root-layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/skills.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/skills.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/posts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/posts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,12 +50,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "benjamin-chavez"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;benjamin-chavez&quot;
   }
-}]]></component>
+}</component>
   <component name="GitToolBoxStore">
     <option name="recentBranches">
       <RecentBranches>
@@ -30,7 +66,11 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="nextjs-upgrade" />
-                    <option name="lastUsedInstant" value="1774710846" />
+                    <option name="lastUsedInstant" value="1774713186" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="major-version-upgrades" />
+                    <option name="lastUsedInstant" value="1774713071" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="phase-2-aws-infrastructure" />
@@ -45,26 +85,26 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:benjamin-chavez/benjamin-chavez.com.git",
-    "accountId": "b4450e84-4e74-4e45-b2af-32265ed0ed88"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:benjamin-chavez/benjamin-chavez.com.git&quot;,
+    &quot;accountId&quot;: &quot;b4450e84-4e74-4e45-b2af-32265ed0ed88&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1,
-  "fromUser": false
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3BZxJwJN60MjGd9x0elEa4Nd295" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
     <option name="sortByType" value="true" />
     <option name="sortKey" value="BY_TYPE" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -79,11 +119,16 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "pnpm",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "ts.external.directory.path": "/Users/benjaminchavez/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "settings.editor.selected.configurable": "Errors",
+    "ts.external.directory.path": "/Users/benjaminchavez/Code/benjamin-chavez.com/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.Next.js: server-side">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
@@ -113,11 +158,53 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1774710325871</updated>
-      <workItem from="1774710327000" duration="2528000" />
+      <workItem from="1774710327000" duration="4478000" />
+      <workItem from="1774715041557" duration="1864000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="next.config.mjs" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="major-version-upgrades" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="major-version-upgrades" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

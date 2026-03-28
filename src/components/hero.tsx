@@ -1,18 +1,16 @@
 // src/components/hero.tsx
-
 import 'server-only';
-// 'use client';
-// import BannerImage from '@/../public/img/Banner-image-cropped.png';
+
 import Link from 'next/link';
 import BannerImage from './banner-image';
 
 function HeroButton({
   href,
   children,
-}: {
+}: Readonly<{
   href: string;
   children: React.ReactNode;
-}) {
+}>) {
   return (
     //  "duration-600 transition ease-in-out group-hover:bg-black/80"
 
