@@ -155,9 +155,5 @@ vite.config.ts.timestamp-*
 # vercel
 .vercel
 
-# claude
-.claude/
 
-# conext
-.context/
 

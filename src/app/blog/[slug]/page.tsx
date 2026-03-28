@@ -4,7 +4,7 @@ import 'server-only';
 
 import { Container } from '@/components/container';
 import { formatDate } from '@/lib/utils';
-import { getPublishedPosts, getPostBySlug } from '@/lib/posts';
+import { getPostBySlug, getPublishedPosts } from '@/lib/posts';
 import { cx } from 'cva.config';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';

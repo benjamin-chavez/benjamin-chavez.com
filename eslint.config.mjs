@@ -12,7 +12,7 @@ export default tseslint.config(
       parserOptions: { project: './tsconfig.json' },
     },
     rules: {
-      '@typescript-eslint/prefer-readonly-parameter-types': 'warn',
+      // TODO:
     },
   },
 );

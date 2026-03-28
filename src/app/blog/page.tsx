@@ -3,7 +3,7 @@ import 'server-only';
 
 import { Container } from '@/components/container';
 import { formatDate } from '@/lib/utils';
-import { getPublishedPosts } from '@/lib/posts';
+import { getPublishedPosts, type Post } from '@/lib/posts';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -23,7 +23,7 @@ export default function Blog() {
       </h1>
 
       <div className="my-6 space-y-16 ">
-        {publicPosts.map((post) => (
+        {publicPosts.map((post: Post) => (
           <Link href={`/blog/${post.slug}`} key={post.slug}>
             <article className="ease  group mb-4 flex flex-col items-start justify-between rounded px-2 py-4 transition duration-200 hover:bg-black/10">
               <div className="flex items-center text-xs">

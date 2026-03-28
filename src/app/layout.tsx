@@ -1,6 +1,7 @@
 import 'server-only';
 
 import RootLayout from '@/components/root-layout';
+import { env } from '@/env';
 import { Metadata } from 'next';
 import { Dosis, Inter, Open_Sans } from 'next/font/google';
 import Script from 'next/script';
@@ -57,12 +58,6 @@ export const metadata: Metadata = {
     // yandex: '14d2e73487fa6c71',
   },
 };
-if (!process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN) {
-  console.warn(
-    '[layout] NEXT_PUBLIC_CF_ANALYTICS_TOKEN is not set — Cloudflare Web Analytics will be disabled',
-  );
-}
-
 export default function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -75,11 +70,11 @@ export default function Layout({
       <body className=" flex min-h-full flex-col">
         <RootLayout>{children}</RootLayout>
         {/* Cloudflare Web Analytics — loads only when NEXT_PUBLIC_CF_ANALYTICS_TOKEN is set */}
-        {process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN && (
+        {env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN && (
           <Script
             strategy="afterInteractive"
             src="https://static.cloudflareinsights.com/beacon.min.js"
-            data-cf-beacon={`{"token":"${process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN}"}`}
+            data-cf-beacon={`{"token":"${env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN}"}`}
           />
         )}
       </body>

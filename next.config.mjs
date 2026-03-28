@@ -3,7 +3,7 @@
 // `headers()` config is inert when `output: 'export'` is set.
 
 import createMDX from '@next/mdx';
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import remarkCodeTitles from 'remark-flexible-code-titles';
