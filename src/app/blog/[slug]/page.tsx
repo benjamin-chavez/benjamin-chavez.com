@@ -18,9 +18,9 @@ export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
-}: {
+}: Readonly<{
   params: Promise<{ slug: string }>;
-}): Promise<Metadata | undefined> {
+}>): Promise<Metadata | undefined> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return;

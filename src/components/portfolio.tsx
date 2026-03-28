@@ -161,7 +161,7 @@ const projects = [
   },
 ];
 
-function PortfolioCard({ project }: { project: any }) {
+function PortfolioCard({ project }: Readonly<{ project: any }>) {
   return (
     <div className="group relative aspect-video w-full rounded-[3px] shadow-basic">
       <Image

@@ -1,14 +1,15 @@
 // src/components/icons/rails-icon.tsx
 
 import { cx } from '../../../cva.config';
+import React from 'react';
 
 export default function RailsIcon({
   className,
   props,
-}: {
+}: Readonly<{
   className?: string;
-  props?: any;
-}) {
+  props?: React.SVGProps<SVGSVGElement>;
+}>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,13 +1,14 @@
 // src/components/icons/javascript-icon.tsx
 
 import { cx } from '../../../cva.config';
+import React from 'react';
 
 export default function JavaScriptIcon({
   className,
   props,
 }: Readonly<{
   className?: string;
-  props?: any;
+  props?: React.SVGProps<SVGSVGElement>;
 }>) {
   return (
     <svg

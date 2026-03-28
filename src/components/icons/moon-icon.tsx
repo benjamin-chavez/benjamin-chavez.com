@@ -1,13 +1,14 @@
 // src/components/icons/template-icon.tsx
 
 import { cx } from '../../../cva.config';
+import React from 'react';
 
 export default function MoonIcon({
   className,
   props,
 }: Readonly<{
   className?: string;
-  props?: any;
+  props?: React.SVGProps<SVGSVGElement>;
 }>) {
   return (
     <svg

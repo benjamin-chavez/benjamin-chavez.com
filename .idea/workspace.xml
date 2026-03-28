@@ -2,45 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/blog/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/blog/[slug]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/global-error.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/global-error.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/not-found.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/not-found.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/code-block-title.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/code-block-title.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/code-copy-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/code-copy-button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/container.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/container.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/hero.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/hero.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/bootstrap-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/bootstrap-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/github-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/github-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/html-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/html-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/javascript-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/javascript-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/linkedin-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/linkedin-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/linux-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/linux-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/mac-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/mac-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/moon-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/moon-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/nextjs-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/nextjs-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/python-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/python-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/react-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/react-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/redux-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/redux-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/typescript-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/typescript-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/website-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/website-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/icons/windows-icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icons/windows-icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/my-story.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-story.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbar/mobile-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/mobile-menu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/portfolio.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/portfolio.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/root-layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/root-layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/skills.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/skills.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/posts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/posts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +124,7 @@
       <option name="presentableId" value="Default" />
       <updated>1774710325871</updated>
       <workItem from="1774710327000" duration="4478000" />
-      <workItem from="1774715041557" duration="1864000" />
+      <workItem from="1774715041557" duration="2798000" />
     </task>
     <servers />
   </component>

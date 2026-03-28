@@ -1,13 +1,14 @@
 // src/components/icons/redux-icon.tsx
 
 import { cx } from '../../../cva.config';
+import React from 'react';
 
 export default function ReduxIcon({
   className,
   props,
 }: Readonly<{
   className?: string;
-  props?: any;
+  props?: React.SVGProps<SVGSVGElement>;
 }>) {
   return (
     <svg

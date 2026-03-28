@@ -1,14 +1,15 @@
 // src/components/icons/envelope-filled-icon.tsx
 
 import { cx } from '../../../cva.config';
+import React from 'react';
 
 export default function EnvelopeFilledIcon({
   className,
   props,
-}: {
+}: Readonly<{
   className?: string;
-  props?: any;
-}) {
+  props?: React.SVGProps<SVGSVGElement>;
+}>) {
   return (
     <>
       <svg

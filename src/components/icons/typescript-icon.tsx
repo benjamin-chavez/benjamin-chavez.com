@@ -1,11 +1,12 @@
 import { cx } from '../../../cva.config';
+import React from 'react';
 
 export default function TypescriptIcon({
   className,
   props,
 }: Readonly<{
   className?: string;
-  props?: any;
+  props?: React.SVGProps<SVGSVGElement>;
 }>) {
   return (
     <svg

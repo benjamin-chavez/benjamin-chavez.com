@@ -1,16 +1,16 @@
 // src/components/icons/tailwind-icon.tsx
 
-// src/components/icons/tailwind-icon.tsx
-
 import { cx } from '../../../cva.config';
+import React from 'react';
+import React from 'react';
 
 export default function TailwindIcon({
   className,
   props,
-}: {
+}: Readonly<{
   className?: string;
-  props?: any;
-}) {
+  props?: React.SVGProps<SVGSVGElement>;
+}>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

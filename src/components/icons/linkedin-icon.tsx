@@ -1,13 +1,14 @@
 // src/components/icons/linkedin-icon.tsx
 
 import { cx } from '../../../cva.config';
+import React from 'react';
 
 export function LinkedInIcon({
   className,
   props,
 }: Readonly<{
   className?: string;
-  props?: any;
+  props?: React.SVGProps<SVGSVGElement>;
 }>) {
   return (
     <svg
