@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="new infra&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/prettier.xml&#10;#&#9;.idea/vcs.xml">
-      <change beforePath="$PROJECT_DIR$/.github/CI-CD.md" beforeDir="false" afterPath="$PROJECT_DIR$/.github/CI-CD.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tutorials/2026-03-28-cloudfront-redirect-refactor_codex.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/2026-03-28-cloudfront-redirect-refactor_codex.md" afterDir="false" />
-    </list>
+    <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="new infra&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/prettier.xml&#10;#&#9;.idea/vcs.xml" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,6 +113,7 @@
       <recent name="$PROJECT_DIR$/scripts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.context" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/.github/actions/tag-deployment" />
     </key>
@@ -163,6 +159,11 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="next.config.mjs" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="9016f68e-5c4a-49f1-a61f-c3461c366dfb" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="RECENT_FILTERS">
       <map>
         <entry key="Branch">
@@ -180,6 +181,11 @@
     </option>
     <option name="TAB_STATES">
       <map>
+        <entry key="9016f68e-5c4a-49f1-a61f-c3461c366dfb">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>

@@ -14,9 +14,8 @@ on:
         default: dist
       aws_region:
         description: AWS region exposed to the client build.
-        required: false
+        required: true
         type: string
-        default: us-east-2
     secrets:
       NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
         description: Cloudinary cloud name used in the static build.
@@ -39,6 +38,13 @@ jobs:
       NEXT_PUBLIC_SENTRY_DSN: ${{ vars.NEXT_PUBLIC_SENTRY_DSN }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Validate required inputs
+        run: |
+          if [ -z "${{ inputs.aws_region }}" ]; then
+            echo "Input 'aws_region' is required." >&2
+            exit 1
+          fi
 
       - uses: pnpm/action-setup@v4
 

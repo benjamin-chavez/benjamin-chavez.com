@@ -20,7 +20,7 @@ The top-level CI workflow in [`./workflows/ci.yml`](./workflows/ci.yml) wires th
 
 | Setting | Current value |
 |---------|---------------|
-| `AWS_REGION` | `us-east-2` |
+| `AWS_REGION` | GitHub repo variable `vars.AWS_REGION` |
 | `CDK_STACK_NAME` | `BenjaminChavezDotCom` |
 | `APP_URL` | `https://benjamin-chavez.com` |
 | `ARTIFACT_NAME` | `dist` |
@@ -122,9 +122,9 @@ Reusable workflow interface:
 | Workflow | Inputs | Required secrets |
 |----------|--------|------------------|
 | Lint GitHub Actions | None | None |
-| Build Static Site | `app_url`, `artifact_name` (default `dist`), `aws_region` (default `us-east-2`) | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` |
+| Build Static Site | `app_url`, `artifact_name` (default `dist`), `aws_region` | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` |
 | Lighthouse Static Site | `artifact_name` (default `dist`) | None |
-| Deploy Static Site | `artifact_name` (default `dist`), `aws_region` (default `us-east-2`), `cdk_stack_name`, `tag_prefix` (default `v`) | `AWS_DEPLOY_ROLE_ARN` |
+| Deploy Static Site | `artifact_name` (default `dist`), `aws_region`, `cdk_stack_name`, `tag_prefix` (default `v`) | `AWS_DEPLOY_ROLE_ARN` |
 
 Repo-level values used by the live pipeline:
 
@@ -132,6 +132,7 @@ Repo-level values used by the live pipeline:
 |------|------|----------|---------|---------|
 | Secret | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Yes | Build | Cloudinary cloud name embedded into the static site |
 | Secret | `AWS_DEPLOY_ROLE_ARN` | Yes | Deploy | IAM role ARN used for GitHub OIDC authentication |
+| Variable | `AWS_REGION` | Yes | Build, Deploy | Shared AWS region used by the reusable workflows |
 | Variable | `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` | No | Build | Optional Cloudflare Web Analytics token |
 | Variable | `NEXT_PUBLIC_CW_RUM_APP_MONITOR_ID` | No | Build | Optional CloudWatch RUM App Monitor ID |
 | Variable | `NEXT_PUBLIC_CW_RUM_IDENTITY_POOL_ID` | No | Build | Optional CloudWatch RUM Cognito Identity Pool ID |
@@ -140,7 +141,17 @@ Repo-level values used by the live pipeline:
 Environment validation in the app:
 
 - [`src/clientEnv.ts`](../src/clientEnv.ts) validates the `NEXT_PUBLIC_*` values used by the app.
-- [`src/buildEnv.ts`](../src/buildEnv.ts) currently defines only `AWS_REGION` and is not part of the live site build path documented above.
+- [`src/buildEnv.ts`](../src/buildEnv.ts) currently defines only `AWS_REGION` and requires it explicitly if the module is imported into future build-time code.
+
+### First Infrastructure Deploy
+
+The GitHub Actions pipeline deploys static assets only. The first `cdk deploy` stays manual and is documented here:
+
+- Runbook: [`../infrastructure/INITIAL_DEPLOYMENT.md`](../infrastructure/INITIAL_DEPLOYMENT.md)
+- Helper script: [`../scripts/initial-aws-deploy.sh`](../scripts/initial-aws-deploy.sh)
+- Additional local env required for the first infrastructure deploy:
+  - `AWS_REGION`
+  - `CLOUDFRONT_CERTIFICATE_REGION`
 
 ### Unused Repo-Local Helpers
 

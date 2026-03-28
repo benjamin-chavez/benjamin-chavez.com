@@ -3,6 +3,7 @@ export type EnvironmentName = 'prod';
 export interface EnvironmentConfig {
   readonly account: string;
   readonly region: string;
+  readonly certificateRegion: string;
   readonly envName: EnvironmentName;
   readonly domainName: string;
   readonly alternateDomainNames: string[];

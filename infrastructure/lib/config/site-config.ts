@@ -69,7 +69,10 @@ function readEnvironmentName(
 
 function resolveContextValue(
   value: string,
-  placeholder: '${CDK_DEFAULT_ACCOUNT}' | '${CDK_DEFAULT_REGION}',
+  placeholder:
+    | '${CDK_DEFAULT_ACCOUNT}'
+    | '${CDK_DEFAULT_REGION}'
+    | '${CLOUDFRONT_CERTIFICATE_REGION}',
   envValue: string | undefined,
 ): string {
   if (value !== placeholder) {
@@ -101,6 +104,10 @@ function parseEnvironmentConfig(
       `environments.${environmentName}.account`,
     ),
     region: readString(value.region, `environments.${environmentName}.region`),
+    certificateRegion: readString(
+      value.certificateRegion,
+      `environments.${environmentName}.certificateRegion`,
+    ),
     envName: readEnvironmentName(
       value.envName,
       `environments.${environmentName}.envName`,
@@ -176,6 +183,11 @@ export function resolveEnvironmentConfig(
     '${CDK_DEFAULT_REGION}',
     process.env.CDK_DEFAULT_REGION,
   );
+  const certificateRegion = resolveContextValue(
+    baseEnvConfig.certificateRegion,
+    '${CLOUDFRONT_CERTIFICATE_REGION}',
+    process.env.CLOUDFRONT_CERTIFICATE_REGION,
+  );
 
   return {
     environment: baseEnvConfig.envName,
@@ -184,6 +196,7 @@ export function resolveEnvironmentConfig(
       ...baseEnvConfig,
       account,
       region,
+      certificateRegion,
       compiledEdgeAssetPath: path.join(
         infrastructureRoot,
         'dist',

@@ -7,7 +7,7 @@ import 'server-only';
 import { z } from 'zod';
 
 const envSchema = z.object({
-  AWS_REGION: z.string().default('us-east-2'),
+  AWS_REGION: z.string().min(1),
 });
 
 const parsed = envSchema.safeParse({

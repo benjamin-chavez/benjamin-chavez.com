@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 env:
-  AWS_REGION: us-east-2
+  AWS_REGION: ${{ vars.AWS_REGION }}
   CDK_STACK_NAME: BenjaminChavezDotCom
   APP_URL: https://benjamin-chavez.com
   ARTIFACT_NAME: dist

@@ -23,7 +23,8 @@
     "environments": {
       "prod": {
         "account": "${CDK_DEFAULT_ACCOUNT}",
-        "region": "us-east-1",
+        "region": "${CDK_DEFAULT_REGION}",
+        "certificateRegion": "${CLOUDFRONT_CERTIFICATE_REGION}",
         "envName": "prod",
         "domainName": "benjamin-chavez.com",
         "alternateDomainNames": ["www.benjamin-chavez.com"]

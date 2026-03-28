@@ -29,6 +29,7 @@ export class StaticSite extends Construct {
     const { appName, environment, envConfig } = props;
     const {
       alternateDomainNames,
+      certificateRegion,
       compiledEdgeAssetPath,
       domainName,
       redirectsAssetPath,
@@ -43,11 +44,15 @@ export class StaticSite extends Construct {
     this.hostedZone = new route53.PublicHostedZone(this, 'HostedZone', {
       zoneName: domainName,
     });
+    this.hostedZone.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
 
-    const certificate = new acm.Certificate(this, 'Certificate', {
+    // CloudFront viewer certificates must live in us-east-1 even when the
+    // distribution and supporting resources are managed elsewhere.
+    const certificate = new acm.DnsValidatedCertificate(this, 'Certificate', {
       domainName,
+      hostedZone: this.hostedZone,
+      region: certificateRegion,
       subjectAlternativeNames: alternateDomainNames,
-      validation: acm.CertificateValidation.fromDns(this.hostedZone),
     });
 
     const routing = new CloudFrontRouting(this, 'CloudFrontRouting', {
@@ -153,31 +158,43 @@ export class StaticSite extends Construct {
       new targets.CloudFrontTarget(this.distribution),
     );
 
-    new route53.ARecord(this, 'ARecord', {
+    const apexARecord = new route53.ARecord(this, 'ARecord', {
       zone: this.hostedZone,
       target: distributionTarget,
     });
+    apexARecord.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
 
-    new route53.AaaaRecord(this, 'AAAARecord', {
+    const apexAaaaRecord = new route53.AaaaRecord(this, 'AAAARecord', {
       zone: this.hostedZone,
       target: distributionTarget,
     });
+    apexAaaaRecord.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
 
     for (let index = 0; index < alternateDomainNames.length; index += 1) {
       const alternateDomainName = alternateDomainNames[index];
       const recordName = this.getRecordName(alternateDomainName, domainName);
 
-      new route53.ARecord(this, `AlternateARecord${index}`, {
-        zone: this.hostedZone,
-        recordName,
-        target: distributionTarget,
-      });
+      const alternateARecord = new route53.ARecord(
+        this,
+        `AlternateARecord${index}`,
+        {
+          zone: this.hostedZone,
+          recordName,
+          target: distributionTarget,
+        },
+      );
+      alternateARecord.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
 
-      new route53.AaaaRecord(this, `AlternateAAAARecord${index}`, {
-        zone: this.hostedZone,
-        recordName,
-        target: distributionTarget,
-      });
+      const alternateAaaaRecord = new route53.AaaaRecord(
+        this,
+        `AlternateAAAARecord${index}`,
+        {
+          zone: this.hostedZone,
+          recordName,
+          target: distributionTarget,
+        },
+      );
+      alternateAaaaRecord.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
     }
   }
 
