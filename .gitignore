@@ -159,5 +159,5 @@ vite.config.ts.timestamp-*
 .claude/
 
 # conext
-.conext/
+.context/
 
