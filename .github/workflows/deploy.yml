@@ -1,0 +1,55 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+env:
+  AWS_REGION: us-east-1
+  CDK_STACK_NAME: BenjaminChavezSite
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Read CDK stack outputs
+        id: stack
+        run: |
+          OUTPUTS=$(aws cloudformation describe-stacks \
+            --stack-name "$CDK_STACK_NAME" \
+            --query 'Stacks[0].Outputs' --output json)
+          BUCKET=$(echo "$OUTPUTS" | jq -r '.[] | select(.OutputKey=="BucketName") | .OutputValue')
+          DIST_ID=$(echo "$OUTPUTS" | jq -r '.[] | select(.OutputKey=="DistributionId") | .OutputValue')
+          echo "bucket=$BUCKET" >> "$GITHUB_OUTPUT"
+          echo "dist_id=$DIST_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Sync to S3
+        env:
+          BUCKET: ${{ steps.stack.outputs.bucket }}
+        run: aws s3 sync out/ "s3://$BUCKET" --delete
+
+      - name: Invalidate CloudFront cache
+        env:
+          DIST_ID: ${{ steps.stack.outputs.dist_id }}
+        run: aws cloudfront create-invalidation --distribution-id "$DIST_ID" --paths "/*"
