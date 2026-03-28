@@ -68,7 +68,7 @@ Static export deployed to AWS (S3 + CloudFront) via CDK.
 |-------------|-----------------------------|
 | Production  | https://benjamin-chavez.com |
 
-For infrastructure details and CDK commands, see the [Infrastructure README](infrastructure/README.md).
+For infrastructure details and CDK commands, see the [INFRASTRUCTURE.md](infrastructure/INFRASTRUCTURE.md).
 For the first AWS deployment, use the [initial deployment runbook](infrastructure/INITIAL_DEPLOYMENT.md) and the checked-in helper script at [`scripts/initial-aws-deploy.sh`](scripts/initial-aws-deploy.sh).
 
 ---
@@ -82,7 +82,7 @@ For the first AWS deployment, use the [initial deployment runbook](infrastructur
 | `pnpm run start` | Run the production server locally              |
 | `pnpm run lint`  | Run the Next.js lint command                   |
 
-For infrastructure commands (CDK synth, diff, deploy), see the [Infrastructure README](infrastructure/README.md).
+For infrastructure commands (CDK synth, diff, deploy), see the [INFRASTRUCTURE.md](infrastructure/INFRASTRUCTURE.md).
 
 ---
 
