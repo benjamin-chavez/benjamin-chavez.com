@@ -8,6 +8,7 @@ cd "$(dirname "$0")/.." || exit 1
 # Find and delete old directories
 find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
 find . -name "dist" -type d -prune -exec rm -rf '{}' +
+find . -name "out" -type d -prune -exec rm -rf '{}' +
 find . -name ".turbo" -type d -prune -exec rm -rf '{}' +
 find . -name ".next" -type d -prune -exec rm -rf '{}' +
 find . -name "cdk.out" -type d -prune -exec rm -rf '{}' +

@@ -69,6 +69,7 @@ const withMDX = createMDX({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  distDir: 'dist',
   pageExtensions: ['ts', 'tsx', 'mdx'],
   reactStrictMode: false,
   poweredByHeader: false,
