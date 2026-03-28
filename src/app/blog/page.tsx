@@ -34,9 +34,8 @@ export default function Blog() {
                   {formatDate(post.publishedAt)}
                 </time>
               </div>
-              <div className="relative ">
+              <div>
                 <h3 className="mt-3 text-lg uppercase leading-6 text-gray-900 group-hover:text-gray-600">
-                  <span className="absolute inset-0" />
                   {post.title}
                 </h3>
                 <p className="mt-3 break-inside-avoid-column font-open-sans text-[15px] font-light text-neutral-500">

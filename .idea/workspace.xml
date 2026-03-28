@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/parallax-background.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/parallax-background.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/blog/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/blog/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/root-layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/root-layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +130,7 @@
       <option name="presentableId" value="Default" />
       <updated>1774710325871</updated>
       <workItem from="1774710327000" duration="4478000" />
-      <workItem from="1774715041557" duration="8371000" />
+      <workItem from="1774715041557" duration="9298000" />
     </task>
     <servers />
   </component>

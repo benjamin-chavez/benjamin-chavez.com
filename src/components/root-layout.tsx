@@ -11,7 +11,7 @@ function RootLayoutInner({
   return (
     <>
       <Navbar />
-      <main className="w-full flex-auto">{children}</main>
+      <main className="w-full flex-auto bg-[#ECEDFA]">{children}</main>
       <Footer />
     </>
   );
