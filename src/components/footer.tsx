@@ -50,6 +50,9 @@ export default function Footer() {
             );
           })}
         </div>
+        <p className="mt-4 text-sm text-neutral-500">
+          &copy; {new Date().getFullYear()} Benjamin Chavez
+        </p>
       </Container>
     </section>
   );
