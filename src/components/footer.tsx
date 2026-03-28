@@ -5,6 +5,7 @@ import { Container } from '@/components/container';
 import EnvelopeFilledIcon from './icons/envelope-filled-icon';
 import { GithubIcon } from './icons/github-icon';
 import { LinkedInIcon } from './icons/linkedin-icon';
+import ParallaxBackground from './parallax-background';
 
 const contactLinks = [
   {
@@ -26,7 +27,17 @@ const contactLinks = [
 
 export default function Footer() {
   return (
-    <section className="bg-parallax py-7 md:bg-fixed" id="contact">
+    <section
+      className="relative isolate overflow-hidden bg-[#111111] py-7"
+      id="contact"
+    >
+      <ParallaxBackground
+        src="/img/parallax-img.avif"
+        className="-z-10"
+        overlayClassName="bg-black/70"
+        speed={0.1}
+        overscan={40}
+      />
       <Container className="flex w-fit max-w-5xl flex-col items-center py-9">
         <div className="flex flex-col items-center justify-center ">
           <h2 className=" font-dosis text-3xl uppercase leading-9 text-white">

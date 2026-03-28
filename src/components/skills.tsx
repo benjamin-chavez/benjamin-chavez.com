@@ -24,6 +24,7 @@ import RubyIcon from './icons/ruby-icon';
 import TailwindIcon from './icons/tailwind-icon';
 import TypescriptIcon from './icons/typescript-icon';
 import WindowsIcon from './icons/windows-icon';
+import ParallaxBackground from './parallax-background';
 
 const technologies = {
   'Languages & Technologies': [
@@ -58,7 +59,14 @@ const technologies = {
 
 export default function Skills() {
   return (
-    <section className="bg-parallax py-7 md:bg-fixed">
+    <section className="relative isolate overflow-hidden bg-[#111111] py-7">
+      <ParallaxBackground
+        src="/img/parallax-img.avif"
+        className="-z-10"
+        overlayClassName="bg-black/70"
+        speed={0.1}
+        overscan={40}
+      />
       <Container className="max-w-5xl py-9">
         <div className="flex flex-col items-center justify-center ">
           <h2 className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-white">

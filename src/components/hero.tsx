@@ -27,11 +27,11 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className=" relative -mt-14 h-screen min-h-screen w-full bg-cover bg-fixed bg-center bg-no-repeat"
+      className="relative isolate -mt-14 h-screen min-h-screen w-full overflow-hidden bg-black"
     >
       <BannerImage />
 
-      <div className="absolute top-0 -z-10 aspect-auto h-full w-full bg-gradient-to-b from-transparent to-black/70 md:fixed" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent to-black/70" />
       <div className="flex h-full items-end justify-center pb-16 text-white">
         <div className="flex flex-col items-center">
           <h1 className="font-dosis text-7xl font-light uppercase tracking-[.45rem] text-transparent md:text-white ">

@@ -2,17 +2,18 @@
 
 export const dynamic = 'force-static';
 
+import { clientEnv } from '@/clientEnv';
 import { getPublishedPosts } from '@/lib/posts';
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogs = getPublishedPosts().map((post) => ({
-    url: `https://benjamin-chavez.com/blog/${post.slug}/`,
+    url: `${clientEnv.NEXT_PUBLIC_APP_URL}/blog/${post.slug}/`,
     lastModified: post.updatedAt,
   }));
 
   const routes = ['', '/blog'].map((route) => ({
-    url: `https://benjamin-chavez.com${route}`,
+    url: `${clientEnv.NEXT_PUBLIC_APP_URL}${route}`,
     lastModified: new Date().toISOString().split('T')[0],
   }));
 

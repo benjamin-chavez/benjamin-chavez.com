@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
+import { clientEnv } from '@/clientEnv';
 
 export interface Post {
   title: string;
@@ -66,9 +67,9 @@ export function getAllPosts(): Post[] {
           dateModified: data.updatedAt,
           description: data.summary,
           image: data.image
-            ? `https://benjamin-chavez.com${data.image}`
-            : `https://benjamin-chavez.com/og/${slug}.png`,
-          url: `https://benjamin-chavez.com/blog/${slug}/`,
+            ? `${clientEnv.NEXT_PUBLIC_APP_URL}${data.image}`
+            : `${clientEnv.NEXT_PUBLIC_APP_URL}/og/${slug}.png`,
+          url: `${clientEnv.NEXT_PUBLIC_APP_URL}/blog/${slug}/`,
           author: { '@type': 'Person', name: 'Benjamin Chavez' },
         },
       };

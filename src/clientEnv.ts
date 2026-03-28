@@ -15,11 +15,8 @@ const parsed = envSchema.safeParse({
 });
 
 if (!parsed.success) {
-  console.error(
-    '❌ Invalid environment variables:',
-    parsed.error.flatten().fieldErrors,
-  );
+  console.error('❌ Invalid environment variables:\n' + z.prettifyError(parsed.error));
   throw new Error('Invalid environment variables');
 }
 
-export const env = parsed.data;
+export const clientEnv = parsed.data;

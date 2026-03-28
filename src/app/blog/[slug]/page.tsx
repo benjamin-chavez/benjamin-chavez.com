@@ -3,6 +3,7 @@
 import 'server-only';
 
 import { Container } from '@/components/container';
+import { clientEnv } from '@/clientEnv';
 import { formatDate } from '@/lib/utils';
 import { getPostBySlug, getPublishedPosts } from '@/lib/posts';
 import { cx } from 'cva.config';
@@ -33,7 +34,7 @@ export async function generateMetadata({
       description: post.summary,
       type: 'article',
       publishedTime: post.publishedAt,
-      url: `https://benjamin-chavez.com/blog/${slug}/`,
+      url: `${clientEnv.NEXT_PUBLIC_APP_URL}/blog/${slug}/`,
       images: [{ url: `/og/${slug}.png` }],
     },
     twitter: {
