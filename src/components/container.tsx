@@ -7,7 +7,7 @@ type ContainerProps = {
   as?: keyof React.JSX.IntrinsicElements;
   className?: string;
   children: React.ReactNode;
-  [x: string]: any;
+  [x: string]: unknown;
 };
 
 export function Container({
@@ -18,11 +18,7 @@ export function Container({
 }: Readonly<ContainerProps>) {
   return (
     <Component
-      className={cx(
-        'mx-auto max-w-3xl px-5 md:px-4',
-        className,
-        //
-      )}
+      className={cx('mx-auto max-w-3xl px-5 md:px-4', className)}
       {...props}
     >
       {children}

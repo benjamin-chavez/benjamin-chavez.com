@@ -2,13 +2,24 @@ import { z } from 'zod';
 
 const envSchema = z.object({
   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string().min(1),
-  NEXT_PUBLIC_APP_URL: z.string().url(),
+  NEXT_PUBLIC_APP_URL: z.url().default('http://localhost:3000'),
   NEXT_PUBLIC_CF_ANALYTICS_TOKEN: z.string().optional(),
 });
 
-export const env = envSchema.parse({
+const parsed = envSchema.safeParse({
   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
-    process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-  NEXT_PUBLIC_CF_ANALYTICS_TOKEN: process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN,
+    process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || undefined,
+  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || undefined,
+  NEXT_PUBLIC_CF_ANALYTICS_TOKEN:
+    process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN || undefined,
 });
+
+if (!parsed.success) {
+  console.error(
+    '❌ Invalid environment variables:',
+    parsed.error.flatten().fieldErrors,
+  );
+  throw new Error('Invalid environment variables');
+}
+
+export const env = parsed.data;
