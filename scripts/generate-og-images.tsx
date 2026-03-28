@@ -1,24 +1,29 @@
 import React from 'react';
 import fs from 'fs';
 import path from 'path';
+import { loadEnvConfig } from '@next/env';
 import satori from 'satori';
 import sharp from 'sharp';
-import { getAllPosts } from '../src/lib/posts';
 
 const OG_WIDTH = 1200;
 const OG_HEIGHT = 630;
 
 async function main() {
-  const outDir = path.join(process.cwd(), 'public/og');
+  const projectDir = process.cwd();
+
+  // Match `next build` env resolution so local builds pick up `.env.local`
+  // without needing a separate wrapper script.
+  loadEnvConfig(projectDir, false);
+
+  const { getAllPosts } = await import('../src/lib/posts');
+
+  const outDir = path.join(projectDir, 'public/og');
   fs.mkdirSync(outDir, { recursive: true });
 
-  const fontPath = path.join(
-    process.cwd(),
-    'public/fonts/Dosis/static/Dosis-Regular.ttf',
-  );
+  const fontPath = path.join(projectDir, 'public/fonts/Dosis/static/Dosis-Regular.ttf');
   const fontData = fs.readFileSync(fontPath);
 
-  const avatarPath = path.join(process.cwd(), 'public/img/avatar.png');
+  const avatarPath = path.join(projectDir, 'public/img/avatar.png');
   const avatarBase64 = `data:image/png;base64,${fs.readFileSync(avatarPath).toString('base64')}`;
 
   const posts = getAllPosts();

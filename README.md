@@ -4,50 +4,55 @@
   <img src=".github/benjamin-chavez.com-preview.png" alt="benjamin-chavez.com application screenshot">
 </p>
 
-
 ## CI/CD
 
-See [`.github/CI-CD.md`](.github/CI-CD.md) for deployment workflow, versioning, and automation details.
-
+See [`.github/CI-CD.md`](.github/CI-CD.md) for the live GitHub Actions pipeline, deployment flow, and release tagging behavior.
 
 ## Running Locally
 
-First, clone the repo:
+Prerequisites:
+
+- Node.js `24.x` from [`.nvmrc`](.nvmrc)
+- PNPM `10.x`
+
+Install and run the app:
+
 ```bash
 git clone git@github.com:benjamin-chavez/benjamin-chavez.com.git
 cd benjamin-chavez.com
-```
-
-Next, install the npm dependencies:
-```bash
 pnpm install
-```
-
-Then, create a new `.env` file by copying [`.env.example`](.env.example):
-```bash
 cp .env.example .env.local
-```
-
-Next, run the development server:
-```bash
 pnpm dev
 ```
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+The local dev server runs at [http://localhost:3000](http://localhost:3000).
 
+## Root Scripts
 
-## Scripts:
 - `pnpm dev`
-  - Runs the development server
-
+  - Starts the Next.js development server with webpack.
 - `pnpm run dev:clear-cache`
-  - Rebuilds the `.next` and `.contentlayer` folders before running the development server. This is required in order to see styling changes when editing the blog markdown file: `ctrl-markdown-theme.json`.
-
+  - Deletes `.next/` and then starts the development server again.
 - `pnpm run build`
-  - Builds the infrastructure package, then creates the production web build
-
+  - Generates OG images and runs the production Next.js build. The OG-image prebuild step now loads the same local env files that `next build` uses, so the same command works in CI and on your machine. Because [`next.config.mjs`](next.config.mjs) sets `output: 'export'` and `distDir: 'dist'`, the static export is written to `dist/`.
+- `pnpm run build:local`
+  - Compatibility alias for `pnpm run build`.
 - `pnpm run start`
-  - Runs a local copy of the production build on [http://localhost:3000](http://localhost:3000)
-
+  - Runs `next start`.
 - `pnpm run lint`
-  - Checks styling throughout codebase
+  - Runs the configured Next.js lint command.
+
+## Infrastructure Scripts
+
+The AWS CDK package lives under [`infrastructure/`](infrastructure).
+
+- `pnpm --dir infrastructure run build`
+  - Compiles the edge handler and the infrastructure TypeScript sources.
+- `pnpm --dir infrastructure run build:edge`
+  - Compiles `infrastructure/edge/**/*.ts` into `infrastructure/dist/cloudfront/`.
+- `pnpm --dir infrastructure run synth`
+  - Rebuilds the edge handler and synthesizes the CloudFormation template.
+- `pnpm --dir infrastructure run diff`
+  - Rebuilds the edge handler and shows the CloudFormation diff.
+- `pnpm --dir infrastructure run deploy`
+  - Rebuilds the edge handler and runs `cdk deploy`.

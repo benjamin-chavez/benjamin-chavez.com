@@ -2,25 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="new infra&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/prettier.xml&#10;#&#9;.idea/vcs.xml">
-      <change afterPath="$PROJECT_DIR$/.github/actions/tag-deployment/action.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.github/actions/tag-deployment/tag-deployment.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/lib/config/site-config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/lib/config/types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/lib/constructs/cloudfront-routing.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/lib/stacks/static-site-stack.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/actions/setup-node-pnpm/action.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/actions/setup-node-pnpm/action.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/CI-CD.md" beforeDir="false" afterPath="$PROJECT_DIR$/.github/CI-CD.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/bin/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/bin/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/cloudfront/redirects.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/cloudfront/viewer-request.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/lib/static-site-construct.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/tsconfig.edge.json" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/tsconfig.edge.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/buildEnv.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/buildEnv.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/utility/cloudwatch-rum.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/utility/cloudwatch-rum.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/utility/sentry-init.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/utility/sentry-init.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/2026-03-28-cloudfront-redirect-refactor_codex.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/2026-03-28-cloudfront-redirect-refactor_codex.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +118,7 @@
       <recent name="$PROJECT_DIR$/scripts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/.github/actions/tag-deployment" />
     </key>
   </component>

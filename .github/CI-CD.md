@@ -2,82 +2,167 @@
 
 ## CI/CD & Automation
 
-This project uses GitHub Actions to build, validate, and deploy a static Next.js site to AWS (S3 + CloudFront).
+This repo uses GitHub Actions to build, audit, and deploy a static Next.js export to AWS S3 + CloudFront. The deploy workflow assumes the infrastructure stack already exists and reads its deploy targets from CloudFormation outputs.
 
 ### Workflow Layout
 
 | Workflow | File | Trigger | Purpose |
 |----------|------|---------|---------|
-| CI | [`ci.yml`](workflows/ci.yml) | Push, pull request, manual dispatch | Orchestrates build, Lighthouse, and gated deploy |
-| Build Static Site | [`build-static-site.yml`](workflows/build-static-site.yml) | `workflow_call` | Builds the site and uploads the deployable artifact |
-| Lighthouse Static Site | [`lighthouse-static-site.yml`](workflows/lighthouse-static-site.yml) | `workflow_call` | Runs Lighthouse against the uploaded build artifact |
-| Deploy Static Site | [`deploy-static-site.yml`](workflows/deploy-static-site.yml) | `workflow_call` | Downloads the artifact, deploys to AWS, invalidates CloudFront, and tags the release |
+| CI | [`./workflows/ci.yml`](./workflows/ci.yml) | Push to `master`, pull request to `master`, manual dispatch | Orchestrates Actionlint, build, Lighthouse, and gated deploy |
+| Lint GitHub Actions | [`./workflows/lint-github-actions.yml`](./workflows/lint-github-actions.yml) | `workflow_call` | Installs pinned `actionlint` and validates workflow files |
+| Build Static Site | [`./workflows/build-static-site.yml`](./workflows/build-static-site.yml) | `workflow_call` | Builds the static site and uploads the deployable `dist/` artifact |
+| Lighthouse Static Site | [`./workflows/lighthouse-static-site.yml`](./workflows/lighthouse-static-site.yml) | `workflow_call` | Downloads the build artifact and runs Lighthouse CI against it |
+| Deploy Static Site | [`./workflows/deploy-static-site.yml`](./workflows/deploy-static-site.yml) | `workflow_call` | Downloads the artifact, deploys it to AWS, invalidates CloudFront, and creates the next deployment tag |
 
-### CI Flow
+### Live CI Flow
 
-The top-level CI workflow builds once, validates that exact artifact with Lighthouse, and only then deploys it on `master`.
+The top-level CI workflow in [`./workflows/ci.yml`](./workflows/ci.yml) wires the reusable workflows together with the current repo defaults:
 
-| Job | Description |
-|-----|-------------|
-| Build | Installs dependencies, runs `pnpm build`, and uploads `dist/` as an artifact |
-| Lighthouse | Downloads the `dist/` artifact and runs `npx @lhci/cli autorun` |
-| Deploy | Downloads the same `dist/` artifact, syncs it to S3, invalidates CloudFront, and creates a semver deployment tag |
+| Setting | Current value |
+|---------|---------------|
+| `AWS_REGION` | `us-east-2` |
+| `CDK_STACK_NAME` | `BenjaminChavezDotCom` |
+| `APP_URL` | `https://benjamin-chavez.com` |
+| `ARTIFACT_NAME` | `dist` |
+| `TAG_PREFIX` | `v` |
 
-### Reuse Across Repos
+Jobs run in this order:
 
-The reusable workflows in `.github/workflows/` are designed to be called by another repo with the same stack. The caller should:
+| Job | What it does |
+|-----|--------------|
+| Actionlint | Checks out the repo, installs `actionlint` `v1.7.11` from the official release, and validates `.github/workflows/*.yml` |
+| Build | Checks out the repo, installs PNPM, sets up Node from [`.nvmrc`](../.nvmrc), runs `pnpm install --frozen-lockfile`, runs `pnpm build`, and uploads `dist/` |
+| Lighthouse | Downloads the same `dist/` artifact and runs `npx @lhci/cli autorun` |
+| Deploy | Runs only after Actionlint, Build, and Lighthouse succeed, and only for `push` or `workflow_dispatch` on `refs/heads/master` |
 
-1. Standardize on the same GitHub secret and variable names.
-2. Pass repo-specific values such as `app_url` and `cdk_stack_name` as workflow inputs.
-3. Pin external reusable workflow references to a commit SHA when another repo starts calling them.
+`actionlint` is intentionally scoped to workflow files only. It does not validate repo-local composite action metadata under `.github/actions/`.
+
+### GitHub Actions Linting
+
+Workflow linting is defined in [`./workflows/lint-github-actions.yml`](./workflows/lint-github-actions.yml).
+
+| Step | What it does |
+|------|--------------|
+| Checkout | Checks out the repo so `actionlint` can inspect all local workflow files and reusable workflow calls |
+| Install actionlint | Downloads the pinned official release archive for the current Linux runner architecture and adds the extracted binary to `PATH` |
+| Run actionlint | Runs `actionlint` from repo root with default project discovery |
+
+### Build Artifact
+
+The deploy artifact is the static export in `dist/`.
+
+- [`next.config.mjs`](../next.config.mjs) sets `output: 'export'` and `distDir: 'dist'`.
+- [`package.json`](../package.json) defines `pnpm build` as `tsx scripts/generate-og-images.tsx && next build --webpack`.
+- [`scripts/generate-og-images.tsx`](../scripts/generate-og-images.tsx) generates OG images into `public/og` before the static export runs.
+
+### Lighthouse Behavior
+
+Lighthouse CI is configured by [`.lighthouserc.js`](../.lighthouserc.js).
+
+| Setting | Current value |
+|---------|---------------|
+| `staticDistDir` | `./dist` |
+| URLs audited | `http://localhost/index.html`, `http://localhost/blog/index.html` |
+| `numberOfRuns` | `3` |
+| Upload target | `temporary-public-storage` |
+
+Current assertions:
+
+| Category | Level | Minimum score |
+|----------|-------|---------------|
+| Performance | `warn` | `0.9` |
+| Accessibility | `error` | `0.9` |
+| Best Practices | `warn` | `0.9` |
+| SEO | `warn` | `0.9` |
+
+The workflow always uploads `.lighthouseci/` as the `lighthouse-results` artifact, even when the job fails.
 
 ### Deployment Behavior
 
-Deploy runs only after both Build and Lighthouse succeed.
+Deploy is defined in [`./workflows/deploy-static-site.yml`](./workflows/deploy-static-site.yml).
 
-| Step | Description |
-|------|-------------|
-| Configure AWS | OIDC authentication via `AWS_DEPLOY_ROLE_ARN` |
-| Read CDK stack outputs | Fetches the S3 bucket name and CloudFront distribution ID from CloudFormation |
-| Sync to S3 | `aws s3 sync dist/ s3://<bucket> --delete` |
-| Invalidate CloudFront | Creates a `/*` invalidation |
-| Tag deployment | Auto-increments the semver patch version on successful deploy |
+| Step | What it does |
+|------|--------------|
+| Checkout | Checks out the repo with `fetch-depth: 0` so tags are available |
+| Download artifact | Downloads the `dist/` artifact into `dist/` |
+| Configure AWS | Uses GitHub OIDC with `AWS_DEPLOY_ROLE_ARN` via `aws-actions/configure-aws-credentials@v4` |
+| Read stack outputs | Calls `aws cloudformation describe-stacks` for `cdk_stack_name` and reads `BucketName` and `DistributionId` |
+| Sync to S3 | Runs `aws s3 sync dist/ "s3://$BUCKET" --delete` |
+| Invalidate CloudFront | Runs `aws cloudfront create-invalidation --distribution-id "$DIST_ID" --paths "/*"` |
+| Tag deployment | Fetches tags, finds the latest matching semver tag, bumps the patch version, creates the new tag, and pushes it |
+
+Additional live deploy behavior:
+
+- Deploys are serialized with the `production-deploy` concurrency group.
+- `cancel-in-progress` is `false`.
+- This workflow deploys static assets only. It does not run `cdk deploy` or update infrastructure.
 
 ### Versioning
 
-Deployments are tagged with semver versions that auto-increment on each successful deploy.
+Successful deploys create the next patch tag matching `TAG_PREFIX`.
 
-| Action | Example |
-|--------|---------|
-| Automatic (every deploy) | `v1.0.0` -> `v1.0.1` -> `v1.0.2` |
-| Manual minor bump | `git tag v1.1.0 && git push origin v1.1.0` |
-| Manual major bump | `git tag v2.0.0 && git push origin v2.0.0` |
+| Example | Result |
+|---------|--------|
+| No existing tags | `v0.0.1` |
+| Latest tag is `v1.0.0` | Next deploy creates `v1.0.1` |
+| Latest tag is `v1.4.9` | Next deploy creates `v1.4.10` |
 
-List all deployment versions:
+If you manually create a higher semver tag, future deploys continue patch bumps from that latest tag.
+
+List deployment tags:
 
 ```bash
 git tag -l 'v*' --sort=-v:refname
 ```
 
-### Required Secrets & Variables
+### Inputs, Secrets, and Repo Variables
 
-#### Secrets
+Reusable workflow interface:
 
-| Secret | Required | Purpose |
-|--------|----------|---------|
-| `AWS_DEPLOY_ROLE_ARN` | Yes | IAM role ARN for GitHub OIDC authentication |
-| `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Yes | Cloudinary cloud name embedded in the static build |
+| Workflow | Inputs | Required secrets |
+|----------|--------|------------------|
+| Lint GitHub Actions | None | None |
+| Build Static Site | `app_url`, `artifact_name` (default `dist`), `aws_region` (default `us-east-2`) | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` |
+| Lighthouse Static Site | `artifact_name` (default `dist`) | None |
+| Deploy Static Site | `artifact_name` (default `dist`), `aws_region` (default `us-east-2`), `cdk_stack_name`, `tag_prefix` (default `v`) | `AWS_DEPLOY_ROLE_ARN` |
 
-#### Variables / Environment
+Repo-level values used by the live pipeline:
 
-| Variable | Required | Default | Purpose |
-|----------|----------|---------|---------|
-| `AWS_REGION` | No | `us-east-2` | AWS region for deployment and public client config |
-| `NEXT_PUBLIC_APP_URL` | No | `http://localhost:3000` | Site URL embedded in static output |
-| `NEXT_PUBLIC_AWS_REGION` | No | `us-east-2` | AWS region exposed to the client |
-| `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` | No | — | Cloudflare Web Analytics token |
-| `NEXT_PUBLIC_CW_RUM_APP_MONITOR_ID` | No | — | CloudWatch RUM App Monitor ID |
-| `NEXT_PUBLIC_CW_RUM_IDENTITY_POOL_ID` | No | — | CloudWatch RUM Cognito Identity Pool ID |
-| `NEXT_PUBLIC_SENTRY_DSN` | No | — | Sentry DSN |
+| Kind | Name | Required | Used by | Purpose |
+|------|------|----------|---------|---------|
+| Secret | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Yes | Build | Cloudinary cloud name embedded into the static site |
+| Secret | `AWS_DEPLOY_ROLE_ARN` | Yes | Deploy | IAM role ARN used for GitHub OIDC authentication |
+| Variable | `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` | No | Build | Optional Cloudflare Web Analytics token |
+| Variable | `NEXT_PUBLIC_CW_RUM_APP_MONITOR_ID` | No | Build | Optional CloudWatch RUM App Monitor ID |
+| Variable | `NEXT_PUBLIC_CW_RUM_IDENTITY_POOL_ID` | No | Build | Optional CloudWatch RUM Cognito Identity Pool ID |
+| Variable | `NEXT_PUBLIC_SENTRY_DSN` | No | Build | Optional Sentry DSN |
 
-Environment variable schemas are validated at build time by [`src/buildEnv.ts`](../src/buildEnv.ts) and [`src/clientEnv.ts`](../src/clientEnv.ts).
+Environment validation in the app:
+
+- [`src/clientEnv.ts`](../src/clientEnv.ts) validates the `NEXT_PUBLIC_*` values used by the app.
+- [`src/buildEnv.ts`](../src/buildEnv.ts) currently defines only `AWS_REGION` and is not part of the live site build path documented above.
+
+### Unused Repo-Local Helpers
+
+These files exist in the repo but are not used by the current workflows:
+
+| Helper | File | Notes |
+|--------|------|-------|
+| Setup Node.js and PNPM | [`./actions/setup-node-pnpm/action.yml`](./actions/setup-node-pnpm/action.yml) | Current workflows call `pnpm/action-setup@v4` and `actions/setup-node@v6` directly |
+| Tag deployment | [`./actions/tag-deployment/action.yml`](./actions/tag-deployment/action.yml) | Supports configurable semver bumps, but the live deploy workflow performs an inline patch bump instead |
+
+### Local Tooling
+
+To match the CI lint job locally, install `actionlint` once on your machine and run it from repo root:
+
+```bash
+brew install actionlint
+actionlint
+```
+
+Pinned Go install alternative:
+
+```bash
+go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.11
+actionlint
+```

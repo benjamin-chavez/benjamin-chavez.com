@@ -21,6 +21,10 @@ permissions:
   contents: read
 
 jobs:
+  actionlint:
+    name: Actionlint
+    uses: ./.github/workflows/lint-github-actions.yml
+
   build:
     name: Build
     uses: ./.github/workflows/build-static-site.yml
@@ -39,7 +43,7 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: [build, lighthouse]
+    needs: [actionlint, build, lighthouse]
     if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     permissions:
       contents: write

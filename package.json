@@ -11,7 +11,7 @@
     "dev": "next dev --webpack",
     "dev:clear-cache": "rm -rf .next && next dev --webpack",
     "build": "tsx scripts/generate-og-images.tsx && next build --webpack",
-    "build:local": "tsx --env-file=.env --env-file=.env.local scripts/generate-og-images.tsx && next build --webpack",
+    "build:local": "pnpm run build",
     "start": "next start",
     "lint": "next lint"
   },
