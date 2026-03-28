@@ -1,9 +1,10 @@
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import { Construct } from 'constructs';
+import type { EnvironmentName } from '../config/types';
 
 export interface CloudFrontRoutingProps {
   readonly appName: string;
-  readonly environment: string;
+  readonly environment: EnvironmentName;
   readonly domainName: string;
   readonly compiledEdgeAssetPath: string;
   readonly redirectsAssetPath: string;

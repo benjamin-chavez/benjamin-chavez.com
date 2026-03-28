@@ -1,17 +1,20 @@
-export type SiteEnvironmentName = 'prod';
+export type EnvironmentName = 'prod';
 
-export interface SiteEnvironmentConfig {
-  readonly envName: SiteEnvironmentName;
+export interface EnvironmentConfig {
   readonly account: string;
   readonly region: string;
+  readonly envName: EnvironmentName;
   readonly domainName: string;
   readonly alternateDomainNames: string[];
+}
+
+export interface ResolvedEnvironmentConfig extends EnvironmentConfig {
   readonly compiledEdgeAssetPath: string;
   readonly redirectsAssetPath: string;
 }
 
-export interface SiteAppConfig {
+export interface AppContext {
   readonly appName: string;
   readonly stackName: string;
-  readonly environments: Record<SiteEnvironmentName, SiteEnvironmentConfig>;
+  readonly environments: Record<EnvironmentName, EnvironmentConfig>;
 }

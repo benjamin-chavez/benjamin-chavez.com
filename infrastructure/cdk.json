@@ -17,6 +17,17 @@
   "context": {
     "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
     "@aws-cdk/core:checkSecretUsage": true,
-    "@aws-cdk/core:target-partitions": ["aws"]
+    "@aws-cdk/core:target-partitions": ["aws"],
+    "appName": "benjamin-chavez-com",
+    "stackName": "BenjaminChavezSite",
+    "environments": {
+      "prod": {
+        "account": "${CDK_DEFAULT_ACCOUNT}",
+        "region": "us-east-1",
+        "envName": "prod",
+        "domainName": "benjamin-chavez.com",
+        "alternateDomainNames": ["www.benjamin-chavez.com"]
+      }
+    }
   }
 }

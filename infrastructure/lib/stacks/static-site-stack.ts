@@ -1,15 +1,15 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import type {
-  SiteEnvironmentConfig,
-  SiteEnvironmentName,
+  EnvironmentName,
+  ResolvedEnvironmentConfig,
 } from '../config/types';
 import { StaticSite } from '../constructs/static-site';
 
 export interface StaticSiteStackProps extends cdk.StackProps {
   readonly appName: string;
-  readonly environment: SiteEnvironmentName;
-  readonly envConfig: SiteEnvironmentConfig;
+  readonly environment: EnvironmentName;
+  readonly envConfig: ResolvedEnvironmentConfig;
 }
 
 export class StaticSiteStack extends cdk.Stack {

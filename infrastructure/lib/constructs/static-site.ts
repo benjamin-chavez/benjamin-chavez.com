@@ -7,15 +7,15 @@ import * as targets from 'aws-cdk-lib/aws-route53-targets';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 import type {
-  SiteEnvironmentConfig,
-  SiteEnvironmentName,
+  EnvironmentName,
+  ResolvedEnvironmentConfig,
 } from '../config/types';
 import { CloudFrontRouting } from './cloudfront-routing';
 
 export interface StaticSiteProps {
   readonly appName: string;
-  readonly environment: SiteEnvironmentName;
-  readonly envConfig: SiteEnvironmentConfig;
+  readonly environment: EnvironmentName;
+  readonly envConfig: ResolvedEnvironmentConfig;
 }
 
 export class StaticSite extends Construct {
@@ -163,7 +163,8 @@ export class StaticSite extends Construct {
       target: distributionTarget,
     });
 
-    for (const [index, alternateDomainName] of alternateDomainNames.entries()) {
+    for (let index = 0; index < alternateDomainNames.length; index += 1) {
+      const alternateDomainName = alternateDomainNames[index];
       const recordName = this.getRecordName(alternateDomainName, domainName);
 
       new route53.ARecord(this, `AlternateARecord${index}`, {

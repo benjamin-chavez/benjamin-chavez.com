@@ -6,7 +6,7 @@
 > - How to separate deployment orchestration from reusable infrastructure modules
 > - How to introduce typed infrastructure config without overbuilding multi-environment support
 > - How to move CloudFront routing concerns behind a dedicated construct
-> - How to emit a compiled CloudFront handler into `dist/cloudfront/viewer-request.js`
+> - How to emit a compiled CloudFront handler into `dist/cloudfront/viewer-request.handler.js`
 > - How to verify a structural refactor with `build`, `synth`, and `diff`
 >
 > **Prerequisites:** You should be comfortable reading TypeScript, making small CDK refactors, and running `pnpm` commands from this repo.
@@ -32,7 +32,7 @@ Right now, this repo's infrastructure package works, but it is shaped differentl
 
 That structure is fine for a small first version, but it makes future changes harder than they need to be. One file currently owns reusable infrastructure behavior, stack-level outputs, and some deployment-level decisions. CloudFront routing logic is also split across the construct, the edge source, the generated JavaScript asset, and the build configuration.
 
-In this tutorial, you'll restructure the package in three phases. First you'll split stack-level orchestration from reusable infrastructure. Then you'll add typed config so deployment values stop living inline in `bin/app.ts`. Finally, you'll move CloudFront routing concerns behind a dedicated construct and emit the compiled handler into `infrastructure/dist/cloudfront/viewer-request.js`, where generated code belongs.
+In this tutorial, you'll restructure the package in three phases. First you'll split stack-level orchestration from reusable infrastructure. Then you'll add typed config so deployment values stop living inline in `bin/app.ts`. Finally, you'll move CloudFront routing concerns behind a dedicated construct and emit the compiled handler into `infrastructure/dist/cloudfront/viewer-request.handler.js`, where generated code belongs.
 
 ---
 
@@ -347,7 +347,7 @@ new StaticSiteStack(app, 'BenjaminChavezSite', {
     compiledEdgeAssetPath: path.join(
       infrastructureRoot,
       'cloudfront',
-      'viewer-request.js',
+      'viewer-request.handler.js',
     ),
     redirectsAssetPath: path.join(
       infrastructureRoot,
@@ -458,7 +458,7 @@ export const appConfig: SiteAppConfig = {
         infrastructureRoot,
         'dist',
         'cloudfront',
-        'viewer-request.js',
+        'viewer-request.handler.js',
       ),
       redirectsAssetPath: path.join(
         infrastructureRoot,
@@ -816,7 +816,7 @@ export const appConfig: SiteAppConfig = {
         infrastructureRoot,
         'dist',
         'cloudfront',
-        'viewer-request.js',
+        'viewer-request.handler.js',
       ),
       redirectsAssetPath: path.join(
         infrastructureRoot,
@@ -840,7 +840,7 @@ git rm infrastructure/cloudfront/viewer-request.js
 | `git rm` | Removes a tracked file from the repository and working tree |
 | `infrastructure/cloudfront/viewer-request.js` | The old source-controlled compiled CloudFront handler that should no longer be edited or tracked |
 
-> **Common mistake:** Don't manually edit `infrastructure/dist/cloudfront/viewer-request.js` after this step. That file is generated output. The source of truth is `infrastructure/edge/viewer-request.ts`.
+> **Common mistake:** Don't manually edit `infrastructure/dist/cloudfront/viewer-request.handler.js` after this step. That file is generated output. The source of truth is `infrastructure/edge/viewer-request.handler.ts`.
 
 > **Common mistake:** Don't keep CloudFront routing partially in `static-site.ts` and partially in `cloudfront-routing.ts`. Once you introduce the routing construct, let it own the KVS and viewer-request function wiring completely.
 
@@ -885,12 +885,12 @@ git rm infrastructure/cloudfront/viewer-request.js
 
 At the end of this step:
 
-- `edge/viewer-request.ts` should still be the only source of truth for the handler
+- `edge/viewer-request.handler.ts` should still be the only source of truth for the handler
 - `assets/cloudfront/redirects.json` should exist
 - `tsconfig.edge.json` should emit to `dist/cloudfront`
 - `lib/constructs/cloudfront-routing.ts` should exist
 - `static-site.ts` should use `CloudFrontRouting`
-- `appConfig.environments.prod` should point at `dist/cloudfront/viewer-request.js`
+- `appConfig.environments.prod` should point at `dist/cloudfront/viewer-request.handler.js`
 
 ---
 
@@ -924,14 +924,14 @@ pnpm --dir infrastructure run build
 2. Confirm that the compiled handler exists in `dist/cloudfront`.
 
 ```bash
-ls -la infrastructure/dist/cloudfront/viewer-request.js
+ls -la infrastructure/dist/cloudfront/viewer-request.handler.js
 ```
 
 | Part | What it does |
 |------|-------------|
 | `ls` | Lists files |
 | `-la` | Shows detailed output including permissions and timestamps |
-| `infrastructure/dist/cloudfront/viewer-request.js` | The generated CloudFront handler asset you expect after the build |
+| `infrastructure/dist/cloudfront/viewer-request.handler.js` | The generated CloudFront handler asset you expect after the build |
 
 3. Synthesize the stack.
 
@@ -975,7 +975,7 @@ This step already includes a breakdown table for every terminal command.
 You should be ready to deploy only after all of the following are true:
 
 - `pnpm --dir infrastructure run build` passes
-- `infrastructure/dist/cloudfront/viewer-request.js` exists
+- `infrastructure/dist/cloudfront/viewer-request.handler.js` exists
 - `pnpm --dir infrastructure run synth` succeeds
 - `pnpm --dir infrastructure run diff` shows only the intended structural/resource changes
 
@@ -987,7 +987,7 @@ You should be ready to deploy only after all of the following are true:
 
 You restructured the infrastructure package around clearer module boundaries. The deployment entrypoint now points to a stack, the reusable site infrastructure lives in a construct, deployment values come from typed config, and CloudFront routing is owned by a dedicated module instead of being scattered across unrelated files.
 
-You also moved the compiled viewer-request handler into `dist/cloudfront`, which makes the source-versus-generated distinction much clearer. `edge/viewer-request.ts` becomes the only source of truth, and the deployable JavaScript asset becomes a build artifact instead of a source-controlled file you might accidentally edit by hand.
+You also moved the compiled viewer-request handler into `dist/cloudfront`, which makes the source-versus-generated distinction much clearer. `edge/viewer-request.handler.ts` becomes the only source of truth, and the deployable JavaScript asset becomes a build artifact instead of a source-controlled file you might accidentally edit by hand.
 
 ### What we learned
 
