@@ -1,5 +1,7 @@
 import 'server-only';
 
+import { CloudWatchRUM } from '@/components/utility/cloudwatch-rum';
+import { SentryInit } from '@/components/utility/sentry-init';
 import RootLayout from '@/components/root-layout';
 import { clientEnv } from '@/clientEnv';
 import { Metadata } from 'next';
@@ -72,6 +74,8 @@ export default function Layout({
         <div className="pointer-events-none fixed inset-0 -z-50 bg-[linear-gradient(to_bottom,#F8F9FA_0%,#F8F9FA_50%,#040804_50%,#040804_100%)]" />
 
         <RootLayout>{children}</RootLayout>
+        <CloudWatchRUM />
+        <SentryInit />
         {/* Cloudflare Web Analytics — loads only when NEXT_PUBLIC_CF_ANALYTICS_TOKEN is set */}
         {clientEnv.NEXT_PUBLIC_CF_ANALYTICS_TOKEN && (
           <Script

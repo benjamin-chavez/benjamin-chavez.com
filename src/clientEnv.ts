@@ -4,6 +4,10 @@ const envSchema = z.object({
   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string().min(1),
   NEXT_PUBLIC_APP_URL: z.url().default('http://localhost:3000'),
   NEXT_PUBLIC_CF_ANALYTICS_TOKEN: z.string().optional(),
+  NEXT_PUBLIC_CW_RUM_APP_MONITOR_ID: z.string().optional(),
+  NEXT_PUBLIC_CW_RUM_IDENTITY_POOL_ID: z.string().optional(),
+  NEXT_PUBLIC_AWS_REGION: z.string(),
+  NEXT_PUBLIC_SENTRY_DSN: z.string().optional(),
 });
 
 const parsed = envSchema.safeParse({
@@ -12,10 +16,18 @@ const parsed = envSchema.safeParse({
   NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || undefined,
   NEXT_PUBLIC_CF_ANALYTICS_TOKEN:
     process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN || undefined,
+  NEXT_PUBLIC_CW_RUM_APP_MONITOR_ID:
+    process.env.NEXT_PUBLIC_CW_RUM_APP_MONITOR_ID || undefined,
+  NEXT_PUBLIC_CW_RUM_IDENTITY_POOL_ID:
+    process.env.NEXT_PUBLIC_CW_RUM_IDENTITY_POOL_ID || undefined,
+  NEXT_PUBLIC_AWS_REGION: process.env.NEXT_PUBLIC_AWS_REGION || undefined,
+  NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN || undefined,
 });
 
 if (!parsed.success) {
-  console.error('❌ Invalid environment variables:\n' + z.prettifyError(parsed.error));
+  console.error(
+    '❌ Invalid environment variables:\n' + z.prettifyError(parsed.error),
+  );
   throw new Error('Invalid environment variables');
 }
 

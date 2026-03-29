@@ -155,5 +155,8 @@ vite.config.ts.timestamp-*
 # vercel
 .vercel
 
+# Lighthouse CI
+.lighthouseci/
+
 
 

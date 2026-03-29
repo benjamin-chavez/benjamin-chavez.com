@@ -1,25 +1,36 @@
 import React from 'react';
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
+import { loadEnvConfig } from '@next/env';
 import satori from 'satori';
 import sharp from 'sharp';
-import { getAllPosts } from '../src/lib/posts';
 
 const OG_WIDTH = 1200;
 const OG_HEIGHT = 630;
 
 async function main() {
-  const outDir = path.join(process.cwd(), 'public/og');
+  const projectDir = process.cwd();
+
+  // Match `next build` env resolution so local builds pick up `.env.local`
+  // without needing a separate wrapper script.
+  loadEnvConfig(projectDir, false);
+
+  const { getAllPosts } = await import('../src/lib/posts');
+
+  const outDir = path.join(projectDir, 'public/og');
   fs.mkdirSync(outDir, { recursive: true });
 
   const fontPath = path.join(
-    process.cwd(),
+    projectDir,
     'public/fonts/Dosis/static/Dosis-Regular.ttf',
   );
   const fontData = fs.readFileSync(fontPath);
 
-  const avatarPath = path.join(process.cwd(), 'public/img/avatar.png');
+  const avatarPath = path.join(projectDir, 'public/img/avatar.png');
   const avatarBase64 = `data:image/png;base64,${fs.readFileSync(avatarPath).toString('base64')}`;
+
+  const bgPath = path.join(projectDir, 'public/img/og-thumbnail.png');
+  const bgBase64 = `data:image/png;base64,${fs.readFileSync(bgPath).toString('base64')}`;
 
   const posts = getAllPosts();
 
@@ -33,7 +44,8 @@ async function main() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '80px',
-          background: 'linear-gradient(135deg, #7cb563 0%, #4a8c3f 100%)',
+          backgroundImage: `url(${bgBase64})`,
+          backgroundSize: 'cover',
         }}
       >
         <div

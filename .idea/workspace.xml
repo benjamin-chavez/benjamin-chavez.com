@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/lib/posts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/posts.ts" afterDir="false" />
+    <list default="true" id="8bdfd01e-de84-4e29-99d8-27f3d9fc363c" name="Changes" comment="new infra&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/prettier.xml&#10;#&#9;.idea/vcs.xml">
+      <change beforePath="$PROJECT_DIR$/infrastructure/bin/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/bin/app.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/cdk.out/BenjaminChavezDotCom.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/cdk.out/BenjaminChavezDotCom.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/cdk.out/BenjaminChavezDotCom.metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/cdk.out/BenjaminChavezDotCom.metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/cdk.out/BenjaminChavezDotCom.template.json" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/cdk.out/BenjaminChavezDotCom.template.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/cdk.out/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/cdk.out/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/cdk.out/tree.json" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/cdk.out/tree.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/lib/constructs/static-site.ts" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/lib/constructs/static-site.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/lib/stacks/static-site-stack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/lib/stacks/static-site-stack.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="GitHub Action" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,6 +75,9 @@
   &quot;fromUser&quot;: false
 }</component>
   <component name="ProjectId" id="3BZxJwJN60MjGd9x0elEa4Nd295" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
@@ -76,11 +93,12 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHELLCHECK.PATH": "/Users/benjaminchavez/Library/Application Support/JetBrains/WebStorm2025.3/plugins/Shell Script/shellcheck",
-    "git-widget-placeholder": "nextjs-upgrade",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "phase-2-aws-infrastructure",
     "javascript.preferred.runtime.type.id": "node",
     "js.debugger.nextJs.config.created.client": "true",
     "js.debugger.nextJs.config.created.server": "true",
-    "last_opened_file_path": "/Users/benjaminchavez/Code/benjamin-chavez.com/.github",
+    "last_opened_file_path": "/Users/benjaminchavez/Code/benjamin-chavez.com/.github/actions",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "pnpm",
@@ -89,12 +107,26 @@
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "/Users/benjaminchavez/Code/benjamin-chavez.com/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Markdown",
+      "TypeScript",
+      "TEXT"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.github/actions" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/.github" />
       <recent name="$PROJECT_DIR$/scripts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.context" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/.github/actions/tag-deployment" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: server-side">
@@ -129,6 +161,15 @@
       <workItem from="1774710327000" duration="4478000" />
       <workItem from="1774715041557" duration="9847000" />
     </task>
+    <task id="LOCAL-00001" summary="new infra&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/prettier.xml&#10;#&#9;.idea/vcs.xml">
+      <option name="closed" value="true" />
+      <created>1774741718897</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1774741718897</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,6 +179,11 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="next.config.mjs" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="9016f68e-5c4a-49f1-a61f-c3461c366dfb" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="RECENT_FILTERS">
       <map>
         <entry key="Branch">
@@ -155,6 +201,11 @@
     </option>
     <option name="TAB_STATES">
       <map>
+        <entry key="9016f68e-5c4a-49f1-a61f-c3461c366dfb">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -174,5 +225,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="new infra&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/prettier.xml&#10;#&#9;.idea/vcs.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="new infra&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/prettier.xml&#10;#&#9;.idea/vcs.xml" />
   </component>
 </project>

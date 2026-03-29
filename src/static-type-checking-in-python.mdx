@@ -1,0 +1,185 @@
+[//]: # (# )
+
+[//]: # ()
+[//]: # (---)
+
+[//]: # (# src/content/how-to-create-new-express-application.md)
+
+[//]: # (title: 'Creating a TypeScript Express.js Web Application with ES6 - Step-by-Step Guide')
+
+[//]: # (author: 'Ben Chavez')
+
+[//]: # (description: "Want to learn how to create a basic server using Express and Typescript? Look no further than this comprehensive guide. Follow along to create your own server and endpoints, and learn how to use hot reloading to watch for changes in code. Whether you're a beginner or just looking to expand your knowledge, this guide is a valuable resource for anyone interested in creating a basic Express Typescript web application.")
+
+[//]: # (summary: 'In this step-by-step guide, you will learn how to create a basic Express Typescript web application, from creating a new directory for the application to running the server. You will also learn how to add endpoints to return data and how to add hot reloading to watch for changes in code')
+
+[//]: # (publishedAt: '2023-09-13')
+
+[//]: # (updatedAt: '2023-10-10')
+
+[//]: # (---)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Sweet. OK, so today we're looking at static type checking in Python, or otherwise known as Mario on MyPy. So what is, let me see if I can get this out of the way. One second. OK, what is mypy? So mypy is a static type checker for Python. And sometimes I think it's best to look at static typing through the lens of generic typing. So in Python, as we know, we could basically So I'm going to probably go, I'll try and add some like kind of like beginner, like, I don't know, stuff in that. Oh, so then you know what I'm talking about. And then I'll also go deep. So if I'm explaining the basics, obviously to you guys, or that's obviously you guys, that's why. But in any case, dynamic typing is basically saying that we can, anything can be any type. So in Python, we can, we can define things like, car equals 1999. But we could also define things like car equals Honda. And it lets us do that. Whereas in statically typed languages or strongly typed languages, it doesn't let you do that. If you define something as a number or as an integer, then later on, you can't give it a value that is a string or text. And so statically typed in Python, statically typing implies adding type annotations to all your variables as you define them. So in this example, that would be the equivalent of saying that this is an integer. This is string. And so now, Python and the interpreter knows what these variables are. And later on, if you try to change them, it'll be more clear that this is incorrectly set. That's generally kind of like a static type. Static type checking with mypy specifically is going to throw errors. when you try and do that. And so here's just like a quick example of static typing in Python. So just a kind of quick one of the trade-offs, development speed is a big one and it could be argued on either side. If you think it's faster or slower, oftentimes it, The argument is that it slows you down for people who haven't used them a lot. And that could be true in the short term, potentially, if you're writing shorter scripts or anything like that. But as you start to develop bigger projects, the static typing, it allows you to continue to move fast because you are not getting caught up trying to figure out what things are being passed around to what. I think that we've probably all faced bugs like that. and spent hours trying to figure out what was wrong with our code, only to realize that we accidentally passed in a dictionary instead of a list. And so static type checking helps to kind of let you avoid that. So here's a quick example. I don't know if anybody wants to try and tell me what's wrong with this code.)
+
+[//]: # ()
+[//]: # (SPEAKER_02: I mean, what's wrong with this code? Lack of type.)
+
+[//]: # ()
+[//]: # (SPEAKER_03: I would say what is loan ID? It could be a combination of string or integer. Yeah, go ahead. If you were to introduce this as a critical part of the code, you could potentially run the scenario where you get the wrong loan ID. It's not enforcing anything. It's just simply taking it in and passing it back.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: So, yeah, I think, like, with this, the, like, my opinion of it is, like, there's not enough information to know, like, truthfully, whether, like, what's wrong with it, and that is, like, itself a problem, but ultimately, like, unclear what the issue is. So, kind of the same question for this one, you know, what's wrong with this? It's, like, okay, well, still kind of unclear. You, ultimately, like, you hope that this is a number, right? So... Now it's like, okay, well, what's wrong with this? Well, loan ID is a string and here we're adding like five to it. So like that is problematic. Here is kind of what we would output if we were to pass this loan ID in here. So here we actually get the loan back and then here we would get a type error on it. And that would only happen at runtime though. So like we would actually like have to run the code for that to happen. we wouldn't see any type errors or anything like that in the actual code itself as we were running it. And so with mypy, we would see this, basically. So as soon as we started to try and do something incorrect, we would see it start to give us those errors. can take a look at this here. So here is the untyped version. If we start to add types to this, we should see some type errors show up. And so actually what's happening here is that And this is just another point that Josh brought up to me recently. But basically, what's happening here is MyPy is not actually running. So we can add type annotations. But unless we're using a static type checker like MyPy, the type annotations oftentimes won't actually tell us what's wrong or tell us that anything is wrong. And so we turn the type checker on. Then we should start to see errors here. If we don't, then that is odd. Let's see.)
+
+[//]: # ()
+[//]: # (SPEAKER_03: Nice using a VS code there, huh?)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Uh, I'm trying to, you know, appeal to the peel. So, uh, uh, let's see here. This is. So anyway, sorry, I didn't actually have MyPy installed on this other project, F2 projects here. So as you can see here, now we're actually getting the errors on it. And so it's going to tell us immediately as we start to type this out. So here it's fine, right? But as soon as we start to add five to it, it's going to be like, hey, you can't do that. And so that's kind of ultimately the benefit of it. And like I mentioned, if you have like PyLance running, that'll catch some stuff. But if you're like adding types, but if you are running MyPy without types, like type annotations, it's not going to do anything. If you have type annotations without MyPy, you'll get some benefits, but you're still going to get not quite as many benefits. It's not going to catch everything. So let's see here.)
+
+[//]: # ()
+[//]: # (SPEAKER_02: Were you suggesting running PyLance and MyPy or just MyPy with type annotations?)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Can you say that one more time?)
+
+[//]: # ()
+[//]: # (SPEAKER_02: You mentioned PyLance. Were you suggesting running PyLance and MyPy side by side?)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Yes, both of them. So if I'm not mistaken, MyPy uses PyLance under the hood to actually do its type checking. So if you have PyLance in general running, it's going to catch some of the type errors. But then if you add MyPy to that, then you'll get more coverage, basically. And that's just what I've seen through little what you guys just saw of me trying to test this stuff out. There was some examples where I didn't expect it to be checking anything. Like the one we're looking at right here, I didn't expect it to catch that at all because I wasn't running the MyPy extension. But it was catching it, and I wasn't quite sure why. And it was because I had the Pylance extension going. And then later on, I'll show you some more code where even with the Pylance extension running, Without MyPy, it wasn't catching a bunch of stuff. So we can look at that in a few minutes. So ultimately, the benefit is it's going to catch more errors before runtime. And that's one thing to be clear is that MyPy and static type checking are not... They happen only during development, not at runtime. So if your code is being typed perfectly in runtime or during... during development, and then you go into production and you start passing in integers to things that expect strings, it's not going to actually do anything. But that would be ideally something that is out of your system, like you'd control for via other mechanisms like Pydantic and things like that, which we'll touch on. A big thing about it using type annotations is just general documentation for your other developers. Like I said earlier, I think we've all probably spent time where we're trying to figure out what's wrong with our code, only to realize we're using the wrong type somewhere along the way. And that can just make things clear for the rest of the team as we're I don't know, developing with each other's code. And then lastly, it eliminates an entire need for a type of test case. So here's an example of a basic kind of function where it's calculating the area. And so with a function like this, you might need to write some tests to make sure that it's going to do what you actually think it's going to do, and that it's going to, like, if you pass in, what is this? Where is this type error? Basically, this one was a quick one I pulled from ChatGDP. But it gets the point across where it's basically checking if you pass in a type that it's not going to expect, you expect it to raise an error. So you're writing tests to say, hey, raise an error if we get this string right here. if you get an array or something also raising error. And so we're testing to make sure that that's how it's going to behave. And if we just add some type annotations, then we don't actually need to write any of this test code. We'll start to get those squiggly lines of the linting errors as we try and pass in things that are not floats or ints. And so here, the So this is Guido, I'm sure you guys probably know, the guy who developed Python. So I'm going to show you guys a quick clip of him talking about his view on TypeScript versus JavaScript, because there's a lot of correlators, as I'm sure the front end guys, primarily, I think, in this group is going to know about. So let's see here. I'm going to just go ahead and pop this open.)
+
+[//]: # ()
+[//]: # (SPEAKER_04: On my Chrome.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Oh, I'm in Chrome.)
+
+[//]: # ()
+[//]: # (UNKNOWN: Cool.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: You guys see that?)
+
+[//]: # ()
+[//]: # (SPEAKER_02: Nope. OK.)
+
+[//]: # ()
+[//]: # (SPEAKER_04: There's my mute button. You have to tell it that you want to share sound in the apps.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: In my settings or in the Zoom settings?)
+
+[//]: # ()
+[//]: # (SPEAKER_04: It should be the Zoom settings. OK. Let's see.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Is it in the when you reshare? Is it in that prompt? yes yes like share music or share sound yeah if you click the mute audio icon there's like the upper like the drop down once you click it should tell you there uh just your microphone switch uh i'm not seeing it so we can potentially just skip it a lot unless somebody knows the exact name of it. But otherwise, it's fine. I'll share the clip with you guys. But basically, he's just talking about how type checking in MyPy is to Python what TypeScript is to JavaScript. And ultimately, when MyPy was initially created, MyPy stands for MyPython, and the guy who created it was writing it as a superset of Python. similar, like basically exactly how TypeScript is to JavaScript. And so basically in this clip, Lex Friedman asks Guido like, you know, if he were to recommend to somebody like whether to use JavaScript or TypeScript, like what would he recommend? And he recommends like they would use TypeScript. So kind of the, what it's like, what that question is supposed to like convey is like, you know, would he recommend someone use type checking in MyPy with Python or not? And so like, ultimately, yes. Also his shirt is hilarious. It's actually nice. I thought it was just PyLadies. Okay, cool. Let's see here. The next slide here.)
+
+[//]: # ()
+[//]: # (SPEAKER_02: Quick question for you, Ben. Just out of curiosity, does he mention or talk about why MyPy isn't part of the standard library?)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Yeah. There's a couple reasons. And So, he works pretty closely with the guy who developed MyPy. And the main thing is that, or I guess there's kind of two things. The first one that he kind of talks about is that there are certain things in Python and libraries that couldn't have been developed had you had the strong typing on it. I'm not exactly sure of examples of those. I think just the flexibility of language allows you to do some pretty crazy things. I've tried to look for examples in libraries and things like that to try and find something that couldn't be done with types. It could get kind of deep, as I'm sure you guys know, but that was kind of the first one. And the second one is just that not everybody who uses Python wants it. And so he doesn't want to put that in to force it on everybody. And that maybe in the future, they might do something to add that into it. But because they don't want to, if you add something to it, you can't really take it out of Python. So that's kind of the big reason. Yeah. Okay. So then just kind of quickly touching on like Pydantic and MyPy because we've been using Pydantic and that essentially it does all of our runtime checking. So it is a compliment to MyPy and a compliment to like the static type annotations overall. Basically kind of just gives us the full scope of checking and type inference, both at runtime and during development. So ultimately the two work complementary to each other. So next I've got just kind of a bigger example here. We've got I've got this like loan fetcher right here, basically. So we've got a like our main function fetches some loan data. It's going to filter the loan data calling this like filter loan data, which is basically just taking out anything that has loan number in the field name. and then it's going to print it. So this is some kind of standard code that we might see. So I've got a mock data call here that we're going to pass in. Let's see here. So instead of using the API, because we don't actually have an API to hit, I'm going to use this mock loan venture here. And so right now, we can go ahead and we'll just pass that in instead. And so now we can run this, and it should work. So I'm going to go ahead and run it, and we'll see the output. Sometimes my stuff takes forever to load. Let's see. Okay, so we saw that it ran. This is the result that it output after it filtered out the low number. So we could see it had like low number in here is the input data and then here it just took it out. So that's great. And then now we have another mock set of data. So this will be our second mock and we will pass that in instead. So now we'll switch this out to mock two And we will run this. And this one works just fine. So it took out anything that had loan number in it. So right here, we don't have the loan numbers in there here anymore. Um, and so kind of the main thing that I want to point out here is that the code works totally fine running both of these. Um, and they're both kind of like dictionary structures, but this one, uh, clearly has just lists in it and, and each like there aren't any, there's nothing else but strings inside of these lists. Right. Um, and our code let us do it. No problem. And so. So to me, this might be problematic because let us do it. We were able to make it through. And let's say that we were actually only expecting a list of strings. Then if we pass this through, basically all of this would cause issues down the road. And so if we take this exact example and we go down to where we have mypy enabled, and I will also turn it on. It is on. OK, cool. Here we go. Sorry about that. OK. So here is our loan fetcher again. Here we've got this is loan fetcher one. So as you can see, I'm already going to run this. I'm already looking at this thing. It's already giving me errors. I'm not really sure why. I'm going to try and run it anyway, because I wasn't expecting this error here. So yeah. It might take a second to run. I'm not sure what's going on there. OK, cool. So we can see it run. I think the issue here is this error is potentially)
+
+[//]: # ()
+[//]: # (SPEAKER_03: Yeah, I was complaining about the output. So something in your mock response is making it kind of get flagged, and that dick took up it.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Yeah. Earlier, when I did this, I initially set this up as a float, because I've got floats in here, right? But it was telling like it was, I don't know, I'm not sure what setting I had going, but it was basically saying that that was wrong, and it had to be an int. So that's why that was happening. But as you can see in real time, the benefits of it saying, hey, you're doing something that you didn't say you were going to do. So now if we take the mock data from the mock2, and so this is mock2 with types on it, and we try and pass it into the first one, We're going to see, now we're getting errors here. It's telling us we're not allowed to do that. There should be, should be seeing more errors than we're currently seeing. I'm wondering why. I'm going to take this one and pass it into the other one and see if that is any different, because I should be seeing some more errors. If not, though, then that is OK. And we are at least seeing something here. Should be. Why is it not touch everything?)
+
+[//]: # ()
+[//]: # (SPEAKER_03: One thing that you might want to try doing is noticing that you have some warning signs on your terminals there. Try and clear all those terminals out and open a nice, fresh terminal. Sometimes I notice that it'll kind of help reload. And then you open a new terminal. I believe that loads your... I mean, assist in loading with your Python version and all that.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Yeah, I think that the shell might have been for the version that doesn't have type checking or MyPy installed. So I guess we'll see in a second here what's going on, if it works or not. Interesting. Okay, well... This is a horrible example. But ultimately, we should be getting some type errors here, similar to this one. I had it running earlier where it was basically flagging the entire thing. And it should be doing that. That said, it is something that you have to configure and get running properly. And that could be a little bit of an issue, I think, or a little bit of a hurdle until you get it running properly. But at least what we're seeing here is that we are getting some error, not as many as I was hoping for. But in any case, it's still telling us that something's wrong here. That's ideal, because ultimately, we shouldn't be able to run both of these things through here unless we explicitly know that we want to do that and explicitly know that like, let's see here. I think it is related to the way that I'm defining the base class, but that's OK. We shouldn't be able to run the same code on those two things unless we explicitly tell it that we want to do that. So ultimately, we would want to be able to say this is going to be a list of strings or a string or a float or just an any type if we know that it can be all those things. Otherwise, we can run into issues where we're passing the same thing through and it's not going to give us what we want. And then lastly, Just some other tools to mention. So MyPy is kind of the original. Then there's PyWrite, that's one that's currently developed by Microsoft. There's one called Pyre, that's Facebook. PyType is Google. And they all kind of do the same things, they're just different variations on it. Um, lastly, or like two other things just kind of worth mentioning is like Cython and Mojo. So, um, Cython is, um, Python with, uh, that compiles down to C and the primary speed gains that you like for performance reasons, the primary speed gains you get from that is through adding type annotations to, uh, the Python code. And then, uh, the compiler uses that to, um, as like, well, it's compiling on C and that is where you're getting most of the performance boost there. And then similarly with Mojo, it's like a newer implementation of Python. It's a superset of Python, but with types. And the same thing goes for that. It compiles it, and then a lot of the performance you're getting from it is from the type annotations. So it's not quite static type checking, but it's kind of like, I don't know, a layer deeper. And then lastly, in order to get this all running properly with type checking, you can have the package installed in the PyProject file here. And then you can run it as like in the terminal, do like mypy, it's like poetry, like run mypy or something like that. And it'll output all the errors that you'd see, like it would output this in the terminal basically. You could do that in your CICD, but if you want to have it like visually like this, then you have to add the extension. So either like in VS Code, there's an extension and like PyCharm is an extension. And then you can kind of have all your type checking. And that is all.)
+
+[//]: # ()
+[//]: # (SPEAKER_02: Cool. Hey, question for you. I think I kind of brought this up when we pitched this lunch and learn. But how would you feel? I'm down to use MyPy. It actually sounds great. How would you feel about having like a pre-commit script for our repos where it runs MyPy? If it fails, you can't commit code. Yeah.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: personally don't like pre commits. Cause I feel like they get in the way of like, uh, like sometimes you want to just get something saved, but, um, I like the idea of having a check on the CI or something like that would be nice. Another thing that is nice about it is you can, in your config files, you can gradually make it stricter. So you can start off pretty light, so that way it's not failing a bunch. And then as you go further, you can have it check more and more things. And I believe you could also set it up so that way it's only checking the code that you actually touched. So that way... Um, you know, if you update your, like make changes or whatever, then you're not going to get like, like a bunch of errors for code. You didn't like, right. That's old. Um, but yeah, I mean, uh, I mean, I'd be down for that, but I prefer if it was like in the CI or something. So that way we can like, uh, yeah.)
+
+[//]: # ()
+[//]: # (SPEAKER_02: The CI that would just, uh, fail in the pipeline then. Right.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Uh huh.)
+
+[//]: # ()
+[//]: # (SPEAKER_02: Yeah.)
+
+[//]: # ()
+[//]: # (SPEAKER_03: Yeah, actually, by design, the pipeline is set up that way, but I thought it would be a little too heavy-handed at the moment. But there's also... We have a linter that we're using, rough, and... Yeah, like it's flagging all kinds of stuff that we're going to have to go through and actually change. I would say if there's a wave that MyPy, actually, probably not for MyPy, but definitely for the linter, we could do a pre-commit that cleans some of the stuff that's done or could clean it in a safe way. But I don't know if there's something like that for MyPy because it's all...)
+
+[//]: # ()
+[//]: # (SPEAKER_00: I could check because I know a lot of times there is like you can get like it gives you like the suggestions or whatever like the same way like it does if you're like have something spelled wrong or something and so I think that you should be able to do it because like I don't know I don't know if it'll give me like a context action here, but you should be able to do it like whatever actions it gives you here. I know you could do it for rough, but I don't know if you could do it for my pet, but I could, I could take a look and see and let you guys know.)
+
+[//]: # ()
+[//]: # (SPEAKER_02: There's, there's definitely a pre-commit for my pie and I'm pretty keen on getting some kind of pre-commit going things like running black to format code. I sort to sort imports, you know, my pie or rough or both. linting and whether or not we fail hard fail on like the linting that's up in the air but i'd be down to once we if we get all the existing errors cleaned up and just you know uh hoist uses a similar pre-commit for their stuff and it was really annoying at first but i really like it now uh once i got used to it robert and sunset how do you guys feel about that pre-commit that hoist uses or either or i guess just self-check i don't see robert on here)
+
+[//]: # ()
+[//]: # (SPEAKER_01: Oh, yeah. So, I mean, I like having an option. I mean, not the option. I think if there's a restriction, I definitely like that just because we don't have to deal with the causing issue. But I want the option when you want to push like what Ben was saying. I want the option that is like the dash dash, like the no verify kind of stuff. That will be awesome. So that way we have both versions. Let's say if I'm merging the dev branch, that should be restrict. But if I'm merging my own branch that just want to test something, I just have to say like no dash dash no verify, which allow no run descriptor. Basically skip the script. If that makes sense.)
+
+[//]: # ()
+[//]: # (SPEAKER_02: Does that exist in the Hoist repo? Like is that part of pre-commit? Yes. Cool, I didn't know that. Yeah, that's neat.)
+
+[//]: # ()
+[//]: # (SPEAKER_03: Yeah, and then I'm down for, because I actually want to enforce the linter. We should try and enforce it. But yeah, I know for a fact this would be a pain in the ass, but we'd have really sharp, clean code if we did. So I'm down to have a pre-commit. I actually used to hate TypeScript. But I absolutely love it after working with it and learning, like, how it works. Because I'm used to Python, so I can do whatever the hell I want.)
+
+[//]: # ()
+[//]: # (SPEAKER_02: Yeah.)
+
+[//]: # ()
+[//]: # (SPEAKER_03: But with TypeScript, you had to predefine everything or anything that you're using in a function or anything like that, right? It has to match what the input is. And the reason I like it is because the code works. So once you get past the typing, the code will for sure work. And that's kind of the nice part about it. So I'm 100% on board with introducing mypy, because that's why I like pedantic. I like pedantic because it enforces data rules to an extent. Obviously, it's not super strict. But yeah, anything else that we can add to making the code less ambiguous is what I would be in favor of. I'm very in favor of everything being explicit as possible.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Yeah, I was running... I would have this running. I think I deleted it from the repo because I didn't mean to add it, and I felt like that was not necessarily fair. But I have this configuration, and I also have a rough one that's pretty intense. And I think you just need to turn the extensions on. I'm not 100% sure how it is for VS Code versus PyCharm. But I think you just need to download or install the extension for MyPy and then for Ruff. And then having the config files in here, automatically, you'll start seeing a lot of stuff pops up. And so I have noticed, though, that there's been a couple of times where I've gotten a little bit too caught up in in dealing with type errors and stuff like that. Because if your whole screen is full of errors, then it gets easy to get distracted by them and to start trying to clean a bunch of them up like this. And just something to mention.)
+
+[//]: # ()
+[//]: # (SPEAKER_03: I think it could take a whole day. I'm pretty sure I had Core or Mario open, and my problems number was over 500 problems. So yeah. One other thing that we could try doing, too, is in terms of the older stuff, there are, I don't know, like Cursor. I use something called Klein. which could use an AI to help facilitate fixing some of the problems that are there. So that might actually be another approach in terms of retrofitting. We could use like an AI bot to help rewrite and even introduce some new testing. So it doesn't have to be all done manually or upfront, right?)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Yeah, that's one thing that's also nice about doing this now versus like, I don't know, five years ago too, is like, it's super easy to just throw one of these functions into... like, clot or something and just be like, hey, like, can you help me type this? Because, like, I don't know, sometimes they can get a little bit, like, I don't know, kind of intense. Like, I think that the code, what is it? I think it's in this one where we're doing the, we have the, what are they called? The decorators for the transformers. I forgot where that code is exactly, but yeah. that, like, I, like, was typing that one day. And I don't know if I've ever committed, but, like, it was, like, pretty intense to try and, like, figure out on my own. So it was nice to have, like, kind of, I don't know, have that as a resource.)
+
+[//]: # ()
+[//]: # (SPEAKER_03: Yeah, we should definitely... Let's, I guess, maybe as an action item for backend folks, we should come up with a timeline when I introduce it. We can introduce MyPy all day, like right now. I think that's more of just a visual thing. But in terms of enforcement, maybe we can work on maybe repo by repo and start enforcing some of the rules. The pipeline also right now is... it's equipped to look at those things. So even like, if you look at the Python, you look at the linting, it'll tell you all the problem with it. We're just ignoring it right now. So I think coupled that with a pre-commit and adding MyPy and actually looking at maybe knocking out the problems on a particular module or function at a time when we do our commits, I think will help. And then we can talk about maybe sometime in the future, actually making that an enforcement. If we enforce it now, development's going to pretty much stop, right? Probably for, like, days or weeks or however long it takes us to do it. But I think we should introduce it slowly. Let's get the habit in, and then we can do the enforcement. Sounds good.)
+
+[//]: # ()
+[//]: # (SPEAKER_02: You know, any thoughts on, like, how to centralize? Like, if we had a pre-commit file and we're running mypy, black, isort, how do you think we could centralize that pre-commit file and those tools and those settings?)
+
+[//]: # ()
+[//]: # (SPEAKER_03: like a new repo you just pull it down instead of having to recreate it cookie cutter is what my opinion would be okay yeah that's yeah that's a good idea because cookie cutter uh basically is just templatizing it so if you create a new repo you just pull it like create using cookie cutter and then now you have the pre-commit um yeah that's the only way i can think of doing it)
+
+[//]: # ()
+[//]: # (SPEAKER_02: That's great. We can do that for our folder structures, for our infrastructure structure.)
+
+[//]: # ()
+[//]: # (SPEAKER_03: That would be awesome to do. Especially for API development or just Lambdas, we can have those in place. You can have pre-installed packages, too.)
+
+[//]: # ()
+[//]: # (SPEAKER_02: Yeah, that would be it. So ticket-wise, if we wanted to have tickets for the tech debt for this, create a cookie cutter. That's pretty high on my priority. I like that a lot. And then create the pre-commit script and the settings for MyPy and whatever else we want to add to it. That's cover everything?)
+
+[//]: # ()
+[//]: # (SPEAKER_03: Yeah, pre-commit, we should add MyPy, black formatter, and rough fixing. those three things should be done.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Other one that you mentioned, Josh, the, um, uh, I forgot what it's called. The, um, it's the sorter. Yeah.)
+
+[//]: # ()
+[//]: # (SPEAKER_03: Yeah. Yeah. That's it.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: I know rough does, does that also, I'm not sure if you need both or not, but I play around with both in there. Both. Nice.)
+
+[//]: # ()
+[//]: # (SPEAKER_03: Yeah. I've seen rough, uh, hit linting on that. Um, I think it does include eyesore.)
+
+[//]: # ()
+[//]: # (SPEAKER_00: Cool. Okay, cool. Some good takeaways. Thanks for listening.)
+
+[//]: # ()
+[//]: # (SPEAKER_03: Yeah, it was a great presentation. Thanks, Ben. Thanks for putting me together. You guys are always raising the bar.)
+
+[//]: # ()
+[//]: # (UNKNOWN: All right, Alex.)

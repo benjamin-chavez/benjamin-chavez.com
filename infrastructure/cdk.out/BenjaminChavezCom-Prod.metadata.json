@@ -1,0 +1,179 @@
+{
+  "/BenjaminChavezCom-Prod": [
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "Environment",
+          "value": "prod"
+        },
+        {
+          "key": "ManagedBy",
+          "value": "cdk"
+        },
+        {
+          "key": "Owner",
+          "value": "ben"
+        },
+        {
+          "key": "Project",
+          "value": "benjamin-chavez-com"
+        },
+        {
+          "key": "Repository",
+          "value": "benjamin-chavez/benjamin-chavez.com"
+        }
+      ]
+    }
+  ],
+  "/BenjaminChavezCom-Prod/AWSCloudFrontPartitionHostedZoneIdMap": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AWSCloudFrontPartitionHostedZoneIdMap"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BucketName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BucketName"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/DistributionId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DistributionId"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/DistributionDomainName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DistributionDomainName"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/NameServers": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NameServers"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/Bucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComBucket38824A1F"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/HostedZone/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComHostedZone17AA3231"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/Certificate/CertificateRequestorFunction": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+      "data": 0
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/SecurityHeaders/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComSecurityHeadersB2B02954"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/Distribution/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComDistribution8AA7A064"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/ARecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComARecord426D5BBA"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/AAAARecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComAAAARecord02E4E238"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/AlternateARecord0/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComAlternateARecord00787C6FF"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/AlternateAAAARecord0/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComAlternateAAAARecord0B86D03D0"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/Bucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComBucketPolicy4C328891"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/Certificate/CertificateRequestorFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComCertificateCertificateRequestorFunctionB6085F04"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/Certificate/CertificateRequestorResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComCertificateCertificateRequestorResource060D210B"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/CloudFrontRouting/RedirectStore/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComCloudFrontRoutingRedirectStore0F7AD82A"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/CloudFrontRouting/ViewerRequestFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComCloudFrontRoutingViewerRequestFunction402A1637"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/Certificate/CertificateRequestorFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComCertificateCertificateRequestorFunctionServiceRole6A59D40C"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/Distribution/Origin1/S3OriginAccessControl/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComDistributionOrigin1S3OriginAccessControl75199F71"
+    }
+  ],
+  "/BenjaminChavezCom-Prod/BenjaminChavezCom/Certificate/CertificateRequestorFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BenjaminChavezComCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy06EE45DA"
+    }
+  ]
+}
