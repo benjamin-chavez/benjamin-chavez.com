@@ -1,5 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import { toPascalCase } from '../config/site-config';
 import type {
   EnvironmentName,
   ResolvedEnvironmentConfig,
@@ -19,7 +20,7 @@ export class StaticSiteStack extends cdk.Stack {
     super(scope, id, props);
     const { appName, environment, envConfig } = props;
 
-    this.site = new StaticSite(this, 'App', {
+    this.site = new StaticSite(this, toPascalCase(appName), {
       appName,
       environment,
       envConfig,

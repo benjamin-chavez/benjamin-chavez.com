@@ -59,10 +59,25 @@ export AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-$AWS_REGION}"
 export CDK_DEFAULT_REGION="${CDK_DEFAULT_REGION:-$AWS_REGION}"
 export CDK_DEFAULT_ACCOUNT="${CDK_DEFAULT_ACCOUNT:-$AWS_ACCOUNT_ID}"
 
-STACK_NAME="${CDK_STACK_NAME:-$(jq -r '.context.stackName' infrastructure/cdk.json)}"
-if [[ -z "$STACK_NAME" || "$STACK_NAME" == "null" ]]; then
-  echo "Could not resolve stack name from infrastructure/cdk.json" >&2
-  exit 1
+to_pascal_case() {
+  local IFS='-'
+  local result=""
+  for segment in $1; do
+    result+="$(printf '%s' "${segment:0:1}" | tr '[:lower:]' '[:upper:]')${segment:1}"
+  done
+  printf '%s' "$result"
+}
+
+if [[ -n "${CDK_STACK_NAME:-}" ]]; then
+  STACK_NAME="$CDK_STACK_NAME"
+else
+  APP_NAME="$(jq -r '.context.appName' infrastructure/cdk.json)"
+  ENV_NAME="prod"
+  if [[ -z "$APP_NAME" || "$APP_NAME" == "null" ]]; then
+    echo "Could not resolve appName from infrastructure/cdk.json" >&2
+    exit 1
+  fi
+  STACK_NAME="$(to_pascal_case "$APP_NAME")-$(to_pascal_case "$ENV_NAME")"
 fi
 
 require_file .env.local

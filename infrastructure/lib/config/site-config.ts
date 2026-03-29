@@ -21,7 +21,7 @@ const infrastructureRoot = process.cwd();
 //             NAMING HELPERS
 // ============================================
 
-function toPascalCase(kebab: string): string {
+export function toPascalCase(kebab: string): string {
   return kebab
     .split('-')
     .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))

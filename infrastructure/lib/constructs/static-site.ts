@@ -35,7 +35,7 @@ export class StaticSite extends Construct {
       redirectsAssetPath,
     } = envConfig;
 
-    this.bucket = new s3.Bucket(this, 'SiteBucket', {
+    this.bucket = new s3.Bucket(this, 'Bucket', {
       bucketName: `${appName}-${environment}-site`,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
