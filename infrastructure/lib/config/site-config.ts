@@ -18,6 +18,26 @@ import type {
 const infrastructureRoot = process.cwd();
 
 // ============================================
+//             NAMING HELPERS
+// ============================================
+
+function toPascalCase(kebab: string): string {
+  return kebab
+    .split('-')
+    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+    .join('');
+}
+
+export function deriveStackName(
+  appName: string,
+  environment: EnvironmentName,
+): string {
+  const pascalEnv = environment.charAt(0).toUpperCase() + environment.slice(1);
+
+  return `${toPascalCase(appName)}-${pascalEnv}`;
+}
+
+// ============================================
 //                TYPE GUARDS
 // ============================================
 
@@ -129,7 +149,7 @@ function parseEnvironmentConfig(
 
 export function loadAppContext(app: cdk.App): AppContext {
   const appName = app.node.tryGetContext('appName');
-  const stackName = app.node.tryGetContext('stackName');
+  const repository = app.node.tryGetContext('repository');
   const environments = app.node.tryGetContext('environments');
 
   if (!isRecord(environments)) {
@@ -140,7 +160,7 @@ export function loadAppContext(app: cdk.App): AppContext {
 
   return {
     appName: readString(appName, 'appName'),
-    stackName: readString(stackName, 'stackName'),
+    repository: readString(repository, 'repository'),
     environments: {
       prod: parseEnvironmentConfig('prod', environments.prod),
     },

@@ -12,8 +12,8 @@ on:
 
 env:
   AWS_REGION: ${{ vars.AWS_REGION }}
-  CDK_STACK_NAME: BenjaminChavezDotCom
-  APP_URL: https://benjamin-chavez.com
+  CDK_STACK_NAME: ${{ vars.CDK_STACK_NAME }}
+  APP_URL: ${{ vars.APP_URL }}
   ARTIFACT_NAME: dist
   TAG_PREFIX: v
 

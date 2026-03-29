@@ -146,4 +146,5 @@ echo
 echo "Next steps:"
 echo "1. Verify the site on https://$DISTRIBUTION_DOMAIN_NAME"
 echo "2. Update your registrar nameservers to the Route 53 nameservers above"
-echo "3. After propagation, verify https://benjamin-chavez.com"
+DOMAIN_NAME="$(jq -r '.context.environments.prod.domainName' infrastructure/cdk.json)"
+echo "3. After propagation, verify https://$DOMAIN_NAME"

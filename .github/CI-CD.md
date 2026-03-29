@@ -21,8 +21,8 @@ The top-level CI workflow in [`./workflows/ci.yml`](./workflows/ci.yml) wires th
 | Setting | Current value |
 |---------|---------------|
 | `AWS_REGION` | GitHub repo variable `vars.AWS_REGION` |
-| `CDK_STACK_NAME` | `BenjaminChavezDotCom` |
-| `APP_URL` | `https://benjamin-chavez.com` |
+| `CDK_STACK_NAME` | GitHub repo variable `vars.CDK_STACK_NAME` |
+| `APP_URL` | GitHub repo variable `vars.APP_URL` |
 | `ARTIFACT_NAME` | `dist` |
 | `TAG_PREFIX` | `v` |
 

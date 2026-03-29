@@ -16,6 +16,6 @@ export interface ResolvedEnvironmentConfig extends EnvironmentConfig {
 
 export interface AppContext {
   readonly appName: string;
-  readonly stackName: string;
+  readonly repository: string;
   readonly environments: Record<EnvironmentName, EnvironmentConfig>;
 }

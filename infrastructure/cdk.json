@@ -19,7 +19,7 @@
     "@aws-cdk/core:checkSecretUsage": true,
     "@aws-cdk/core:target-partitions": ["aws"],
     "appName": "benjamin-chavez-com",
-    "stackName": "BenjaminChavezDotCom",
+    "repository": "benjamin-chavez/benjamin-chavez.com",
     "environments": {
       "prod": {
         "account": "${CDK_DEFAULT_ACCOUNT}",
