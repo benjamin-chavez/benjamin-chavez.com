@@ -19,7 +19,7 @@ export class StaticSiteStack extends cdk.Stack {
     super(scope, id, props);
     const { appName, environment, envConfig } = props;
 
-    this.site = new StaticSite(this, 'Site', {
+    this.site = new StaticSite(this, 'App', {
       appName,
       environment,
       envConfig,

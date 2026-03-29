@@ -12,6 +12,10 @@ export function CloudWatchRUM() {
 
     if (!appMonitorId || !identityPoolId) return;
 
+    if (!region) {
+      console.warn('Region is not set for CloudWatchRUM');
+    }
+
     import('aws-rum-web').then(({ AwsRum }) => {
       try {
         new AwsRum(appMonitorId, '1.0.0', region, {

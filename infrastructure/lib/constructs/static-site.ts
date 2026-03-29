@@ -36,6 +36,7 @@ export class StaticSite extends Construct {
     } = envConfig;
 
     this.bucket = new s3.Bucket(this, 'SiteBucket', {
+      bucketName: `${appName}-${environment}-site`, // e.g. "benjamin-chavez.com-prod-site"
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
       encryption: s3.BucketEncryption.S3_MANAGED,

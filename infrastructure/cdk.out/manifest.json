@@ -11,21 +11,28 @@
     },
     "BenjaminChavezDotCom": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://123456789012/us-east-2",
+      "environment": "aws://369579651631/us-east-2",
       "properties": {
         "templateFile": "BenjaminChavezDotCom.template.json",
         "terminationProtection": false,
+        "tags": {
+          "Environment": "prod",
+          "ManagedBy": "cdk",
+          "Owner": "ben",
+          "Project": "benjamin-chavez-com",
+          "Stack": "benjamin-chavez-com-prod"
+        },
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::123456789012:role/cdk-hnb659fds-deploy-role-123456789012-us-east-2",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::123456789012:role/cdk-hnb659fds-cfn-exec-role-123456789012-us-east-2",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-123456789012-us-east-2/cde4f7fd6ebfcfae6808b932bb61bbf7daf5e9130d4a842a259f1e69b8510505.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::369579651631:role/cdk-hnb659fds-deploy-role-369579651631-us-east-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::369579651631:role/cdk-hnb659fds-cfn-exec-role-369579651631-us-east-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-369579651631-us-east-2/00dc28f829376b6a1bf488c0793c8ea948ccd3027c60e1f422c5e83b236178c4.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "BenjaminChavezDotCom.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::123456789012:role/cdk-hnb659fds-lookup-role-123456789012-us-east-2",
+          "arn": "arn:${AWS::Partition}:iam::369579651631:role/cdk-hnb659fds-lookup-role-369579651631-us-east-2",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }

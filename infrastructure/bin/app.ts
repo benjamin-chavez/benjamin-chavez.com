@@ -16,6 +16,12 @@ const { environment, env, envConfig } = resolveEnvironmentConfig(
   targetEnv,
 );
 
+cdk.Tags.of(app).add('Project', appContext.appName); // benjamin-chavez.com
+cdk.Tags.of(app).add('Environment', environment); // prod
+cdk.Tags.of(app).add('Stack', `${appContext.appName}-${environment}`); // benjamin-chavez.com-prod
+cdk.Tags.of(app).add('ManagedBy', 'cdk');
+cdk.Tags.of(app).add('Owner', 'ben');
+
 new StaticSiteStack(app, appContext.stackName, {
   env,
   appName: appContext.appName,

@@ -6,7 +6,7 @@ const envSchema = z.object({
   NEXT_PUBLIC_CF_ANALYTICS_TOKEN: z.string().optional(),
   NEXT_PUBLIC_CW_RUM_APP_MONITOR_ID: z.string().optional(),
   NEXT_PUBLIC_CW_RUM_IDENTITY_POOL_ID: z.string().optional(),
-  NEXT_PUBLIC_AWS_REGION: z.string().optional(),
+  NEXT_PUBLIC_AWS_REGION: z.string(),
   NEXT_PUBLIC_SENTRY_DSN: z.string().optional(),
 });
 

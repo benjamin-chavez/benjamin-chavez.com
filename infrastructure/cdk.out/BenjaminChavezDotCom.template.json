@@ -1,6 +1,6 @@
 {
  "Resources": {
-  "SiteSiteBucket7CA177D5": {
+  "AppSiteBucketE79A373E": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
     "BucketEncryption": {
@@ -12,24 +12,47 @@
       }
      ]
     },
+    "BucketName": "benjamin-chavez-com-prod-site",
     "PublicAccessBlockConfiguration": {
      "BlockPublicAcls": true,
      "BlockPublicPolicy": true,
      "IgnorePublicAcls": true,
      "RestrictPublicBuckets": true
-    }
+    },
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "prod"
+     },
+     {
+      "Key": "ManagedBy",
+      "Value": "cdk"
+     },
+     {
+      "Key": "Owner",
+      "Value": "ben"
+     },
+     {
+      "Key": "Project",
+      "Value": "benjamin-chavez-com"
+     },
+     {
+      "Key": "Stack",
+      "Value": "benjamin-chavez-com-prod"
+     }
+    ]
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/SiteBucket/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/SiteBucket/Resource"
    }
   },
-  "SiteSiteBucketPolicy0953BA94": {
+  "AppSiteBucketPolicyEB305FF1": {
    "Type": "AWS::S3::BucketPolicy",
    "Properties": {
     "Bucket": {
-     "Ref": "SiteSiteBucket7CA177D5"
+     "Ref": "AppSiteBucketE79A373E"
     },
     "PolicyDocument": {
      "Statement": [
@@ -51,7 +74,7 @@
             },
             ":distribution/",
             {
-             "Ref": "SiteDistribution390DED28"
+             "Ref": "AppDistribution3FB407A1"
             }
            ]
           ]
@@ -68,7 +91,7 @@
          [
           {
            "Fn::GetAtt": [
-            "SiteSiteBucket7CA177D5",
+            "AppSiteBucketE79A373E",
             "Arn"
            ]
           },
@@ -82,21 +105,43 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/SiteBucket/Policy/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/SiteBucket/Policy/Resource"
    }
   },
-  "SiteHostedZone0E1602DC": {
+  "AppHostedZone109F9094": {
    "Type": "AWS::Route53::HostedZone",
    "Properties": {
+    "HostedZoneTags": [
+     {
+      "Key": "Environment",
+      "Value": "prod"
+     },
+     {
+      "Key": "ManagedBy",
+      "Value": "cdk"
+     },
+     {
+      "Key": "Owner",
+      "Value": "ben"
+     },
+     {
+      "Key": "Project",
+      "Value": "benjamin-chavez-com"
+     },
+     {
+      "Key": "Stack",
+      "Value": "benjamin-chavez-com-prod"
+     }
+    ],
     "Name": "benjamin-chavez.com."
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/HostedZone/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/HostedZone/Resource"
    }
   },
-  "SiteCertificateCertificateRequestorFunctionServiceRole5666ECA6": {
+  "AppCertificateCertificateRequestorFunctionServiceRoleF4C1935C": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -124,13 +169,35 @@
        ]
       ]
      }
+    ],
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "prod"
+     },
+     {
+      "Key": "ManagedBy",
+      "Value": "cdk"
+     },
+     {
+      "Key": "Owner",
+      "Value": "ben"
+     },
+     {
+      "Key": "Project",
+      "Value": "benjamin-chavez-com"
+     },
+     {
+      "Key": "Stack",
+      "Value": "benjamin-chavez-com-prod"
+     }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/Certificate/CertificateRequestorFunction/ServiceRole/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/Certificate/CertificateRequestorFunction/ServiceRole/Resource"
    }
   },
-  "SiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy71AFF3A0": {
+  "AppCertificateCertificateRequestorFunctionServiceRoleDefaultPolicyB6376615": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -179,7 +246,7 @@
           },
           ":route53:::hostedzone/",
           {
-           "Ref": "SiteHostedZone0E1602DC"
+           "Ref": "AppHostedZone109F9094"
           }
          ]
         ]
@@ -188,51 +255,73 @@
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "SiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy71AFF3A0",
+    "PolicyName": "AppCertificateCertificateRequestorFunctionServiceRoleDefaultPolicyB6376615",
     "Roles": [
      {
-      "Ref": "SiteCertificateCertificateRequestorFunctionServiceRole5666ECA6"
+      "Ref": "AppCertificateCertificateRequestorFunctionServiceRoleF4C1935C"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/Certificate/CertificateRequestorFunction/ServiceRole/DefaultPolicy/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/Certificate/CertificateRequestorFunction/ServiceRole/DefaultPolicy/Resource"
    }
   },
-  "SiteCertificateCertificateRequestorFunctionCD9FC6AA": {
+  "AppCertificateCertificateRequestorFunction6D311721": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-123456789012-us-east-2",
+     "S3Bucket": "cdk-hnb659fds-assets-369579651631-us-east-2",
      "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip"
     },
     "Handler": "index.certificateRequestHandler",
     "Role": {
      "Fn::GetAtt": [
-      "SiteCertificateCertificateRequestorFunctionServiceRole5666ECA6",
+      "AppCertificateCertificateRequestorFunctionServiceRoleF4C1935C",
       "Arn"
      ]
     },
     "Runtime": "nodejs22.x",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "prod"
+     },
+     {
+      "Key": "ManagedBy",
+      "Value": "cdk"
+     },
+     {
+      "Key": "Owner",
+      "Value": "ben"
+     },
+     {
+      "Key": "Project",
+      "Value": "benjamin-chavez-com"
+     },
+     {
+      "Key": "Stack",
+      "Value": "benjamin-chavez-com-prod"
+     }
+    ],
     "Timeout": 900
    },
    "DependsOn": [
-    "SiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy71AFF3A0",
-    "SiteCertificateCertificateRequestorFunctionServiceRole5666ECA6"
+    "AppCertificateCertificateRequestorFunctionServiceRoleDefaultPolicyB6376615",
+    "AppCertificateCertificateRequestorFunctionServiceRoleF4C1935C"
    ],
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/Certificate/CertificateRequestorFunction/Resource",
+    "aws:cdk:path": "BenjaminChavezDotCom/App/Certificate/CertificateRequestorFunction/Resource",
     "aws:asset:path": "asset.b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
   },
-  "SiteCertificateCertificateRequestorResource86F17F2A": {
+  "AppCertificateCertificateRequestorResource07E5C272": {
    "Type": "AWS::CloudFormation::CustomResource",
    "Properties": {
     "ServiceToken": {
      "Fn::GetAtt": [
-      "SiteCertificateCertificateRequestorFunctionCD9FC6AA",
+      "AppCertificateCertificateRequestorFunction6D311721",
       "Arn"
      ]
     },
@@ -241,17 +330,24 @@
      "www.benjamin-chavez.com"
     ],
     "HostedZoneId": {
-     "Ref": "SiteHostedZone0E1602DC"
+     "Ref": "AppHostedZone109F9094"
     },
-    "Region": "us-east-1"
+    "Region": "us-east-1",
+    "Tags": {
+     "Environment": "prod",
+     "ManagedBy": "cdk",
+     "Owner": "ben",
+     "Project": "benjamin-chavez-com",
+     "Stack": "benjamin-chavez-com-prod"
+    }
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/Certificate/CertificateRequestorResource/Default"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/Certificate/CertificateRequestorResource/Default"
    }
   },
-  "SiteCloudFrontRoutingRedirectStore703D8D3B": {
+  "AppCloudFrontRoutingRedirectStoreC19F4B48": {
    "Type": "AWS::CloudFront::KeyValueStore",
    "Properties": {
     "Comment": "Redirects for benjamin-chavez-com (prod) - benjamin-chavez.com",
@@ -264,30 +360,52 @@
         {
          "Ref": "AWS::Partition"
         },
-        ":s3:::cdk-hnb659fds-assets-123456789012-us-east-2/3b4080eaa2f1a62fea368b6cb9b60773095510d405197ae6a81dc2d33278f9ea.json"
+        ":s3:::cdk-hnb659fds-assets-369579651631-us-east-2/3b4080eaa2f1a62fea368b6cb9b60773095510d405197ae6a81dc2d33278f9ea.json"
        ]
       ]
      },
      "SourceType": "S3"
     },
-    "Name": "BenjaminChavezDotComSiteCloudFrontRoutingRedirectStore95149E4E"
+    "Name": "BenjaminChavezDotComAppCloudFrontRoutingRedirectStore6FC6A41C",
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "prod"
+     },
+     {
+      "Key": "ManagedBy",
+      "Value": "cdk"
+     },
+     {
+      "Key": "Owner",
+      "Value": "ben"
+     },
+     {
+      "Key": "Project",
+      "Value": "benjamin-chavez-com"
+     },
+     {
+      "Key": "Stack",
+      "Value": "benjamin-chavez-com-prod"
+     }
+    ]
    },
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/CloudFrontRouting/RedirectStore/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/CloudFrontRouting/RedirectStore/Resource"
    }
   },
-  "SiteCloudFrontRoutingViewerRequestFunction731EB125": {
+  "AppCloudFrontRoutingViewerRequestFunction7064A978": {
    "Type": "AWS::CloudFront::Function",
    "Properties": {
     "AutoPublish": true,
     "FunctionCode": "import cf from 'cloudfront';\nconst kvs = cf.kvs();\nfunction hasFileExtension(uri) {\n    const lastSegment = uri.split('/').pop() ?? '';\n    return lastSegment.includes('.');\n}\nfunction serializeQuerystring(querystring) {\n    const parts = [];\n    for (const key in querystring) {\n        if (!Object.prototype.hasOwnProperty.call(querystring, key)) {\n            continue;\n        }\n        const entry = querystring[key];\n        const values = entry.multiValue && entry.multiValue.length > 0\n            ? entry.multiValue\n            : [entry];\n        for (const valueEntry of values) {\n            parts.push(`${encodeURIComponent(key)}=${encodeURIComponent(valueEntry.value)}`);\n        }\n    }\n    return parts.join('&');\n}\nfunction buildRedirectLocation(destination, querystring) {\n    const serializedQuery = serializeQuerystring(querystring);\n    if (!serializedQuery) {\n        return destination;\n    }\n    const separator = destination.includes('?') ? '&' : '?';\n    return `${destination}${separator}${serializedQuery}`;\n}\nasync function handler(event) {\n    const request = event.request;\n    const uri = request.uri;\n    try {\n        const redirectTarget = await kvs.get(uri);\n        return {\n            statusCode: 301,\n            statusDescription: 'Moved Permanently',\n            headers: {\n                location: {\n                    value: buildRedirectLocation(redirectTarget, request.querystring),\n                },\n            },\n        };\n    }\n    catch {\n        // A missing key just means this request is not a redirect.\n    }\n    if (uri.endsWith('/')) {\n        request.uri += 'index.html';\n    }\n    else if (!hasFileExtension(uri)) {\n        request.uri += '/index.html';\n    }\n    return request;\n}\n",
     "FunctionConfig": {
-     "Comment": "us-east-2BenjaminChavezDorRequestFunction7FB26727",
+     "Comment": "us-east-2BenjaminChavezDorRequestFunction6B6C8944",
      "KeyValueStoreAssociations": [
       {
        "KeyValueStoreARN": {
         "Fn::GetAtt": [
-         "SiteCloudFrontRoutingRedirectStore703D8D3B",
+         "AppCloudFrontRoutingRedirectStoreC19F4B48",
          "Arn"
         ]
        }
@@ -295,13 +413,13 @@
      ],
      "Runtime": "cloudfront-js-2.0"
     },
-    "Name": "us-east-2BenjaminChavezDorRequestFunction7FB26727"
+    "Name": "us-east-2BenjaminChavezDorRequestFunction6B6C8944"
    },
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/CloudFrontRouting/ViewerRequestFunction/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/CloudFrontRouting/ViewerRequestFunction/Resource"
    }
   },
-  "SiteSecurityHeaders2B88159C": {
+  "AppSecurityHeaders131F4133": {
    "Type": "AWS::CloudFront::ResponseHeadersPolicy",
    "Properties": {
     "ResponseHeadersPolicyConfig": {
@@ -319,7 +437,7 @@
        }
       ]
      },
-     "Name": "BenjaminChavezDotComSiteSecurityHeaders4BE1115A",
+     "Name": "BenjaminChavezDotComAppSecurityHeadersA750261D",
      "SecurityHeadersConfig": {
       "ContentSecurityPolicy": {
        "ContentSecurityPolicy": "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://static.cloudflareinsights.com https://www.youtube.com; frame-src youtube.com www.youtube.com https://imgur.com/; style-src 'self' 'unsafe-inline'; img-src * blob: data:; media-src 'none'; connect-src 'self' https://static.cloudflareinsights.com; font-src 'self'",
@@ -351,24 +469,24 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/SecurityHeaders/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/SecurityHeaders/Resource"
    }
   },
-  "SiteDistributionOrigin1S3OriginAccessControl4F95283E": {
+  "AppDistributionOrigin1S3OriginAccessControl6E38665C": {
    "Type": "AWS::CloudFront::OriginAccessControl",
    "Properties": {
     "OriginAccessControlConfig": {
-     "Name": "BenjaminChavezDotComSiteDistOrigin1S3OriginAccessControl24F3352A",
+     "Name": "BenjaminChavezDotComAppDistrOrigin1S3OriginAccessControl02D92579",
      "OriginAccessControlOriginType": "s3",
      "SigningBehavior": "always",
      "SigningProtocol": "sigv4"
     }
    },
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/Distribution/Origin1/S3OriginAccessControl/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/Distribution/Origin1/S3OriginAccessControl/Resource"
    }
   },
-  "SiteDistribution390DED28": {
+  "AppDistribution3FB407A1": {
    "Type": "AWS::CloudFront::Distribution",
    "Properties": {
     "DistributionConfig": {
@@ -398,16 +516,16 @@
         "EventType": "viewer-request",
         "FunctionARN": {
          "Fn::GetAtt": [
-          "SiteCloudFrontRoutingViewerRequestFunction731EB125",
+          "AppCloudFrontRoutingViewerRequestFunction7064A978",
           "FunctionARN"
          ]
         }
        }
       ],
       "ResponseHeadersPolicyId": {
-       "Ref": "SiteSecurityHeaders2B88159C"
+       "Ref": "AppSecurityHeaders131F4133"
       },
-      "TargetOriginId": "BenjaminChavezDotComSiteDistributionOrigin1D867FFC9",
+      "TargetOriginId": "BenjaminChavezDotComAppDistributionOrigin198243FCD",
       "ViewerProtocolPolicy": "redirect-to-https"
      },
      "DefaultRootObject": "index.html",
@@ -418,14 +536,14 @@
       {
        "DomainName": {
         "Fn::GetAtt": [
-         "SiteSiteBucket7CA177D5",
+         "AppSiteBucketE79A373E",
          "RegionalDomainName"
         ]
        },
-       "Id": "BenjaminChavezDotComSiteDistributionOrigin1D867FFC9",
+       "Id": "BenjaminChavezDotComAppDistributionOrigin198243FCD",
        "OriginAccessControlId": {
         "Fn::GetAtt": [
-         "SiteDistributionOrigin1S3OriginAccessControl4F95283E",
+         "AppDistributionOrigin1S3OriginAccessControl6E38665C",
          "Id"
         ]
        },
@@ -438,26 +556,48 @@
      "ViewerCertificate": {
       "AcmCertificateArn": {
        "Fn::GetAtt": [
-        "SiteCertificateCertificateRequestorResource86F17F2A",
+        "AppCertificateCertificateRequestorResource07E5C272",
         "Arn"
        ]
       },
       "MinimumProtocolVersion": "TLSv1.2_2021",
       "SslSupportMethod": "sni-only"
      }
-    }
+    },
+    "Tags": [
+     {
+      "Key": "Environment",
+      "Value": "prod"
+     },
+     {
+      "Key": "ManagedBy",
+      "Value": "cdk"
+     },
+     {
+      "Key": "Owner",
+      "Value": "ben"
+     },
+     {
+      "Key": "Project",
+      "Value": "benjamin-chavez-com"
+     },
+     {
+      "Key": "Stack",
+      "Value": "benjamin-chavez-com-prod"
+     }
+    ]
    },
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/Distribution/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/Distribution/Resource"
    }
   },
-  "SiteARecordDC5A9E63": {
+  "AppARecordF6D6571C": {
    "Type": "AWS::Route53::RecordSet",
    "Properties": {
     "AliasTarget": {
      "DNSName": {
       "Fn::GetAtt": [
-       "SiteDistribution390DED28",
+       "AppDistribution3FB407A1",
        "DomainName"
       ]
      },
@@ -472,7 +612,7 @@
      }
     },
     "HostedZoneId": {
-     "Ref": "SiteHostedZone0E1602DC"
+     "Ref": "AppHostedZone109F9094"
     },
     "Name": "benjamin-chavez.com.",
     "Type": "A"
@@ -480,16 +620,16 @@
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/ARecord/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/ARecord/Resource"
    }
   },
-  "SiteAAAARecordC995A123": {
+  "AppAAAARecord48510C2B": {
    "Type": "AWS::Route53::RecordSet",
    "Properties": {
     "AliasTarget": {
      "DNSName": {
       "Fn::GetAtt": [
-       "SiteDistribution390DED28",
+       "AppDistribution3FB407A1",
        "DomainName"
       ]
      },
@@ -504,7 +644,7 @@
      }
     },
     "HostedZoneId": {
-     "Ref": "SiteHostedZone0E1602DC"
+     "Ref": "AppHostedZone109F9094"
     },
     "Name": "benjamin-chavez.com.",
     "Type": "AAAA"
@@ -512,16 +652,16 @@
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/AAAARecord/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/AAAARecord/Resource"
    }
   },
-  "SiteAlternateARecord0238F1B98": {
+  "AppAlternateARecord04E024DEB": {
    "Type": "AWS::Route53::RecordSet",
    "Properties": {
     "AliasTarget": {
      "DNSName": {
       "Fn::GetAtt": [
-       "SiteDistribution390DED28",
+       "AppDistribution3FB407A1",
        "DomainName"
       ]
      },
@@ -536,7 +676,7 @@
      }
     },
     "HostedZoneId": {
-     "Ref": "SiteHostedZone0E1602DC"
+     "Ref": "AppHostedZone109F9094"
     },
     "Name": "www.benjamin-chavez.com.",
     "Type": "A"
@@ -544,16 +684,16 @@
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/AlternateARecord0/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/AlternateARecord0/Resource"
    }
   },
-  "SiteAlternateAAAARecord04196C860": {
+  "AppAlternateAAAARecord0D3DE578C": {
    "Type": "AWS::Route53::RecordSet",
    "Properties": {
     "AliasTarget": {
      "DNSName": {
       "Fn::GetAtt": [
-       "SiteDistribution390DED28",
+       "AppDistribution3FB407A1",
        "DomainName"
       ]
      },
@@ -568,7 +708,7 @@
      }
     },
     "HostedZoneId": {
-     "Ref": "SiteHostedZone0E1602DC"
+     "Ref": "AppHostedZone109F9094"
     },
     "Name": "www.benjamin-chavez.com.",
     "Type": "AAAA"
@@ -576,7 +716,16 @@
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
-    "aws:cdk:path": "BenjaminChavezDotCom/Site/AlternateAAAARecord0/Resource"
+    "aws:cdk:path": "BenjaminChavezDotCom/App/AlternateAAAARecord0/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/3VP22rCQBD9Ft/XrU30A6JShFKUBHzoi0x2R1nd7Iad2YqE/HtJYhsL9ulcZs5cEpnMF3I2gStNlb5MrSllUzCoi4ArHRpKZbOM6oIsVkd3ZwPsvDXqNtp3PYglELYi+Mi4SGWzi6U1auOJUX96h13qQWU5Kh905w6sQBYZAAyqFQoDm6NRwFiBgxMGuXa0B2s0MOrVWBYWqlKDbN6iU2y864b+8FYYqGSTe9tf0OP4xsBaQekBiJBJZh0IZX3Ux+Ady+Ydb3uwEQv2oZ/x13i2VORItXeEGwSNgcaFzwtrQxxMGftskW6DORmXKYVEK+84eNtl/7Efw20r+gcKhpNxJ7GKxL7KkXwMCu8H/PIPqOu+6+i2kevIrXBeozzTy1cyl6+JnE3OZMw0RMemQpkP+A1A4IbsQgIAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "BenjaminChavezDotCom/CDKMetadata/Default"
    }
   }
  },
@@ -593,18 +742,18 @@
  "Outputs": {
   "BucketName": {
    "Value": {
-    "Ref": "SiteSiteBucket7CA177D5"
+    "Ref": "AppSiteBucketE79A373E"
    }
   },
   "DistributionId": {
    "Value": {
-    "Ref": "SiteDistribution390DED28"
+    "Ref": "AppDistribution3FB407A1"
    }
   },
   "DistributionDomainName": {
    "Value": {
     "Fn::GetAtt": [
-     "SiteDistribution390DED28",
+     "AppDistribution3FB407A1",
      "DomainName"
     ]
    }
@@ -615,7 +764,7 @@
      ",",
      {
       "Fn::GetAtt": [
-       "SiteHostedZone0E1602DC",
+       "AppHostedZone109F9094",
        "NameServers"
       ]
      }

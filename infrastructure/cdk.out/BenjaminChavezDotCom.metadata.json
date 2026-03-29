@@ -1,4 +1,31 @@
 {
+  "/BenjaminChavezDotCom": [
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "Environment",
+          "value": "prod"
+        },
+        {
+          "key": "ManagedBy",
+          "value": "cdk"
+        },
+        {
+          "key": "Owner",
+          "value": "ben"
+        },
+        {
+          "key": "Project",
+          "value": "benjamin-chavez-com"
+        },
+        {
+          "key": "Stack",
+          "value": "benjamin-chavez-com-prod"
+        }
+      ]
+    }
+  ],
   "/BenjaminChavezDotCom/AWSCloudFrontPartitionHostedZoneIdMap": [
     {
       "type": "aws:cdk:logicalId",
@@ -41,106 +68,112 @@
       "data": "CheckBootstrapVersion"
     }
   ],
-  "/BenjaminChavezDotCom/Site/SiteBucket/Resource": [
+  "/BenjaminChavezDotCom/CDKMetadata/Default": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteSiteBucket7CA177D5"
+      "data": "CDKMetadata"
     }
   ],
-  "/BenjaminChavezDotCom/Site/HostedZone/Resource": [
+  "/BenjaminChavezDotCom/App/SiteBucket/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteHostedZone0E1602DC"
+      "data": "AppSiteBucketE79A373E"
     }
   ],
-  "/BenjaminChavezDotCom/Site/Certificate/CertificateRequestorFunction": [
+  "/BenjaminChavezDotCom/App/HostedZone/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AppHostedZone109F9094"
+    }
+  ],
+  "/BenjaminChavezDotCom/App/Certificate/CertificateRequestorFunction": [
     {
       "type": "aws:cdk:is-custom-resource-handler-runtime-family",
       "data": 0
     }
   ],
-  "/BenjaminChavezDotCom/Site/SecurityHeaders/Resource": [
+  "/BenjaminChavezDotCom/App/SecurityHeaders/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteSecurityHeaders2B88159C"
+      "data": "AppSecurityHeaders131F4133"
     }
   ],
-  "/BenjaminChavezDotCom/Site/Distribution/Resource": [
+  "/BenjaminChavezDotCom/App/Distribution/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteDistribution390DED28"
+      "data": "AppDistribution3FB407A1"
     }
   ],
-  "/BenjaminChavezDotCom/Site/ARecord/Resource": [
+  "/BenjaminChavezDotCom/App/ARecord/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteARecordDC5A9E63"
+      "data": "AppARecordF6D6571C"
     }
   ],
-  "/BenjaminChavezDotCom/Site/AAAARecord/Resource": [
+  "/BenjaminChavezDotCom/App/AAAARecord/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteAAAARecordC995A123"
+      "data": "AppAAAARecord48510C2B"
     }
   ],
-  "/BenjaminChavezDotCom/Site/AlternateARecord0/Resource": [
+  "/BenjaminChavezDotCom/App/AlternateARecord0/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteAlternateARecord0238F1B98"
+      "data": "AppAlternateARecord04E024DEB"
     }
   ],
-  "/BenjaminChavezDotCom/Site/AlternateAAAARecord0/Resource": [
+  "/BenjaminChavezDotCom/App/AlternateAAAARecord0/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteAlternateAAAARecord04196C860"
+      "data": "AppAlternateAAAARecord0D3DE578C"
     }
   ],
-  "/BenjaminChavezDotCom/Site/SiteBucket/Policy/Resource": [
+  "/BenjaminChavezDotCom/App/SiteBucket/Policy/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteSiteBucketPolicy0953BA94"
+      "data": "AppSiteBucketPolicyEB305FF1"
     }
   ],
-  "/BenjaminChavezDotCom/Site/Certificate/CertificateRequestorFunction/Resource": [
+  "/BenjaminChavezDotCom/App/Certificate/CertificateRequestorFunction/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteCertificateCertificateRequestorFunctionCD9FC6AA"
+      "data": "AppCertificateCertificateRequestorFunction6D311721"
     }
   ],
-  "/BenjaminChavezDotCom/Site/Certificate/CertificateRequestorResource/Default": [
+  "/BenjaminChavezDotCom/App/Certificate/CertificateRequestorResource/Default": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteCertificateCertificateRequestorResource86F17F2A"
+      "data": "AppCertificateCertificateRequestorResource07E5C272"
     }
   ],
-  "/BenjaminChavezDotCom/Site/CloudFrontRouting/RedirectStore/Resource": [
+  "/BenjaminChavezDotCom/App/CloudFrontRouting/RedirectStore/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteCloudFrontRoutingRedirectStore703D8D3B"
+      "data": "AppCloudFrontRoutingRedirectStoreC19F4B48"
     }
   ],
-  "/BenjaminChavezDotCom/Site/CloudFrontRouting/ViewerRequestFunction/Resource": [
+  "/BenjaminChavezDotCom/App/CloudFrontRouting/ViewerRequestFunction/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteCloudFrontRoutingViewerRequestFunction731EB125"
+      "data": "AppCloudFrontRoutingViewerRequestFunction7064A978"
     }
   ],
-  "/BenjaminChavezDotCom/Site/Certificate/CertificateRequestorFunction/ServiceRole/Resource": [
+  "/BenjaminChavezDotCom/App/Certificate/CertificateRequestorFunction/ServiceRole/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteCertificateCertificateRequestorFunctionServiceRole5666ECA6"
+      "data": "AppCertificateCertificateRequestorFunctionServiceRoleF4C1935C"
     }
   ],
-  "/BenjaminChavezDotCom/Site/Distribution/Origin1/S3OriginAccessControl/Resource": [
+  "/BenjaminChavezDotCom/App/Distribution/Origin1/S3OriginAccessControl/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteDistributionOrigin1S3OriginAccessControl4F95283E"
+      "data": "AppDistributionOrigin1S3OriginAccessControl6E38665C"
     }
   ],
-  "/BenjaminChavezDotCom/Site/Certificate/CertificateRequestorFunction/ServiceRole/DefaultPolicy/Resource": [
+  "/BenjaminChavezDotCom/App/Certificate/CertificateRequestorFunction/ServiceRole/DefaultPolicy/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "SiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy71AFF3A0"
+      "data": "AppCertificateCertificateRequestorFunctionServiceRoleDefaultPolicyB6376615"
     }
   ]
 }
