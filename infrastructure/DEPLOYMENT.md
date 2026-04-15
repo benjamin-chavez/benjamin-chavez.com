@@ -13,7 +13,7 @@ Most changes are content-only. Infrastructure deploys are only needed when you m
 ## CI/CD (Automatic)
 
 Pushing to `master` (direct push, merged PR, or manual `workflow_dispatch`) triggers the CI pipeline. The pipeline
-runs actionlint, builds the site, runs Lighthouse audits, and — if all pass — deploys the static assets to S3 and
+runs GitHub workflow linting, builds the site, runs Lighthouse audits, and — if all pass — deploys the static assets to S3 and
 invalidates CloudFront. Each successful deploy creates a semver patch tag (e.g., `v1.0.1`).
 
 No manual steps are required for content-only changes that go through CI. The CI pipeline does **not** run `cdk deploy`
@@ -66,42 +66,22 @@ NEXT_PUBLIC_APP_URL=https://benjamin-chavez.com
 
 ### Steps
 
-1. Read the deploy targets (see [Read Stack Outputs](#read-stack-outputs)):
+1. Run the preflight check:
 
 ```bash
-OUTPUTS=$(aws cloudformation describe-stacks \
-  --stack-name BenjaminChavezCom-Prod \
-  --region us-east-2 \
-  --query 'Stacks[0].Outputs' --output json)
-
-BUCKET=$(echo "$OUTPUTS" | jq -r '.[] | select(.OutputKey=="BucketName") | .OutputValue')
-DIST_ID=$(echo "$OUTPUTS" | jq -r '.[] | select(.OutputKey=="DistributionId") | .OutputValue')
+scripts/deploy-content.sh --check
 ```
 
-2. Build the static site:
+This verifies local prerequisites, resolves the CDK stack name, reads the S3 bucket and CloudFront distribution from
+CloudFormation, and exits without building or publishing anything.
+
+2. Build and publish the static site:
 
 ```bash
-pnpm build
+scripts/deploy-content.sh --apply
 ```
 
-This runs OG image generation and the Next.js static export into `dist/`.
-
-3. Sync to S3:
-
-```bash
-aws s3 sync dist/ "s3://$BUCKET" --delete
-```
-
-This uploads `dist/` to the S3 bucket and `--delete` removes any files in S3 that no longer exist locally, ensuring the
-bucket is an exact mirror of the build output.
-
-4. Invalidate CloudFront:
-
-```bash
-aws cloudfront create-invalidation \
-  --distribution-id "$DIST_ID" \
-  --paths "/*"
-```
+This runs `pnpm build`, uploads `dist/` to S3 with `aws s3 sync --delete`, and creates a CloudFront invalidation.
 
 ## Infrastructure Deploy
 
@@ -167,22 +147,10 @@ export CLOUDFRONT_CERTIFICATE_REGION=us-east-1
 pnpm --dir infrastructure run deploy
 ```
 
-3. Build and publish content (see [Manual Content Deploy](#manual-content-deploy) for the full sequence):
+3. Build and publish content:
 
 ```bash
-OUTPUTS=$(aws cloudformation describe-stacks \
-  --stack-name BenjaminChavezCom-Prod \
-  --region us-east-2 \
-  --query 'Stacks[0].Outputs' --output json)
-
-BUCKET=$(echo "$OUTPUTS" | jq -r '.[] | select(.OutputKey=="BucketName") | .OutputValue')
-DIST_ID=$(echo "$OUTPUTS" | jq -r '.[] | select(.OutputKey=="DistributionId") | .OutputValue')
-
-pnpm build
-aws s3 sync dist/ "s3://$BUCKET" --delete
-aws cloudfront create-invalidation \
-  --distribution-id "$DIST_ID" \
-  --paths "/*"
+scripts/deploy-content.sh --apply
 ```
 
 ## Preview Before Deploying
@@ -223,20 +191,7 @@ Rebuild from a known-good commit and re-publish:
 
 ```bash
 git checkout <good-commit>
-pnpm build
-
-OUTPUTS=$(aws cloudformation describe-stacks \
-  --stack-name BenjaminChavezCom-Prod \
-  --region us-east-2 \
-  --query 'Stacks[0].Outputs' --output json)
-
-BUCKET=$(echo "$OUTPUTS" | jq -r '.[] | select(.OutputKey=="BucketName") | .OutputValue')
-DIST_ID=$(echo "$OUTPUTS" | jq -r '.[] | select(.OutputKey=="DistributionId") | .OutputValue')
-
-aws s3 sync dist/ "s3://$BUCKET" --delete
-aws cloudfront create-invalidation \
-  --distribution-id "$DIST_ID" \
-  --paths "/*"
+scripts/deploy-content.sh --apply
 ```
 
 ### Infrastructure rollback

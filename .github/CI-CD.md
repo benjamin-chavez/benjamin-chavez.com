@@ -9,8 +9,8 @@ workflow assumes the infrastructure stack already exists and reads its deploy ta
 
 | Workflow               | File                                                                               | Trigger                                                     | Purpose                                                                                                |
 |------------------------|------------------------------------------------------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| CI                     | [`./workflows/ci.yml`](./workflows/ci.yml)                                         | Push to `master`, pull request to `master`, manual dispatch | Orchestrates Actionlint, build, Lighthouse, and gated deploy                                           |
-| Lint GitHub Actions    | [`./workflows/lint-github-actions.yml`](./workflows/lint-github-actions.yml)       | `workflow_call`                                             | Installs pinned `actionlint` and validates workflow files                                              |
+| CI                     | [`./workflows/ci.yml`](./workflows/ci.yml)                                         | Push to `master`, pull request to `master`, manual dispatch | Orchestrates GitHub workflow linting, build, Lighthouse, and gated deploy                              |
+| GitHub Workflow Lint   | [`./workflows/github-workflow-lint.yml`](./workflows/github-workflow-lint.yml)     | `workflow_call`                                             | Installs the pinned workflow linter and validates workflow files                                       |
 | Build Static Site      | [`./workflows/build-static-site.yml`](./workflows/build-static-site.yml)           | `workflow_call`                                             | Builds the static site and uploads the deployable `dist/` artifact                                     |
 | Lighthouse Static Site | [`./workflows/lighthouse-static-site.yml`](./workflows/lighthouse-static-site.yml) | `workflow_call`                                             | Downloads the build artifact and runs Lighthouse CI against it                                         |
 | Deploy Static Site     | [`./workflows/deploy-static-site.yml`](./workflows/deploy-static-site.yml)         | `workflow_call`                                             | Downloads the artifact, deploys it to AWS, invalidates CloudFront, and creates the next deployment tag |
@@ -32,23 +32,23 @@ Jobs run in this order:
 
 | Job        | What it does                                                                                                                                               |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Actionlint | Checks out the repo, installs `actionlint` `v1.7.11` from the official release, and validates `.github/workflows/*.yml`                                    |
+| GitHub Workflow Lint | Checks out the repo, installs the pinned workflow linter, and validates `.github/workflows/*.yml`                                            |
 | Build      | Checks out the repo, installs PNPM, sets up Node from [`.nvmrc`](../.nvmrc), runs `pnpm install --frozen-lockfile`, runs `pnpm build`, and uploads `dist/` |
-| Lighthouse | Downloads the same `dist/` artifact and runs `npx @lhci/cli autorun`                                                                                       |
-| Deploy     | Runs only after Actionlint, Build, and Lighthouse succeed, and only for `push` or `workflow_dispatch` on `refs/heads/master`                               |
+| Lighthouse | Installs dependencies from the lockfile, downloads the same `dist/` artifact, and runs `pnpm exec lhci autorun`                                            |
+| Deploy     | Runs only after GitHub Workflow Lint, Build, and Lighthouse succeed, and only for `push` or `workflow_dispatch` on `refs/heads/master`                    |
 
-`actionlint` is intentionally scoped to workflow files only. It does not validate repo-local composite action metadata
+GitHub workflow linting is intentionally scoped to workflow files only. It does not validate repo-local composite action metadata
 under `.github/actions/`.
 
-### GitHub Actions Linting
+### GitHub Workflow Linting
 
-Workflow linting is defined in [`./workflows/lint-github-actions.yml`](./workflows/lint-github-actions.yml).
+Workflow linting is defined in [`./workflows/github-workflow-lint.yml`](./workflows/github-workflow-lint.yml).
 
-| Step               | What it does                                                                                                                    |
-|--------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| Checkout           | Checks out the repo so `actionlint` can inspect all local workflow files and reusable workflow calls                            |
-| Install actionlint | Downloads the pinned official release archive for the current Linux runner architecture and adds the extracted binary to `PATH` |
-| Run actionlint     | Runs `actionlint` from repo root with default project discovery                                                                 |
+| Step                            | What it does                                                                                                                    |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Checkout                        | Checks out the repo so the workflow linter can inspect all local workflow files and reusable workflow calls                     |
+| Install GitHub workflow linter  | Downloads the pinned release archive for the current Linux runner architecture and adds the extracted binary to `PATH`          |
+| Run GitHub workflow linter      | Runs workflow linting from repo root with default project discovery                                                            |
 
 ### Build Artifact
 
@@ -126,7 +126,7 @@ Reusable workflow interface:
 
 | Workflow               | Inputs                                                                                       | Required secrets                    |
 |------------------------|----------------------------------------------------------------------------------------------|-------------------------------------|
-| Lint GitHub Actions    | None                                                                                         | None                                |
+| GitHub Workflow Lint   | None                                                                                         | None                                |
 | Build Static Site      | `app_url`, `artifact_name` (default `dist`), `aws_region`                                    | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` |
 | Lighthouse Static Site | `artifact_name` (default `dist`)                                                             | None                                |
 | Deploy Static Site     | `artifact_name` (default `dist`), `aws_region`, `cdk_stack_name`, `tag_prefix` (default `v`) | `AWS_DEPLOY_ROLE_ARN`               |
@@ -167,19 +167,3 @@ These files exist in the repo but are not used by the current workflows:
 |------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
 | Setup Node.js and PNPM | [`./actions/setup-node-pnpm/action.yml`](./actions/setup-node-pnpm/action.yml) | Current workflows call `pnpm/action-setup@v4` and `actions/setup-node@v6` directly                     |
 | Tag deployment         | [`./actions/tag-deployment/action.yml`](./actions/tag-deployment/action.yml)   | Supports configurable semver bumps, but the live deploy workflow performs an inline patch bump instead |
-
-### Local Tooling
-
-To match the CI lint job locally, install `actionlint` once on your machine and run it from repo root:
-
-```bash
-brew install actionlint
-actionlint
-```
-
-Pinned Go install alternative:
-
-```bash
-go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.11
-actionlint
-```

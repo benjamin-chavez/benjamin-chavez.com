@@ -18,9 +18,9 @@ permissions:
   contents: read
 
 jobs:
-  actionlint:
-    name: Actionlint
-    uses: ./.github/workflows/lint-github-actions.yml
+  github-workflow-lint:
+    name: GitHub Workflow Lint
+    uses: ./.github/workflows/github-workflow-lint.yml
 
   build:
     name: Build
@@ -40,7 +40,7 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: [actionlint, build, lighthouse]
+    needs: [github-workflow-lint, build, lighthouse]
     if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     permissions:
       contents: write

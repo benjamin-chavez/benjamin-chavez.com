@@ -1,6 +1,6 @@
-# .github/workflows/lint-github-actions.yml
+# .github/workflows/github-workflow-lint.yml
 
-name: Lint GitHub Actions
+name: GitHub Workflow Lint
 
 on:
   workflow_call:
@@ -9,16 +9,16 @@ permissions:
   contents: read
 
 jobs:
-  actionlint:
-    name: Actionlint
+  github-workflow-lint:
+    name: GitHub Workflow Lint
     runs-on: ubuntu-latest
     env:
-      ACTIONLINT_VERSION: 1.7.11
+      WORKFLOW_LINTER_VERSION: 1.7.11
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Install actionlint
+      - name: Install GitHub workflow linter
         run: |
           set -euo pipefail
 
@@ -35,15 +35,16 @@ jobs:
               ;;
           esac
 
-          BIN_DIR="$RUNNER_TEMP/actionlint-bin"
+          BIN_DIR="$RUNNER_TEMP/github-workflow-lint-bin"
           mkdir -p "$BIN_DIR"
 
-          TARBALL="actionlint_${ACTIONLINT_VERSION}_linux_${ARCH}.tar.gz"
-          URL="https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/${TARBALL}"
+          TARBALL="actionlint_${WORKFLOW_LINTER_VERSION}_linux_${ARCH}.tar.gz"
+          URL="https://github.com/rhysd/actionlint/releases/download/v${WORKFLOW_LINTER_VERSION}/${TARBALL}"
 
           curl -sSfL "$URL" -o "$RUNNER_TEMP/$TARBALL"
           tar -xzf "$RUNNER_TEMP/$TARBALL" -C "$BIN_DIR"
+          mv "$BIN_DIR/actionlint" "$BIN_DIR/github-workflow-lint"
           echo "$BIN_DIR" >> "$GITHUB_PATH"
 
-      - name: Lint GitHub Actions workflows
-        run: actionlint
+      - name: Run GitHub workflow linter
+        run: github-workflow-lint
