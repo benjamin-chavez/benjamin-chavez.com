@@ -10,13 +10,6 @@ on:
     branches: [master]
   workflow_dispatch:
 
-env:
-  AWS_REGION: ${{ vars.AWS_REGION }}
-  CDK_STACK_NAME: ${{ vars.CDK_STACK_NAME }}
-  APP_URL: ${{ vars.APP_URL }}
-  ARTIFACT_NAME: dist
-  TAG_PREFIX: v
-
 permissions:
   contents: read
 
@@ -29,9 +22,9 @@ jobs:
     name: Build
     uses: ./.github/workflows/build-static-site.yml
     with:
-      app_url: ${{ env.APP_URL }}
-      artifact_name: ${{ env.ARTIFACT_NAME }}
-      aws_region: ${{ env.AWS_REGION }}
+      app_url: ${{ vars.APP_URL }}
+      artifact_name: dist
+      aws_region: ${{ vars.AWS_REGION }}
     secrets: inherit
 
   lighthouse:
@@ -39,7 +32,7 @@ jobs:
     needs: build
     uses: ./.github/workflows/lighthouse-static-site.yml
     with:
-      artifact_name: ${{ env.ARTIFACT_NAME }}
+      artifact_name: dist
 
   deploy:
     name: Deploy
@@ -50,8 +43,8 @@ jobs:
       id-token: write
     uses: ./.github/workflows/deploy-static-site.yml
     with:
-      artifact_name: ${{ env.ARTIFACT_NAME }}
-      aws_region: ${{ env.AWS_REGION }}
-      cdk_stack_name: ${{ env.CDK_STACK_NAME }}
-      tag_prefix: ${{ env.TAG_PREFIX }}
+      artifact_name: dist
+      aws_region: ${{ vars.AWS_REGION }}
+      cdk_stack_name: ${{ vars.CDK_STACK_NAME }}
+      tag_prefix: v
     secrets: inherit
