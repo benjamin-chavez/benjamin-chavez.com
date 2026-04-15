@@ -15,5 +15,5 @@
     "rootDir": "./edge",
     "outDir": "./dist/cloudfront"
   },
-  "include": ["edge/**/*.ts", "edge/**/*.d.ts"]
+  "include": ["edge/**/*.ts", "edge/**/*.d.ts", "edge/**/*"]
 }
