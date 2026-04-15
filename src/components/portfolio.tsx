@@ -36,7 +36,8 @@ const projects = [
     ],
   },
   {
-    title: 'The Denizen Designer Project',
+    // title: 'The Denizen Designer Project',
+    title: 'Denizen Designer',
     description:
       'Report for the Equity Health & Innovations Research Lab at DePaul University.',
     image: DenizenDesignerThumbnail,
@@ -176,9 +177,11 @@ function PortfolioCard({ project }: Readonly<{ project: any }>) {
         <h3 className="font-dosis text-3xl tracking-[.18rem] text-transparent [text-wrap:balance] group-hover:text-white">
           {project.title}
         </h3>
-        <p className="mt-2 font-open-sans text-base text-transparent group-hover:text-gray-400 ">
+
+        <p className="mt-2 hidden font-open-sans text-base text-transparent group-hover:text-gray-400 xs:block ">
           {project.description}
         </p>
+
         <div className=" mt-4 flex justify-center gap-4 ">
           {project.links.map((link: any) => (
             <a
