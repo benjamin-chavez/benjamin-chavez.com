@@ -24,7 +24,9 @@ Run commands from the repo root with `pnpm --dir infrastructure run <script>`, o
 | Path                                                                 | Purpose                                       |
 |----------------------------------------------------------------------|-----------------------------------------------|
 | [`bin/app.ts`](bin/app.ts)                                           | CDK app entrypoint                            |
-| [`lib/stacks/static-site-stack.ts`](lib/stacks/static-site-stack.ts) | Main infrastructure stack                     |
+| [`lib/stacks/hosted-zone-stack.ts`](lib/stacks/hosted-zone-stack.ts) | Route 53 hosted zone                          |
+| [`lib/stacks/certificate-stack.ts`](lib/stacks/certificate-stack.ts) | ACM certificate (DNS-validated)               |
+| [`lib/stacks/static-site-stack.ts`](lib/stacks/static-site-stack.ts) | S3, CloudFront, DNS alias records             |
 | [`lib/constructs/`](lib/constructs)                                  | Reusable CDK constructs for the static site   |
 | [`lib/config/`](lib/config)                                          | Shared infrastructure configuration and types |
 | [`edge/`](edge)                                                      | CloudFront edge handler sources               |
@@ -35,6 +37,7 @@ Run commands from the repo root with `pnpm --dir infrastructure run <script>`, o
 - [Root README](../README.md) for app development and root-level commands
 - [`.github/CI-CD.md`](../.github/CI-CD.md) for the GitHub Actions deployment pipeline
 - [`INITIAL_DEPLOYMENT.md`](INITIAL_DEPLOYMENT.md) for the first manual AWS deployment runbook
+- [`DEPLOYMENT.md`](DEPLOYMENT.md) for the routine deployment workflow
 - [`../scripts/initial-aws-deploy.sh`](../scripts/initial-aws-deploy.sh) for the user-run helper script
 
 ## Region Notes
