@@ -10,6 +10,10 @@ on:
     branches: [master]
   workflow_dispatch:
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }} # Cancel older runs when new commits push
+
 permissions:
   contents: read
 

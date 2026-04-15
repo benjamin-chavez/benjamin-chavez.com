@@ -19,12 +19,12 @@
     "@aws-cdk/core:checkSecretUsage": true,
     "@aws-cdk/core:target-partitions": ["aws"],
     "appName": "benjamin-chavez-com",
-    "repository": "benjamin-chavez/benjamin-chavez.com",
+    "githubRepository": "benjamin-chavez/benjamin-chavez.com",
     "environments": {
       "prod": {
         "account": "${CDK_DEFAULT_ACCOUNT}",
         "region": "${CDK_DEFAULT_REGION}",
-        "certificateRegion": "${CLOUDFRONT_CERTIFICATE_REGION}",
+        "certificateRegion": "us-east-1",
         "envName": "prod",
         "domainName": "benjamin-chavez.com",
         "alternateDomainNames": ["www.benjamin-chavez.com"]

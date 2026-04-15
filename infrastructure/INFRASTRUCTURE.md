@@ -16,7 +16,7 @@ Run commands from the repo root with `pnpm --dir infrastructure run <script>`, o
 | `pnpm --dir infrastructure run build:edge`    | Compiles `edge/**/*.ts` into `dist/cloudfront/`                       |
 | `pnpm --dir infrastructure run synth`         | Rebuilds the edge handler and synthesizes the CloudFormation template |
 | `pnpm --dir infrastructure run diff`          | Rebuilds the edge handler and shows the CloudFormation diff           |
-| `pnpm --dir infrastructure run deploy`        | Rebuilds the edge handler and runs `cdk deploy`                       |
+| `pnpm --dir infrastructure run deploy`        | Rebuilds the edge handler and runs `cdk deploy --all`                 |
 | `pnpm --dir infrastructure run cdk -- <args>` | Runs the CDK CLI directly for package-local commands                  |
 
 ## Package Layout

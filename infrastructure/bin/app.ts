@@ -24,7 +24,7 @@ const stackName = deriveStackName(appContext.appName, environment);
 
 cdk.Tags.of(app).add('Project', appContext.appName);
 cdk.Tags.of(app).add('Environment', environment);
-cdk.Tags.of(app).add('Repository', appContext.repository);
+cdk.Tags.of(app).add('Repository', appContext.githubRepository);
 cdk.Tags.of(app).add('ManagedBy', 'cdk');
 cdk.Tags.of(app).add('Owner', 'ben');
 
@@ -45,6 +45,7 @@ const siteStack = new StaticSiteStack(app, stackName, {
   env,
   crossRegionReferences: true,
   appName: appContext.appName,
+  githubRepository: appContext.githubRepository,
   environment,
   envConfig,
   certificate: certificateStack.certificate,

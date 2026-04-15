@@ -92,7 +92,8 @@ This runs OG image generation and the Next.js static export into `dist/`.
 aws s3 sync dist/ "s3://$BUCKET" --delete
 ```
 
-This uploads `dist/` to the S3 bucket and `--delete` removes any files in S3 that no longer exist locally, ensuring the bucket is an exact mirror of the build output.
+This uploads `dist/` to the S3 bucket and `--delete` removes any files in S3 that no longer exist locally, ensuring the
+bucket is an exact mirror of the build output.
 
 4. Invalidate CloudFront:
 
@@ -131,14 +132,14 @@ Review the CloudFormation diff carefully before proceeding.
 pnpm --dir infrastructure run deploy
 ```
 
-This compiles the edge handler, synthesizes the templates, and runs `cdk deploy`. All three stacks deploy in
+This compiles the edge handler, synthesizes the templates, and runs `cdk deploy --all`. All three stacks deploy in
 dependency order:
 
-| Stack | Region | Resources |
-|-------|--------|-----------|
-| `BenjaminChavezCom-Prod-HostedZone` | `us-east-1` | Route 53 hosted zone |
-| `BenjaminChavezCom-Prod-Certificate` | `us-east-1` | ACM certificate (DNS-validated) |
-| `BenjaminChavezCom-Prod` | `us-east-2` | S3 bucket, CloudFront distribution, Route 53 alias records |
+| Stack                                | Region      | Resources                                                  |
+|--------------------------------------|-------------|------------------------------------------------------------|
+| `BenjaminChavezCom-Prod-HostedZone`  | `us-east-1` | Route 53 hosted zone                                       |
+| `BenjaminChavezCom-Prod-Certificate` | `us-east-1` | ACM certificate (DNS-validated)                            |
+| `BenjaminChavezCom-Prod`             | `us-east-2` | S3 bucket, CloudFront distribution, Route 53 alias records |
 
 > **Note:** CDK will prompt for approval if there are security-sensitive changes (IAM, security groups). Pass
 > `--require-approval never` only if you have already reviewed the diff.
