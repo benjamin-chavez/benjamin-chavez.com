@@ -10,6 +10,7 @@
 .anchor:hover {
   @apply visible;
 }
+
 /*
 .prose a {
   @apply decoration-neutral-400 decoration-[0.1em] underline-offset-2 transition-all;
@@ -27,6 +28,10 @@
 /* Code highlight within text (ex: `snippit`) */
 .prose code {
   @apply border-none bg-gray-200 px-0;
+}
+
+.prose pre {
+  @apply my-0;
 }
 
 [data-rehype-pretty-code-fragment] code {

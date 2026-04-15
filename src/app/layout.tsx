@@ -1,10 +1,10 @@
 import 'server-only';
 
-import { CloudWatchRUM } from '@/components/utility/cloudwatch-rum';
+import { CloudWatchRealUserMonitoring } from '@/components/utility/cloud-watch-real-user-monitoring';
 import { SentryInit } from '@/components/utility/sentry-init';
 import RootLayout from '@/components/root-layout';
 import { clientEnv } from '@/clientEnv';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import { Dosis, Inter, Open_Sans } from 'next/font/google';
 import Script from 'next/script';
 import '../styles/globals.css';
@@ -23,6 +23,11 @@ const open_sans = Open_Sans({
   subsets: ['latin'],
   variable: '--font-open-sans',
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(clientEnv.NEXT_PUBLIC_APP_URL),
@@ -70,11 +75,11 @@ export default function Layout({
       data-scroll-behavior="smooth"
       className={`${open_sans.variable} ${dosis.variable} ${inter.variable} h-full scroll-smooth bg-[#ECEDFA] font-dosis text-base antialiased`}
     >
-      <body className=" flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col ">
         <div className="pointer-events-none fixed inset-0 -z-50 bg-[linear-gradient(to_bottom,#F8F9FA_0%,#F8F9FA_50%,#040804_50%,#040804_100%)]" />
 
         <RootLayout>{children}</RootLayout>
-        <CloudWatchRUM />
+        <CloudWatchRealUserMonitoring />
         <SentryInit />
         {/* Cloudflare Web Analytics — loads only when NEXT_PUBLIC_CF_ANALYTICS_TOKEN is set */}
         {clientEnv.NEXT_PUBLIC_CF_ANALYTICS_TOKEN && (

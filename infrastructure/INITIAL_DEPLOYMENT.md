@@ -39,12 +39,8 @@ export CLOUDFRONT_CERTIFICATE_REGION=us-east-1
 
 This repo intentionally uses two AWS regions during infrastructure deployment:
 
-- `AWS_REGION=us-east-2`
-  - main stack region
-  - S3 bucket
-  - most CDK-managed resources
-- `CLOUDFRONT_CERTIFICATE_REGION=us-east-1`
-  - ACM certificate used by CloudFront for `benjamin-chavez.com` and `www.benjamin-chavez.com`
+- `AWS_REGION=us-east-2` — site stack region (S3, CloudFront distribution, Route 53 alias records)
+- `CLOUDFRONT_CERTIFICATE_REGION=us-east-1` — DNS stack region (Route 53 hosted zone, ACM certificate)
 
 This split is required by AWS. CloudFront is a global service, but ACM certificates attached to CloudFront distributions must be created in `us-east-1`. That means the site stack can live in `us-east-2` while the CloudFront viewer certificate still has to be provisioned in `us-east-1`.
 
@@ -111,15 +107,37 @@ scripts/initial-aws-deploy.sh --check
 scripts/initial-aws-deploy.sh --apply
 ```
 
+**3. Replace the "Verify Before DNS Cutover" and "DNS Cutover From Vercel" sections** with:
+
+```markdown
+## Post-Deployment Verification
+
+After the script completes, verify the site:
+
+- homepage loads
+- blog pages render
+- redirects work
+- static assets load
+- HTTPS works
+
+Useful checks:
+
+
+
 The script will:
 
 - install infrastructure dependencies if needed
 - bootstrap CDK
-- deploy the infrastructure stack
+- deploy the DNS stack (`<StackName>-Dns`) to `us-east-1` — creates the Route 53 hosted zone and ACM certificate
+- print the Route 53 nameservers and pause, waiting for you to update your registrar
+- wait for ACM certificate validation (automatic once nameservers propagate)
+- deploy the site stack to `us-east-2` — creates S3, CloudFront, and DNS alias records
 - build the site with `pnpm build`
 - sync `dist/` to S3
 - invalidate CloudFront
-- print the CloudFront domain, stack outputs, and Route 53 nameservers
+- print the CloudFront domain and stack outputs
+
+> **Note:** The script will pause after deploying the DNS stack and prompt you to update your registrar nameservers before continuing. Cert validation typically takes 5–30 minutes after nameserver propagation.
 
 ## Verify Before DNS Cutover
 
@@ -134,8 +152,12 @@ Verify the site on the CloudFront distribution domain that the script prints:
 Useful checks:
 
 ```bash
-curl -I "https://<distribution-domain>"
-curl -I "https://<distribution-domain>/blog/"
+[//]: # (curl -I "https://<distribution-domain>")
+[//]: # (curl -I "https://<distribution-domain>/blog/")
+
+curl -I "https://benjamin-chavez.com"
+curl -I "https://benjamin-chavez.com/blog/"
+curl -I "https://www.benjamin-chavez.com"
 ```
 
 ## DNS Cutover From Vercel

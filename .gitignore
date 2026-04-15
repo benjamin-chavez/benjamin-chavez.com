@@ -157,6 +157,9 @@ vite.config.ts.timestamp-*
 
 # Lighthouse CI
 .lighthouseci/
+ infrastructure/cdk.out/
+
+ .idea
 
 
 

@@ -23,9 +23,9 @@ export default function MobileMenu({
       open={mobileMenuOpen}
       onClose={setMobileMenuOpen}
     >
-      <div className="fixed inset-0 z-50" />
+      <div className="fixed inset-0 z-50 bg-black/40" />
 
-      <DialogPanel className="x-5 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white py-3  pr-2 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+      <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-5 py-3 pr-2 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
         <Container className="mx-auto max-w-7xl  md:max-w-none md:px-12">
           <div className="flex items-center justify-between ">
             <LogoIconLink />

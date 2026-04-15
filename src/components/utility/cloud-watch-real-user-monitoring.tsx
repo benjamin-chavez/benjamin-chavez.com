@@ -4,7 +4,7 @@
 import { useEffect } from 'react';
 import { clientEnv } from '@/clientEnv';
 
-export function CloudWatchRUM() {
+export function CloudWatchRealUserMonitoring() {
   useEffect(() => {
     const appMonitorId = clientEnv.NEXT_PUBLIC_CW_RUM_APP_MONITOR_ID;
     const identityPoolId = clientEnv.NEXT_PUBLIC_CW_RUM_IDENTITY_POOL_ID;
@@ -13,7 +13,8 @@ export function CloudWatchRUM() {
     if (!appMonitorId || !identityPoolId) return;
 
     if (!region) {
-      console.warn('Region is not set for CloudWatchRUM');
+      console.warn('Region is not set for CloudWatchRealUserMonitoring');
+      return;
     }
 
     import('aws-rum-web').then(({ AwsRum }) => {

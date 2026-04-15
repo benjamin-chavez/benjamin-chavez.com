@@ -43,8 +43,8 @@ export function useMDXComponents(): MDXComponents {
             isNoFollowLink
               ? 'nofollow'
               : isExternal
-              ? 'noopener noreferrer'
-              : undefined
+                ? 'noopener noreferrer'
+                : undefined
           }
           {...props}
         />
@@ -121,7 +121,12 @@ export function useMDXComponents(): MDXComponents {
     ),
     Image: (props: any) => (
       <div className="flex w-full justify-center">
-        <Image alt={props.alt} className="rounded-md" {...props} quality={100} />
+        <Image
+          alt={props.alt}
+          className="rounded-md"
+          {...props}
+          quality={100}
+        />
       </div>
     ),
     CodeBlockTitle,

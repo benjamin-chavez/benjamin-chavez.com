@@ -78,7 +78,7 @@ export default async function BlogPost({
   const { default: PostContent } = await import(`@/content/${slug}.mdx`);
 
   return (
-    <Container className="relative py-9">
+    <Container className="relative px-3 py-9 md:px-2">
       <BackButton className={'pb-9'} />
 
       <h1 className=" font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414] ">
@@ -97,7 +97,7 @@ export default async function BlogPost({
           </time>
         </div>
 
-        <div className=" -ml-1 w-fit rounded-md !bg-[#83a06c] !bg-opacity-50 px-1.5 py-1 font-open-sans !text-[#008000] md:ml-0">
+        <div className="-ml-1 w-fit rounded-md !bg-[#83a06c] !bg-opacity-50 px-1.5 py-1 font-open-sans !text-[#008000] md:ml-0">
           Last Updated:{' '}
           <time
             dateTime={post.updatedAt}
@@ -109,7 +109,7 @@ export default async function BlogPost({
       </div>
 
       <section className="my-16 flex flex-col">
-        <article className=" prose mx-auto max-w-none pb-20  prose-code:before:content-none prose-code:after:content-none ">
+        <article className=" prose mx-auto max-w-full pb-20 prose-code:before:content-none prose-code:after:content-none ">
           <PostContent />
         </article>
       </section>

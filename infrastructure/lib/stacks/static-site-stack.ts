@@ -1,4 +1,7 @@
+// infrastructure/lib/stacks/static-site-stack.ts
 import * as cdk from 'aws-cdk-lib';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
+import * as route53 from 'aws-cdk-lib/aws-route53';
 import { Construct } from 'constructs';
 import { toPascalCase } from '../config/site-config';
 import type {
@@ -11,6 +14,8 @@ export interface StaticSiteStackProps extends cdk.StackProps {
   readonly appName: string;
   readonly environment: EnvironmentName;
   readonly envConfig: ResolvedEnvironmentConfig;
+  readonly certificate: acm.ICertificate;
+  readonly hostedZone: route53.IHostedZone;
 }
 
 export class StaticSiteStack extends cdk.Stack {
@@ -18,12 +23,14 @@ export class StaticSiteStack extends cdk.Stack {
 
   constructor(scope: Construct, id: string, props: StaticSiteStackProps) {
     super(scope, id, props);
-    const { appName, environment, envConfig } = props;
+    const { appName, environment, envConfig, certificate, hostedZone } = props;
 
     this.site = new StaticSite(this, toPascalCase(appName), {
       appName,
       environment,
       envConfig,
+      certificate,
+      hostedZone,
     });
 
     new cdk.CfnOutput(this, 'BucketName', {
@@ -36,10 +43,6 @@ export class StaticSiteStack extends cdk.Stack {
 
     new cdk.CfnOutput(this, 'DistributionDomainName', {
       value: this.site.distribution.distributionDomainName,
-    });
-
-    new cdk.CfnOutput(this, 'NameServers', {
-      value: cdk.Fn.join(',', this.site.hostedZone.hostedZoneNameServers!),
     });
   }
 }

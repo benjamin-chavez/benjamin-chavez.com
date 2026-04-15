@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// infrastructure/bin/app.ts
+
 import * as cdk from 'aws-cdk-lib';
 import {
   deriveStackName,
@@ -7,6 +9,8 @@ import {
   resolveEnvironmentConfig,
 } from '../lib/config/site-config';
 import { StaticSiteStack } from '../lib/stacks/static-site-stack';
+import { HostedZoneStack } from '../lib/stacks/hosted-zone-stack';
+import { CertificateStack } from '../lib/stacks/certificate-stack';
 
 const app = new cdk.App();
 const appContext = loadAppContext(app);
@@ -24,9 +28,27 @@ cdk.Tags.of(app).add('Repository', appContext.repository);
 cdk.Tags.of(app).add('ManagedBy', 'cdk');
 cdk.Tags.of(app).add('Owner', 'ben');
 
-new StaticSiteStack(app, stackName, {
+const hostedZoneStack = new HostedZoneStack(app, `${stackName}-HostedZone`, {
+  env: { account: env.account, region: envConfig.certificateRegion },
+  crossRegionReferences: true,
+  envConfig,
+});
+
+const certificateStack = new CertificateStack(app, `${stackName}-Certificate`, {
+  env: { account: env.account, region: envConfig.certificateRegion },
+  crossRegionReferences: true,
+  envConfig,
+  hostedZone: hostedZoneStack.hostedZone,
+});
+
+const siteStack = new StaticSiteStack(app, stackName, {
   env,
+  crossRegionReferences: true,
   appName: appContext.appName,
   environment,
   envConfig,
+  certificate: certificateStack.certificate,
+  hostedZone: hostedZoneStack.hostedZone,
 });
+
+siteStack.addDependency(certificateStack);

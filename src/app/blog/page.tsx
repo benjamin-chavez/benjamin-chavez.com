@@ -1,4 +1,3 @@
-// src/app/blog/page.tsx
 import 'server-only';
 
 import { Container } from '@/components/container';
@@ -17,7 +16,7 @@ export default function Blog() {
   const publicPosts = getPublishedPosts();
 
   return (
-    <Container className="px-3 py-9 md:px-2">
+    <Container className="!bg-red-500 px-3 py-9 md:px-2">
       <h1 className="px-2 text-center font-dosis text-3xl uppercase leading-9 tracking-[.4rem] text-[#141414]">
         Blog
       </h1>

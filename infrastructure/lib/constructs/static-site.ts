@@ -1,3 +1,5 @@
+// infrastructure/lib/constructs/static-site.ts
+
 import * as cdk from 'aws-cdk-lib';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
@@ -16,20 +18,21 @@ export interface StaticSiteProps {
   readonly appName: string;
   readonly environment: EnvironmentName;
   readonly envConfig: ResolvedEnvironmentConfig;
+  readonly certificate: acm.ICertificate;
+  readonly hostedZone: route53.IHostedZone;
 }
 
 export class StaticSite extends Construct {
   public readonly bucket: s3.Bucket;
   public readonly distribution: cloudfront.Distribution;
-  public readonly hostedZone: route53.PublicHostedZone;
+  public readonly hostedZone: route53.IHostedZone;
 
   constructor(scope: Construct, id: string, props: StaticSiteProps) {
     super(scope, id);
 
-    const { appName, environment, envConfig } = props;
+    const { appName, environment, envConfig, certificate, hostedZone } = props;
     const {
       alternateDomainNames,
-      certificateRegion,
       compiledEdgeAssetPath,
       domainName,
       redirectsAssetPath,
@@ -42,19 +45,7 @@ export class StaticSite extends Construct {
       encryption: s3.BucketEncryption.S3_MANAGED,
     });
 
-    this.hostedZone = new route53.PublicHostedZone(this, 'HostedZone', {
-      zoneName: domainName,
-    });
-    this.hostedZone.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
-
-    // CloudFront viewer certificates must live in us-east-1 even when the
-    // distribution and supporting resources are managed elsewhere.
-    const certificate = new acm.DnsValidatedCertificate(this, 'Certificate', {
-      domainName,
-      hostedZone: this.hostedZone,
-      region: certificateRegion,
-      subjectAlternativeNames: alternateDomainNames,
-    });
+    this.hostedZone = hostedZone;
 
     const routing = new CloudFrontRouting(this, 'CloudFrontRouting', {
       appName,
