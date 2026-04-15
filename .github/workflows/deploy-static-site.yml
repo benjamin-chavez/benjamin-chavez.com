@@ -95,7 +95,7 @@ jobs:
             LATEST="${TAG_PREFIX}0.0.0"
           fi
 
-          VERSION="${LATEST#${TAG_PREFIX}}"
+          VERSION="${LATEST#"${TAG_PREFIX}"}"
           if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Latest tag '$LATEST' is not valid semver" >&2
             exit 1
