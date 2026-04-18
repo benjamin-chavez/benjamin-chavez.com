@@ -1,7 +1,6 @@
+// src/app/layout.tsx
 import 'server-only';
 
-import { CloudWatchRealUserMonitoring } from '@/components/utility/cloud-watch-real-user-monitoring';
-import { SentryInit } from '@/components/utility/sentry-init';
 import RootLayout from '@/components/root-layout';
 import { clientEnv } from '@/clientEnv';
 import { Metadata, Viewport } from 'next';
@@ -79,8 +78,8 @@ export default function Layout({
         <div className="pointer-events-none fixed inset-0 -z-50 bg-[linear-gradient(to_bottom,#F8F9FA_0%,#F8F9FA_50%,#040804_50%,#040804_100%)]" />
 
         <RootLayout>{children}</RootLayout>
-        <CloudWatchRealUserMonitoring />
-        <SentryInit />
+        {/*<CloudWatchRealUserMonitoring />*/}
+        {/*<SentryInit />*/}
         <CloudflareAnalytics />
       </body>
     </html>
