@@ -42,8 +42,10 @@ A statically exported personal site and blog built with Next.js and deployed on 
   hosting and CDN delivery.
 - **[Amazon Route 53](https://aws.amazon.com/route53/)** and *
   *[AWS Certificate Manager](https://aws.amazon.com/certificate-manager/)** - DNS and TLS for the site domains.
+- **[Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/)** - Privacy-friendly traffic analytics and
+  Core Web Vitals (LCP, INP, CLS, TTFB) via client-side beacon.
 - **[Amazon CloudWatch RUM](https://aws.amazon.com/cloudwatch/real-user-monitoring/)** - Client-side real user
-  monitoring.
+  monitoring (scaffolded but dormant; Cloudflare Web Analytics covers Web Vitals in the meantime).
 - **[Sentry](https://sentry.io/)** - Browser error tracking.
 
 ---
@@ -69,7 +71,8 @@ Static export deployed to AWS (S3 + CloudFront) via CDK.
 | Production  | https://benjamin-chavez.com |
 
 For infrastructure details and CDK commands, see the [INFRASTRUCTURE.md](infrastructure/INFRASTRUCTURE.md).
-For the first AWS deployment, use the [initial deployment runbook](infrastructure/INITIAL_DEPLOYMENT.md) and the checked-in helper script at [`scripts/initial-aws-deploy.sh`](scripts/initial-aws-deploy.sh).
+For the first AWS deployment, use the [initial deployment runbook](infrastructure/INITIAL_DEPLOYMENT.md) and the
+checked-in helper script at [`scripts/initial-aws-deploy.sh`](scripts/initial-aws-deploy.sh).
 
 ---
 
@@ -100,6 +103,8 @@ pnpm dev
 
 ## Roadmap
 
-- Add Cloudflare Web Analytics after the first AWS production cutover is stable.
-- Add minimal browser-side Sentry once the AWS deployment flow is stable in production.
-- Add CloudWatch RUM after the supporting AWS resources are provisioned.
+- Enable Cloudflare Web Analytics (primary telemetry): set `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` as a GitHub Actions
+  repository variable. Covers visitors, page views, referrers, and Core Web Vitals.
+- Enable browser-side Sentry for error tracking: set `NEXT_PUBLIC_SENTRY_DSN` as a GitHub Actions repository variable.
+- CloudWatch RUM is scaffolded but deferred; Cloudflare Web Analytics now covers Web Vitals. Revisit only if
+  AWS-native RUM becomes valuable (e.g., CloudWatch alarms on client errors, correlation with backend traces).
