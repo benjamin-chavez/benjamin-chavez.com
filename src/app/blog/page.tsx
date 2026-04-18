@@ -21,10 +21,10 @@ export default function Blog() {
         Blog
       </h1>
 
-      <div className="my-6 space-y-16 ">
+      <div className="my-6">
         {publicPosts.map((post: Post) => (
           <Link href={`/blog/${post.slug}`} key={post.slug} className="block">
-            <article className="ease  group mb-4 flex flex-col items-start justify-between rounded px-2 py-4 transition duration-200 hover:bg-black/10">
+            <article className="ease group flex flex-col items-start justify-between rounded px-2 py-4 transition duration-200 hover:bg-black/10">
               <div className="flex items-center text-xs">
                 <time
                   dateTime={post.publishedAt}

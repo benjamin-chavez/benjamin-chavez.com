@@ -6,9 +6,9 @@ import RootLayout from '@/components/root-layout';
 import { clientEnv } from '@/clientEnv';
 import { Metadata, Viewport } from 'next';
 import { Dosis, Inter, Open_Sans } from 'next/font/google';
-import Script from 'next/script';
 import '../styles/globals.css';
 import React from 'react';
+import { CloudflareAnalytics } from '@/components/utility/cloudflare-analytics';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -81,14 +81,7 @@ export default function Layout({
         <RootLayout>{children}</RootLayout>
         <CloudWatchRealUserMonitoring />
         <SentryInit />
-        {/* Cloudflare Web Analytics — loads only when NEXT_PUBLIC_CF_ANALYTICS_TOKEN is set */}
-        {clientEnv.NEXT_PUBLIC_CF_ANALYTICS_TOKEN && (
-          <Script
-            strategy="afterInteractive"
-            src="https://static.cloudflareinsights.com/beacon.min.js"
-            data-cf-beacon={`{"token":"${clientEnv.NEXT_PUBLIC_CF_ANALYTICS_TOKEN}"}`}
-          />
-        )}
+        <CloudflareAnalytics />
       </body>
     </html>
   );
