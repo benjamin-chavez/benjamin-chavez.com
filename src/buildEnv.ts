@@ -1,7 +1,4 @@
 // src/buildEnv.ts
-
-// NOTE: Build-time env vars for the static export pipeline (OG image generation, CDK, etc.).
-// The 'server-only' guard prevents accidental import from 'use client' components.
 import 'server-only';
 
 import { z } from 'zod';
@@ -21,4 +18,5 @@ if (!parsed.success) {
   throw new Error('Invalid build environment variables');
 }
 
+// NOTE: Build-time env vars for the static export pipeline (OG image generation, CDK, etc.).
 export const buildEnv = parsed.data;
