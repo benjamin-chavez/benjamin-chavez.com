@@ -68,7 +68,7 @@ export class StaticSite extends Construct {
               "style-src 'self' 'unsafe-inline'",
               'img-src * blob: data:',
               "media-src 'none'",
-              "connect-src 'self' https://static.cloudflareinsights.com",
+              "connect-src 'self' https://static.cloudflareinsights.com https://cloudflareinsights.com",
               "font-src 'self'",
             ].join('; '),
             override: true,
